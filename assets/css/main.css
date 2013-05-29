@@ -1,0 +1,82 @@
+body, html {
+	background-color: rgb(70, 70, 70);
+	color: white;
+	cursor: default;
+}
+
+section.home {
+	font-family: 'Quando', serif;
+}
+
+section.home h1, section.home h2 {
+	font-family: 'Volkhov', serif;
+	position: absolute;
+	margin: 0;
+}
+
+section.home h1 {
+	top: 30px;
+	background-color: rgb(218, 72, 72);
+	font-size: 50px;
+}
+
+section.home h2 {
+	top: 90px;
+	font-size: 40px;
+}
+
+section.home section.game {
+	height: 30%;
+	width: 40%;
+	background-color: rgb(218, 72, 72);
+}
+
+section.home .line {
+	position: absolute;
+	font-size: 34px;
+}
+
+section.home #line1 {top: 130px;}
+
+nav {
+	position: absolute;
+	top: 170px;
+}
+
+nav ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+nav ul li:hover {
+	color: rgb(218, 72, 72);
+}
+
+nav ul #blog-ish {font-size: 60px;}
+nav ul #resume {font-size: 16px;}
+nav ul #have-done {font-size: 34px;}
+nav ul #will-do {font-size: 37px;}
+nav ul #who-I-am {font-size: 2.03em;}
+
+section.home p {
+	width: 570px;
+}
+
+section.home p:nth-child(1) {
+	margin: 50px 0 5px 0;
+}
+
+section.home p:nth-child(3) {
+	margin: 5px 0 0 0;
+}
+
+.annoying {
+	font-size: 16px;
+	margin-left: 10px;
+	color: white;
+}
+
+.have_FUN {
+	display: none;
+}
