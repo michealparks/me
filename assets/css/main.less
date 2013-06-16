@@ -1,0 +1,175 @@
+body, html {
+	background-color: rgb(70,70,70);
+	color: white;
+	cursor: default;
+	overflow: hidden;
+	nav {
+		position: absolute;
+		top: 195px;
+		ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			li {
+				padding: 3px;
+			}
+			svg {
+				cursor: pointer;
+				stroke-width: 0;
+				fill: #000;
+				transition: 0.3s;
+				-webkit-transition: 0.3s;
+			}
+			li:hover {
+				background-color: #222;
+				color: rgb(218,72,72);
+			}
+			.svg-li:hover {
+				background-color: rgba(0,0,0,0);
+			}
+		}
+	}
+	.home {
+		font-family: 'Quando', serif;
+		h1, h2{
+			font-family: 'Volkhov', serif;
+			position: absolute;
+			margin: 0;
+		}
+		h1 {
+			top: 75px;
+			background-color: rgb(218, 72, 72);
+			font-size: 50px;
+		}
+		h2 {
+			top: 140px;
+			font-size: 40px;
+		}
+		p {
+			text-align: left;
+		}
+		.line {
+			position: fixed;
+			top: 80px;
+			stroke: rgb(218,72,72);
+			stroke-width: 4;
+		}
+		.red-block {
+			position: absolute;
+			background-color: rgb(218, 72, 72);
+			top: 75px;
+			left: 50%;
+			margin-left: -25%;
+			height: 50%;
+			width: 50%;
+		}
+	}
+}
+
+nav ul .svg-li:hover {
+	
+}
+
+nav ul svg {
+	
+}
+
+nav ul #layer_1:hover,
+nav ul #layer_2:hover {
+	fill: rgb(218,72,72);
+	transition: 0.3s;
+	-webkit-transition: 0.3s;
+}
+
+nav ul #blog {font-size: 30px;}
+nav ul #have-done {font-size: 20px;}
+nav ul #will-do {font-size: 21px;}
+nav ul #who-I-am {font-size: 28px;}
+
+section.home p {
+	width: 570px;
+}
+
+section.home p:nth-child(1) {
+	margin: 85px 0 -30px 0;
+}
+
+section.home #game_section p {
+	margin: -320px 0 0 0;
+}
+
+.win {
+	font-size: 47px!important;
+	font-family: 'Press Start 2P'!important;
+	z-index: 1000;
+	margin: 30px 0 0 0!important;
+	padding: 10px;
+	background-color: rgba(0,0,0,0)!important;
+	animation: super_cool 2s infinite;
+	-webkit-animation: super_cool 2s infinite;
+	-moz-animation: super_cool 2s infinite;
+	-o-animation: super_cool 2s infinite;
+}
+
+@keyframes super_cool {
+0% {color: red;}
+16.6% {color: red;}
+16.7% {color: #B3FBFF;}
+33.2% {color:#B3FBFF;}
+33.3% {color:yellow;}
+49.8% {color:yellow;}
+49.9% {color: green;}
+66.4% {color: green;}
+66.5% {color: orange;}
+83% {color: orange;}	
+83.1% {color: purple;}
+99.6% {color: purple;}
+100% {color: red;}
+}
+
+@-moz-keyframes super_cool {
+0.0% {color: red;}
+16.6% {color: red;}
+16.7% {color: #B3FBFF;}
+33.2% {color:#B3FBFF;}
+33.3% {color:yellow;}
+49.8% {color:yellow;}
+49.9% {color: green;}
+66.4% {color: green;}
+66.5% {color: orange;}
+83.0% {color: orange;}	
+83.1% {color: purple;}
+99.6% {color: purple;}
+100% {color: red;}
+}
+
+@-webkit-keyframes super_cool {
+0% {color: red;}
+16.6% {color: red;}
+16.7% {color: #B3FBFF;}
+33.2% {color:#B3FBFF;}
+33.3% {color:yellow;}
+49.8% {color:yellow;}
+49.9% {color: green;}
+66.4% {color: green;}
+66.5% {color: orange;}
+83% {color: orange;}	
+83.1% {color: purple;}
+99.6% {color: purple;}
+100% {color: red;}
+}		
+
+@-o-keyframes super_cool {
+0% {color: red;}
+16.6% {color: red;}
+16.7% {color: #B3FBFF;}
+33.2% {color:#B3FBFF;}
+33.3% {color:yellow;}
+49.8% {color:yellow;}
+49.9% {color: green;}
+66.4% {color: green;}
+66.5% {color: orange;}
+83% {color: orange;}	
+83.1% {color: purple;}
+99.6% {color: purple;}
+100% {color: red;}
