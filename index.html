@@ -9,6 +9,7 @@
 		<link rel="alternate" type="application/rss+xml" title="" href=""> 
 
 		<!-- We like google fonts! -->
+		<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Quando' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Volkhov' rel='stylesheet' type='text/css'>
 
@@ -23,18 +24,18 @@
 	<body>
 		<section class="home">
 			<h1>My name is</h1>
-			<h2>Micheal Parks.</h2>
+			<h2 id="homeButton">Micheal Parks.</h2>
 
 			<svg class="line" height="202px" width="400px" xmlns="http://www.w3.org/2000/svg" version="1.1">
   				<line x1="0" y1="110" x2="400" y2="110"/>
 				</svg>
 
 			<nav id="main_nav"><ul>
-				<li class="not_ready" id="blog-ish">Blog-ish.</li>
-				<li class="not_ready" id="have-done">What I've done.</li>
-				<li class="not_ready" id="will-do">What we'll do.</li>
-				<li class="not_ready" id="who-I-am">Who I really am.</li>
-				<a href="https://soundcloud.com/godisacomputer"><li><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				<li id="blog">Blog.</li>
+				<li id="have-done">What I've done.</li>
+				<li id="will-do">What we'll do.</li>
+				<li id="who-I-am">Who I really am.</li>
+				<a href="https://soundcloud.com/godisacomputer"><li class="svg-li"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="69px" height="69px" viewBox="0 0 56.693 56.693" enable-background="new 0 0 69 69" xml:space="preserve">
 				<path d="M28.348,5.158c-13.6,0-24.625,11.023-24.625,24.623c0,13.6,11.025,24.625,24.625,24.625
 	c13.598,0,24.623-11.025,24.623-24.625C52.971,16.181,41.945,5.158,28.348,5.158z M11.847,33.124
@@ -86,7 +87,7 @@
 
 			<center>
 				<section id="game_section">
-					<section class="game" id="game1">
+					<section class="red-block" id="game1">
 						<p>Hello. Come play a game that I made.</p>
 						<!-- <img width="40px" src='assets/4chan.png' /> -->
 					</section>
@@ -97,6 +98,18 @@
 						<p>michealparks1989@gmail.com</p>
 						<p>(click to copy)</p>
 					</section>
+				</section>
+
+				<section class="red-block" id="blog-section" hidden>
+					<div class="post">
+						<div class="title/date">
+							<div class="title">Green Living</div>
+							<div class="date">16 June 2013</div>
+						</div>
+						<span class="content">
+							Since I'll be moving into a house this August (a move that I once swore that I would never make) for the first time since I left my parent's house for college, I've decided to make an attempt to  
+						</span>
+					</div>
 				</section>
 			</center>
 
