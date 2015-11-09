@@ -8,7 +8,8 @@ var Metalsmith   = require('metalsmith'),
     permalinks   = require('metalsmith-permalinks'),
     archive      = require('metalsmith-archive'),
     sass         = require('metalsmith-sass'),
-    autoprefixer = require('metalsmith-autoprefixer')
+    autoprefixer = require('metalsmith-autoprefixer'),
+    highlight    = require('metalsmith-code-highlight')
 
 Metalsmith(__dirname)
   .source('./src')
@@ -30,6 +31,7 @@ Metalsmith(__dirname)
     sourceMapContents: true
   }))
   .use(autoprefixer())
+  .use(highlight())
   .build(function onError(err) {
     if (err) console.error(err)
   })
