@@ -1,0 +1,17 @@
+doctype html
+
+html(lang='en')
+  head  
+    meta(charset='utf-8')
+    title= title
+
+    link(href='https://fonts.googleapis.com/css?family=Questrial|Josefin+Sans|Quicksand:300', rel='stylesheet', type='text/css')
+    link(href='../styles/index.css', rel='stylesheet', type='text/css')
+
+  body
+    include partials/header
+
+    main
+      .block!= contents
+
+    include partials/footer

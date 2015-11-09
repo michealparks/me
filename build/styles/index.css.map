@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "index.css",
+	"sources": [
+		"index.sass"
+	],
+	"sourcesContent": [
+		"body {\n  font-family: Josefin Sans; }\n\nh1, h2, h3, h4 {\n  font-family: Quicksand; }\n\ncode {\n  display: block;\n  width: 600px;\n  margin: auto;\n  padding: 10px 20px;\n  color: #fff;\n  background-color: rgb(43, 43, 43);\n  text-align: left;\n  border-radius: 5px; }\n\n.block {\n  width: 600px;\n  max-width: 100%;\n  margin: auto; }\n"
+	],
+	"mappings": "AAAA,IAAI,AAAC,CACH,WAAW,CAAE,YAAa,CAAG,AAE/B,EAAE,CAAE,EAAE,CAAE,EAAE,CAAE,EAAE,AAAC,CACb,WAAW,CAAE,SAAU,CAAG,AAE5B,IAAI,AAAC,CACH,OAAO,CAAE,KAAM,CACf,KAAK,CAAE,KAAM,CACb,MAAM,CAAE,IAAK,CACb,OAAO,CAAE,SAAU,CACnB,KAAK,CAAE,IAAK,CACZ,gBAAgB,CAAE,OAAG,CACrB,UAAU,CAAE,IAAK,CACjB,aAAa,CAAE,GAAI,CAAG,AAExB,MAAM,AAAC,CACL,KAAK,CAAE,KAAM,CACb,SAAS,CAAE,IAAK,CAChB,MAAM,CAAE,IAAK,CAAG",
+	"names": []
+}

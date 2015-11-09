@@ -1,0 +1,23 @@
+doctype html
+
+html(lang='en')
+  head  
+    meta(base='/')
+    meta(charset='utf-8')
+
+    link(href='https://fonts.googleapis.com/css?family=Questrial|Josefin+Sans|Quicksand:300', rel='stylesheet', type='text/css')
+    link(href='styles/index.css', rel='stylesheet', type='text/css')
+
+    title= title
+
+  body
+    include partials/header
+
+    main
+      each page in collections.pages
+        section.post.block
+          h3= page.title
+          date= page.date
+          article!= page.contents
+
+    include partials/footer
