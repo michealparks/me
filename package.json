@@ -4,7 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node metalsmith.js"
+    "server": "cross-env NODE_ENV=development node bin/server",
+    "html:dev": "cross-env NODE_ENV=development node bin/html",
+    "html:prod": "cross-env NODE_ENV=production node bin/html",
+    "js:dev": "cross-env NODE_ENV=development webpack --watch --progress --colors",
+    "js:prod": "cross-env NODE_ENV=production webpack",
+    "styl:dev": "stylus --watch src/styles/index.styl --out public/index.css",
+    "styl:prod": "stylus -r --compress src/styles/index.styl --out public/index.css",
+    "dev": "concurrently \"npm run server\" \"npm run html:dev\" \"npm run js:dev\" \"npm run styl:dev\"",
+    "build": "npm run js:prod && npm run styl:prod && npm run html:prod",
+    "deploy": "npm run build && gh-pages -d public",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -17,18 +27,19 @@
   },
   "homepage": "https://github.com/michealparks/me",
   "devDependencies": {
-    "browserify": "^12.0.1",
-    "jade": "^1.11.0",
-    "metalsmith": "^2.1.0",
-    "metalsmith-archive": "^0.1.1",
-    "metalsmith-autoprefixer": "^1.1.0",
-    "metalsmith-code-highlight": "0.0.3",
-    "metalsmith-collections": "^0.7.0",
-    "metalsmith-drafts": "0.0.1",
-    "metalsmith-markdown": "^0.2.1",
-    "metalsmith-permalinks": "^0.4.0",
-    "metalsmith-sass": "^1.3.0",
-    "metalsmith-templates": "^0.7.0"
+    "concurrently": "^3.4.0",
+    "cross-env": "^5.0.0",
+    "express": "^4.15.3",
+    "inline-source": "^5.2.2",
+    "stylus": "^0.54.5",
+    "webpack": "^2.6.1"
   },
-  "dependencies": {}
+  "standard": {
+    "globals": [
+      "XMLHttpRequest"
+    ]
+  },
+  "dependencies": {
+    "marked": "^0.3.6"
+  }
 }
