@@ -63,20 +63,32 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  press: window.ontouchend === undefined ? 'click' : 'touchend'
+}
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const marked = __webpack_require__(1)
-const press = window.ontouchend === undefined ? 'click' : 'touchend'
-const postList = document.getElementsByClassName('post-title')
-const blogPost = document.getElementById('blog-post__content')
+const marked = __webpack_require__(3)
+const press = __webpack_require__(0).press
 
-for (let i = 0, l = postList.length; i < l; ++i) {
-  postList[i].addEventListener(press, onPostListPress)
+const blogList = document.getElementById('blog-list')
+const postTitle = document.getElementsByClassName('post-title')
+const blogPost = document.getElementById('blog-post')
+const blogPostContent = document.getElementById('blog-post__content')
+
+for (let i = 0, l = postTitle.length; i < l; ++i) {
+  postTitle[i].addEventListener(press, onPostTitlePress)
 }
 
 document.getElementById('blog-post__back')
@@ -84,7 +96,7 @@ document.getElementById('blog-post__back')
   toggleBlogPostView(false)
 })
 
-function onPostListPress (e) {
+function onPostTitlePress (e) {
   const url = e.currentTarget.getAttribute('data-file')
 
   getPost(url, function (err, html) {
@@ -92,21 +104,19 @@ function onPostListPress (e) {
 
     toggleBlogPostView(true)
 
-    blogPost.innerHTML = html
+    blogPostContent.innerHTML = html
   })
 }
 
 function toggleBlogPostView (isActive) {
-  document.getElementById('blog-list')
-  .classList.toggle('blog-list--active', !isActive)
-  document.getElementById('blog-post')
-  .classList.toggle('blog-post--active', isActive)
+  blogList.classList.toggle('blog-list--active', !isActive)
+  blogPost.classList.toggle('blog-post--active', isActive)
 }
 
 function getPost (url, next) {
   const xhr = new XMLHttpRequest()
 
-  xhr.open('get', `assets/posts/${url}`)
+  xhr.open('get', 'assets/posts/' + url)
   xhr.responseType = 'text'
   xhr.timeout = 10000
 
@@ -123,7 +133,38 @@ function getPost (url, next) {
 
 
 /***/ }),
-/* 1 */
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const press = __webpack_require__(0).press
+const links = document.getElementsByClassName('nav__link')
+
+let prevLink = document.getElementById('link-blog')
+let prevSection = document.getElementById('section-blog')
+
+for (let i = 0, l = links.length; i < l; ++i) {
+  links[i].addEventListener(press, onLinkPress)
+}
+
+function onLinkPress (e) {
+  if (e.currentTarget.id === prevLink.id) return
+
+  const target = e.currentTarget
+  const section = document.getElementById(target.id.replace('link', 'section'))
+
+  target.classList.add('nav__link--active')
+  prevLink.classList.remove('nav__link--active')
+
+  section.classList.add('section--active')
+  prevSection.classList.remove('section--active')
+
+  prevLink = target
+  prevSection = section
+}
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -1413,10 +1454,10 @@ if (true) {
   return this || (typeof window !== 'undefined' ? window : global);
 }());
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1440,6 +1481,18 @@ try {
 // easier to handle this case. if(!global) { ...}
 
 module.exports = g;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(2)
+__webpack_require__(1)
+
+document.getElementById('header__img').ondragstart = function () {
+  return false
+}
 
 
 /***/ })

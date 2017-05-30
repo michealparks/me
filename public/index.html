@@ -22,20 +22,16 @@
 <body>
 
 <header class='header'>
-  <img class='header__img' src='assets/me.jpg' />
+  <img id='header__img' class='header__img' src='assets/me.jpg' />
   <h1 class='header__title'>micheal parks</h1>
 
   <nav class='nav'>
     <ul class='nav__list'>
-      <li class='nav__link'>blog</li>
-      <li class='nav__link'>projects</li>
-      <li class='nav__link'>contact</li>
+      <li id='link-blog' class='nav__link nav__link--active'>blog</li>
+      <li id='link-projects' class='nav__link'>projects</li>
+      <li id='link-contact' class='nav__link'>contact</li>
     </ul>
   </nav>
-
-  <script async>
-  document.getElementsByClassName('nav__link')
-  </script>
 
   <div class="header__icons">
     <a class='no-decor' target='_tab' href='https://www.instagram.com/micheal.parks/'>
@@ -57,15 +53,25 @@
 </header>
 
 <main class='main'>
-  <section class='blog-list blog-list--active' id='blog-list'>
-    <h2 class='post-title' data-file='post1.md'>This is my example post</h2>
-    <h2 class='post-title' data-file='post2.md'>Thoughts on Ayn Rand</h2>
-  </section>
+  <div id='section-blog' class='section section--active'>
+    <section class='blog-list blog-list--active' id='blog-list'>
+      <h2 class='post-title' data-file='post1.md'>This is my example post</h2>
+      <h2 class='post-title' data-file='post2.md'>Thoughts on Ayn Rand</h2>
+    </section>
 
-  <section class='blog-post' id='blog-post'>
-    <div class='blog-post__back' id='blog-post__back'>Back</div>
-    <div class='blog-post__content' id='blog-post__content'></div>
-  </section>
+    <section class='blog-post' id='blog-post'>
+      <div class='blog-post__back' id='blog-post__back'>Back</div>
+      <div class='blog-post__content' id='blog-post__content'></div>
+    </section>
+  </div>
+
+  <div id='section-projects' class='section'>
+
+  </div>
+
+  <div id='section-contact' class='section'>
+
+  </div>
 </main>
 
 <script async inline src='index.js'></script>

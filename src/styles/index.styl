@@ -44,7 +44,12 @@ body
   background-color: #333
   text-align: right
   
+.header *
+  -webkit-user-select: none
+  user-select: none
+  
 .header__title
+  cursor: default
   font-size: 1.5em
   
 .header__img
@@ -74,13 +79,24 @@ body
   transform: scale(1.0)
   transition: 70ms
   
+.nav
+  width: 100%
+  
 .nav__list
+  width: calc(100% + 20px)
   list-style: none
   padding: 0
   margin: 5px 0
   
 .nav__link
-  padding: 7px 0
+  cursor: pointer
+  position: relative
+  width: 100%
+  padding: 7px 20px
+  font-weight: 300
+  
+.nav__link--active
+  background-color: #212121
 
 .main
   position: absolute
@@ -103,5 +119,29 @@ body
 .blog-list--active
 .blog-post--active
   display: flex
+  
+.blog-post__content
+  max-height: 100%
+  max-width: 700px
+  
+.post-title
+  cursor: pointer
+  position: relative
+  padding: 8px 0
+  margin: 0
+  
+.post-title:before
+  content: ''
+  position: absolute
+  width: 100px
+  height: 0.5px
+  background-color: #fff
+  bottom: 2px
+  transition: 150ms
+  transform-origin: 0 50%
+  transform: scale(0)
+    
+.post-title:hover:before
+  transform: scale(1)
 
 
