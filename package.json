@@ -4,11 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "cross-env NODE_ENV=development node bin/server",
-    "js:dev": "cross-env NODE_ENV=development webpack --watch --progress --colors",
-    "js:prod": "cross-env NODE_ENV=production webpack",
-    "dev": "concurrently \"npm run server\" \"npm run js:dev\"",
-    "build": "npm run js:prod && npm run styl:prod",
+    "start": "cross-env NODE_ENV=development rollup -c -w",
     "deploy": "npm run build && gh-pages -d public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,17 +18,17 @@
   },
   "homepage": "https://github.com/michealparks/me",
   "devDependencies": {
-    "concurrently": "^3.4.0",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-replace": "^2.3.1",
     "cross-env": "^5.0.0",
-    "express": "^4.15.3",
-    "webpack": "^2.6.1"
+    "rollup": "^1.31.0",
+    "rollup-plugin-svelte": "^5.1.1",
+    "rollup-plugin-terser": "^5.2.0",
+    "svelte": "^3.18.1"
   },
   "standard": {
     "globals": [
       "fetch"
     ]
-  },
-  "dependencies": {
-    "marked": "^0.3.6"
   }
 }
