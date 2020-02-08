@@ -5,14 +5,10 @@
   "main": "index.js",
   "scripts": {
     "server": "cross-env NODE_ENV=development node bin/server",
-    "html:dev": "cross-env NODE_ENV=development node bin/html",
-    "html:prod": "cross-env NODE_ENV=production node bin/html",
     "js:dev": "cross-env NODE_ENV=development webpack --watch --progress --colors",
     "js:prod": "cross-env NODE_ENV=production webpack",
-    "styl:dev": "stylus --watch src/styles/index.styl --out public/index.css",
-    "styl:prod": "stylus -r --compress src/styles/index.styl --out public/index.css",
-    "dev": "concurrently \"npm run server\" \"npm run html:dev\" \"npm run js:dev\" \"npm run styl:dev\"",
-    "build": "npm run js:prod && npm run styl:prod && npm run html:prod",
+    "dev": "concurrently \"npm run server\" \"npm run js:dev\"",
+    "build": "npm run js:prod && npm run styl:prod",
     "deploy": "npm run build && gh-pages -d public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,7 +17,6 @@
     "url": "git+https://github.com/michealparks/me.git"
   },
   "author": "Micheal Parks",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/michealparks/me/issues"
   },
@@ -30,13 +25,11 @@
     "concurrently": "^3.4.0",
     "cross-env": "^5.0.0",
     "express": "^4.15.3",
-    "inline-source": "^5.2.2",
-    "stylus": "^0.54.5",
     "webpack": "^2.6.1"
   },
   "standard": {
     "globals": [
-      "XMLHttpRequest"
+      "fetch"
     ]
   },
   "dependencies": {
