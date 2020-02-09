@@ -1,9 +1,23 @@
-<script>
-  export let name
-</script>
 
 <style>
-  h1 { color: teal; }
+  :global(body) {
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  :global(body) * {
+    box-sizing: border-box;
+    }
 </style>
 
-<h1>Hello {name}!</h1>
+<script>
+  import Header from './Header.svelte'
+  import Projects from './Projects.svelte'
+  import Footer from './Footer.svelte'
+</script>
+
+<main>
+  <Header />
+  <Projects />
+  <Footer />
+</main>
