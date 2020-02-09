@@ -33,12 +33,10 @@ const document = (head, html, meta) => {
       <body>
         ${html}
         <script type="module">
-          import App from './main.js'
-
-          new App({
+          import('./main.js').then(module => new module.default({
             target: document.body,
             hydrate: true
-          })          
+          })) 
         </script>
       </body>
     </html>
