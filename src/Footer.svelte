@@ -15,6 +15,7 @@
 
   h2 {
     font-family: 'Roboto Mono', monospace;
+    font-size: 30px;
   }
 
 </style>

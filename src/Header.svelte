@@ -19,7 +19,6 @@
 
   h1 {
     position: relative;
-    font-size: 50px;
     text-align: center;
     font-family: 'Comfortaa', sans-serif;
     font-family: 'Roboto Mono', monospace;

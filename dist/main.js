@@ -405,7 +405,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (77:4) {#each colors as color (color.hex)}
+// (76:4) {#each colors as color (color.hex)}
 function create_each_block(key_1, ctx) {
 	let bg_circle;
 
@@ -428,7 +428,7 @@ function create_each_block(key_1, ctx) {
 			set_style(bg_circle, "transform", "translate3d(" + /*color*/ ctx[5].x + "px, " + /*color*/ ctx[5].y + "px, " + /*color*/ ctx[5].z + "px)");
 			set_style(bg_circle, "opacity", /*opacity*/ ctx[0]);
 			set_style(bg_circle, "transition", "transform " + duration + "ms, opacity 1500ms");
-			set_custom_element_data(bg_circle, "class", "svelte-1ccibik");
+			set_custom_element_data(bg_circle, "class", "svelte-9otxag");
 			this.first = bg_circle;
 		},
 		m(target, anchor) {
@@ -504,10 +504,10 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h1, "class", "font-effect-anaglyph svelte-1ccibik");
+			attr(h1, "class", "font-effect-anaglyph svelte-9otxag");
 			set_style(section, "height", /*height*/ ctx[2] + size + "px");
-			attr(section, "class", "svelte-1ccibik");
-			attr(header, "class", "svelte-1ccibik");
+			attr(section, "class", "svelte-9otxag");
+			attr(header, "class", "svelte-9otxag");
 		},
 		m(target, anchor) {
 			insert(target, header, anchor);
@@ -701,9 +701,9 @@ function create_fragment$2(ctx) {
 		h() {
 			attr(img, "alt", "Micheal's detatched head.");
 			if (img.src !== (img_src_value = "profile.jpg")) attr(img, "src", img_src_value);
-			attr(img, "class", "svelte-2gv8bw");
-			attr(h2, "class", "font-effect-anaglyph svelte-2gv8bw");
-			attr(footer, "class", "svelte-2gv8bw");
+			attr(img, "class", "svelte-5fdlr6");
+			attr(h2, "class", "font-effect-anaglyph svelte-5fdlr6");
+			attr(footer, "class", "svelte-5fdlr6");
 		},
 		m(target, anchor) {
 			insert(target, footer, anchor);
@@ -766,7 +766,7 @@ function create_fragment$3(ctx) {
 			this.h();
 		},
 		h() {
-			attr(main, "class", "svelte-u3gbwx");
+			attr(main, "class", "svelte-1ta1a3y");
 		},
 		m(target, anchor) {
 			insert(target, main, anchor);
