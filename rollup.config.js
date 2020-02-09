@@ -31,7 +31,7 @@ export default [
         }
       }),
       svelteHTML(),
-      serve({
+      DEV && serve({
         contentBase: 'dist',
         open: true
       })
