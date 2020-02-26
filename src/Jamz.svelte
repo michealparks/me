@@ -56,6 +56,7 @@ button {
   margin: 10px;
   color: #fff;
   background-color: transparent;
+  font-family: comic sans;
 }
 
 iframe {

@@ -37,11 +37,6 @@ setRands(width)
 onMount(() => {
   setTimeout(() => {
     opacity = 0.5
-    setRands()
-    seth1State()
-
-    setInterval(seth1State, h1duration)
-    setInterval(setRands, duration)
   }, 10)
 })
 </script>
