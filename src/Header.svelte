@@ -22,6 +22,13 @@
     text-align: center;
     font-family: 'Comfortaa', sans-serif;
     font-family: 'Roboto Mono', monospace;
+    color: #000;
+    letter-spacing: -15px;
+    transition-timing-function: steps(32, end);
+  }
+
+  h1.expanded {
+    letter-spacing: -5px;
   }
 
   bg-circle {
@@ -37,13 +44,16 @@
 import { onMount } from 'svelte'
 import { colorMap } from './consts.js'
 
-const duration = 20000
+const duration = 40000
+const h1duration = 10000
 const size = 150
 const width = 800 - size
 const height = 200 - size
 const depth = 100
 
 let opacity = 0
+
+let h1State = ''
 
 let colors = [] 
 for (const hex of Object.values(colorMap)) {
@@ -59,12 +69,19 @@ const setRands = (w = window.innerWidth - size) => {
   colors = colors
 }
 
+const seth1State = () => {
+  h1State = (h1State === '') ? 'expanded' : ''
+}
+
 setRands(width)
 
 onMount(() => {
   setTimeout(() => {
     opacity = 0.5
     setRands()
+    seth1State()
+
+    setInterval(seth1State, h1duration)
     setInterval(setRands, duration)
   }, 10)
 })
@@ -79,6 +96,8 @@ onMount(() => {
           width: {size}px;
           height: {size}px;
           background-color: {color.hex};
+          box-shadow:  20px 20px 40px {color.hex}, 
+             -20px -20px 60px {color.hex};
           transform: translate3d({color.x}px, {color.y}px, {color.z}px);
           opacity: {opacity};
           transition: transform {duration}ms, opacity 1500ms;
@@ -86,6 +105,8 @@ onMount(() => {
       ></bg-circle>
     {/each}
 
-    <h1 class="font-effect-anaglyph">Hello web.</h1>
+    <h1 style="transition-duration: {h1duration}ms;" class="font-effect-anaglyph {h1State}">hi i am micheal</h1>
+
+    
   </section>
 </header>

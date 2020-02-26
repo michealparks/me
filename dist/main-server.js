@@ -1,1 +1,293 @@
-"use strict";function A(A){return A()}let n;function r(A){n=A}function e(A){(function(){if(!n)throw new Error("Function called outside component initialization");return n})().$$.on_mount.push(A)}const o={'"':"&quot;","'":"&#39;","&":"&amp;","<":"&lt;",">":"&gt;"};function t(A){return String(A).replace(/["'&<>]/g,A=>o[A])}function C(A,n){if(!A||!A.$$render)throw"svelte:component"===n&&(n+=" this={...}"),new Error(`<${n}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);return A}let s;function a(e){function o(A,o,t,C){const a=n;r({$$:{on_destroy:s,context:new Map(a?a.$$.context:[]),on_mount:[],before_update:[],after_update:[],callbacks:Object.create(null)}});const i=e(A,o,t,C);return r(a),i}return{render:(n={},r={})=>{s=[];const e={title:"",head:"",css:new Set},t=o(e,n,{},r);return s.forEach(A),{html:t,css:{code:Array.from(e.css).map(A=>A.code).join("\n"),map:null},head:e.title+e.head}},$$render:o}}const i={code:"body{margin:0;font-family:'Nunito', sans-serif}*{box-sizing:border-box}h1{font-size:5.9vw;font-size:min(50px, 5.9vw)}h2{font-size:3.0vh}p{font-size:2vmin}",map:'{"version":3,"file":"Stylesheet.svelte","sources":["Stylesheet.svelte"],"sourcesContent":["<style>\\r\\n  :global(body) {\\r\\n    margin: 0;\\r\\n    font-family: \'Nunito\', sans-serif;\\r\\n  }\\r\\n\\r\\n  :global(*) {\\r\\n    box-sizing: border-box;\\r\\n  }\\r\\n\\r\\n  :global(h1) {\\r\\n    font-size: 5.9vw;\\r\\n    font-size: min(50px, 5.9vw);\\r\\n  }\\r\\n  :global(h2) {\\r\\n    font-size: 3.0vh;\\r\\n  }\\r\\n  :global(p) {\\r\\n    font-size: 2vmin;\\r\\n  }\\r\\n</style>"],"names":[],"mappings":"AACU,IAAI,AAAE,CAAC,AACb,MAAM,CAAE,CAAC,CACT,WAAW,CAAE,QAAQ,CAAC,CAAC,UAAU,AACnC,CAAC,AAEO,CAAC,AAAE,CAAC,AACV,UAAU,CAAE,UAAU,AACxB,CAAC,AAEO,EAAE,AAAE,CAAC,AACX,SAAS,CAAE,KAAK,CAChB,SAAS,CAAE,IAAI,IAAI,CAAC,CAAC,KAAK,CAAC,AAC7B,CAAC,AACO,EAAE,AAAE,CAAC,AACX,SAAS,CAAE,KAAK,AAClB,CAAC,AACO,CAAC,AAAE,CAAC,AACV,SAAS,CAAE,KAAK,AAClB,CAAC"}'},l=a((A,n,r,e)=>(A.css.add(i),"")),c={red:"#ef9a9a",pink:"#F48FB1",purple:"#CE93D8",deeppurple:"#B39DDB",indigo:"#9FA8DA",blue:"#90CAF9",lightblue:"#81D4FA",cyan:"#80DEEA",teal:"#80CBC4",green:"#A5D6A7",yellow:"#FFF59D",amber:"#FFE082",orange:"#FFCC80",deeporange:"#FFAB91"},d={code:"header.svelte-9otxag{display:grid;grid-template-columns:1fr 3fr 1fr;padding:30px}section.svelte-9otxag{position:relative;display:flex;justify-content:center;align-items:center;width:100%;max-width:800px;grid-area:1 / 2 / 2 / 3;margin:auto;perspective:300px}h1.svelte-9otxag{position:relative;text-align:center;font-family:'Comfortaa', sans-serif;font-family:'Roboto Mono', monospace}bg-circle.svelte-9otxag{position:absolute;top:0;left:0;border-radius:100%;opacity:0.5}",map:'{"version":3,"file":"Header.svelte","sources":["Header.svelte"],"sourcesContent":["<style>\\r\\n  header {\\r\\n    display: grid;\\r\\n    grid-template-columns: 1fr 3fr 1fr;\\r\\n    padding: 30px;\\r\\n  }\\r\\n\\r\\n  section {\\r\\n    position: relative;\\r\\n    display: flex;\\r\\n    justify-content: center;\\r\\n    align-items: center;\\r\\n    width: 100%;\\r\\n    max-width: 800px;\\r\\n    grid-area: 1 / 2 / 2 / 3;\\r\\n    margin: auto;\\r\\n    perspective: 300px;\\r\\n  }\\r\\n\\r\\n  h1 {\\r\\n    position: relative;\\r\\n    text-align: center;\\r\\n    font-family: \'Comfortaa\', sans-serif;\\r\\n    font-family: \'Roboto Mono\', monospace;\\r\\n  }\\r\\n\\r\\n  bg-circle {\\r\\n    position: absolute;\\r\\n    top: 0;\\r\\n    left: 0;\\r\\n    border-radius: 100%;\\r\\n    opacity: 0.5;\\r\\n  }\\r\\n</style>\\r\\n\\r\\n<script>\\r\\nimport { onMount } from \'svelte\'\\r\\nimport { colorMap } from \'./consts.js\'\\r\\n\\r\\nconst duration = 20000\\r\\nconst size = 150\\r\\nconst width = 800 - size\\r\\nconst height = 200 - size\\r\\nconst depth = 100\\r\\n\\r\\nlet opacity = 0\\r\\n\\r\\nlet colors = [] \\r\\nfor (const hex of Object.values(colorMap)) {\\r\\n  colors.push({ hex, x: 0, y: 0, z: 0 })\\r\\n}\\r\\n\\r\\nconst setRands = (w = window.innerWidth - size) => {\\r\\n  for (const color of colors) {\\r\\n    color.x = Math.random() * Math.min(width, w)\\r\\n    color.y = Math.random() * height\\r\\n    color.z = Math.random() * depth\\r\\n  }\\r\\n  colors = colors\\r\\n}\\r\\n\\r\\nsetRands(width)\\r\\n\\r\\nonMount(() => {\\r\\n  setTimeout(() => {\\r\\n    opacity = 0.5\\r\\n    setRands()\\r\\n    setInterval(setRands, duration)\\r\\n  }, 10)\\r\\n})\\r\\n\\r\\n<\/script>\\r\\n\\r\\n<header>\\r\\n  <section style=\\"height: {height + size}px\\">\\r\\n    {#each colors as color (color.hex)}\\r\\n      <bg-circle\\r\\n        style=\\"\\r\\n          width: {size}px;\\r\\n          height: {size}px;\\r\\n          background-color: {color.hex};\\r\\n          transform: translate3d({color.x}px, {color.y}px, {color.z}px);\\r\\n          opacity: {opacity};\\r\\n          transition: transform {duration}ms, opacity 1500ms;\\r\\n        \\"\\r\\n      ></bg-circle>\\r\\n    {/each}\\r\\n\\r\\n    <h1 class=\\"font-effect-anaglyph\\">Hello web.</h1>\\r\\n  </section>\\r\\n</header>\\r\\n"],"names":[],"mappings":"AACE,MAAM,cAAC,CAAC,AACN,OAAO,CAAE,IAAI,CACb,qBAAqB,CAAE,GAAG,CAAC,GAAG,CAAC,GAAG,CAClC,OAAO,CAAE,IAAI,AACf,CAAC,AAED,OAAO,cAAC,CAAC,AACP,QAAQ,CAAE,QAAQ,CAClB,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,MAAM,CACvB,WAAW,CAAE,MAAM,CACnB,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,KAAK,CAChB,SAAS,CAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACxB,MAAM,CAAE,IAAI,CACZ,WAAW,CAAE,KAAK,AACpB,CAAC,AAED,EAAE,cAAC,CAAC,AACF,QAAQ,CAAE,QAAQ,CAClB,UAAU,CAAE,MAAM,CAClB,WAAW,CAAE,WAAW,CAAC,CAAC,UAAU,CACpC,WAAW,CAAE,aAAa,CAAC,CAAC,SAAS,AACvC,CAAC,AAED,SAAS,cAAC,CAAC,AACT,QAAQ,CAAE,QAAQ,CAClB,GAAG,CAAE,CAAC,CACN,IAAI,CAAE,CAAC,CACP,aAAa,CAAE,IAAI,CACnB,OAAO,CAAE,GAAG,AACd,CAAC"}'},p=a((A,n,r,o)=>{let C=0,s=[];for(const A of Object.values(c))s.push({hex:A,x:0,y:0,z:0});const a=(A=window.innerWidth-150)=>{for(const n of s)n.x=Math.random()*Math.min(650,A),n.y=50*Math.random(),n.z=100*Math.random();s=s};return a(650),e(()=>{setTimeout(()=>{C=.5,a(),setInterval(a,2e4)},10)}),A.css.add(d),`<header class="svelte-9otxag">\n  <section style="${"height: "+t(200)+"px"}" class="svelte-9otxag">\n    ${function(A,n){let r="";for(let e=0;e<A.length;e+=1)r+=n(A[e],e);return r}(s,A=>`<bg-circle style="${"\r\n          width: "+t(150)+"px;\r\n          height: "+t(150)+"px;\r\n          background-color: "+t(A.hex)+";\r\n          transform: translate3d("+t(A.x)+"px, "+t(A.y)+"px, "+t(A.z)+"px);\r\n          opacity: "+t(C)+";\r\n          transition: transform "+t(2e4)+"ms, opacity 1500ms;\r\n        "}" class="svelte-9otxag"></bg-circle>`)}\n\n    <h1 class="font-effect-anaglyph svelte-9otxag">Hello web.</h1>\n  </section>\n</header>`}),f=a((A,n,r,e)=>'<main>\n  <h2 class="font-effect-anaglyph svelte-mms0oj">Current projects</h2>\n  <article>\n    <h3>Galeri</h3>\n    <p>Galeri is a chrome extension or a desktop app focused on artwork discovery. </p>\n  </article>\n</main>'),h={code:"footer.svelte-5fdlr6{display:grid;grid-template-columns:1fr 10fr;grid-template-rows:1fr;grid-column-gap:20px;padding:30px;background-color:#eee}img.svelte-5fdlr6{max-width:180px;border-radius:100%}h2.svelte-5fdlr6{font-family:'Roboto Mono', monospace;font-size:30px}",map:'{"version":3,"file":"Footer.svelte","sources":["Footer.svelte"],"sourcesContent":["<style>\\r\\n  footer {\\r\\n    display: grid;\\r\\n    grid-template-columns: 1fr 10fr;\\r\\n    grid-template-rows: 1fr;\\r\\n    grid-column-gap: 20px;\\r\\n    padding: 30px;\\r\\n    background-color: #eee;\\r\\n  }\\r\\n\\r\\n  img {\\r\\n    max-width: 180px;\\r\\n    border-radius: 100%;\\r\\n  }\\r\\n\\r\\n  h2 {\\r\\n    font-family: \'Roboto Mono\', monospace;\\r\\n    font-size: 30px;\\r\\n  }\\r\\n\\r\\n</style>\\r\\n\\r\\n<footer>\\r\\n  <img alt=\\"Micheal\'s detatched head.\\" src=\\"profile.jpg\\" />\\r\\n\\r\\n  <section>\\r\\n    <h2 class=\\"font-effect-anaglyph\\">Micheal Parks</h2>\\r\\n    <p></p>\\r\\n  </section>\\r\\n  \\r\\n\\r\\n  <social-media>\\r\\n\\r\\n  </social-media>\\r\\n</footer>"],"names":[],"mappings":"AACE,MAAM,cAAC,CAAC,AACN,OAAO,CAAE,IAAI,CACb,qBAAqB,CAAE,GAAG,CAAC,IAAI,CAC/B,kBAAkB,CAAE,GAAG,CACvB,eAAe,CAAE,IAAI,CACrB,OAAO,CAAE,IAAI,CACb,gBAAgB,CAAE,IAAI,AACxB,CAAC,AAED,GAAG,cAAC,CAAC,AACH,SAAS,CAAE,KAAK,CAChB,aAAa,CAAE,IAAI,AACrB,CAAC,AAED,EAAE,cAAC,CAAC,AACF,WAAW,CAAE,aAAa,CAAC,CAAC,SAAS,CACrC,SAAS,CAAE,IAAI,AACjB,CAAC"}'},m=a((A,n,r,e)=>(A.css.add(h),'<footer class="svelte-5fdlr6">\n  <img alt="Micheal\'s detatched head." src="profile.jpg" class="svelte-5fdlr6">\n\n  <section>\n    <h2 class="font-effect-anaglyph svelte-5fdlr6">Micheal Parks</h2>\n    <p></p>\n  </section>\n  \n\n  <social-media>\n\n  </social-media>\n</footer>')),g=a((A,n,r,e)=>`<main>\n  ${C(l,"Stylesheet").$$render(A,{},{},{})}\n  ${C(p,"Header").$$render(A,{},{},{})}\n  ${C(f,"Projects").$$render(A,{},{},{})}\n  ${C(m,"Footer").$$render(A,{},{},{})}\n</main>`);module.exports=g;
+'use strict';
+
+function run(fn) {
+    return fn();
+}
+function blank_object() {
+    return Object.create(null);
+}
+function run_all(fns) {
+    fns.forEach(run);
+}
+
+let current_component;
+function set_current_component(component) {
+    current_component = component;
+}
+function get_current_component() {
+    if (!current_component)
+        throw new Error(`Function called outside component initialization`);
+    return current_component;
+}
+function onMount(fn) {
+    get_current_component().$$.on_mount.push(fn);
+}
+const escaped = {
+    '"': '&quot;',
+    "'": '&#39;',
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;'
+};
+function escape(html) {
+    return String(html).replace(/["'&<>]/g, match => escaped[match]);
+}
+function each(items, fn) {
+    let str = '';
+    for (let i = 0; i < items.length; i += 1) {
+        str += fn(items[i], i);
+    }
+    return str;
+}
+function validate_component(component, name) {
+    if (!component || !component.$$render) {
+        if (name === 'svelte:component')
+            name += ' this={...}';
+        throw new Error(`<${name}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules`);
+    }
+    return component;
+}
+let on_destroy;
+function create_ssr_component(fn) {
+    function $$render(result, props, bindings, slots) {
+        const parent_component = current_component;
+        const $$ = {
+            on_destroy,
+            context: new Map(parent_component ? parent_component.$$.context : []),
+            // these will be immediately discarded
+            on_mount: [],
+            before_update: [],
+            after_update: [],
+            callbacks: blank_object()
+        };
+        set_current_component({ $$ });
+        const html = fn(result, props, bindings, slots);
+        set_current_component(parent_component);
+        return html;
+    }
+    return {
+        render: (props = {}, options = {}) => {
+            on_destroy = [];
+            const result = { title: '', head: '', css: new Set() };
+            const html = $$render(result, props, {}, options);
+            run_all(on_destroy);
+            return {
+                html,
+                css: {
+                    code: Array.from(result.css).map(css => css.code).join('\n'),
+                    map: null // TODO
+                },
+                head: result.title + result.head
+            };
+        },
+        $$render
+    };
+}
+
+/* src\Stylesheet.svelte generated by Svelte v3.19.1 */
+
+const css = {
+	code: "body{margin:0;font-family:'Nunito', sans-serif}*{box-sizing:border-box}h1{font-size:50px;font-size:max(min(50px, 6.0vmin), 36px)}h2{font-size:40px;font-size:max(min(40px, 3.0vmin), 30px)}p{font-size:16px;font-size:max(min(16px, 2.0vmin), 14px)}",
+	map: "{\"version\":3,\"file\":\"Stylesheet.svelte\",\"sources\":[\"Stylesheet.svelte\"],\"sourcesContent\":[\"<style>\\r\\n  :global(body) {\\r\\n    margin: 0;\\r\\n    font-family: 'Nunito', sans-serif;\\r\\n  }\\r\\n  :global(*) {\\r\\n    box-sizing: border-box;\\r\\n  }\\r\\n  :global(h1) {\\r\\n    font-size: 50px;\\r\\n    font-size: max(min(50px, 6.0vmin), 36px);\\r\\n  }\\r\\n  :global(h2) {\\r\\n    font-size: 40px;\\r\\n    font-size: max(min(40px, 3.0vmin), 30px);\\r\\n  }\\r\\n  :global(p) {\\r\\n    font-size: 16px;\\r\\n    font-size: max(min(16px, 2.0vmin), 14px); \\r\\n  }\\r\\n</style>\\r\\n\"],\"names\":[],\"mappings\":\"AACU,IAAI,AAAE,CAAC,AACb,MAAM,CAAE,CAAC,CACT,WAAW,CAAE,QAAQ,CAAC,CAAC,UAAU,AACnC,CAAC,AACO,CAAC,AAAE,CAAC,AACV,UAAU,CAAE,UAAU,AACxB,CAAC,AACO,EAAE,AAAE,CAAC,AACX,SAAS,CAAE,IAAI,CACf,SAAS,CAAE,IAAI,IAAI,IAAI,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,IAAI,CAAC,AAC1C,CAAC,AACO,EAAE,AAAE,CAAC,AACX,SAAS,CAAE,IAAI,CACf,SAAS,CAAE,IAAI,IAAI,IAAI,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,IAAI,CAAC,AAC1C,CAAC,AACO,CAAC,AAAE,CAAC,AACV,SAAS,CAAE,IAAI,CACf,SAAS,CAAE,IAAI,IAAI,IAAI,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,IAAI,CAAC,AAC1C,CAAC\"}"
+};
+
+const Stylesheet = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
+	$$result.css.add(css);
+	return ``;
+});
+
+const colorMap = {
+  red: '#ef9a9a',
+  pink: '#F48FB1',
+  purple: '#CE93D8',
+  deeppurple: '#B39DDB',
+  indigo: '#9FA8DA',
+  blue: '#90CAF9',
+  lightblue: '#81D4FA',
+  cyan: '#80DEEA',
+  teal: '#80CBC4',
+  green: '#A5D6A7',
+  yellow: '#FFF59D',
+  amber: '#FFE082',
+  orange: '#FFCC80',
+  deeporange: '#FFAB91'
+};
+
+/* src\Header.svelte generated by Svelte v3.19.1 */
+
+const css$1 = {
+	code: "header.svelte-bvjtz1{display:grid;grid-template-columns:1fr 3fr 1fr;padding:30px}section.svelte-bvjtz1{position:relative;display:flex;justify-content:center;align-items:center;width:100%;max-width:800px;grid-area:1 / 2 / 2 / 3;margin:auto;perspective:300px}h1.svelte-bvjtz1{position:relative;text-align:center;font-family:'Comfortaa', sans-serif;font-family:'Roboto Mono', monospace;color:#000;letter-spacing:-15px;transition-timing-function:steps(32, end)}h1.expanded.svelte-bvjtz1{letter-spacing:-5px}bg-circle.svelte-bvjtz1{position:absolute;top:0;left:0;border-radius:100%;opacity:0.5}",
+	map: "{\"version\":3,\"file\":\"Header.svelte\",\"sources\":[\"Header.svelte\"],\"sourcesContent\":[\"<style>\\r\\n  header {\\r\\n    display: grid;\\r\\n    grid-template-columns: 1fr 3fr 1fr;\\r\\n    padding: 30px;\\r\\n  }\\r\\n\\r\\n  section {\\r\\n    position: relative;\\r\\n    display: flex;\\r\\n    justify-content: center;\\r\\n    align-items: center;\\r\\n    width: 100%;\\r\\n    max-width: 800px;\\r\\n    grid-area: 1 / 2 / 2 / 3;\\r\\n    margin: auto;\\r\\n    perspective: 300px;\\r\\n  }\\r\\n\\r\\n  h1 {\\r\\n    position: relative;\\r\\n    text-align: center;\\r\\n    font-family: 'Comfortaa', sans-serif;\\r\\n    font-family: 'Roboto Mono', monospace;\\r\\n    color: #000;\\r\\n    letter-spacing: -15px;\\r\\n    transition-timing-function: steps(32, end);\\r\\n  }\\r\\n\\r\\n  h1.expanded {\\r\\n    letter-spacing: -5px;\\r\\n  }\\r\\n\\r\\n  bg-circle {\\r\\n    position: absolute;\\r\\n    top: 0;\\r\\n    left: 0;\\r\\n    border-radius: 100%;\\r\\n    opacity: 0.5;\\r\\n  }\\r\\n</style>\\r\\n\\r\\n<script>\\r\\nimport { onMount } from 'svelte'\\r\\nimport { colorMap } from './consts.js'\\r\\n\\r\\nconst duration = 40000\\r\\nconst h1duration = 10000\\r\\nconst size = 150\\r\\nconst width = 800 - size\\r\\nconst height = 200 - size\\r\\nconst depth = 100\\r\\n\\r\\nlet opacity = 0\\r\\n\\r\\nlet h1State = ''\\r\\n\\r\\nlet colors = [] \\r\\nfor (const hex of Object.values(colorMap)) {\\r\\n  colors.push({ hex, x: 0, y: 0, z: 0 })\\r\\n}\\r\\n\\r\\nconst setRands = (w = window.innerWidth - size) => {\\r\\n  for (const color of colors) {\\r\\n    color.x = Math.random() * Math.min(width, w)\\r\\n    color.y = Math.random() * height\\r\\n    color.z = Math.random() * depth\\r\\n  }\\r\\n  colors = colors\\r\\n}\\r\\n\\r\\nconst seth1State = () => {\\r\\n  h1State = (h1State === '') ? 'expanded' : ''\\r\\n}\\r\\n\\r\\nsetRands(width)\\r\\n\\r\\nonMount(() => {\\r\\n  setTimeout(() => {\\r\\n    opacity = 0.5\\r\\n    setRands()\\r\\n    seth1State()\\r\\n\\r\\n    setInterval(seth1State, h1duration)\\r\\n    setInterval(setRands, duration)\\r\\n  }, 10)\\r\\n})\\r\\n\\r\\n</script>\\r\\n\\r\\n<header>\\r\\n  <section style=\\\"height: {height + size}px\\\">\\r\\n    {#each colors as color (color.hex)}\\r\\n      <bg-circle\\r\\n        style=\\\"\\r\\n          width: {size}px;\\r\\n          height: {size}px;\\r\\n          background-color: {color.hex};\\r\\n          box-shadow:  20px 20px 40px {color.hex}, \\r\\n             -20px -20px 60px {color.hex};\\r\\n          transform: translate3d({color.x}px, {color.y}px, {color.z}px);\\r\\n          opacity: {opacity};\\r\\n          transition: transform {duration}ms, opacity 1500ms;\\r\\n        \\\"\\r\\n      ></bg-circle>\\r\\n    {/each}\\r\\n\\r\\n    <h1 style=\\\"transition-duration: {h1duration}ms;\\\" class=\\\"font-effect-anaglyph {h1State}\\\">hi i am micheal</h1>\\r\\n\\r\\n    \\r\\n  </section>\\r\\n</header>\\r\\n\"],\"names\":[],\"mappings\":\"AACE,MAAM,cAAC,CAAC,AACN,OAAO,CAAE,IAAI,CACb,qBAAqB,CAAE,GAAG,CAAC,GAAG,CAAC,GAAG,CAClC,OAAO,CAAE,IAAI,AACf,CAAC,AAED,OAAO,cAAC,CAAC,AACP,QAAQ,CAAE,QAAQ,CAClB,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,MAAM,CACvB,WAAW,CAAE,MAAM,CACnB,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,KAAK,CAChB,SAAS,CAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CACxB,MAAM,CAAE,IAAI,CACZ,WAAW,CAAE,KAAK,AACpB,CAAC,AAED,EAAE,cAAC,CAAC,AACF,QAAQ,CAAE,QAAQ,CAClB,UAAU,CAAE,MAAM,CAClB,WAAW,CAAE,WAAW,CAAC,CAAC,UAAU,CACpC,WAAW,CAAE,aAAa,CAAC,CAAC,SAAS,CACrC,KAAK,CAAE,IAAI,CACX,cAAc,CAAE,KAAK,CACrB,0BAA0B,CAAE,MAAM,EAAE,CAAC,CAAC,GAAG,CAAC,AAC5C,CAAC,AAED,EAAE,SAAS,cAAC,CAAC,AACX,cAAc,CAAE,IAAI,AACtB,CAAC,AAED,SAAS,cAAC,CAAC,AACT,QAAQ,CAAE,QAAQ,CAClB,GAAG,CAAE,CAAC,CACN,IAAI,CAAE,CAAC,CACP,aAAa,CAAE,IAAI,CACnB,OAAO,CAAE,GAAG,AACd,CAAC\"}"
+};
+
+const duration = 40000;
+const h1duration = 10000;
+const size = 150;
+const depth = 100;
+
+const Header = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
+	const width = 800 - size;
+	const height = 200 - size;
+	let opacity = 0;
+	let h1State = "";
+	let colors = [];
+
+	for (const hex of Object.values(colorMap)) {
+		colors.push({ hex, x: 0, y: 0, z: 0 });
+	}
+
+	const setRands = (w = window.innerWidth - size) => {
+		for (const color of colors) {
+			color.x = Math.random() * Math.min(width, w);
+			color.y = Math.random() * height;
+			color.z = Math.random() * depth;
+		}
+
+		colors = colors;
+	};
+
+	const seth1State = () => {
+		h1State = h1State === "" ? "expanded" : "";
+	};
+
+	setRands(width);
+
+	onMount(() => {
+		setTimeout(
+			() => {
+				opacity = 0.5;
+				setRands();
+				seth1State();
+				setInterval(seth1State, h1duration);
+				setInterval(setRands, duration);
+			},
+			10
+		);
+	});
+
+	$$result.css.add(css$1);
+
+	return `<header class="${"svelte-bvjtz1"}">
+  <section style="${"height: " + escape(height + size) + "px"}" class="${"svelte-bvjtz1"}">
+    ${each(colors, color => `<bg-circle style="${"\r\n          width: " + escape(size) + "px;\r\n          height: " + escape(size) + "px;\r\n          background-color: " + escape(color.hex) + ";\r\n          box-shadow:  20px 20px 40px " + escape(color.hex) + ", \r\n             -20px -20px 60px " + escape(color.hex) + ";\r\n          transform: translate3d(" + escape(color.x) + "px, " + escape(color.y) + "px, " + escape(color.z) + "px);\r\n          opacity: " + escape(opacity) + ";\r\n          transition: transform " + escape(duration) + "ms, opacity 1500ms;\r\n        "}" class="${"svelte-bvjtz1"}"></bg-circle>`)}
+
+    <h1 style="${"transition-duration: " + escape(h1duration) + "ms;"}" class="${"font-effect-anaglyph " + escape(h1State) + " svelte-bvjtz1"}">hi i am micheal</h1>
+
+    
+  </section>
+</header>`;
+});
+
+/* src\Projects.svelte generated by Svelte v3.19.1 */
+
+const css$2 = {
+	code: "section.svelte-1e2z65{padding:100px 20px}current-projects.svelte-1e2z65{display:grid;grid-template-columns:repeat(3, 1fr);grid-column-gap:60px;max-width:var(--content-width);margin:auto}h2.svelte-1e2z65{font-family:'Roboto Mono', monospace;text-align:center;text-shadow:var(--lighting-text-shadow)}article.svelte-1e2z65{border-radius:50px;background:var(--lighting-shadow-bg);padding:40px;box-shadow:var(--lighting-shadow)}",
+	map: "{\"version\":3,\"file\":\"Projects.svelte\",\"sources\":[\"Projects.svelte\"],\"sourcesContent\":[\"\\r\\n<style>\\r\\nsection {\\r\\n  padding: 100px 20px;\\r\\n}\\r\\ncurrent-projects {\\r\\n  display: grid;\\r\\n  grid-template-columns: repeat(3, 1fr);\\r\\n  grid-column-gap: 60px;\\r\\n  max-width: var(--content-width);\\r\\n  margin: auto;\\r\\n}\\r\\nh2 {\\r\\n  font-family: 'Roboto Mono', monospace;\\r\\n  text-align: center;\\r\\n  text-shadow: var(--lighting-text-shadow);\\r\\n}\\r\\narticle {\\r\\n  border-radius: 50px;\\r\\n  background: var(--lighting-shadow-bg);\\r\\n  padding: 40px;\\r\\n  box-shadow: var(--lighting-shadow);\\r\\n}\\r\\n</style>\\r\\n\\r\\n<script>\\r\\nconst projects = [\\r\\n  {\\r\\n    title: 'Galeri',\\r\\n    summary: 'Galeri is a chrome extension or a desktop app focused on artwork discovery.'\\r\\n  }, {\\r\\n    title: 'Koschei Society Webchat Service',\\r\\n    summary: ''\\r\\n  }, {\\r\\n    title: 'Sim Shitty',\\r\\n    summary: ''\\r\\n  }\\r\\n]\\r\\n</script>\\r\\n\\r\\n<section>\\r\\n  <h2>Current projects</h2>\\r\\n  <current-projects>\\r\\n    {#each projects as project, i (i)}\\r\\n      <article>\\r\\n        <h3>{project.title}</h3>\\r\\n        <p>{project.summary}</p>\\r\\n      </article>\\r\\n    {/each}\\r\\n  </current-projects>\\r\\n</section>\\r\\n\"],\"names\":[],\"mappings\":\"AAEA,OAAO,cAAC,CAAC,AACP,OAAO,CAAE,KAAK,CAAC,IAAI,AACrB,CAAC,AACD,gBAAgB,cAAC,CAAC,AAChB,OAAO,CAAE,IAAI,CACb,qBAAqB,CAAE,OAAO,CAAC,CAAC,CAAC,GAAG,CAAC,CACrC,eAAe,CAAE,IAAI,CACrB,SAAS,CAAE,IAAI,eAAe,CAAC,CAC/B,MAAM,CAAE,IAAI,AACd,CAAC,AACD,EAAE,cAAC,CAAC,AACF,WAAW,CAAE,aAAa,CAAC,CAAC,SAAS,CACrC,UAAU,CAAE,MAAM,CAClB,WAAW,CAAE,IAAI,sBAAsB,CAAC,AAC1C,CAAC,AACD,OAAO,cAAC,CAAC,AACP,aAAa,CAAE,IAAI,CACnB,UAAU,CAAE,IAAI,oBAAoB,CAAC,CACrC,OAAO,CAAE,IAAI,CACb,UAAU,CAAE,IAAI,iBAAiB,CAAC,AACpC,CAAC\"}"
+};
+
+const Projects = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
+	const projects = [
+		{
+			title: "Galeri",
+			summary: "Galeri is a chrome extension or a desktop app focused on artwork discovery."
+		},
+		{
+			title: "Koschei Society Webchat Service",
+			summary: ""
+		},
+		{ title: "Sim Shitty", summary: "" }
+	];
+
+	$$result.css.add(css$2);
+
+	return `<section class="${"svelte-1e2z65"}">
+  <h2 class="${"svelte-1e2z65"}">Current projects</h2>
+  <current-projects class="${"svelte-1e2z65"}">
+    ${each(projects, (project, i) => `<article class="${"svelte-1e2z65"}">
+        <h3>${escape(project.title)}</h3>
+        <p>${escape(project.summary)}</p>
+      </article>`)}
+  </current-projects>
+</section>`;
+});
+
+/* src\Footer.svelte generated by Svelte v3.19.1 */
+
+const css$3 = {
+	code: "footer.svelte-1au8iln.svelte-1au8iln{display:grid;grid-template-columns:1fr 10fr;grid-template-rows:1fr;grid-column-gap:20px;max-width:var(--content-width);margin:auto;padding:30px}img.svelte-1au8iln.svelte-1au8iln{max-width:180px;border-radius:100%;box-shadow:var(--lighting-shadow)}h2.svelte-1au8iln.svelte-1au8iln{font-family:'Roboto Mono', monospace;font-size:30px}h2.svelte-1au8iln span.svelte-1au8iln{display:inline-block;animation:svelte-1au8iln-jump;animation-duration:200ms;animation-iteration-count:infinite}a.svelte-1au8iln svg.svelte-1au8iln{width:100%;height:100%}p.social-media.svelte-1au8iln.svelte-1au8iln{display:flex;align-items:center;margin:0\r\n  }p.social-media.svelte-1au8iln span.svelte-1au8iln{margin:0 7px 0 0}p.social-media.svelte-1au8iln a.svelte-1au8iln{display:inline-block;width:40px;height:40px;padding:0 7px}@keyframes svelte-1au8iln-jump{0%{transform:translate(0, 0) }50%{transform:translate(0, -5px) }100%{transform:translate(0, 0) }}",
+	map: "{\"version\":3,\"file\":\"Footer.svelte\",\"sources\":[\"Footer.svelte\"],\"sourcesContent\":[\"<style>\\r\\n  footer {\\r\\n    display: grid;\\r\\n    grid-template-columns: 1fr 10fr;\\r\\n    grid-template-rows: 1fr;\\r\\n    grid-column-gap: 20px;\\r\\n    max-width: var(--content-width);\\r\\n    margin: auto;\\r\\n    padding: 30px;\\r\\n  }\\r\\n\\r\\n  img {\\r\\n    max-width: 180px;\\r\\n    border-radius: 100%;\\r\\n    box-shadow: var(--lighting-shadow);\\r\\n  }\\r\\n\\r\\n  h2 {\\r\\n    font-family: 'Roboto Mono', monospace;\\r\\n    font-size: 30px;\\r\\n    \\r\\n  }\\r\\n\\r\\n  h2 span {\\r\\n    display: inline-block;\\r\\n    animation: jump;\\r\\n    animation-duration: 200ms;\\r\\n    animation-iteration-count: infinite;\\r\\n  }\\r\\n\\r\\n  a svg {\\r\\n    width: 100%;\\r\\n    height: 100%;\\r\\n  }\\r\\n\\r\\n  p.social-media {\\r\\n    display: flex;\\r\\n    align-items: center;\\r\\n    margin: 0\\r\\n  }\\r\\n\\r\\n  p.social-media span {\\r\\n    margin: 0 7px 0 0;\\r\\n  }\\r\\n\\r\\n   p.social-media a {\\r\\n    display: inline-block;\\r\\n    width: 40px;\\r\\n    height: 40px;\\r\\n    padding: 0 7px;\\r\\n  }\\r\\n\\r\\n  @keyframes jump {\\r\\n    0%  { transform: translate(0, 0) }\\r\\n    50% { transform: translate(0, -5px) }\\r\\n    100% { transform: translate(0, 0) }\\r\\n  }\\r\\n\\r\\n</style>\\r\\n\\r\\n<footer>\\r\\n  <img alt=\\\"Micheal's detatched head.\\\" src=\\\"profile.jpg\\\" />\\r\\n\\r\\n  <section>\\r\\n    <h2>\\r\\n      {#each 'about this human:' as char, i (char)}\\r\\n        <span style=\\\"animation-delay: {i * 52}ms; {char === ' ' ? 'margin-left: 10px;' : ''}\\\">{char}</span>\\r\\n      {/each}\\r\\n    </h2>\\r\\n    <p>\\r\\n      <strong>Micheal Parks</strong> is a software engineer or whatever who lives in a <a target=\\\"_tab\\\" href=\\\"https://duckduckgo.com/?q=new+york+city&ia=news&iaxm=about\\\">Large Apple</a>.\\r\\n    </p>\\r\\n\\r\\n    <p class=\\\"social-media\\\">\\r\\n      <span>He has links for you but of course</span>\\r\\n      <a target=\\\"_tab\\\" href=\\\"https://open.spotify.com/user/micheal_parks\\\">\\r\\n        <svg class=\\\"icon icon-spotify\\\"><use xlink:href=\\\"#icon-spotify\\\"></use></svg>\\r\\n      </a>\\r\\n      <a target=\\\"_tab\\\" href=\\\"https://github.com/michealparks\\\">\\r\\n        <svg class=\\\"icon icon-github\\\"><use xlink:href=\\\"#icon-github\\\"></use></svg>\\r\\n      </a>\\r\\n      <a target=\\\"_tab\\\" href=\\\"https://soundcloud.com/dead_culture\\\">\\r\\n        <svg class=\\\"icon icon-soundcloud\\\"><use xlink:href=\\\"#icon-soundcloud\\\"></use></svg>\\r\\n      </a>\\r\\n    </p>\\r\\n  </section>\\r\\n  \\r\\n    \\r\\n  \\r\\n</footer>\"],\"names\":[],\"mappings\":\"AACE,MAAM,8BAAC,CAAC,AACN,OAAO,CAAE,IAAI,CACb,qBAAqB,CAAE,GAAG,CAAC,IAAI,CAC/B,kBAAkB,CAAE,GAAG,CACvB,eAAe,CAAE,IAAI,CACrB,SAAS,CAAE,IAAI,eAAe,CAAC,CAC/B,MAAM,CAAE,IAAI,CACZ,OAAO,CAAE,IAAI,AACf,CAAC,AAED,GAAG,8BAAC,CAAC,AACH,SAAS,CAAE,KAAK,CAChB,aAAa,CAAE,IAAI,CACnB,UAAU,CAAE,IAAI,iBAAiB,CAAC,AACpC,CAAC,AAED,EAAE,8BAAC,CAAC,AACF,WAAW,CAAE,aAAa,CAAC,CAAC,SAAS,CACrC,SAAS,CAAE,IAAI,AAEjB,CAAC,AAED,iBAAE,CAAC,IAAI,eAAC,CAAC,AACP,OAAO,CAAE,YAAY,CACrB,SAAS,CAAE,mBAAI,CACf,kBAAkB,CAAE,KAAK,CACzB,yBAAyB,CAAE,QAAQ,AACrC,CAAC,AAED,gBAAC,CAAC,GAAG,eAAC,CAAC,AACL,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,AACd,CAAC,AAED,CAAC,aAAa,8BAAC,CAAC,AACd,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,MAAM,CAAE,CAAC;EACX,CAAC,AAED,CAAC,4BAAa,CAAC,IAAI,eAAC,CAAC,AACnB,MAAM,CAAE,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,AACnB,CAAC,AAEA,CAAC,4BAAa,CAAC,CAAC,eAAC,CAAC,AACjB,OAAO,CAAE,YAAY,CACrB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,OAAO,CAAE,CAAC,CAAC,GAAG,AAChB,CAAC,AAED,WAAW,mBAAK,CAAC,AACf,EAAE,AAAE,CAAC,AAAC,SAAS,CAAE,UAAU,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,AAClC,GAAG,AAAC,CAAC,AAAC,SAAS,CAAE,UAAU,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,AACrC,IAAI,AAAC,CAAC,AAAC,SAAS,CAAE,UAAU,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,AACrC,CAAC\"}"
+};
+
+const Footer = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
+	$$result.css.add(css$3);
+
+	return `<footer class="${"svelte-1au8iln"}">
+  <img alt="${"Micheal's detatched head."}" src="${"profile.jpg"}" class="${"svelte-1au8iln"}">
+
+  <section>
+    <h2 class="${"svelte-1au8iln"}">
+      ${each("about this human:", (char, i) => `<span style="${"animation-delay: " + escape(i * 52) + "ms; " + escape(char === " " ? "margin-left: 10px;" : "")}" class="${"svelte-1au8iln"}">${escape(char)}</span>`)}
+    </h2>
+    <p>
+      <strong>Micheal Parks</strong> is a software engineer or whatever who lives in a <a target="${"_tab"}" href="${"https://duckduckgo.com/?q=new+york+city&ia=news&iaxm=about"}">Large Apple</a>.
+    </p>
+
+    <p class="${"social-media svelte-1au8iln"}">
+      <span class="${"svelte-1au8iln"}">He has links for you but of course</span>
+      <a target="${"_tab"}" href="${"https://open.spotify.com/user/micheal_parks"}" class="${"svelte-1au8iln"}">
+        <svg class="${"icon icon-spotify svelte-1au8iln"}"><use xlink:href="${"#icon-spotify"}"></use></svg>
+      </a>
+      <a target="${"_tab"}" href="${"https://github.com/michealparks"}" class="${"svelte-1au8iln"}">
+        <svg class="${"icon icon-github svelte-1au8iln"}"><use xlink:href="${"#icon-github"}"></use></svg>
+      </a>
+      <a target="${"_tab"}" href="${"https://soundcloud.com/dead_culture"}" class="${"svelte-1au8iln"}">
+        <svg class="${"icon icon-soundcloud svelte-1au8iln"}"><use xlink:href="${"#icon-soundcloud"}"></use></svg>
+      </a>
+    </p>
+  </section>
+  
+    
+  
+</footer>`;
+});
+
+/* src\Icons.svelte generated by Svelte v3.19.1 */
+
+const Icons = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
+	return `<div style="${"display: none"}">
+
+<svg id="${"icon-spotify"}" viewBox="${"0 0 32 32"}">
+  <path fill="${"#1ed760"}" style="${"fill: #1ed760"}" d="${"M16 0c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.12-16-16-16zM23.361 23.12c-0.32 0.479-0.88 0.64-1.361 0.32-3.76-2.32-8.48-2.801-14.081-1.521-0.557 0.163-1.039-0.239-1.199-0.719-0.16-0.561 0.24-1.040 0.72-1.2 6.080-1.361 11.36-0.8 15.52 1.76 0.56 0.24 0.639 0.879 0.401 1.36zM25.281 18.72c-0.401 0.56-1.121 0.8-1.683 0.4-4.319-2.64-10.879-3.44-15.919-1.84-0.639 0.16-1.36-0.16-1.52-0.8s0.16-1.361 0.8-1.521c5.84-1.759 13.040-0.877 18 2.161 0.481 0.241 0.72 1.040 0.321 1.6zM25.441 14.24c-5.121-3.040-13.681-3.36-18.561-1.839-0.8 0.239-1.6-0.241-1.84-0.961-0.24-0.801 0.24-1.6 0.96-1.841 5.68-1.68 15.040-1.36 20.961 2.161 0.719 0.4 0.959 1.36 0.559 2.080-0.399 0.561-1.36 0.799-2.079 0.4z"}"></path>
+</svg>
+
+<svg id="${"icon-soundcloud"}" viewBox="${"0 0 32 32"}">
+  <path fill="${"#f30"}" style="${"fill: #f30"}" d="${"M1.567 16.3c-0.068 0-0.125 0.061-0.135 0.133l-0.311 2.872 0.311 2.807c0.009 0.077 0.067 0.131 0.135 0.131 0.067 0 0.12-0.053 0.132-0.131l0.34-2.807-0.36-2.872c0-0.076-0.060-0.133-0.12-0.133zM0.36 17.404c-0.080 0-0.121 0.049-0.139 0.125l-0.221 1.776 0.22 1.744c0 0.073 0.060 0.125 0.12 0.125s0.119-0.060 0.139-0.139l0.28-1.759-0.28-1.779c0-0.081-0.059-0.12-0.12-0.12zM2.799 15.74c-0.081 0-0.16 0.060-0.16 0.139l-0.28 3.417 0.3 3.277c0 0.080 0.060 0.16 0.159 0.16 0.081 0 0.14-0.081 0.161-0.16l0.339-3.299-0.339-3.397c-0.021-0.080-0.081-0.16-0.161-0.16zM4.077 15.599c-0.1 0-0.18 0.080-0.2 0.18l-0.257 3.52 0.28 3.392c0.021 0.103 0.1 0.184 0.199 0.184 0.1 0 0.18-0.081 0.2-0.2l0.32-3.376-0.32-3.497c0-0.1-0.080-0.18-0.18-0.18zM5.617 16.079c-0.007-0.12-0.1-0.199-0.212-0.199-0.12 0-0.211 0.080-0.219 0.199l-0.289 3.24 0.267 3.417c0 0.12 0.1 0.209 0.212 0.209 0.099 0 0.197-0.091 0.197-0.211l0.303-3.417-0.303-3.259zM6.696 13.8c-0.135 0-0.24 0.12-0.24 0.241l-0.28 5.276 0.249 3.417c0 0.12 0.107 0.219 0.24 0.219 0.125 0 0.232-0.12 0.24-0.24l0.279-3.417-0.279-5.296c-0.011-0.139-0.117-0.24-0.24-0.24zM7.944 12.541c-0.14 0-0.26 0.12-0.271 0.259l-0.24 6.496 0.22 3.397c0 0.16 0.12 0.279 0.26 0.279 0.139 0 0.259-0.119 0.28-0.279l0.257-3.397-0.256-6.475c-0.021-0.16-0.14-0.28-0.28-0.28zM9.233 11.943c-0.161 0-0.281 0.119-0.3 0.279l-0.22 7.033 0.22 3.36c0.019 0.159 0.139 0.3 0.3 0.3 0.159 0 0.3-0.14 0.3-0.3l0.26-3.36-0.261-7.033c0-0.16-0.14-0.3-0.3-0.3zM10.892 11.981c0-0.18-0.14-0.32-0.32-0.32-0.159 0-0.32 0.14-0.32 0.32l-0.199 7.255 0.199 3.337c0.021 0.18 0.161 0.32 0.341 0.32s0.32-0.14 0.32-0.32l0.219-3.337-0.219-7.275zM11.891 11.803c-0.18 0-0.34 0.159-0.34 0.339l-0.2 7.096 0.2 3.297c0 0.2 0.16 0.34 0.34 0.34s0.34-0.16 0.34-0.36l0.2-3.299-0.22-7.076c0-0.197-0.16-0.36-0.361-0.36zM13.189 12.001c-0.219 0-0.379 0.18-0.379 0.38l-0.137 6.857 0.18 3.299c0 0.199 0.159 0.369 0.379 0.369 0.199 0 0.361-0.16 0.379-0.38l0.161-3.257-0.18-6.816c-0.016-0.219-0.18-0.38-0.38-0.38zM14.791 10.813c-0.060-0.039-0.14-0.059-0.22-0.059s-0.159 0.020-0.22 0.059c-0.12 0.072-0.199 0.2-0.199 0.34v0.081l-0.139 8.064 0.153 3.265v0.011c0.011 0.080 0.040 0.18 0.099 0.24 0.077 0.081 0.189 0.139 0.312 0.139 0.107 0 0.211-0.059 0.279-0.12 0.077-0.080 0.121-0.18 0.121-0.3l0.020-0.32 0.156-2.937-0.18-8.115c0-0.139-0.081-0.257-0.18-0.319zM16.132 10.084c-0.060-0.060-0.12-0.081-0.2-0.081-0.099 0-0.199 0.021-0.279 0.081-0.1 0.081-0.159 0.2-0.159 0.32v0.039l-0.183 8.812 0.101 1.62 0.081 1.58c0 0.219 0.197 0.419 0.437 0.419 0.241 0 0.44-0.2 0.44-0.439l0.2-3.219-0.2-8.849c0-0.16-0.099-0.295-0.22-0.369zM28.064 15.033c-0.54 0-1.060 0.115-1.519 0.309-0.32-3.539-3.28-6.315-6.917-6.315-0.879 0-1.74 0.18-2.519 0.479-0.3 0.12-0.36 0.24-0.38 0.479v12.491c0.021 0.24 0.2 0.44 0.44 0.46h10.913c2.159 0.021 3.917-1.717 3.917-3.896s-1.759-3.936-3.917-3.936z"}"></path>
+</svg>
+
+<svg id="${"icon-github"}" viewBox="${"0 0 32 32"}">
+  <path fill="${"#fff"}" d="${"M16 0.396c-8.84 0-16 7.164-16 16 0 7.071 4.584 13.067 10.94 15.18 0.8 0.151 1.093-0.344 1.093-0.769 0-0.38-0.013-1.387-0.020-2.72-4.451 0.965-5.389-2.147-5.389-2.147-0.728-1.847-1.78-2.34-1.78-2.34-1.449-0.992 0.112-0.972 0.112-0.972 1.607 0.112 2.451 1.648 2.451 1.648 1.427 2.447 3.745 1.74 4.66 1.331 0.144-1.035 0.556-1.74 1.013-2.14-3.553-0.4-7.288-1.776-7.288-7.907 0-1.747 0.62-3.173 1.647-4.293-0.18-0.404-0.72-2.031 0.14-4.235 0 0 1.34-0.429 4.4 1.64 1.28-0.356 2.64-0.532 4-0.54 1.36 0.008 2.72 0.184 4 0.54 3.040-2.069 4.38-1.64 4.38-1.64 0.86 2.204 0.32 3.831 0.16 4.235 1.020 1.12 1.64 2.547 1.64 4.293 0 6.147-3.74 7.5-7.3 7.893 0.56 0.48 1.080 1.461 1.080 2.96 0 2.141-0.020 3.861-0.020 4.381 0 0.42 0.28 0.92 1.1 0.76 6.401-2.099 10.981-8.099 10.981-15.159 0-8.836-7.164-16-16-16z"}"></path>
+</svg>
+
+</div>`;
+});
+
+/* src\App.svelte generated by Svelte v3.19.1 */
+
+const css$4 = {
+	code: ":root{--content-width:1100px;--lighting-shadow-bg:linear-gradient(145deg, #1f1f1f, #242424);--lighting-shadow:20px 20px 60px #1d1d1d,  -20px -20px 60px #272727;--lighting-text-shadow:10px 10px 10px #0e0e0e, -10px -10px 10px #363636}a{color:#ccc}main.svelte-anfilj{position:absolute;width:100%;height:100%;background-color:#222;color:#eee\r\n}",
+	map: "{\"version\":3,\"file\":\"App.svelte\",\"sources\":[\"App.svelte\"],\"sourcesContent\":[\"<script>\\r\\n  import Stylesheet from './Stylesheet.svelte'\\r\\n  import Header from './Header.svelte'\\r\\n  import Projects from './Projects.svelte'\\r\\n  import Footer from './Footer.svelte'\\r\\n  import Icons from './Icons.svelte'\\r\\n</script>\\r\\n\\r\\n<style>\\r\\n:global(:root) {\\r\\n  --content-width: 1100px;\\r\\n  --lighting-shadow-bg: linear-gradient(145deg, #1f1f1f, #242424);\\r\\n  --lighting-shadow: 20px 20px 60px #1d1d1d,  -20px -20px 60px #272727;;\\r\\n  --lighting-text-shadow: 10px 10px 10px #0e0e0e, -10px -10px 10px #363636;\\r\\n}\\r\\n\\r\\n:global(a) {\\r\\n  color: #ccc;\\r\\n}\\r\\n\\r\\nmain {\\r\\n  position: absolute;\\r\\n  width: 100%;\\r\\n  height: 100%;\\r\\n  background-color: #222;\\r\\n  color: #eee\\r\\n}\\r\\n</style>\\r\\n\\r\\n<main>\\r\\n  <Stylesheet />\\r\\n  <Header />\\r\\n  <Projects />\\r\\n  <Footer />\\r\\n  <Icons />\\r\\n</main>\\r\\n\"],\"names\":[],\"mappings\":\"AASQ,KAAK,AAAE,CAAC,AACd,eAAe,CAAE,MAAM,CACvB,oBAAoB,CAAE,yCAAyC,CAC/D,iBAAiB,CAAE,iDAAiD,CACpE,sBAAsB,CAAE,gDAAgD,AAC1E,CAAC,AAEO,CAAC,AAAE,CAAC,AACV,KAAK,CAAE,IAAI,AACb,CAAC,AAED,IAAI,cAAC,CAAC,AACJ,QAAQ,CAAE,QAAQ,CAClB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,gBAAgB,CAAE,IAAI,CACtB,KAAK,CAAE,IAAI;AACb,CAAC\"}"
+};
+
+const App = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
+	$$result.css.add(css$4);
+
+	return `<main class="${"svelte-anfilj"}">
+  ${validate_component(Stylesheet, "Stylesheet").$$render($$result, {}, {}, {})}
+  ${validate_component(Header, "Header").$$render($$result, {}, {}, {})}
+  ${validate_component(Projects, "Projects").$$render($$result, {}, {}, {})}
+  ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}
+  ${validate_component(Icons, "Icons").$$render($$result, {}, {}, {})}
+</main>`;
+});
+
+module.exports = App;
