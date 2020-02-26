@@ -5,6 +5,21 @@ import { onMount } from 'svelte'
 let state = 'unjammed'
 let target
 
+const initJamz = () => {
+  state = 'jamming'
+  const tag = document.createElement('script')
+  tag.async = true
+  tag.src = 'https://www.youtube.com/iframe_api'
+  document.head.appendChild(tag)
+
+  window.onYouTubeIframeAPIReady = () => new YT.Player('jamz', {
+    events: {
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange
+    }
+  })
+}
+
 const startJamz = () => {
   target.playVideo()
   state = 'jamming'
@@ -18,6 +33,7 @@ const endJamz = () => {
 
 const onPlayerReady = (e) => {
   target = e.target
+  startJamz()
 }
 
 const onPlayerStateChange = (e) => {
@@ -30,20 +46,6 @@ const onPlayerStateChange = (e) => {
       return
   }
 }
-
-onMount(() => {
-  const tag = document.createElement('script')
-  tag.async = true
-  tag.src = 'https://www.youtube.com/iframe_api'
-  document.head.appendChild(tag)
-
-  window.onYouTubeIframeAPIReady = () => new YT.Player('jamz', {
-    events: {
-      onReady: onPlayerReady,
-      onStateChange: onPlayerStateChange
-    }
-  })
-})
 </script>
 
 <style>
@@ -74,7 +76,7 @@ iframe {
 
 <button-container>
   {#if state === 'unjammed'}
-    <button on:click={startJamz}>pump up my jamz</button>
+    <button on:click={initJamz}>pump up my jamz</button>
   {:else if state === 'jamming'}
     <button on:click={endJamz}>stop!! 'nuff jam TIME!!</button>
   {:else}
@@ -82,12 +84,14 @@ iframe {
   {/if}
 </button-container>
 
-<iframe
-  id="jamz"
-  title="Jamz"
-  width="560"
-  height="315"
-  src="https://www.youtube.com/embed/4T1t5OFOYDU?enablejsapi=1"
-  frameborder="0"
-  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-/>
+{#if state !== 'unjammed'}
+  <iframe
+    id="jamz"
+    title="Jamz"
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/4T1t5OFOYDU?enablejsapi=1"
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  />
+{/if}

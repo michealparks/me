@@ -138,16 +138,21 @@ function schedule_update() {
 function add_render_callback(fn) {
     render_callbacks.push(fn);
 }
+let flushing = false;
 const seen_callbacks = new Set();
 function flush() {
+    if (flushing)
+        return;
+    flushing = true;
     do {
         // first, call beforeUpdate functions
         // and update components
-        while (dirty_components.length) {
-            const component = dirty_components.shift();
+        for (let i = 0; i < dirty_components.length; i += 1) {
+            const component = dirty_components[i];
             set_current_component(component);
             update(component.$$);
         }
+        dirty_components.length = 0;
         while (binding_callbacks.length)
             binding_callbacks.pop()();
         // then, once components are updated, call
@@ -167,6 +172,7 @@ function flush() {
         flush_callbacks.pop()();
     }
     update_scheduled = false;
+    flushing = false;
     seen_callbacks.clear();
 }
 function update($$) {
@@ -1433,7 +1439,7 @@ function create_else_block(ctx) {
 		m(target, anchor) {
 			insert(target, button, anchor);
 			append(button, t);
-			dispose = listen(button, "click", /*startJamz*/ ctx[1]);
+			dispose = listen(button, "click", /*startJamz*/ ctx[2]);
 		},
 		p: noop,
 		d(detaching) {
@@ -1443,8 +1449,8 @@ function create_else_block(ctx) {
 	};
 }
 
-// (78:32) 
-function create_if_block_1(ctx) {
+// (80:32) 
+function create_if_block_2(ctx) {
 	let button;
 	let t;
 	let dispose;
@@ -1468,7 +1474,7 @@ function create_if_block_1(ctx) {
 		m(target, anchor) {
 			insert(target, button, anchor);
 			append(button, t);
-			dispose = listen(button, "click", /*endJamz*/ ctx[2]);
+			dispose = listen(button, "click", /*endJamz*/ ctx[3]);
 		},
 		p: noop,
 		d(detaching) {
@@ -1478,8 +1484,8 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (76:2) {#if state === 'unjammed'}
-function create_if_block(ctx) {
+// (78:2) {#if state === 'unjammed'}
+function create_if_block_1(ctx) {
 	let button;
 	let t;
 	let dispose;
@@ -1503,7 +1509,7 @@ function create_if_block(ctx) {
 		m(target, anchor) {
 			insert(target, button, anchor);
 			append(button, t);
-			dispose = listen(button, "click", /*startJamz*/ ctx[1]);
+			dispose = listen(button, "click", /*initJamz*/ ctx[1]);
 		},
 		p: noop,
 		d(detaching) {
@@ -1513,36 +1519,17 @@ function create_if_block(ctx) {
 	};
 }
 
-function create_fragment$4(ctx) {
-	let button_container;
-	let t;
+// (87:0) {#if state !== 'unjammed'}
+function create_if_block(ctx) {
 	let iframe;
 	let iframe_src_value;
 
-	function select_block_type(ctx, dirty) {
-		if (/*state*/ ctx[0] === "unjammed") return create_if_block;
-		if (/*state*/ ctx[0] === "jamming") return create_if_block_1;
-		return create_else_block;
-	}
-
-	let current_block_type = select_block_type(ctx);
-	let if_block = current_block_type(ctx);
-
 	return {
 		c() {
-			button_container = element("button-container");
-			if_block.c();
-			t = space();
 			iframe = element("iframe");
 			this.h();
 		},
 		l(nodes) {
-			button_container = claim_element(nodes, "BUTTON-CONTAINER", { class: true });
-			var button_container_nodes = children(button_container);
-			if_block.l(button_container_nodes);
-			button_container_nodes.forEach(detach);
-			t = claim_space(nodes);
-
 			iframe = claim_element(nodes, "IFRAME", {
 				id: true,
 				title: true,
@@ -1558,7 +1545,6 @@ function create_fragment$4(ctx) {
 			this.h();
 		},
 		h() {
-			set_custom_element_data(button_container, "class", "svelte-1y6pnro");
 			attr(iframe, "id", "jamz");
 			attr(iframe, "title", "Jamz");
 			attr(iframe, "width", "560");
@@ -1569,31 +1555,90 @@ function create_fragment$4(ctx) {
 			attr(iframe, "class", "svelte-1y6pnro");
 		},
 		m(target, anchor) {
-			insert(target, button_container, anchor);
-			if_block.m(button_container, null);
-			insert(target, t, anchor);
 			insert(target, iframe, anchor);
 		},
-		p(ctx, [dirty]) {
-			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
-				if_block.p(ctx, dirty);
-			} else {
-				if_block.d(1);
-				if_block = current_block_type(ctx);
+		d(detaching) {
+			if (detaching) detach(iframe);
+		}
+	};
+}
 
-				if (if_block) {
-					if_block.c();
-					if_block.m(button_container, null);
+function create_fragment$4(ctx) {
+	let button_container;
+	let t;
+	let if_block1_anchor;
+
+	function select_block_type(ctx, dirty) {
+		if (/*state*/ ctx[0] === "unjammed") return create_if_block_1;
+		if (/*state*/ ctx[0] === "jamming") return create_if_block_2;
+		return create_else_block;
+	}
+
+	let current_block_type = select_block_type(ctx);
+	let if_block0 = current_block_type(ctx);
+	let if_block1 = /*state*/ ctx[0] !== "unjammed" && create_if_block();
+
+	return {
+		c() {
+			button_container = element("button-container");
+			if_block0.c();
+			t = space();
+			if (if_block1) if_block1.c();
+			if_block1_anchor = empty();
+			this.h();
+		},
+		l(nodes) {
+			button_container = claim_element(nodes, "BUTTON-CONTAINER", { class: true });
+			var button_container_nodes = children(button_container);
+			if_block0.l(button_container_nodes);
+			button_container_nodes.forEach(detach);
+			t = claim_space(nodes);
+			if (if_block1) if_block1.l(nodes);
+			if_block1_anchor = empty();
+			this.h();
+		},
+		h() {
+			set_custom_element_data(button_container, "class", "svelte-1y6pnro");
+		},
+		m(target, anchor) {
+			insert(target, button_container, anchor);
+			if_block0.m(button_container, null);
+			insert(target, t, anchor);
+			if (if_block1) if_block1.m(target, anchor);
+			insert(target, if_block1_anchor, anchor);
+		},
+		p(ctx, [dirty]) {
+			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block0) {
+				if_block0.p(ctx, dirty);
+			} else {
+				if_block0.d(1);
+				if_block0 = current_block_type(ctx);
+
+				if (if_block0) {
+					if_block0.c();
+					if_block0.m(button_container, null);
 				}
+			}
+
+			if (/*state*/ ctx[0] !== "unjammed") {
+				if (!if_block1) {
+					if_block1 = create_if_block();
+					if_block1.c();
+					if_block1.m(if_block1_anchor.parentNode, if_block1_anchor);
+				}
+			} else if (if_block1) {
+				if_block1.d(1);
+				if_block1 = null;
 			}
 		},
 		i: noop,
 		o: noop,
 		d(detaching) {
 			if (detaching) detach(button_container);
-			if_block.d();
+			if_block0.d();
 			if (detaching) detach(t);
-			if (detaching) detach(iframe);
+			if (if_block1) if_block1.d(detaching);
+			if (detaching) detach(if_block1_anchor);
 		}
 	};
 }
@@ -1601,6 +1646,22 @@ function create_fragment$4(ctx) {
 function instance$3($$self, $$props, $$invalidate) {
 	let state = "unjammed";
 	let target;
+
+	const initJamz = () => {
+		$$invalidate(0, state = "jamming");
+		const tag = document.createElement("script");
+		tag.async = true;
+		tag.src = "https://www.youtube.com/iframe_api";
+		document.head.appendChild(tag);
+
+		window.onYouTubeIframeAPIReady = () => new YT.Player("jamz",
+		{
+				events: {
+					onReady: onPlayerReady,
+					onStateChange: onPlayerStateChange
+				}
+			});
+	};
 
 	const startJamz = () => {
 		target.playVideo();
@@ -1615,6 +1676,7 @@ function instance$3($$self, $$props, $$invalidate) {
 
 	const onPlayerReady = e => {
 		target = e.target;
+		startJamz();
 	};
 
 	const onPlayerStateChange = e => {
@@ -1628,22 +1690,7 @@ function instance$3($$self, $$props, $$invalidate) {
 		}
 	};
 
-	onMount(() => {
-		const tag = document.createElement("script");
-		tag.async = true;
-		tag.src = "https://www.youtube.com/iframe_api";
-		document.head.appendChild(tag);
-
-		window.onYouTubeIframeAPIReady = () => new YT.Player("jamz",
-		{
-				events: {
-					onReady: onPlayerReady,
-					onStateChange: onPlayerStateChange
-				}
-			});
-	});
-
-	return [state, startJamz, endJamz];
+	return [state, initJamz, startJamz, endJamz];
 }
 
 class Jamz extends SvelteComponent {
