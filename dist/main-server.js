@@ -291,11 +291,33 @@ const Footer = create_ssr_component(($$result, $$props, $$bindings, $$slots) => 
 
 const css$5 = {
 	code: "button-container.svelte-1nqdmtk{display:flex;justify-content:flex-end}button.svelte-1nqdmtk{margin:10px;color:#fff;background-color:transparent}iframe.svelte-1nqdmtk{--size:400px;position:fixed;z-index:-1;opacity:0.3;margin:calc(var(--size) / -2);height:calc(100% + var(--size));width:calc(100% + var(--size));top:0;left:0}",
-	map: "{\"version\":3,\"file\":\"Jamz.svelte\",\"sources\":[\"Jamz.svelte\"],\"sourcesContent\":[\"\\r\\n<script>\\r\\nimport { onMount } from 'svelte'\\r\\n\\r\\nlet state = 'unjammed'\\r\\nlet target\\r\\n\\r\\nconst handleJamz = () => {\\r\\n  target.playVideo()\\r\\n  document.querySelector('main').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'\\r\\n  state = 'jamming'\\r\\n}\\r\\n\\r\\nconst handleJamming = () => {\\r\\n  target.stopVideo()\\r\\n  document.querySelector('main').style.backgroundColor = ''\\r\\n  state = 'jammed'\\r\\n}\\r\\n\\r\\nonMount(() => {\\r\\n  const tag = document.createElement('script')\\r\\n  tag.async = true\\r\\n  tag.src = 'https://www.youtube.com/iframe_api'\\r\\n  document.head.appendChild(tag)\\r\\n\\r\\n  window.onYouTubeIframeAPIReady = () => new YT.Player('jamz', {\\r\\n    events: { onReady: (e) => {\\r\\n      console.log('ready', e)\\r\\n      target = e.target\\r\\n    } }\\r\\n  })\\r\\n})\\r\\n</script>\\r\\n\\r\\n<style>\\r\\nbutton-container {\\r\\n  display: flex;\\r\\n  justify-content: flex-end;\\r\\n}\\r\\n\\r\\nbutton {\\r\\n  margin: 10px;\\r\\n  color: #fff;\\r\\n  background-color: transparent;\\r\\n}\\r\\n\\r\\niframe {\\r\\n  --size: 400px;\\r\\n  position: fixed;\\r\\n  z-index: -1;\\r\\n  opacity: 0.3;\\r\\n  margin: calc(var(--size) / -2);\\r\\n  height: calc(100% + var(--size));\\r\\n  width: calc(100% + var(--size));\\r\\n  top: 0;\\r\\n  left: 0;\\r\\n}\\r\\n</style>\\r\\n\\r\\n<button-container>\\r\\n  {#if state === 'unjammed'}\\r\\n    <button on:click={handleJamz}>pump up my jamz</button>\\r\\n  {:else if state === 'jamming'}\\r\\n    <button on:click={handleJamming}>stop!! jammed 'nuff!</button>\\r\\n  {:else}\\r\\n    <button on:click={handleJamz}>more! moar JAMZ!</button>\\r\\n  {/if}\\r\\n</button-container>\\r\\n\\r\\n<iframe\\r\\n  id=\\\"jamz\\\"\\r\\n  title=\\\"Jamz\\\"\\r\\n  width=\\\"560\\\"\\r\\n  height=\\\"315\\\"\\r\\n  src=\\\"https://www.youtube.com/embed/4T1t5OFOYDU?enablejsapi=1\\\"\\r\\n  frameborder=\\\"0\\\"\\r\\n  allow=\\\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\\\"\\r\\n/>\"],\"names\":[],\"mappings\":\"AAmCA,gBAAgB,eAAC,CAAC,AAChB,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,QAAQ,AAC3B,CAAC,AAED,MAAM,eAAC,CAAC,AACN,MAAM,CAAE,IAAI,CACZ,KAAK,CAAE,IAAI,CACX,gBAAgB,CAAE,WAAW,AAC/B,CAAC,AAED,MAAM,eAAC,CAAC,AACN,MAAM,CAAE,KAAK,CACb,QAAQ,CAAE,KAAK,CACf,OAAO,CAAE,EAAE,CACX,OAAO,CAAE,GAAG,CACZ,MAAM,CAAE,KAAK,IAAI,MAAM,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAC9B,MAAM,CAAE,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,MAAM,CAAC,CAAC,CAChC,KAAK,CAAE,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,MAAM,CAAC,CAAC,CAC/B,GAAG,CAAE,CAAC,CACN,IAAI,CAAE,CAAC,AACT,CAAC\"}"
+	map: "{\"version\":3,\"file\":\"Jamz.svelte\",\"sources\":[\"Jamz.svelte\"],\"sourcesContent\":[\"\\r\\n<script>\\r\\nimport { onMount } from 'svelte'\\r\\n\\r\\nlet state = 'unjammed'\\r\\nlet target\\r\\n\\r\\nconst startJamz = () => {\\r\\n  target.playVideo()\\r\\n  state = 'jamming'\\r\\n}\\r\\n\\r\\nconst endJamz = () => {\\r\\n  target.stopVideo()\\r\\n  document.querySelector('main').style.backgroundColor = ''\\r\\n  state = 'jammed'\\r\\n}\\r\\n\\r\\nconst onPlayerReady = (e) => {\\r\\n  target = e.target\\r\\n}\\r\\n\\r\\nconst onPlayerStateChange = (e) => {\\r\\n  switch (e.data) {\\r\\n    case YT.PlayerState.ENDED:\\r\\n      endJamz()\\r\\n      return\\r\\n    case YT.PlayerState.PLAYING:\\r\\n      document.querySelector('main').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'\\r\\n      return\\r\\n  }\\r\\n}\\r\\n\\r\\nonMount(() => {\\r\\n  const tag = document.createElement('script')\\r\\n  tag.async = true\\r\\n  tag.src = 'https://www.youtube.com/iframe_api'\\r\\n  document.head.appendChild(tag)\\r\\n\\r\\n  window.onYouTubeIframeAPIReady = () => new YT.Player('jamz', {\\r\\n    events: {\\r\\n      onReady: onPlayerReady,\\r\\n      onStateChange: onPlayerStateChange\\r\\n    }\\r\\n  })\\r\\n})\\r\\n</script>\\r\\n\\r\\n<style>\\r\\nbutton-container {\\r\\n  display: flex;\\r\\n  justify-content: flex-end;\\r\\n}\\r\\n\\r\\nbutton {\\r\\n  margin: 10px;\\r\\n  color: #fff;\\r\\n  background-color: transparent;\\r\\n}\\r\\n\\r\\niframe {\\r\\n  --size: 400px;\\r\\n  position: fixed;\\r\\n  z-index: -1;\\r\\n  opacity: 0.3;\\r\\n  margin: calc(var(--size) / -2);\\r\\n  height: calc(100% + var(--size));\\r\\n  width: calc(100% + var(--size));\\r\\n  top: 0;\\r\\n  left: 0;\\r\\n}\\r\\n</style>\\r\\n\\r\\n<button-container>\\r\\n  {#if state === 'unjammed'}\\r\\n    <button on:click={startJamz}>pump up my jamz</button>\\r\\n  {:else if state === 'jamming'}\\r\\n    <button on:click={endJamz}>stop!! 'nuff jam TIME!!</button>\\r\\n  {:else}\\r\\n    <button on:click={startJamz}>more! moar JAMZ!</button>\\r\\n  {/if}\\r\\n</button-container>\\r\\n\\r\\n<iframe\\r\\n  id=\\\"jamz\\\"\\r\\n  title=\\\"Jamz\\\"\\r\\n  width=\\\"560\\\"\\r\\n  height=\\\"315\\\"\\r\\n  src=\\\"https://www.youtube.com/embed/4T1t5OFOYDU?enablejsapi=1\\\"\\r\\n  frameborder=\\\"0\\\"\\r\\n  allow=\\\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\\\"\\r\\n/>\"],\"names\":[],\"mappings\":\"AAiDA,gBAAgB,eAAC,CAAC,AAChB,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,QAAQ,AAC3B,CAAC,AAED,MAAM,eAAC,CAAC,AACN,MAAM,CAAE,IAAI,CACZ,KAAK,CAAE,IAAI,CACX,gBAAgB,CAAE,WAAW,AAC/B,CAAC,AAED,MAAM,eAAC,CAAC,AACN,MAAM,CAAE,KAAK,CACb,QAAQ,CAAE,KAAK,CACf,OAAO,CAAE,EAAE,CACX,OAAO,CAAE,GAAG,CACZ,MAAM,CAAE,KAAK,IAAI,MAAM,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAC9B,MAAM,CAAE,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,MAAM,CAAC,CAAC,CAChC,KAAK,CAAE,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,MAAM,CAAC,CAAC,CAC/B,GAAG,CAAE,CAAC,CACN,IAAI,CAAE,CAAC,AACT,CAAC\"}"
 };
 
 const Jamz = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
+	let state = "unjammed";
 	let target;
+
+	const endJamz = () => {
+		target.stopVideo();
+		document.querySelector("main").style.backgroundColor = "";
+		state = "jammed";
+	};
+
+	const onPlayerReady = e => {
+		target = e.target;
+	};
+
+	const onPlayerStateChange = e => {
+		switch (e.data) {
+			case YT.PlayerState.ENDED:
+				endJamz();
+				return;
+			case YT.PlayerState.PLAYING:
+				document.querySelector("main").style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+				return;
+		}
+	};
 
 	onMount(() => {
 		const tag = document.createElement("script");
@@ -306,10 +328,8 @@ const Jamz = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
 		window.onYouTubeIframeAPIReady = () => new YT.Player("jamz",
 		{
 				events: {
-					onReady: e => {
-						console.log("ready", e);
-						target = e.target;
-					}
+					onReady: onPlayerReady,
+					onStateChange: onPlayerStateChange
 				}
 			});
 	});
@@ -317,8 +337,11 @@ const Jamz = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
 	$$result.css.add(css$5);
 
 	return `<button-container class="${"svelte-1nqdmtk"}">
-  ${ `<button class="${"svelte-1nqdmtk"}">pump up my jamz</button>`
-	}
+  ${state === "unjammed"
+	? `<button class="${"svelte-1nqdmtk"}">pump up my jamz</button>`
+	: `${state === "jamming"
+		? `<button class="${"svelte-1nqdmtk"}">stop!! &#39;nuff jam TIME!!</button>`
+		: `<button class="${"svelte-1nqdmtk"}">more! moar JAMZ!</button>`}`}
 </button-container>
 
 <iframe id="${"jamz"}" title="${"Jamz"}" width="${"560"}" height="${"315"}" src="${"https://www.youtube.com/embed/4T1t5OFOYDU?enablejsapi=1"}" frameborder="${"0"}" allow="${"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"}" class="${"svelte-1nqdmtk"}"></iframe>`;

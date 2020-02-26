@@ -5,16 +5,30 @@ import { onMount } from 'svelte'
 let state = 'unjammed'
 let target
 
-const handleJamz = () => {
+const startJamz = () => {
   target.playVideo()
-  document.querySelector('main').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
   state = 'jamming'
 }
 
-const handleJamming = () => {
+const endJamz = () => {
   target.stopVideo()
   document.querySelector('main').style.backgroundColor = ''
   state = 'jammed'
+}
+
+const onPlayerReady = (e) => {
+  target = e.target
+}
+
+const onPlayerStateChange = (e) => {
+  switch (e.data) {
+    case YT.PlayerState.ENDED:
+      endJamz()
+      return
+    case YT.PlayerState.PLAYING:
+      document.querySelector('main').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+      return
+  }
 }
 
 onMount(() => {
@@ -24,10 +38,10 @@ onMount(() => {
   document.head.appendChild(tag)
 
   window.onYouTubeIframeAPIReady = () => new YT.Player('jamz', {
-    events: { onReady: (e) => {
-      console.log('ready', e)
-      target = e.target
-    } }
+    events: {
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange
+    }
   })
 })
 </script>
@@ -59,11 +73,11 @@ iframe {
 
 <button-container>
   {#if state === 'unjammed'}
-    <button on:click={handleJamz}>pump up my jamz</button>
+    <button on:click={startJamz}>pump up my jamz</button>
   {:else if state === 'jamming'}
-    <button on:click={handleJamming}>stop!! jammed 'nuff!</button>
+    <button on:click={endJamz}>stop!! 'nuff jam TIME!!</button>
   {:else}
-    <button on:click={handleJamz}>more! moar JAMZ!</button>
+    <button on:click={startJamz}>more! moar JAMZ!</button>
   {/if}
 </button-container>
 

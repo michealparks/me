@@ -1349,7 +1349,7 @@ function create_else_block(ctx) {
 		m(target, anchor) {
 			insert(target, button, anchor);
 			append(button, t);
-			dispose = listen(button, "click", /*handleJamz*/ ctx[1]);
+			dispose = listen(button, "click", /*startJamz*/ ctx[1]);
 		},
 		p: noop,
 		d(detaching) {
@@ -1359,7 +1359,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (63:32) 
+// (77:32) 
 function create_if_block_1(ctx) {
 	let button;
 	let t;
@@ -1368,13 +1368,13 @@ function create_if_block_1(ctx) {
 	return {
 		c() {
 			button = element("button");
-			t = text("stop!! jammed 'nuff!");
+			t = text("stop!! 'nuff jam TIME!!");
 			this.h();
 		},
 		l(nodes) {
 			button = claim_element(nodes, "BUTTON", { class: true });
 			var button_nodes = children(button);
-			t = claim_text(button_nodes, "stop!! jammed 'nuff!");
+			t = claim_text(button_nodes, "stop!! 'nuff jam TIME!!");
 			button_nodes.forEach(detach);
 			this.h();
 		},
@@ -1384,7 +1384,7 @@ function create_if_block_1(ctx) {
 		m(target, anchor) {
 			insert(target, button, anchor);
 			append(button, t);
-			dispose = listen(button, "click", /*handleJamming*/ ctx[2]);
+			dispose = listen(button, "click", /*endJamz*/ ctx[2]);
 		},
 		p: noop,
 		d(detaching) {
@@ -1394,7 +1394,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (61:2) {#if state === 'unjammed'}
+// (75:2) {#if state === 'unjammed'}
 function create_if_block(ctx) {
 	let button;
 	let t;
@@ -1419,7 +1419,7 @@ function create_if_block(ctx) {
 		m(target, anchor) {
 			insert(target, button, anchor);
 			append(button, t);
-			dispose = listen(button, "click", /*handleJamz*/ ctx[1]);
+			dispose = listen(button, "click", /*startJamz*/ ctx[1]);
 		},
 		p: noop,
 		d(detaching) {
@@ -1518,16 +1518,30 @@ function instance$3($$self, $$props, $$invalidate) {
 	let state = "unjammed";
 	let target;
 
-	const handleJamz = () => {
+	const startJamz = () => {
 		target.playVideo();
-		document.querySelector("main").style.backgroundColor = "rgba(0, 0, 0, 0.5)";
 		$$invalidate(0, state = "jamming");
 	};
 
-	const handleJamming = () => {
+	const endJamz = () => {
 		target.stopVideo();
 		document.querySelector("main").style.backgroundColor = "";
 		$$invalidate(0, state = "jammed");
+	};
+
+	const onPlayerReady = e => {
+		target = e.target;
+	};
+
+	const onPlayerStateChange = e => {
+		switch (e.data) {
+			case YT.PlayerState.ENDED:
+				endJamz();
+				return;
+			case YT.PlayerState.PLAYING:
+				document.querySelector("main").style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+				return;
+		}
 	};
 
 	onMount(() => {
@@ -1539,15 +1553,13 @@ function instance$3($$self, $$props, $$invalidate) {
 		window.onYouTubeIframeAPIReady = () => new YT.Player("jamz",
 		{
 				events: {
-					onReady: e => {
-						console.log("ready", e);
-						target = e.target;
-					}
+					onReady: onPlayerReady,
+					onStateChange: onPlayerStateChange
 				}
 			});
 	});
 
-	return [state, handleJamz, handleJamming];
+	return [state, startJamz, endJamz];
 }
 
 class Jamz extends SvelteComponent {
