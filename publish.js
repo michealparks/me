@@ -1,6 +1,6 @@
 const { execSync } = require('child_process')
 const ghpages = require('gh-pages')
-const dir = 'build'
+const dir = 'dist'
 
 execSync('npm run build', { stdio: 'inherit' })
 

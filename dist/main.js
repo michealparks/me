@@ -503,7 +503,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (95:4) {#each colors as color (color.hex)}
+// (51:4) {#each colors as color (color.hex)}
 function create_each_block(key_1, ctx) {
 	let bg_circle;
 
@@ -527,22 +527,22 @@ function create_each_block(key_1, ctx) {
 			set_style(bg_circle, "transform", "translate3d(" + /*color*/ ctx[7].x + "px, " + /*color*/ ctx[7].y + "px, " + /*color*/ ctx[7].z + "px)");
 			set_style(bg_circle, "opacity", /*opacity*/ ctx[0]);
 			set_style(bg_circle, "transition", "transform " + duration + "ms, opacity 1500ms");
-			set_custom_element_data(bg_circle, "class", "svelte-bvjtz1");
+			set_custom_element_data(bg_circle, "class", "svelte-m0nk23");
 			this.first = bg_circle;
 		},
 		m(target, anchor) {
 			insert(target, bg_circle, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*colors*/ 4) {
+			if (dirty & /*colors*/ 2) {
 				set_style(bg_circle, "background-color", /*color*/ ctx[7].hex);
 			}
 
-			if (dirty & /*colors*/ 4) {
+			if (dirty & /*colors*/ 2) {
 				set_style(bg_circle, "box-shadow", "20px 20px 40px " + hexToRGBA(/*color*/ ctx[7].hex, 0.7) + ", -20px -20px 60px " + hexToRGBA(/*color*/ ctx[7].hex, 0.2));
 			}
 
-			if (dirty & /*colors*/ 4) {
+			if (dirty & /*colors*/ 2) {
 				set_style(bg_circle, "transform", "translate3d(" + /*color*/ ctx[7].x + "px, " + /*color*/ ctx[7].y + "px, " + /*color*/ ctx[7].z + "px)");
 			}
 
@@ -563,9 +563,12 @@ function create_fragment(ctx) {
 	let each_1_lookup = new Map();
 	let t0;
 	let h1;
+	let hand_wave0;
 	let t1;
-	let h1_class_value;
-	let each_value = /*colors*/ ctx[2];
+	let t2;
+	let hand_wave1;
+	let t3;
+	let each_value = /*colors*/ ctx[1];
 	const get_key = ctx => /*color*/ ctx[7].hex;
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -585,7 +588,11 @@ function create_fragment(ctx) {
 
 			t0 = space();
 			h1 = element("h1");
-			t1 = text("hi i am micheal 👋");
+			hand_wave0 = element("hand-wave");
+			t1 = text("👋");
+			t2 = text("\r\n      hi i am micheal \r\n      ");
+			hand_wave1 = element("hand-wave");
+			t3 = text("👋");
 			this.h();
 		},
 		l(nodes) {
@@ -599,20 +606,29 @@ function create_fragment(ctx) {
 			}
 
 			t0 = claim_space(section_nodes);
-			h1 = claim_element(section_nodes, "H1", { style: true, class: true });
+			h1 = claim_element(section_nodes, "H1", { class: true });
 			var h1_nodes = children(h1);
-			t1 = claim_text(h1_nodes, "hi i am micheal 👋");
+			hand_wave0 = claim_element(h1_nodes, "HAND-WAVE", { class: true });
+			var hand_wave0_nodes = children(hand_wave0);
+			t1 = claim_text(hand_wave0_nodes, "👋");
+			hand_wave0_nodes.forEach(detach);
+			t2 = claim_text(h1_nodes, "\r\n      hi i am micheal \r\n      ");
+			hand_wave1 = claim_element(h1_nodes, "HAND-WAVE", { class: true });
+			var hand_wave1_nodes = children(hand_wave1);
+			t3 = claim_text(hand_wave1_nodes, "👋");
+			hand_wave1_nodes.forEach(detach);
 			h1_nodes.forEach(detach);
 			section_nodes.forEach(detach);
 			header_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			set_style(h1, "transition-duration", h1duration + "ms");
-			attr(h1, "class", h1_class_value = "font-effect-anaglyph " + /*h1State*/ ctx[1] + " svelte-bvjtz1");
-			set_style(section, "height", /*height*/ ctx[3] + size + "px");
-			attr(section, "class", "svelte-bvjtz1");
-			attr(header, "class", "svelte-bvjtz1");
+			set_custom_element_data(hand_wave0, "class", "svelte-m0nk23");
+			set_custom_element_data(hand_wave1, "class", "svelte-m0nk23");
+			attr(h1, "class", "font-effect-anaglyph svelte-m0nk23");
+			set_style(section, "height", /*height*/ ctx[2] + size + "px");
+			attr(section, "class", "svelte-m0nk23");
+			attr(header, "class", "svelte-m0nk23");
 		},
 		m(target, anchor) {
 			insert(target, header, anchor);
@@ -624,16 +640,16 @@ function create_fragment(ctx) {
 
 			append(section, t0);
 			append(section, h1);
-			append(h1, t1);
+			append(h1, hand_wave0);
+			append(hand_wave0, t1);
+			append(h1, t2);
+			append(h1, hand_wave1);
+			append(hand_wave1, t3);
 		},
 		p(ctx, [dirty]) {
-			if (dirty & /*size, colors, hexToRGBA, opacity, duration*/ 5) {
-				const each_value = /*colors*/ ctx[2];
+			if (dirty & /*size, colors, hexToRGBA, opacity, duration*/ 3) {
+				const each_value = /*colors*/ ctx[1];
 				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, section, destroy_block, create_each_block, t0, get_each_context);
-			}
-
-			if (dirty & /*h1State*/ 2 && h1_class_value !== (h1_class_value = "font-effect-anaglyph " + /*h1State*/ ctx[1] + " svelte-bvjtz1")) {
-				attr(h1, "class", h1_class_value);
 			}
 		},
 		i: noop,
@@ -657,7 +673,6 @@ function instance($$self, $$props, $$invalidate) {
 	const width = 800 - size;
 	const height = 200 - size;
 	let opacity = 0;
-	let h1State = "";
 	let colors = [];
 
 	for (const hex of Object.values(colorMap)) {
@@ -671,11 +686,10 @@ function instance($$self, $$props, $$invalidate) {
 			color.z = Math.random() * depth;
 		}
 
-		$$invalidate(2, colors);
+		$$invalidate(1, colors);
 	};
 
 	const seth1State = () => {
-		$$invalidate(1, h1State = h1State === "" ? "expanded" : "");
 	};
 
 	setRands(width);
@@ -685,7 +699,6 @@ function instance($$self, $$props, $$invalidate) {
 			() => {
 				$$invalidate(0, opacity = 0.5);
 				setRands();
-				seth1State();
 				setInterval(seth1State, h1duration);
 				setInterval(setRands, duration);
 			},
@@ -693,7 +706,7 @@ function instance($$self, $$props, $$invalidate) {
 		);
 	});
 
-	return [opacity, h1State, colors, height];
+	return [opacity, colors, height];
 }
 
 class Header extends SvelteComponent {
@@ -1001,7 +1014,7 @@ function get_each_context$2(ctx, list, i) {
 	return child_ctx;
 }
 
-// (66:6) {#each 'about this human:' as char, i (char)}
+// (65:6) {#each 'about this human:' as char, i (char)}
 function create_each_block$2(key_1, ctx) {
 	let span;
 	let t;
@@ -1312,6 +1325,76 @@ class Footer extends SvelteComponent {
 
 /* src\Jamz.svelte generated by Svelte v3.19.1 */
 
+function create_else_block(ctx) {
+	let button;
+	let t;
+	let dispose;
+
+	return {
+		c() {
+			button = element("button");
+			t = text("more! moar JAMZ!");
+			this.h();
+		},
+		l(nodes) {
+			button = claim_element(nodes, "BUTTON", { class: true });
+			var button_nodes = children(button);
+			t = claim_text(button_nodes, "more! moar JAMZ!");
+			button_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(button, "class", "svelte-1nqdmtk");
+		},
+		m(target, anchor) {
+			insert(target, button, anchor);
+			append(button, t);
+			dispose = listen(button, "click", /*handleJamz*/ ctx[1]);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(button);
+			dispose();
+		}
+	};
+}
+
+// (63:32) 
+function create_if_block_1(ctx) {
+	let button;
+	let t;
+	let dispose;
+
+	return {
+		c() {
+			button = element("button");
+			t = text("stop!! jammed 'nuff!");
+			this.h();
+		},
+		l(nodes) {
+			button = claim_element(nodes, "BUTTON", { class: true });
+			var button_nodes = children(button);
+			t = claim_text(button_nodes, "stop!! jammed 'nuff!");
+			button_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(button, "class", "svelte-1nqdmtk");
+		},
+		m(target, anchor) {
+			insert(target, button, anchor);
+			append(button, t);
+			dispose = listen(button, "click", /*handleJamming*/ ctx[2]);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(button);
+			dispose();
+		}
+	};
+}
+
+// (61:2) {#if state === 'unjammed'}
 function create_if_block(ctx) {
 	let button;
 	let t;
@@ -1324,15 +1407,14 @@ function create_if_block(ctx) {
 			this.h();
 		},
 		l(nodes) {
-			button = claim_element(nodes, "BUTTON", { id: true, class: true });
+			button = claim_element(nodes, "BUTTON", { class: true });
 			var button_nodes = children(button);
 			t = claim_text(button_nodes, "pump up my jamz");
 			button_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(button, "id", "jamz-button");
-			attr(button, "class", "svelte-1i6fbd5");
+			attr(button, "class", "svelte-1nqdmtk");
 		},
 		m(target, anchor) {
 			insert(target, button, anchor);
@@ -1348,20 +1430,33 @@ function create_if_block(ctx) {
 }
 
 function create_fragment$4(ctx) {
+	let button_container;
 	let t;
 	let iframe;
 	let iframe_src_value;
-	let if_block = /*didClick*/ ctx[0] === false && create_if_block(ctx);
+
+	function select_block_type(ctx, dirty) {
+		if (/*state*/ ctx[0] === "unjammed") return create_if_block;
+		if (/*state*/ ctx[0] === "jamming") return create_if_block_1;
+		return create_else_block;
+	}
+
+	let current_block_type = select_block_type(ctx);
+	let if_block = current_block_type(ctx);
 
 	return {
 		c() {
-			if (if_block) if_block.c();
+			button_container = element("button-container");
+			if_block.c();
 			t = space();
 			iframe = element("iframe");
 			this.h();
 		},
 		l(nodes) {
-			if (if_block) if_block.l(nodes);
+			button_container = claim_element(nodes, "BUTTON-CONTAINER", { class: true });
+			var button_container_nodes = children(button_container);
+			if_block.l(button_container_nodes);
+			button_container_nodes.forEach(detach);
 			t = claim_space(nodes);
 
 			iframe = claim_element(nodes, "IFRAME", {
@@ -1372,7 +1467,6 @@ function create_fragment$4(ctx) {
 				src: true,
 				frameborder: true,
 				allow: true,
-				allowfullscreen: true,
 				class: true
 			});
 
@@ -1380,6 +1474,7 @@ function create_fragment$4(ctx) {
 			this.h();
 		},
 		h() {
+			set_custom_element_data(button_container, "class", "svelte-1nqdmtk");
 			attr(iframe, "id", "jamz");
 			attr(iframe, "title", "Jamz");
 			attr(iframe, "width", "560");
@@ -1387,32 +1482,32 @@ function create_fragment$4(ctx) {
 			if (iframe.src !== (iframe_src_value = "https://www.youtube.com/embed/4T1t5OFOYDU?enablejsapi=1")) attr(iframe, "src", iframe_src_value);
 			attr(iframe, "frameborder", "0");
 			attr(iframe, "allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
-			iframe.allowFullscreen = true;
-			attr(iframe, "class", "svelte-1i6fbd5");
+			attr(iframe, "class", "svelte-1nqdmtk");
 		},
 		m(target, anchor) {
-			if (if_block) if_block.m(target, anchor);
+			insert(target, button_container, anchor);
+			if_block.m(button_container, null);
 			insert(target, t, anchor);
 			insert(target, iframe, anchor);
 		},
 		p(ctx, [dirty]) {
-			if (/*didClick*/ ctx[0] === false) {
-				if (if_block) {
-					if_block.p(ctx, dirty);
-				} else {
-					if_block = create_if_block(ctx);
-					if_block.c();
-					if_block.m(t.parentNode, t);
-				}
-			} else if (if_block) {
+			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
+				if_block.p(ctx, dirty);
+			} else {
 				if_block.d(1);
-				if_block = null;
+				if_block = current_block_type(ctx);
+
+				if (if_block) {
+					if_block.c();
+					if_block.m(button_container, null);
+				}
 			}
 		},
 		i: noop,
 		o: noop,
 		d(detaching) {
-			if (if_block) if_block.d(detaching);
+			if (detaching) detach(button_container);
+			if_block.d();
 			if (detaching) detach(t);
 			if (detaching) detach(iframe);
 		}
@@ -1420,36 +1515,39 @@ function create_fragment$4(ctx) {
 }
 
 function instance$3($$self, $$props, $$invalidate) {
-	let didClick = false;
+	let state = "unjammed";
 	let target;
 
 	const handleJamz = () => {
 		target.playVideo();
 		document.querySelector("main").style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-		$$invalidate(0, didClick = true);
+		$$invalidate(0, state = "jamming");
+	};
+
+	const handleJamming = () => {
+		target.stopVideo();
+		document.querySelector("main").style.backgroundColor = "";
+		$$invalidate(0, state = "jammed");
 	};
 
 	onMount(() => {
-		let tag = document.createElement("script");
+		const tag = document.createElement("script");
 		tag.async = true;
 		tag.src = "https://www.youtube.com/iframe_api";
 		document.head.appendChild(tag);
-		let player;
 
-		window.onYouTubeIframeAPIReady = () => {
-			player = new YT.Player("jamz",
-			{
-					events: {
-						onReady: e => {
-							console.log("ready", e);
-							target = e.target;
-						}
+		window.onYouTubeIframeAPIReady = () => new YT.Player("jamz",
+		{
+				events: {
+					onReady: e => {
+						console.log("ready", e);
+						target = e.target;
 					}
-				});
-		};
+				}
+			});
 	});
 
-	return [didClick, handleJamz];
+	return [state, handleJamz, handleJamming];
 }
 
 class Jamz extends SvelteComponent {

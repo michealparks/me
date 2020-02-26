@@ -1,45 +1,3 @@
-<style>
-  header {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    padding: 30px;
-  }
-
-  section {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    grid-area: 1 / 2 / 2 / 3;
-    margin: auto;
-    perspective: 300px;
-  }
-
-  h1 {
-    position: relative;
-    text-align: center;
-    font-family: 'Comfortaa', sans-serif;
-    font-family: 'Roboto Mono', monospace;
-    color: #000;
-    letter-spacing: -15px;
-    transition-timing-function: steps(32, end);
-  }
-
-  h1.expanded {
-    letter-spacing: -5px;
-  }
-
-  bg-circle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 100%;
-    opacity: 0.5;
-  }
-</style>
-
 <script>
 import { onMount } from 'svelte'
 import { colorMap } from './consts.js'
@@ -86,8 +44,6 @@ onMount(() => {
     setInterval(setRands, duration)
   }, 10)
 })
-
-
 </script>
 
 <header>
@@ -105,8 +61,80 @@ onMount(() => {
       ></bg-circle>
     {/each}
 
-    <h1 style="transition-duration: {h1duration}ms;" class="font-effect-anaglyph {h1State}">hi i am micheal 👋</h1>
+    <h1 class="font-effect-anaglyph">
+      <hand-wave>👋</hand-wave>
+      hi i am micheal 
+      <hand-wave>👋</hand-wave>
+    </h1>
 
     
   </section>
 </header>
+
+<style>
+  header {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    padding: 30px;
+  }
+
+  section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    grid-area: 1 / 2 / 2 / 3;
+    margin: auto;
+    perspective: 300px;
+  }
+
+  h1 {
+    position: relative;
+    text-align: center;
+    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Roboto Mono', monospace;
+    color: #000;
+    letter-spacing: -5px
+  }
+
+  bg-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 100%;
+    opacity: 0.5;
+  }
+
+  hand-wave {
+    display: inline-block;
+    animation-duration: 500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: steps(1, end);
+    transform-origin: 100% 100%;
+  }
+
+  hand-wave:first-child {
+    animation-name: wonky-wave-left;
+    transform-origin: 100% 100%;
+  }
+
+  hand-wave:last-child {
+    animation-name: wonky-wave-right;
+    transform-origin: 100% 100%;
+    margin-left: -60px;
+  }
+
+  @keyframes wonky-wave-left {
+    0%   { transform: rotateZ(0)  }
+    50%  { transform: rotateZ(45deg) }
+    100% { transform: rotateZ(0)  }
+  }
+
+  @keyframes wonky-wave-right {
+    0%   { transform: rotateZ(0)      rotateY(180deg) }
+    50%  { transform: rotateZ(-45deg) rotateY(180deg) }
+    100% { transform: rotateZ(0)      rotateY(180deg) }
+  }
+</style>

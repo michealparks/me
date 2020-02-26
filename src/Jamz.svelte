@@ -2,38 +2,44 @@
 <script>
 import { onMount } from 'svelte'
 
-let didClick = false
+let state = 'unjammed'
 let target
 
 const handleJamz = () => {
   target.playVideo()
   document.querySelector('main').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-  didClick = true
+  state = 'jamming'
+}
+
+const handleJamming = () => {
+  target.stopVideo()
+  document.querySelector('main').style.backgroundColor = ''
+  state = 'jammed'
 }
 
 onMount(() => {
-  let tag = document.createElement('script')
+  const tag = document.createElement('script')
   tag.async = true
   tag.src = 'https://www.youtube.com/iframe_api'
   document.head.appendChild(tag)
 
-  let player
-  window.onYouTubeIframeAPIReady = () => {
-    player = new YT.Player('jamz', {
-      events: { onReady: (e) => {
-        console.log('ready', e)
-        target = e.target
-      } }
-    })
-  }
+  window.onYouTubeIframeAPIReady = () => new YT.Player('jamz', {
+    events: { onReady: (e) => {
+      console.log('ready', e)
+      target = e.target
+    } }
+  })
 })
 </script>
 
 <style>
+button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 button {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
+  margin: 10px;
   color: #fff;
   background-color: transparent;
 }
@@ -51,9 +57,15 @@ iframe {
 }
 </style>
 
-{#if didClick === false}
-  <button on:click={handleJamz} id="jamz-button">pump up my jamz</button>
-{/if}
+<button-container>
+  {#if state === 'unjammed'}
+    <button on:click={handleJamz}>pump up my jamz</button>
+  {:else if state === 'jamming'}
+    <button on:click={handleJamming}>stop!! jammed 'nuff!</button>
+  {:else}
+    <button on:click={handleJamz}>more! moar JAMZ!</button>
+  {/if}
+</button-container>
 
 <iframe
   id="jamz"
@@ -63,5 +75,4 @@ iframe {
   src="https://www.youtube.com/embed/4T1t5OFOYDU?enablejsapi=1"
   frameborder="0"
   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
 />

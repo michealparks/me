@@ -60,7 +60,6 @@
 
 <footer>
   <img alt="Micheal's detatched head." src="profile.jpg" />
-
   <section>
     <h2>
       {#each 'about this human:' as char, i (char)}
@@ -89,7 +88,4 @@
       </a>
     </p>
   </section>
-  
-    
-  
 </footer>

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development rollup -c -w",
     "build": "cross-env NODE_ENV=production rollup -c",
-    "deploy": "npm run build && gh-pages -d public",
+    "publish": "node publish.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
