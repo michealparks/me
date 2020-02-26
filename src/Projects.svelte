@@ -14,20 +14,20 @@ h2 {
   font-family: 'Roboto Mono', monospace;
   text-align: center;
   text-shadow: var(--lighting-text-shadow);
-}
-article {
-  border-radius: 50px;
-  background: var(--lighting-shadow-bg);
-  padding: 40px;
-  box-shadow: var(--lighting-shadow);
+  font-size: 30px;
+  margin-bottom: 60px;
 }
 </style>
 
 <script>
+import Project from './Project.svelte'
+
 const projects = [
   {
     title: 'Galeri',
-    summary: 'Galeri is a chrome extension or a desktop app focused on artwork discovery.'
+    summary: 'Galeri is a chrome extension and desktop app focused on artwork discovery.',
+    href: 'https://galeri.io',
+    newTab: true
   }, {
     title: 'Koschei Society Webchat Service',
     summary: ''
@@ -39,13 +39,10 @@ const projects = [
 </script>
 
 <section>
-  <h2>Current projects</h2>
+  <h2>cabinet of curiosities</h2>
   <current-projects>
     {#each projects as project, i (i)}
-      <article>
-        <h3>{project.title}</h3>
-        <p>{project.summary}</p>
-      </article>
+      <Project {...project} />
     {/each}
   </current-projects>
 </section>

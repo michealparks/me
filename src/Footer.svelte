@@ -82,6 +82,11 @@
       <a target="_tab" href="https://soundcloud.com/dead_culture">
         <svg class="icon icon-soundcloud"><use xlink:href="#icon-soundcloud"></use></svg>
       </a>
+
+      <span style="margin-left: 7px;">and the best link!!!!1!!1</span>
+      <a target="_tab" href="https://www.linkedin.com/in/michealparks/">
+        <svg class="icon icon-linkedin"><use xlink:href="#icon-linkedin"></use></svg>
+      </a>
     </p>
   </section>
   

@@ -43,6 +43,7 @@
 <script>
 import { onMount } from 'svelte'
 import { colorMap } from './consts.js'
+import { hexToRGBA } from './util.js'
 
 const duration = 40000
 const h1duration = 10000
@@ -86,18 +87,17 @@ onMount(() => {
   }, 10)
 })
 
+
 </script>
 
 <header>
   <section style="height: {height + size}px">
     {#each colors as color (color.hex)}
       <bg-circle
-        style="
-          width: {size}px;
+        style="width: {size}px;
           height: {size}px;
           background-color: {color.hex};
-          box-shadow:  20px 20px 40px {color.hex}, 
-             -20px -20px 60px {color.hex};
+          box-shadow: 20px 20px 40px {hexToRGBA(color.hex, 0.7)}, -20px -20px 60px {hexToRGBA(color.hex, 0.2)};
           transform: translate3d({color.x}px, {color.y}px, {color.z}px);
           opacity: {opacity};
           transition: transform {duration}ms, opacity 1500ms;
@@ -105,7 +105,7 @@ onMount(() => {
       ></bg-circle>
     {/each}
 
-    <h1 style="transition-duration: {h1duration}ms;" class="font-effect-anaglyph {h1State}">hi i am micheal</h1>
+    <h1 style="transition-duration: {h1duration}ms;" class="font-effect-anaglyph {h1State}">hi i am micheal 👋</h1>
 
     
   </section>
