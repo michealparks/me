@@ -28,13 +28,15 @@ const projects = [
     summary: 'Galeri is a chrome extension and desktop app focused on artwork discovery.',
     href: 'https://galeri.io',
     newTab: true
-  }, {
-    title: 'Koschei Society Webchat Service',
-    summary: ''
-  }, {
-    title: 'Sim Shitty',
-    summary: ''
-  }
+  },
+  // {
+  //   title: 'Koschei Society Webchat Service',
+  //   summary: ''
+  // },
+  // {
+  //   title: 'Sim Shitty',
+  //   summary: ''
+  // }
 ]
 </script>
 

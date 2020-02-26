@@ -220,7 +220,7 @@ const Project = create_ssr_component(($$result, $$props, $$bindings, $$slots) =>
 
 const css$3 = {
 	code: "section.svelte-60oau2{padding:100px 20px}current-projects.svelte-60oau2{display:grid;grid-template-columns:repeat(3, 1fr);grid-column-gap:60px;max-width:var(--content-width);margin:auto}h2.svelte-60oau2{font-family:'Roboto Mono', monospace;text-align:center;text-shadow:var(--lighting-text-shadow);font-size:30px;margin-bottom:60px}",
-	map: "{\"version\":3,\"file\":\"Projects.svelte\",\"sources\":[\"Projects.svelte\"],\"sourcesContent\":[\"\\r\\n<style>\\r\\nsection {\\r\\n  padding: 100px 20px;\\r\\n}\\r\\ncurrent-projects {\\r\\n  display: grid;\\r\\n  grid-template-columns: repeat(3, 1fr);\\r\\n  grid-column-gap: 60px;\\r\\n  max-width: var(--content-width);\\r\\n  margin: auto;\\r\\n}\\r\\nh2 {\\r\\n  font-family: 'Roboto Mono', monospace;\\r\\n  text-align: center;\\r\\n  text-shadow: var(--lighting-text-shadow);\\r\\n  font-size: 30px;\\r\\n  margin-bottom: 60px;\\r\\n}\\r\\n</style>\\r\\n\\r\\n<script>\\r\\nimport Project from './Project.svelte'\\r\\n\\r\\nconst projects = [\\r\\n  {\\r\\n    title: 'Galeri',\\r\\n    summary: 'Galeri is a chrome extension and desktop app focused on artwork discovery.',\\r\\n    href: 'https://galeri.io',\\r\\n    newTab: true\\r\\n  }, {\\r\\n    title: 'Koschei Society Webchat Service',\\r\\n    summary: ''\\r\\n  }, {\\r\\n    title: 'Sim Shitty',\\r\\n    summary: ''\\r\\n  }\\r\\n]\\r\\n</script>\\r\\n\\r\\n<section>\\r\\n  <h2>cabinet of curiosities</h2>\\r\\n  <current-projects>\\r\\n    {#each projects as project, i (i)}\\r\\n      <Project {...project} />\\r\\n    {/each}\\r\\n  </current-projects>\\r\\n</section>\\r\\n\"],\"names\":[],\"mappings\":\"AAEA,OAAO,cAAC,CAAC,AACP,OAAO,CAAE,KAAK,CAAC,IAAI,AACrB,CAAC,AACD,gBAAgB,cAAC,CAAC,AAChB,OAAO,CAAE,IAAI,CACb,qBAAqB,CAAE,OAAO,CAAC,CAAC,CAAC,GAAG,CAAC,CACrC,eAAe,CAAE,IAAI,CACrB,SAAS,CAAE,IAAI,eAAe,CAAC,CAC/B,MAAM,CAAE,IAAI,AACd,CAAC,AACD,EAAE,cAAC,CAAC,AACF,WAAW,CAAE,aAAa,CAAC,CAAC,SAAS,CACrC,UAAU,CAAE,MAAM,CAClB,WAAW,CAAE,IAAI,sBAAsB,CAAC,CACxC,SAAS,CAAE,IAAI,CACf,aAAa,CAAE,IAAI,AACrB,CAAC\"}"
+	map: "{\"version\":3,\"file\":\"Projects.svelte\",\"sources\":[\"Projects.svelte\"],\"sourcesContent\":[\"\\r\\n<style>\\r\\nsection {\\r\\n  padding: 100px 20px;\\r\\n}\\r\\ncurrent-projects {\\r\\n  display: grid;\\r\\n  grid-template-columns: repeat(3, 1fr);\\r\\n  grid-column-gap: 60px;\\r\\n  max-width: var(--content-width);\\r\\n  margin: auto;\\r\\n}\\r\\nh2 {\\r\\n  font-family: 'Roboto Mono', monospace;\\r\\n  text-align: center;\\r\\n  text-shadow: var(--lighting-text-shadow);\\r\\n  font-size: 30px;\\r\\n  margin-bottom: 60px;\\r\\n}\\r\\n</style>\\r\\n\\r\\n<script>\\r\\nimport Project from './Project.svelte'\\r\\n\\r\\nconst projects = [\\r\\n  {\\r\\n    title: 'Galeri',\\r\\n    summary: 'Galeri is a chrome extension and desktop app focused on artwork discovery.',\\r\\n    href: 'https://galeri.io',\\r\\n    newTab: true\\r\\n  },\\r\\n  // {\\r\\n  //   title: 'Koschei Society Webchat Service',\\r\\n  //   summary: ''\\r\\n  // },\\r\\n  // {\\r\\n  //   title: 'Sim Shitty',\\r\\n  //   summary: ''\\r\\n  // }\\r\\n]\\r\\n</script>\\r\\n\\r\\n<section>\\r\\n  <h2>cabinet of curiosities</h2>\\r\\n  <current-projects>\\r\\n    {#each projects as project, i (i)}\\r\\n      <Project {...project} />\\r\\n    {/each}\\r\\n  </current-projects>\\r\\n</section>\\r\\n\"],\"names\":[],\"mappings\":\"AAEA,OAAO,cAAC,CAAC,AACP,OAAO,CAAE,KAAK,CAAC,IAAI,AACrB,CAAC,AACD,gBAAgB,cAAC,CAAC,AAChB,OAAO,CAAE,IAAI,CACb,qBAAqB,CAAE,OAAO,CAAC,CAAC,CAAC,GAAG,CAAC,CACrC,eAAe,CAAE,IAAI,CACrB,SAAS,CAAE,IAAI,eAAe,CAAC,CAC/B,MAAM,CAAE,IAAI,AACd,CAAC,AACD,EAAE,cAAC,CAAC,AACF,WAAW,CAAE,aAAa,CAAC,CAAC,SAAS,CACrC,UAAU,CAAE,MAAM,CAClB,WAAW,CAAE,IAAI,sBAAsB,CAAC,CACxC,SAAS,CAAE,IAAI,CACf,aAAa,CAAE,IAAI,AACrB,CAAC\"}"
 };
 
 const Projects = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
@@ -230,13 +230,10 @@ const Projects = create_ssr_component(($$result, $$props, $$bindings, $$slots) =
 			summary: "Galeri is a chrome extension and desktop app focused on artwork discovery.",
 			href: "https://galeri.io",
 			newTab: true
-		},
-		{
-			title: "Koschei Society Webchat Service",
-			summary: ""
-		},
-		{ title: "Sim Shitty", summary: "" }
-	];
+		}
+	]; // {
+	//   title: 'Koschei Society Webchat Service',
+	//   summary: ''
 
 	$$result.css.add(css$3);
 

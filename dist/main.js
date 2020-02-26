@@ -810,7 +810,7 @@ function get_each_context$1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (44:4) {#each projects as project, i (i)}
+// (46:4) {#each projects as project, i (i)}
 function create_each_block$1(key_1, ctx) {
 	let first;
 	let current;
@@ -977,13 +977,10 @@ function instance$2($$self) {
 			summary: "Galeri is a chrome extension and desktop app focused on artwork discovery.",
 			href: "https://galeri.io",
 			newTab: true
-		},
-		{
-			title: "Koschei Society Webchat Service",
-			summary: ""
-		},
-		{ title: "Sim Shitty", summary: "" }
-	];
+		}
+	]; // {
+	//   title: 'Koschei Society Webchat Service',
+	//   summary: ''
 
 	return [projects];
 }
