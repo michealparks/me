@@ -1382,7 +1382,7 @@ function instance$3($$self, $$props, $$invalidate) {
 				// load a sound and set it as the Audio object's buffer
 				const audioLoader = new THREE.AudioLoader();
 
-				audioLoader.load("infinity_keyboard.wav", function (buffer) {
+				audioLoader.load("infinity_keyboard.mp3", function (buffer) {
 					sound.setBuffer(buffer);
 					sound.setLoop(true);
 					sound.play();
