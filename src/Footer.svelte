@@ -18,7 +18,6 @@
   h2 {
     font-family: 'Roboto Mono', monospace;
     font-size: 30px;
-    
   }
 
   h2 span {
@@ -58,6 +57,10 @@
 
 </style>
 
+<script>
+import SunsetDrive from './SunsetDrive.svelte'
+</script>
+
 <footer>
   <img alt="Micheal's detatched head." src="profile.jpg" />
   <section>
@@ -87,5 +90,7 @@
         <svg class="icon icon-linkedin"><use xlink:href="#icon-linkedin"></use></svg>
       </a>
     </p>
+
+    <SunsetDrive />
   </section>
 </footer>

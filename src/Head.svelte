@@ -1,0 +1,3 @@
+<svelte:head>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+</svelte:head>
