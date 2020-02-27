@@ -1,1 +1,2404 @@
-function e(){}function t(e,t){for(const n in t)e[n]=t[n];return e}function n(e){return e()}function r(){return Object.create(null)}function o(e){e.forEach(n)}function a(e){return"function"==typeof e}function s(e,t){return e!=e?t==t:e!==t||e&&"object"==typeof e||"function"==typeof e}function c(e,t){e.appendChild(t)}function l(e,t,n){e.insertBefore(t,n||null)}function i(e){e.parentNode.removeChild(e)}function h(e){return document.createElement(e)}function f(e){return document.createElementNS("http://www.w3.org/2000/svg",e)}function u(e){return document.createTextNode(e)}function d(){return u(" ")}function m(){return u("")}function p(e,t,n,r){return e.addEventListener(t,n,r),()=>e.removeEventListener(t,n,r)}function g(e,t,n){null==n?e.removeAttribute(t):e.getAttribute(t)!==n&&e.setAttribute(t,n)}function v(e,t,n){t in e?e[t]=n:g(e,t,n)}function E(e,t,n){e.setAttributeNS("http://www.w3.org/1999/xlink",t,n)}function w(e){return Array.from(e.childNodes)}function y(e,t,n,r){for(let r=0;r<e.length;r+=1){const o=e[r];if(o.nodeName===t){let t=0;for(;t<o.attributes.length;){const e=o.attributes[t];n[e.name]?t++:o.removeAttribute(e.name)}return e.splice(r,1)[0]}}return r?f(t):h(t)}function b(e,t){for(let n=0;n<e.length;n+=1){const r=e[n];if(3===r.nodeType)return r.data=""+t,e.splice(n,1)[0]}return u(t)}function $(e){return b(e," ")}function x(e,t){t=""+t,e.data!==t&&(e.data=t)}function A(e,t,n,r){e.style.setProperty(t,n,r?"important":"")}let k;function T(e){k=e}function M(e){(function(){if(!k)throw new Error("Function called outside component initialization");return k})().$$.on_mount.push(e)}const N=[],z=[],C=[],_=[],j=Promise.resolve();let R=!1;function B(e){C.push(e)}let I=!1;const O=new Set;function S(){if(!I){I=!0;do{for(let e=0;e<N.length;e+=1){const t=N[e];T(t),F(t.$$)}for(N.length=0;z.length;)z.pop()();for(let e=0;e<C.length;e+=1){const t=C[e];O.has(t)||(O.add(t),t())}C.length=0}while(N.length);for(;_.length;)_.pop()();R=!1,I=!1,O.clear()}}function F(e){if(null!==e.fragment){e.update(),o(e.before_update);const t=e.dirty;e.dirty=[-1],e.fragment&&e.fragment.p(e.ctx,t),e.after_update.forEach(B)}}const H=new Set;let D;function P(e,t){e&&e.i&&(H.delete(e),e.i(t))}function L(e,t,n,r){if(e&&e.o){if(H.has(e))return;H.add(e),D.c.push(()=>{H.delete(e),r&&(n&&e.d(1),r())}),e.o(t)}}function Y(e,t){e.d(1),t.delete(e.key)}function G(e,t){L(e,1,1,()=>{t.delete(e.key)})}function U(e,t,n,r,o,a,s,c,l,i,h,f){let u=e.length,d=a.length,m=u;const p={};for(;m--;)p[e[m].key]=m;const g=[],v=new Map,E=new Map;for(m=d;m--;){const e=f(o,a,m),c=n(e);let l=s.get(c);l?r&&l.p(e,t):(l=i(c,e),l.c()),v.set(c,g[m]=l),c in p&&E.set(c,Math.abs(m-p[c]))}const w=new Set,y=new Set;function b(e){P(e,1),e.m(c,h),s.set(e.key,e),h=e.first,d--}for(;u&&d;){const t=g[d-1],n=e[u-1],r=t.key,o=n.key;t===n?(h=t.first,u--,d--):v.has(o)?!s.has(r)||w.has(r)?b(t):y.has(o)?u--:E.get(r)>E.get(o)?(y.add(r),b(t)):(w.add(o),u--):(l(n,s),u--)}for(;u--;){const t=e[u];v.has(t.key)||l(t,s)}for(;d;)b(g[d-1]);return g}function q(e){e&&e.c()}function V(e,t){e&&e.l(t)}function W(e,t,r){const{fragment:s,on_mount:c,on_destroy:l,after_update:i}=e.$$;s&&s.m(t,r),B(()=>{const t=c.map(n).filter(a);l?l.push(...t):o(t),e.$$.on_mount=[]}),i.forEach(B)}function J(e,t){const n=e.$$;null!==n.fragment&&(o(n.on_destroy),n.fragment&&n.fragment.d(t),n.on_destroy=n.fragment=null,n.ctx=[])}function Q(e,t){-1===e.$$.dirty[0]&&(N.push(e),R||(R=!0,j.then(S)),e.$$.dirty.fill(0)),e.$$.dirty[t/31|0]|=1<<t%31}function Z(t,n,a,s,c,l,i=[-1]){const h=k;T(t);const f=n.props||{},u=t.$$={fragment:null,ctx:null,props:l,update:e,not_equal:c,bound:r(),on_mount:[],on_destroy:[],before_update:[],after_update:[],context:new Map(h?h.$$.context:[]),callbacks:r(),dirty:i};let d=!1;u.ctx=a?a(t,f,(e,n,...r)=>{const o=r.length?r[0]:n;return u.ctx&&c(u.ctx[e],u.ctx[e]=o)&&(u.bound[e]&&u.bound[e](o),d&&Q(t,e)),n}):[],u.update(),d=!0,o(u.before_update),u.fragment=!!s&&s(u.ctx),n.target&&(n.hydrate?u.fragment&&u.fragment.l(w(n.target)):u.fragment&&u.fragment.c(),n.intro&&P(t.$$.fragment),W(t,n.target,n.anchor),S()),T(h)}class K{$destroy(){J(this,1),this.$destroy=e}$on(e,t){const n=this.$$.callbacks[e]||(this.$$.callbacks[e]=[]);return n.push(t),()=>{const e=n.indexOf(t);-1!==e&&n.splice(e,1)}}$set(){}}function X(t){let n,r;return{c(){n=h("script"),this.h()},l(e){const t=function(e,t=document.body){return Array.from(t.querySelectorAll(e))}('[data-svelte="svelte-1h5wfn8"]',document.head);n=y(t,"SCRIPT",{src:!0}),w(n).forEach(i),t.forEach(i),this.h()},h(){n.src!==(r="https://aframe.io/releases/1.0.4/aframe.min.js")&&g(n,"src","https://aframe.io/releases/1.0.4/aframe.min.js")},m(e,t){c(document.head,n)},p:e,i:e,o:e,d(e){i(n)}}}class ee extends K{constructor(e){super(),Z(this,e,null,X,s,{})}}class te extends K{constructor(e){super(),Z(this,e,null,null,s,{})}}const ne={red:"#ef9a9a",pink:"#F48FB1",purple:"#CE93D8",deeppurple:"#B39DDB",indigo:"#9FA8DA",blue:"#90CAF9",lightblue:"#81D4FA",cyan:"#80DEEA",teal:"#80CBC4",green:"#A5D6A7",yellow:"#FFF59D",amber:"#FFE082",orange:"#FFCC80",deeporange:"#FFAB91"},re=(e,t=1)=>`rgba(${parseInt(e.slice(1,3),16)}, ${parseInt(e.slice(3,5),16)}, ${parseInt(e.slice(5,7),16)}, ${t})`;function oe(e,t,n){const r=e.slice();return r[7]=t[n],r}function ae(e,t){let n;return{key:e,first:null,c(){n=h("bg-circle"),this.h()},l(e){n=y(e,"BG-CIRCLE",{style:!0,class:!0}),w(n).forEach(i),this.h()},h(){A(n,"width",le+"px"),A(n,"height",le+"px"),A(n,"background-color",t[7].hex),A(n,"box-shadow","20px 20px 40px "+re(t[7].hex,.7)+", -20px -20px 60px "+re(t[7].hex,.2)),A(n,"transform","translate3d("+t[7].x+"px, "+t[7].y+"px, "+t[7].z+"px)"),A(n,"opacity",t[0]),A(n,"transition","transform "+ce+"ms, opacity 1500ms"),v(n,"class","svelte-m0nk23"),this.first=n},m(e,t){l(e,n,t)},p(e,t){2&t&&A(n,"background-color",e[7].hex),2&t&&A(n,"box-shadow","20px 20px 40px "+re(e[7].hex,.7)+", -20px -20px 60px "+re(e[7].hex,.2)),2&t&&A(n,"transform","translate3d("+e[7].x+"px, "+e[7].y+"px, "+e[7].z+"px)"),1&t&&A(n,"opacity",e[0])},d(e){e&&i(n)}}}function se(t){let n,r,o,a,s,f,m,p,E,x=[],k=new Map,T=t[1];const M=e=>e[7].hex;for(let e=0;e<T.length;e+=1){let n=oe(t,T,e),r=M(n);k.set(r,x[e]=ae(r,n))}return{c(){n=h("header"),r=h("section");for(let e=0;e<x.length;e+=1)x[e].c();o=d(),a=h("h1"),s=h("hand-wave"),f=u("👋"),m=u("\r\n      hi i am micheal \r\n      "),p=h("hand-wave"),E=u("👋"),this.h()},l(e){n=y(e,"HEADER",{class:!0});var t=w(n);r=y(t,"SECTION",{style:!0,class:!0});var c=w(r);for(let e=0;e<x.length;e+=1)x[e].l(c);o=$(c),a=y(c,"H1",{class:!0});var l=w(a);s=y(l,"HAND-WAVE",{class:!0});var h=w(s);f=b(h,"👋"),h.forEach(i),m=b(l,"\r\n      hi i am micheal \r\n      "),p=y(l,"HAND-WAVE",{class:!0});var u=w(p);E=b(u,"👋"),u.forEach(i),l.forEach(i),c.forEach(i),t.forEach(i),this.h()},h(){v(s,"class","svelte-m0nk23"),v(p,"class","svelte-m0nk23"),g(a,"class","font-effect-anaglyph svelte-m0nk23"),A(r,"height",t[2]+le+"px"),g(r,"class","svelte-m0nk23"),g(n,"class","svelte-m0nk23")},m(e,t){l(e,n,t),c(n,r);for(let e=0;e<x.length;e+=1)x[e].m(r,null);c(r,o),c(r,a),c(a,s),c(s,f),c(a,m),c(a,p),c(p,E)},p(e,[t]){if(3&t){const n=e[1];x=U(x,t,M,1,e,n,k,r,Y,ae,o,oe)}},i:e,o:e,d(e){e&&i(n);for(let e=0;e<x.length;e+=1)x[e].d()}}}const ce=4e4,le=150;function ie(e,t,n){const r=800-le,o=200-le;let a=0,s=[];for(const e of Object.values(ne))s.push({hex:e,x:0,y:0,z:0});return((e=window.innerWidth-le)=>{for(const t of s)t.x=Math.random()*Math.min(r,e),t.y=Math.random()*o,t.z=100*Math.random();n(1,s)})(r),M(()=>{setTimeout(()=>{n(0,a=.5)},10)}),[a,s,o]}class he extends K{constructor(e){super(),Z(this,e,ie,se,s,{})}}function fe(e,t,n){const r=e.slice();return r[5]=t[n],r[7]=n,r}function ue(t,n){let r,o;return{key:t,first:null,c(){r=f("svg"),o=f("use"),this.h()},l(e){r=y(e,"svg",{class:!0,style:!0},1);var t=w(r);o=y(t,"use",{"xlink:href":!0},1),w(o).forEach(i),t.forEach(i),this.h()},h(){E(o,"xlink:href","#icon-arrow_forward"),g(r,"class","icon icon-arrow_forward svelte-11yb7b7"),A(r,"fill",n[4][n[7]]),A(r,"animation-delay",42*n[7]+"ms"),this.first=r},m(e,t){l(e,r,t),c(r,o)},p:e,d(e){e&&i(r)}}}function de(t){let n,r,o,a,s,f,m,p,E,A,k=[],T=new Map,M=Array(10);const N=e=>e[7];for(let e=0;e<M.length;e+=1){let n=fe(t,M,e),r=N(n);T.set(r,k[e]=ue(r,n))}return{c(){n=h("a"),r=h("article"),o=h("h3"),a=u(t[2]),s=d(),f=h("p"),m=u(t[3]),p=d(),E=h("icon-container");for(let e=0;e<k.length;e+=1)k[e].c();this.h()},l(e){n=y(e,"A",{target:!0,href:!0,class:!0});var c=w(n);r=y(c,"ARTICLE",{class:!0});var l=w(r);o=y(l,"H3",{class:!0});var h=w(o);a=b(h,t[2]),h.forEach(i),s=$(l),f=y(l,"P",{});var u=w(f);m=b(u,t[3]),u.forEach(i),p=$(l),E=y(l,"ICON-CONTAINER",{class:!0});var d=w(E);for(let e=0;e<k.length;e+=1)k[e].l(d);d.forEach(i),l.forEach(i),c.forEach(i),this.h()},h(){g(o,"class","svelte-11yb7b7"),v(E,"class","svelte-11yb7b7"),g(r,"class","svelte-11yb7b7"),g(n,"target",A=t[0]?"_tab":"_self"),g(n,"href",t[1]),g(n,"class","svelte-11yb7b7")},m(e,t){l(e,n,t),c(n,r),c(r,o),c(o,a),c(r,s),c(r,f),c(f,m),c(r,p),c(r,E);for(let e=0;e<k.length;e+=1)k[e].m(E,null)},p(e,[t]){if(4&t&&x(a,e[2]),8&t&&x(m,e[3]),16&t){const n=Array(10);k=U(k,t,N,1,e,n,T,E,Y,ue,null,fe)}1&t&&A!==(A=e[0]?"_tab":"_self")&&g(n,"target",A),2&t&&g(n,"href",e[1])},i:e,o:e,d(e){e&&i(n);for(let e=0;e<k.length;e+=1)k[e].d()}}}function me(e,t,n){const r=Object.values(ne);let{newTab:o=!1}=t,{href:a=""}=t,{title:s=""}=t,{summary:c=""}=t;return e.$set=e=>{"newTab"in e&&n(0,o=e.newTab),"href"in e&&n(1,a=e.href),"title"in e&&n(2,s=e.title),"summary"in e&&n(3,c=e.summary)},[o,a,s,c,r]}class pe extends K{constructor(e){super(),Z(this,e,me,de,s,{newTab:0,href:1,title:2,summary:3})}}function ge(e,t,n){const r=e.slice();return r[1]=t[n],r[3]=n,r}function ve(e,n){let r,o;const a=[n[1]];let s={};for(let e=0;e<a.length;e+=1)s=t(s,a[e]);const c=new pe({props:s});return{key:e,first:null,c(){r=m(),q(c.$$.fragment),this.h()},l(e){r=m(),V(c.$$.fragment,e),this.h()},h(){this.first=r},m(e,t){l(e,r,t),W(c,e,t),o=!0},p(e,t){const n=1&t?function(e,t){const n={},r={},o={$$scope:1};let a=e.length;for(;a--;){const s=e[a],c=t[a];if(c){for(const e in s)e in c||(r[e]=1);for(const e in c)o[e]||(n[e]=c[e],o[e]=1);e[a]=c}else for(const e in s)o[e]=1}for(const e in r)e in n||(n[e]=void 0);return n}(a,[(r=e[1],"object"==typeof r&&null!==r?r:{})]):{};var r;c.$set(n)},i(e){o||(P(c.$$.fragment,e),o=!0)},o(e){L(c.$$.fragment,e),o=!1},d(e){e&&i(r),J(c,e)}}}function Ee(e){let t,n,r,a,s,f,m=[],p=new Map,E=e[0];const x=e=>e[3];for(let t=0;t<E.length;t+=1){let n=ge(e,E,t),r=x(n);p.set(r,m[t]=ve(r,n))}return{c(){t=h("section"),n=h("h2"),r=u("cabinet of curiosities"),a=d(),s=h("current-projects");for(let e=0;e<m.length;e+=1)m[e].c();this.h()},l(e){t=y(e,"SECTION",{class:!0});var o=w(t);n=y(o,"H2",{class:!0});var c=w(n);r=b(c,"cabinet of curiosities"),c.forEach(i),a=$(o),s=y(o,"CURRENT-PROJECTS",{class:!0});var l=w(s);for(let e=0;e<m.length;e+=1)m[e].l(l);l.forEach(i),o.forEach(i),this.h()},h(){g(n,"class","svelte-60oau2"),v(s,"class","svelte-60oau2"),g(t,"class","svelte-60oau2")},m(e,o){l(e,t,o),c(t,n),c(n,r),c(t,a),c(t,s);for(let e=0;e<m.length;e+=1)m[e].m(s,null);f=!0},p(e,[t]){if(1&t){const n=e[0];D={r:0,c:[],p:D},m=U(m,t,x,1,e,n,p,s,G,ve,null,ge),D.r||o(D.c),D=D.p}},i(e){if(!f){for(let e=0;e<E.length;e+=1)P(m[e]);f=!0}},o(e){for(let e=0;e<m.length;e+=1)L(m[e]);f=!1},d(e){e&&i(t);for(let e=0;e<m.length;e+=1)m[e].d()}}}function we(e){return[[{title:"Galeri",summary:"Galeri is a chrome extension and desktop app focused on artwork discovery.",href:"https://galeri.io",newTab:!0}]]}class ye extends K{constructor(e){super(),Z(this,e,we,Ee,s,{})}}function be(e){let t,n,r,o,a,s,f,u,m,p,g,E;return{c(){t=h("a-scene"),n=h("a-entity"),r=d(),o=h("a-entity"),a=d(),s=h("a-entity"),f=d(),u=h("a-entity"),m=d(),p=h("a-entity"),g=d(),E=h("a-sky"),this.h()},l(e){t=y(e,"A-SCENE",{fog:!0,"vr-mode-ui":!0,"device-orientation-permission-ui":!0,renderer:!0});var c=w(t);n=y(c,"A-ENTITY",{audio:!0}),w(n).forEach(i),r=$(c),o=y(c,"A-ENTITY",{"edge-box":!0}),w(o).forEach(i),a=$(c),s=y(c,"A-ENTITY",{grid:!0}),w(s).forEach(i),f=$(c),u=y(c,"A-ENTITY",{"edge-box":!0,position:!0,rotation:!0}),w(u).forEach(i),m=$(c),p=y(c,"A-ENTITY",{camera:!0,id:!0,position:!0,rotation:!0,"rotation-reader":!0}),w(p).forEach(i),g=$(c),E=y(c,"A-SKY",{color:!0}),w(E).forEach(i),c.forEach(i),this.h()},h(){v(n,"audio",""),v(o,"edge-box",""),v(s,"grid",""),v(u,"edge-box","type: plane; width: 4; height: 4;"),v(u,"position","0 0 -4"),v(u,"rotation","-90 0 0"),v(p,"camera",""),v(p,"id","camera"),v(p,"position","0 1.6 0"),v(p,"rotation","0 0 0"),v(p,"rotation-reader",""),v(E,"color","#222"),v(t,"fog","type: linear; color: #222; far: 100"),v(t,"vr-mode-ui","enabled: false"),v(t,"device-orientation-permission-ui","enabled: false"),v(t,"renderer","\r\n      antialias: true;\r\n      foveationLevel: 2;\r\n      maxCanvasWidth: 3840;\r\n      maxCanvasHeight: 2160;\r\n    ")},m(e,i){l(e,t,i),c(t,n),c(t,r),c(t,o),c(t,a),c(t,s),c(t,f),c(t,u),c(t,m),c(t,p),c(t,g),c(t,E)},d(e){e&&i(t)}}}function $e(t){let n,r,o,a,s="before"!==t[0]&&be();return{c(){s&&s.c(),n=d(),r=h("button"),o=u("Enough with the yammering! Let me ride off into the sunset already!"),this.h()},l(e){s&&s.l(e),n=$(e),r=y(e,"BUTTON",{class:!0});var t=w(r);o=b(t,"Enough with the yammering! Let me ride off into the sunset already!"),t.forEach(i),this.h()},h(){g(r,"class","svelte-r98mcn")},m(e,i){s&&s.m(e,i),l(e,n,i),l(e,r,i),c(r,o),a=p(r,"click",t[1])},p(e,[t]){"before"!==e[0]?s||(s=be(),s.c(),s.m(n.parentNode,n)):s&&(s.d(1),s=null)},i:e,o:e,d(e){s&&s.d(e),e&&i(n),e&&i(r),a()}}}function xe(e,t,n){let r="before";const o=()=>{if(void 0===window.AFRAME)return setTimeout(o,100);var e,t;window.AFRAME.registerComponent("audio",{init(){const e=new THREE.AudioListener;document.querySelector("#camera").object3D.add(e);const t=new THREE.Audio(e);(new THREE.AudioLoader).load("infinity_keyboard.wav",(function(e){t.setBuffer(e),t.setLoop(!0),t.play()}))}}),window.AFRAME.registerComponent("grid",{init(){const{data:e,el:t}=this;t.setObject3D("mesh",new THREE.GridHelper(5e3,5e3,16777215,16777215))}}),window.AFRAME.registerComponent("edge-box",{schema:{width:{default:1,min:0},height:{default:1,min:0},depth:{default:1,min:0},type:{default:"box"}},init(){const{data:e,el:t}=this;let n;switch(e.type){case"box":n=new THREE.BoxBufferGeometry(e.width,e.height,e.depth);break;case"plane":n=new THREE.PlaneBufferGeometry(e.width,e.height)}this.geometry=new THREE.EdgesGeometry(n),this.material=new THREE.LineBasicMaterial({color:16777215}),this.mesh=new THREE.LineSegments(this.geometry,this.material,{color:16777215}),t.setObject3D("mesh",this.mesh)}}),AFRAME.registerComponent("rotation-reader",{tick:(e=new THREE.Vector3,t=new THREE.Quaternion,function(){const{object3D:n}=this.el;n.getWorldPosition(e),n.getWorldQuaternion(t),console.log(n.position,n.rotation),n.position.z-=.05})})};return[r,()=>{n(0,r="during"),o()}]}class Ae extends K{constructor(e){super(),Z(this,e,xe,$e,s,{})}}function ke(e,t,n){const r=e.slice();return r[0]=t[n],r[2]=n,r}function Te(t,n){let r,o,a;return{key:t,first:null,c(){r=h("span"),o=u(n[0]),this.h()},l(e){r=y(e,"SPAN",{style:!0,class:!0});var t=w(r);o=b(t,n[0]),t.forEach(i),this.h()},h(){g(r,"style",a="animation-delay: "+52*n[2]+"ms; "+(" "===n[0]?"margin-left: 10px;":"")),g(r,"class","svelte-x48bow"),this.first=r},m(e,t){l(e,r,t),c(r,o)},p:e,d(e){e&&i(r)}}}function Me(t){let n,r,o,a,s,m,p,v,x,k,T,M,N,z,C,_,j,R,B,I,O,S,F,H,D,Y,G,U,Q,Z,K,X,ee,te,ne,re,oe,ae,se,ce=[],le=new Map;const ie=e=>e[0];for(let e=0;e<"about this human:".length;e+=1){let n=ke(t,"about this human:",e),r=ie(n);le.set(r,ce[e]=Te(r,n))}const he=new Ae({});return{c(){n=h("footer"),r=h("img"),a=d(),s=h("section"),m=h("h2");for(let e=0;e<ce.length;e+=1)ce[e].c();p=d(),v=h("p"),x=h("strong"),k=u("Micheal Parks"),T=u(" is a software engineer or whatever who lives in a "),M=h("a"),N=u("Large Apple"),z=u("."),C=d(),_=h("p"),j=h("span"),R=u("He has links for you but of course"),B=d(),I=h("a"),O=f("svg"),S=f("use"),F=d(),H=h("a"),D=f("svg"),Y=f("use"),G=d(),U=h("a"),Q=f("svg"),Z=f("use"),K=d(),X=h("span"),ee=u("and the best link!!!!1!!1"),te=d(),ne=h("a"),re=f("svg"),oe=f("use"),ae=d(),q(he.$$.fragment),this.h()},l(e){n=y(e,"FOOTER",{class:!0});var t=w(n);r=y(t,"IMG",{loading:!0,alt:!0,src:!0,class:!0}),a=$(t),s=y(t,"SECTION",{});var o=w(s);m=y(o,"H2",{class:!0});var c=w(m);for(let e=0;e<ce.length;e+=1)ce[e].l(c);c.forEach(i),p=$(o),v=y(o,"P",{});var l=w(v);x=y(l,"STRONG",{});var h=w(x);k=b(h,"Micheal Parks"),h.forEach(i),T=b(l," is a software engineer or whatever who lives in a "),M=y(l,"A",{target:!0,href:!0});var f=w(M);N=b(f,"Large Apple"),f.forEach(i),z=b(l,"."),l.forEach(i),C=$(o),_=y(o,"P",{class:!0});var u=w(_);j=y(u,"SPAN",{class:!0});var d=w(j);R=b(d,"He has links for you but of course"),d.forEach(i),B=$(u),I=y(u,"A",{target:!0,href:!0,class:!0});var g=w(I);O=y(g,"svg",{class:!0},1);var E=w(O);S=y(E,"use",{"xlink:href":!0},1),w(S).forEach(i),E.forEach(i),g.forEach(i),F=$(u),H=y(u,"A",{target:!0,href:!0,class:!0});var A=w(H);D=y(A,"svg",{class:!0},1);var P=w(D);Y=y(P,"use",{"xlink:href":!0},1),w(Y).forEach(i),P.forEach(i),A.forEach(i),G=$(u),U=y(u,"A",{target:!0,href:!0,class:!0});var L=w(U);Q=y(L,"svg",{class:!0},1);var q=w(Q);Z=y(q,"use",{"xlink:href":!0},1),w(Z).forEach(i),q.forEach(i),L.forEach(i),K=$(u),X=y(u,"SPAN",{style:!0,class:!0});var W=w(X);ee=b(W,"and the best link!!!!1!!1"),W.forEach(i),te=$(u),ne=y(u,"A",{target:!0,href:!0,class:!0});var J=w(ne);re=y(J,"svg",{class:!0},1);var se=w(re);oe=y(se,"use",{"xlink:href":!0},1),w(oe).forEach(i),se.forEach(i),J.forEach(i),u.forEach(i),ae=$(o),V(he.$$.fragment,o),o.forEach(i),t.forEach(i),this.h()},h(){g(r,"loading","lazy"),g(r,"alt","Micheal's detatched head."),r.src!==(o="profile-compressed.jpg")&&g(r,"src","profile-compressed.jpg"),g(r,"class","svelte-x48bow"),g(m,"class","svelte-x48bow"),g(M,"target","_tab"),g(M,"href","https://duckduckgo.com/?q=new+york+city&ia=news&iaxm=about"),g(j,"class","svelte-x48bow"),E(S,"xlink:href","#icon-spotify"),g(O,"class","icon icon-spotify svelte-x48bow"),g(I,"target","_tab"),g(I,"href","https://open.spotify.com/user/micheal_parks"),g(I,"class","svelte-x48bow"),E(Y,"xlink:href","#icon-github"),g(D,"class","icon icon-github svelte-x48bow"),g(H,"target","_tab"),g(H,"href","https://github.com/michealparks"),g(H,"class","svelte-x48bow"),E(Z,"xlink:href","#icon-soundcloud"),g(Q,"class","icon icon-soundcloud svelte-x48bow"),g(U,"target","_tab"),g(U,"href","https://soundcloud.com/dead_culture"),g(U,"class","svelte-x48bow"),A(X,"margin-left","7px"),g(X,"class","svelte-x48bow"),E(oe,"xlink:href","#icon-linkedin"),g(re,"class","icon icon-linkedin svelte-x48bow"),g(ne,"target","_tab"),g(ne,"href","https://www.linkedin.com/in/michealparks/"),g(ne,"class","svelte-x48bow"),g(_,"class","social-media svelte-x48bow"),g(n,"class","svelte-x48bow")},m(e,t){l(e,n,t),c(n,r),c(n,a),c(n,s),c(s,m);for(let e=0;e<ce.length;e+=1)ce[e].m(m,null);c(s,p),c(s,v),c(v,x),c(x,k),c(v,T),c(v,M),c(M,N),c(v,z),c(s,C),c(s,_),c(_,j),c(j,R),c(_,B),c(_,I),c(I,O),c(O,S),c(_,F),c(_,H),c(H,D),c(D,Y),c(_,G),c(_,U),c(U,Q),c(Q,Z),c(_,K),c(_,X),c(X,ee),c(_,te),c(_,ne),c(ne,re),c(re,oe),c(s,ae),W(he,s,null),se=!0},p:e,i(e){se||(P(he.$$.fragment,e),se=!0)},o(e){L(he.$$.fragment,e),se=!1},d(e){e&&i(n);for(let e=0;e<ce.length;e+=1)ce[e].d();J(he)}}}class Ne extends K{constructor(e){super(),Z(this,e,null,Me,s,{})}}function ze(t){let n,r,o;return{c(){n=h("button"),r=u("more! moar JAMZ!"),this.h()},l(e){n=y(e,"BUTTON",{class:!0});var t=w(n);r=b(t,"more! moar JAMZ!"),t.forEach(i),this.h()},h(){g(n,"class","svelte-1y6pnro")},m(e,a){l(e,n,a),c(n,r),o=p(n,"click",t[2])},p:e,d(e){e&&i(n),o()}}}function Ce(t){let n,r,o;return{c(){n=h("button"),r=u("stop!! 'nuff jam TIME!!"),this.h()},l(e){n=y(e,"BUTTON",{class:!0});var t=w(n);r=b(t,"stop!! 'nuff jam TIME!!"),t.forEach(i),this.h()},h(){g(n,"class","svelte-1y6pnro")},m(e,a){l(e,n,a),c(n,r),o=p(n,"click",t[3])},p:e,d(e){e&&i(n),o()}}}function _e(t){let n,r,o;return{c(){n=h("button"),r=u("pump up my jamz"),this.h()},l(e){n=y(e,"BUTTON",{class:!0});var t=w(n);r=b(t,"pump up my jamz"),t.forEach(i),this.h()},h(){g(n,"class","svelte-1y6pnro")},m(e,a){l(e,n,a),c(n,r),o=p(n,"click",t[1])},p:e,d(e){e&&i(n),o()}}}function je(e){let t,n;return{c(){t=h("iframe"),this.h()},l(e){t=y(e,"IFRAME",{id:!0,title:!0,width:!0,height:!0,src:!0,frameborder:!0,allow:!0,class:!0}),w(t).forEach(i),this.h()},h(){g(t,"id","jamz"),g(t,"title","Jamz"),g(t,"width","560"),g(t,"height","315"),t.src!==(n="https://www.youtube.com/embed/4T1t5OFOYDU?enablejsapi=1")&&g(t,"src","https://www.youtube.com/embed/4T1t5OFOYDU?enablejsapi=1"),g(t,"frameborder","0"),g(t,"allow","accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),g(t,"class","svelte-1y6pnro")},m(e,n){l(e,t,n)},d(e){e&&i(t)}}}function Re(t){let n,r,o;function a(e,t){return"unjammed"===e[0]?_e:"jamming"===e[0]?Ce:ze}let s=a(t),c=s(t),f="unjammed"!==t[0]&&je();return{c(){n=h("button-container"),c.c(),r=d(),f&&f.c(),o=m(),this.h()},l(e){n=y(e,"BUTTON-CONTAINER",{class:!0});var t=w(n);c.l(t),t.forEach(i),r=$(e),f&&f.l(e),o=m(),this.h()},h(){v(n,"class","svelte-1y6pnro")},m(e,t){l(e,n,t),c.m(n,null),l(e,r,t),f&&f.m(e,t),l(e,o,t)},p(e,[t]){s===(s=a(e))&&c?c.p(e,t):(c.d(1),c=s(e),c&&(c.c(),c.m(n,null))),"unjammed"!==e[0]?f||(f=je(),f.c(),f.m(o.parentNode,o)):f&&(f.d(1),f=null)},i:e,o:e,d(e){e&&i(n),c.d(),e&&i(r),f&&f.d(e),e&&i(o)}}}function Be(e,t,n){let r,o="unjammed";const a=()=>{r.playVideo(),n(0,o="jamming")},s=()=>{r.stopVideo(),document.querySelector("main").style.backgroundColor="",n(0,o="jammed")},c=e=>{r=e.target,a()},l=e=>{switch(e.data){case YT.PlayerState.ENDED:return void s();case YT.PlayerState.PLAYING:return void(document.querySelector("main").style.backgroundColor="rgba(0, 0, 0, 0.5)")}};return[o,()=>{n(0,o="jamming");const e=document.createElement("script");e.async=!0,e.src="https://www.youtube.com/iframe_api",document.head.appendChild(e),window.onYouTubeIframeAPIReady=()=>new YT.Player("jamz",{events:{onReady:c,onStateChange:l}})},a,s]}class Ie extends K{constructor(e){super(),Z(this,e,Be,Re,s,{})}}function Oe(t){let n,r,o,a,s,u,m,p,v,E,b,x,k,T,M;return{c(){n=h("div"),r=f("svg"),o=f("path"),a=d(),s=f("svg"),u=f("path"),m=d(),p=f("svg"),v=f("path"),E=d(),b=f("svg"),x=f("path"),k=d(),T=f("svg"),M=f("path"),this.h()},l(e){n=y(e,"DIV",{style:!0});var t=w(n);r=y(t,"svg",{id:!0,viewBox:!0},1);var c=w(r);o=y(c,"path",{fill:!0,style:!0,d:!0},1),w(o).forEach(i),c.forEach(i),a=$(t),s=y(t,"svg",{id:!0,viewBox:!0},1);var l=w(s);u=y(l,"path",{fill:!0,style:!0,d:!0},1),w(u).forEach(i),l.forEach(i),m=$(t),p=y(t,"svg",{id:!0,viewBox:!0},1);var h=w(p);v=y(h,"path",{fill:!0,d:!0},1),w(v).forEach(i),h.forEach(i),E=$(t),b=y(t,"svg",{id:!0,viewBox:!0},1);var f=w(b);x=y(f,"path",{fill:!0,style:!0,d:!0},1),w(x).forEach(i),f.forEach(i),k=$(t),T=y(t,"svg",{id:!0,viewBox:!0},1);var d=w(T);M=y(d,"path",{d:!0},1),w(M).forEach(i),d.forEach(i),t.forEach(i),this.h()},h(){g(o,"fill","#1ed760"),A(o,"fill","#1ed760"),g(o,"d","M16 0c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.12-16-16-16zM23.361 23.12c-0.32 0.479-0.88 0.64-1.361 0.32-3.76-2.32-8.48-2.801-14.081-1.521-0.557 0.163-1.039-0.239-1.199-0.719-0.16-0.561 0.24-1.040 0.72-1.2 6.080-1.361 11.36-0.8 15.52 1.76 0.56 0.24 0.639 0.879 0.401 1.36zM25.281 18.72c-0.401 0.56-1.121 0.8-1.683 0.4-4.319-2.64-10.879-3.44-15.919-1.84-0.639 0.16-1.36-0.16-1.52-0.8s0.16-1.361 0.8-1.521c5.84-1.759 13.040-0.877 18 2.161 0.481 0.241 0.72 1.040 0.321 1.6zM25.441 14.24c-5.121-3.040-13.681-3.36-18.561-1.839-0.8 0.239-1.6-0.241-1.84-0.961-0.24-0.801 0.24-1.6 0.96-1.841 5.68-1.68 15.040-1.36 20.961 2.161 0.719 0.4 0.959 1.36 0.559 2.080-0.399 0.561-1.36 0.799-2.079 0.4z"),g(r,"id","icon-spotify"),g(r,"viewBox","0 0 32 32"),g(u,"fill","#f30"),A(u,"fill","#f30"),g(u,"d","M1.567 16.3c-0.068 0-0.125 0.061-0.135 0.133l-0.311 2.872 0.311 2.807c0.009 0.077 0.067 0.131 0.135 0.131 0.067 0 0.12-0.053 0.132-0.131l0.34-2.807-0.36-2.872c0-0.076-0.060-0.133-0.12-0.133zM0.36 17.404c-0.080 0-0.121 0.049-0.139 0.125l-0.221 1.776 0.22 1.744c0 0.073 0.060 0.125 0.12 0.125s0.119-0.060 0.139-0.139l0.28-1.759-0.28-1.779c0-0.081-0.059-0.12-0.12-0.12zM2.799 15.74c-0.081 0-0.16 0.060-0.16 0.139l-0.28 3.417 0.3 3.277c0 0.080 0.060 0.16 0.159 0.16 0.081 0 0.14-0.081 0.161-0.16l0.339-3.299-0.339-3.397c-0.021-0.080-0.081-0.16-0.161-0.16zM4.077 15.599c-0.1 0-0.18 0.080-0.2 0.18l-0.257 3.52 0.28 3.392c0.021 0.103 0.1 0.184 0.199 0.184 0.1 0 0.18-0.081 0.2-0.2l0.32-3.376-0.32-3.497c0-0.1-0.080-0.18-0.18-0.18zM5.617 16.079c-0.007-0.12-0.1-0.199-0.212-0.199-0.12 0-0.211 0.080-0.219 0.199l-0.289 3.24 0.267 3.417c0 0.12 0.1 0.209 0.212 0.209 0.099 0 0.197-0.091 0.197-0.211l0.303-3.417-0.303-3.259zM6.696 13.8c-0.135 0-0.24 0.12-0.24 0.241l-0.28 5.276 0.249 3.417c0 0.12 0.107 0.219 0.24 0.219 0.125 0 0.232-0.12 0.24-0.24l0.279-3.417-0.279-5.296c-0.011-0.139-0.117-0.24-0.24-0.24zM7.944 12.541c-0.14 0-0.26 0.12-0.271 0.259l-0.24 6.496 0.22 3.397c0 0.16 0.12 0.279 0.26 0.279 0.139 0 0.259-0.119 0.28-0.279l0.257-3.397-0.256-6.475c-0.021-0.16-0.14-0.28-0.28-0.28zM9.233 11.943c-0.161 0-0.281 0.119-0.3 0.279l-0.22 7.033 0.22 3.36c0.019 0.159 0.139 0.3 0.3 0.3 0.159 0 0.3-0.14 0.3-0.3l0.26-3.36-0.261-7.033c0-0.16-0.14-0.3-0.3-0.3zM10.892 11.981c0-0.18-0.14-0.32-0.32-0.32-0.159 0-0.32 0.14-0.32 0.32l-0.199 7.255 0.199 3.337c0.021 0.18 0.161 0.32 0.341 0.32s0.32-0.14 0.32-0.32l0.219-3.337-0.219-7.275zM11.891 11.803c-0.18 0-0.34 0.159-0.34 0.339l-0.2 7.096 0.2 3.297c0 0.2 0.16 0.34 0.34 0.34s0.34-0.16 0.34-0.36l0.2-3.299-0.22-7.076c0-0.197-0.16-0.36-0.361-0.36zM13.189 12.001c-0.219 0-0.379 0.18-0.379 0.38l-0.137 6.857 0.18 3.299c0 0.199 0.159 0.369 0.379 0.369 0.199 0 0.361-0.16 0.379-0.38l0.161-3.257-0.18-6.816c-0.016-0.219-0.18-0.38-0.38-0.38zM14.791 10.813c-0.060-0.039-0.14-0.059-0.22-0.059s-0.159 0.020-0.22 0.059c-0.12 0.072-0.199 0.2-0.199 0.34v0.081l-0.139 8.064 0.153 3.265v0.011c0.011 0.080 0.040 0.18 0.099 0.24 0.077 0.081 0.189 0.139 0.312 0.139 0.107 0 0.211-0.059 0.279-0.12 0.077-0.080 0.121-0.18 0.121-0.3l0.020-0.32 0.156-2.937-0.18-8.115c0-0.139-0.081-0.257-0.18-0.319zM16.132 10.084c-0.060-0.060-0.12-0.081-0.2-0.081-0.099 0-0.199 0.021-0.279 0.081-0.1 0.081-0.159 0.2-0.159 0.32v0.039l-0.183 8.812 0.101 1.62 0.081 1.58c0 0.219 0.197 0.419 0.437 0.419 0.241 0 0.44-0.2 0.44-0.439l0.2-3.219-0.2-8.849c0-0.16-0.099-0.295-0.22-0.369zM28.064 15.033c-0.54 0-1.060 0.115-1.519 0.309-0.32-3.539-3.28-6.315-6.917-6.315-0.879 0-1.74 0.18-2.519 0.479-0.3 0.12-0.36 0.24-0.38 0.479v12.491c0.021 0.24 0.2 0.44 0.44 0.46h10.913c2.159 0.021 3.917-1.717 3.917-3.896s-1.759-3.936-3.917-3.936z"),g(s,"id","icon-soundcloud"),g(s,"viewBox","0 0 32 32"),g(v,"fill","#fff"),g(v,"d","M16 0.396c-8.84 0-16 7.164-16 16 0 7.071 4.584 13.067 10.94 15.18 0.8 0.151 1.093-0.344 1.093-0.769 0-0.38-0.013-1.387-0.020-2.72-4.451 0.965-5.389-2.147-5.389-2.147-0.728-1.847-1.78-2.34-1.78-2.34-1.449-0.992 0.112-0.972 0.112-0.972 1.607 0.112 2.451 1.648 2.451 1.648 1.427 2.447 3.745 1.74 4.66 1.331 0.144-1.035 0.556-1.74 1.013-2.14-3.553-0.4-7.288-1.776-7.288-7.907 0-1.747 0.62-3.173 1.647-4.293-0.18-0.404-0.72-2.031 0.14-4.235 0 0 1.34-0.429 4.4 1.64 1.28-0.356 2.64-0.532 4-0.54 1.36 0.008 2.72 0.184 4 0.54 3.040-2.069 4.38-1.64 4.38-1.64 0.86 2.204 0.32 3.831 0.16 4.235 1.020 1.12 1.64 2.547 1.64 4.293 0 6.147-3.74 7.5-7.3 7.893 0.56 0.48 1.080 1.461 1.080 2.96 0 2.141-0.020 3.861-0.020 4.381 0 0.42 0.28 0.92 1.1 0.76 6.401-2.099 10.981-8.099 10.981-15.159 0-8.836-7.164-16-16-16z"),g(p,"id","icon-github"),g(p,"viewBox","0 0 32 32"),g(x,"fill","#0077b5"),A(x,"fill","var(--color1, #0077b5)"),g(x,"d","M27.263 27.269h-4.739v-7.425c0-1.771-0.036-4.049-2.469-4.049-2.471 0-2.848 1.927-2.848 3.919v7.556h-4.739v-15.269h4.552v2.081h0.061c0.636-1.2 2.183-2.467 4.493-2.467 4.801 0 5.689 3.16 5.689 7.273zM7.116 9.911c-1.525 0-2.751-1.235-2.751-2.753 0-1.517 1.227-2.751 2.751-2.751 1.52 0 2.752 1.233 2.752 2.751 0 1.519-1.233 2.753-2.752 2.753zM9.492 27.269h-4.752v-15.269h4.752zM29.633 0h-27.272c-1.305 0-2.361 1.032-2.361 2.305v27.389c0 1.275 1.056 2.305 2.361 2.305h27.268c1.304 0 2.371-1.031 2.371-2.305v-27.389c0-1.273-1.067-2.305-2.371-2.305z"),g(b,"id","icon-linkedin"),g(b,"viewBox","0 0 32 32"),g(M,"d","M12 3.984l8.016 8.016-8.016 8.016-1.406-1.406 5.578-5.625h-12.188v-1.969h12.188l-5.578-5.625z"),g(T,"id","icon-arrow_forward"),g(T,"viewBox","0 0 24 24"),A(n,"display","none")},m(e,t){l(e,n,t),c(n,r),c(r,o),c(n,a),c(n,s),c(s,u),c(n,m),c(n,p),c(p,v),c(n,E),c(n,b),c(b,x),c(n,k),c(n,T),c(T,M)},p:e,i:e,o:e,d(e){e&&i(n)}}}class Se extends K{constructor(e){super(),Z(this,e,null,Oe,s,{})}}function Fe(t){let n,r,o,a,s,f,u,m;const p=new ee({}),v=new te({}),E=new he({}),b=new ye({}),x=new Ne({}),A=new Ie({}),k=new Se({});return{c(){q(p.$$.fragment),n=d(),q(v.$$.fragment),r=d(),o=h("main"),q(E.$$.fragment),a=d(),q(b.$$.fragment),s=d(),q(x.$$.fragment),f=d(),q(A.$$.fragment),u=d(),q(k.$$.fragment),this.h()},l(e){V(p.$$.fragment,e),n=$(e),V(v.$$.fragment,e),r=$(e),o=y(e,"MAIN",{class:!0});var t=w(o);V(E.$$.fragment,t),a=$(t),V(b.$$.fragment,t),s=$(t),V(x.$$.fragment,t),f=$(t),V(A.$$.fragment,t),u=$(t),V(k.$$.fragment,t),t.forEach(i),this.h()},h(){g(o,"class","svelte-9dp4ed")},m(e,t){W(p,e,t),l(e,n,t),W(v,e,t),l(e,r,t),l(e,o,t),W(E,o,null),c(o,a),W(b,o,null),c(o,s),W(x,o,null),c(o,f),W(A,o,null),c(o,u),W(k,o,null),m=!0},p:e,i(e){m||(P(p.$$.fragment,e),P(v.$$.fragment,e),P(E.$$.fragment,e),P(b.$$.fragment,e),P(x.$$.fragment,e),P(A.$$.fragment,e),P(k.$$.fragment,e),m=!0)},o(e){L(p.$$.fragment,e),L(v.$$.fragment,e),L(E.$$.fragment,e),L(b.$$.fragment,e),L(x.$$.fragment,e),L(A.$$.fragment,e),L(k.$$.fragment,e),m=!1},d(e){J(p,e),e&&i(n),J(v,e),e&&i(r),e&&i(o),J(E),J(b),J(x),J(A),J(k)}}}export default class extends K{constructor(e){super(),Z(this,e,null,Fe,s,{})}}
+function noop() { }
+function assign(tar, src) {
+    // @ts-ignore
+    for (const k in src)
+        tar[k] = src[k];
+    return tar;
+}
+function run(fn) {
+    return fn();
+}
+function blank_object() {
+    return Object.create(null);
+}
+function run_all(fns) {
+    fns.forEach(run);
+}
+function is_function(thing) {
+    return typeof thing === 'function';
+}
+function safe_not_equal(a, b) {
+    return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+}
+
+function append(target, node) {
+    target.appendChild(node);
+}
+function insert(target, node, anchor) {
+    target.insertBefore(node, anchor || null);
+}
+function detach(node) {
+    node.parentNode.removeChild(node);
+}
+function element(name) {
+    return document.createElement(name);
+}
+function svg_element(name) {
+    return document.createElementNS('http://www.w3.org/2000/svg', name);
+}
+function text(data) {
+    return document.createTextNode(data);
+}
+function space() {
+    return text(' ');
+}
+function empty() {
+    return text('');
+}
+function listen(node, event, handler, options) {
+    node.addEventListener(event, handler, options);
+    return () => node.removeEventListener(event, handler, options);
+}
+function attr(node, attribute, value) {
+    if (value == null)
+        node.removeAttribute(attribute);
+    else if (node.getAttribute(attribute) !== value)
+        node.setAttribute(attribute, value);
+}
+function set_custom_element_data(node, prop, value) {
+    if (prop in node) {
+        node[prop] = value;
+    }
+    else {
+        attr(node, prop, value);
+    }
+}
+function xlink_attr(node, attribute, value) {
+    node.setAttributeNS('http://www.w3.org/1999/xlink', attribute, value);
+}
+function children(element) {
+    return Array.from(element.childNodes);
+}
+function claim_element(nodes, name, attributes, svg) {
+    for (let i = 0; i < nodes.length; i += 1) {
+        const node = nodes[i];
+        if (node.nodeName === name) {
+            let j = 0;
+            while (j < node.attributes.length) {
+                const attribute = node.attributes[j];
+                if (attributes[attribute.name]) {
+                    j++;
+                }
+                else {
+                    node.removeAttribute(attribute.name);
+                }
+            }
+            return nodes.splice(i, 1)[0];
+        }
+    }
+    return svg ? svg_element(name) : element(name);
+}
+function claim_text(nodes, data) {
+    for (let i = 0; i < nodes.length; i += 1) {
+        const node = nodes[i];
+        if (node.nodeType === 3) {
+            node.data = '' + data;
+            return nodes.splice(i, 1)[0];
+        }
+    }
+    return text(data);
+}
+function claim_space(nodes) {
+    return claim_text(nodes, ' ');
+}
+function set_data(text, data) {
+    data = '' + data;
+    if (text.data !== data)
+        text.data = data;
+}
+function set_style(node, key, value, important) {
+    node.style.setProperty(key, value, important ? 'important' : '');
+}
+function query_selector_all(selector, parent = document.body) {
+    return Array.from(parent.querySelectorAll(selector));
+}
+
+let current_component;
+function set_current_component(component) {
+    current_component = component;
+}
+function get_current_component() {
+    if (!current_component)
+        throw new Error(`Function called outside component initialization`);
+    return current_component;
+}
+function onMount(fn) {
+    get_current_component().$$.on_mount.push(fn);
+}
+
+const dirty_components = [];
+const binding_callbacks = [];
+const render_callbacks = [];
+const flush_callbacks = [];
+const resolved_promise = Promise.resolve();
+let update_scheduled = false;
+function schedule_update() {
+    if (!update_scheduled) {
+        update_scheduled = true;
+        resolved_promise.then(flush);
+    }
+}
+function add_render_callback(fn) {
+    render_callbacks.push(fn);
+}
+let flushing = false;
+const seen_callbacks = new Set();
+function flush() {
+    if (flushing)
+        return;
+    flushing = true;
+    do {
+        // first, call beforeUpdate functions
+        // and update components
+        for (let i = 0; i < dirty_components.length; i += 1) {
+            const component = dirty_components[i];
+            set_current_component(component);
+            update(component.$$);
+        }
+        dirty_components.length = 0;
+        while (binding_callbacks.length)
+            binding_callbacks.pop()();
+        // then, once components are updated, call
+        // afterUpdate functions. This may cause
+        // subsequent updates...
+        for (let i = 0; i < render_callbacks.length; i += 1) {
+            const callback = render_callbacks[i];
+            if (!seen_callbacks.has(callback)) {
+                // ...so guard against infinite loops
+                seen_callbacks.add(callback);
+                callback();
+            }
+        }
+        render_callbacks.length = 0;
+    } while (dirty_components.length);
+    while (flush_callbacks.length) {
+        flush_callbacks.pop()();
+    }
+    update_scheduled = false;
+    flushing = false;
+    seen_callbacks.clear();
+}
+function update($$) {
+    if ($$.fragment !== null) {
+        $$.update();
+        run_all($$.before_update);
+        const dirty = $$.dirty;
+        $$.dirty = [-1];
+        $$.fragment && $$.fragment.p($$.ctx, dirty);
+        $$.after_update.forEach(add_render_callback);
+    }
+}
+const outroing = new Set();
+let outros;
+function group_outros() {
+    outros = {
+        r: 0,
+        c: [],
+        p: outros // parent group
+    };
+}
+function check_outros() {
+    if (!outros.r) {
+        run_all(outros.c);
+    }
+    outros = outros.p;
+}
+function transition_in(block, local) {
+    if (block && block.i) {
+        outroing.delete(block);
+        block.i(local);
+    }
+}
+function transition_out(block, local, detach, callback) {
+    if (block && block.o) {
+        if (outroing.has(block))
+            return;
+        outroing.add(block);
+        outros.c.push(() => {
+            outroing.delete(block);
+            if (callback) {
+                if (detach)
+                    block.d(1);
+                callback();
+            }
+        });
+        block.o(local);
+    }
+}
+
+function destroy_block(block, lookup) {
+    block.d(1);
+    lookup.delete(block.key);
+}
+function outro_and_destroy_block(block, lookup) {
+    transition_out(block, 1, 1, () => {
+        lookup.delete(block.key);
+    });
+}
+function update_keyed_each(old_blocks, dirty, get_key, dynamic, ctx, list, lookup, node, destroy, create_each_block, next, get_context) {
+    let o = old_blocks.length;
+    let n = list.length;
+    let i = o;
+    const old_indexes = {};
+    while (i--)
+        old_indexes[old_blocks[i].key] = i;
+    const new_blocks = [];
+    const new_lookup = new Map();
+    const deltas = new Map();
+    i = n;
+    while (i--) {
+        const child_ctx = get_context(ctx, list, i);
+        const key = get_key(child_ctx);
+        let block = lookup.get(key);
+        if (!block) {
+            block = create_each_block(key, child_ctx);
+            block.c();
+        }
+        else if (dynamic) {
+            block.p(child_ctx, dirty);
+        }
+        new_lookup.set(key, new_blocks[i] = block);
+        if (key in old_indexes)
+            deltas.set(key, Math.abs(i - old_indexes[key]));
+    }
+    const will_move = new Set();
+    const did_move = new Set();
+    function insert(block) {
+        transition_in(block, 1);
+        block.m(node, next);
+        lookup.set(block.key, block);
+        next = block.first;
+        n--;
+    }
+    while (o && n) {
+        const new_block = new_blocks[n - 1];
+        const old_block = old_blocks[o - 1];
+        const new_key = new_block.key;
+        const old_key = old_block.key;
+        if (new_block === old_block) {
+            // do nothing
+            next = new_block.first;
+            o--;
+            n--;
+        }
+        else if (!new_lookup.has(old_key)) {
+            // remove old block
+            destroy(old_block, lookup);
+            o--;
+        }
+        else if (!lookup.has(new_key) || will_move.has(new_key)) {
+            insert(new_block);
+        }
+        else if (did_move.has(old_key)) {
+            o--;
+        }
+        else if (deltas.get(new_key) > deltas.get(old_key)) {
+            did_move.add(new_key);
+            insert(new_block);
+        }
+        else {
+            will_move.add(old_key);
+            o--;
+        }
+    }
+    while (o--) {
+        const old_block = old_blocks[o];
+        if (!new_lookup.has(old_block.key))
+            destroy(old_block, lookup);
+    }
+    while (n)
+        insert(new_blocks[n - 1]);
+    return new_blocks;
+}
+
+function get_spread_update(levels, updates) {
+    const update = {};
+    const to_null_out = {};
+    const accounted_for = { $$scope: 1 };
+    let i = levels.length;
+    while (i--) {
+        const o = levels[i];
+        const n = updates[i];
+        if (n) {
+            for (const key in o) {
+                if (!(key in n))
+                    to_null_out[key] = 1;
+            }
+            for (const key in n) {
+                if (!accounted_for[key]) {
+                    update[key] = n[key];
+                    accounted_for[key] = 1;
+                }
+            }
+            levels[i] = n;
+        }
+        else {
+            for (const key in o) {
+                accounted_for[key] = 1;
+            }
+        }
+    }
+    for (const key in to_null_out) {
+        if (!(key in update))
+            update[key] = undefined;
+    }
+    return update;
+}
+function get_spread_object(spread_props) {
+    return typeof spread_props === 'object' && spread_props !== null ? spread_props : {};
+}
+function create_component(block) {
+    block && block.c();
+}
+function claim_component(block, parent_nodes) {
+    block && block.l(parent_nodes);
+}
+function mount_component(component, target, anchor) {
+    const { fragment, on_mount, on_destroy, after_update } = component.$$;
+    fragment && fragment.m(target, anchor);
+    // onMount happens before the initial afterUpdate
+    add_render_callback(() => {
+        const new_on_destroy = on_mount.map(run).filter(is_function);
+        if (on_destroy) {
+            on_destroy.push(...new_on_destroy);
+        }
+        else {
+            // Edge case - component was destroyed immediately,
+            // most likely as a result of a binding initialising
+            run_all(new_on_destroy);
+        }
+        component.$$.on_mount = [];
+    });
+    after_update.forEach(add_render_callback);
+}
+function destroy_component(component, detaching) {
+    const $$ = component.$$;
+    if ($$.fragment !== null) {
+        run_all($$.on_destroy);
+        $$.fragment && $$.fragment.d(detaching);
+        // TODO null out other refs, including component.$$ (but need to
+        // preserve final state?)
+        $$.on_destroy = $$.fragment = null;
+        $$.ctx = [];
+    }
+}
+function make_dirty(component, i) {
+    if (component.$$.dirty[0] === -1) {
+        dirty_components.push(component);
+        schedule_update();
+        component.$$.dirty.fill(0);
+    }
+    component.$$.dirty[(i / 31) | 0] |= (1 << (i % 31));
+}
+function init(component, options, instance, create_fragment, not_equal, props, dirty = [-1]) {
+    const parent_component = current_component;
+    set_current_component(component);
+    const prop_values = options.props || {};
+    const $$ = component.$$ = {
+        fragment: null,
+        ctx: null,
+        // state
+        props,
+        update: noop,
+        not_equal,
+        bound: blank_object(),
+        // lifecycle
+        on_mount: [],
+        on_destroy: [],
+        before_update: [],
+        after_update: [],
+        context: new Map(parent_component ? parent_component.$$.context : []),
+        // everything else
+        callbacks: blank_object(),
+        dirty
+    };
+    let ready = false;
+    $$.ctx = instance
+        ? instance(component, prop_values, (i, ret, ...rest) => {
+            const value = rest.length ? rest[0] : ret;
+            if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
+                if ($$.bound[i])
+                    $$.bound[i](value);
+                if (ready)
+                    make_dirty(component, i);
+            }
+            return ret;
+        })
+        : [];
+    $$.update();
+    ready = true;
+    run_all($$.before_update);
+    // `false` as a special case of no DOM component
+    $$.fragment = create_fragment ? create_fragment($$.ctx) : false;
+    if (options.target) {
+        if (options.hydrate) {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            $$.fragment && $$.fragment.l(children(options.target));
+        }
+        else {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            $$.fragment && $$.fragment.c();
+        }
+        if (options.intro)
+            transition_in(component.$$.fragment);
+        mount_component(component, options.target, options.anchor);
+        flush();
+    }
+    set_current_component(parent_component);
+}
+class SvelteComponent {
+    $destroy() {
+        destroy_component(this, 1);
+        this.$destroy = noop;
+    }
+    $on(type, callback) {
+        const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+        callbacks.push(callback);
+        return () => {
+            const index = callbacks.indexOf(callback);
+            if (index !== -1)
+                callbacks.splice(index, 1);
+        };
+    }
+    $set() {
+        // overridden by instance, if it has props
+    }
+}
+
+/* src\Head.svelte generated by Svelte v3.19.1 */
+
+function create_fragment(ctx) {
+	let script;
+	let script_src_value;
+
+	return {
+		c() {
+			script = element("script");
+			this.h();
+		},
+		l(nodes) {
+			const head_nodes = query_selector_all("[data-svelte=\"svelte-1h5wfn8\"]", document.head);
+			script = claim_element(head_nodes, "SCRIPT", { src: true });
+			var script_nodes = children(script);
+			script_nodes.forEach(detach);
+			head_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			if (script.src !== (script_src_value = "https://aframe.io/releases/1.0.4/aframe.min.js")) attr(script, "src", script_src_value);
+		},
+		m(target, anchor) {
+			append(document.head, script);
+		},
+		p: noop,
+		i: noop,
+		o: noop,
+		d(detaching) {
+			detach(script);
+		}
+	};
+}
+
+class Head extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, null, create_fragment, safe_not_equal, {});
+	}
+}
+
+/* src\Stylesheet.svelte generated by Svelte v3.19.1 */
+
+class Stylesheet extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, null, null, safe_not_equal, {});
+	}
+}
+
+const colorMap = {
+  red: '#ef9a9a',
+  pink: '#F48FB1',
+  purple: '#CE93D8',
+  deeppurple: '#B39DDB',
+  indigo: '#9FA8DA',
+  blue: '#90CAF9',
+  lightblue: '#81D4FA',
+  cyan: '#80DEEA',
+  teal: '#80CBC4',
+  green: '#A5D6A7',
+  yellow: '#FFF59D',
+  amber: '#FFE082',
+  orange: '#FFCC80',
+  deeporange: '#FFAB91'
+};
+
+const hexToRGBA = (hex, a = 1) => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${a})`
+};
+
+/* src\Header.svelte generated by Svelte v3.19.1 */
+
+function get_each_context(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[7] = list[i];
+	return child_ctx;
+}
+
+// (46:4) {#each colors as color (color.hex)}
+function create_each_block(key_1, ctx) {
+	let bg_circle;
+
+	return {
+		key: key_1,
+		first: null,
+		c() {
+			bg_circle = element("bg-circle");
+			this.h();
+		},
+		l(nodes) {
+			bg_circle = claim_element(nodes, "BG-CIRCLE", { style: true, class: true });
+			children(bg_circle).forEach(detach);
+			this.h();
+		},
+		h() {
+			set_style(bg_circle, "width", size + "px");
+			set_style(bg_circle, "height", size + "px");
+			set_style(bg_circle, "background-color", /*color*/ ctx[7].hex);
+			set_style(bg_circle, "box-shadow", "20px 20px 40px " + hexToRGBA(/*color*/ ctx[7].hex, 0.7) + ", -20px -20px 60px " + hexToRGBA(/*color*/ ctx[7].hex, 0.2));
+			set_style(bg_circle, "transform", "translate3d(" + /*color*/ ctx[7].x + "px, " + /*color*/ ctx[7].y + "px, " + /*color*/ ctx[7].z + "px)");
+			set_style(bg_circle, "opacity", /*opacity*/ ctx[0]);
+			set_style(bg_circle, "transition", "transform " + duration + "ms, opacity 1500ms");
+			set_custom_element_data(bg_circle, "class", "svelte-m0nk23");
+			this.first = bg_circle;
+		},
+		m(target, anchor) {
+			insert(target, bg_circle, anchor);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*colors*/ 2) {
+				set_style(bg_circle, "background-color", /*color*/ ctx[7].hex);
+			}
+
+			if (dirty & /*colors*/ 2) {
+				set_style(bg_circle, "box-shadow", "20px 20px 40px " + hexToRGBA(/*color*/ ctx[7].hex, 0.7) + ", -20px -20px 60px " + hexToRGBA(/*color*/ ctx[7].hex, 0.2));
+			}
+
+			if (dirty & /*colors*/ 2) {
+				set_style(bg_circle, "transform", "translate3d(" + /*color*/ ctx[7].x + "px, " + /*color*/ ctx[7].y + "px, " + /*color*/ ctx[7].z + "px)");
+			}
+
+			if (dirty & /*opacity*/ 1) {
+				set_style(bg_circle, "opacity", /*opacity*/ ctx[0]);
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(bg_circle);
+		}
+	};
+}
+
+function create_fragment$1(ctx) {
+	let header;
+	let section;
+	let each_blocks = [];
+	let each_1_lookup = new Map();
+	let t0;
+	let h1;
+	let hand_wave0;
+	let t1;
+	let t2;
+	let hand_wave1;
+	let t3;
+	let each_value = /*colors*/ ctx[1];
+	const get_key = ctx => /*color*/ ctx[7].hex;
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		let child_ctx = get_each_context(ctx, each_value, i);
+		let key = get_key(child_ctx);
+		each_1_lookup.set(key, each_blocks[i] = create_each_block(key, child_ctx));
+	}
+
+	return {
+		c() {
+			header = element("header");
+			section = element("section");
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			t0 = space();
+			h1 = element("h1");
+			hand_wave0 = element("hand-wave");
+			t1 = text("👋");
+			t2 = text("\r\n      hi i am micheal \r\n      ");
+			hand_wave1 = element("hand-wave");
+			t3 = text("👋");
+			this.h();
+		},
+		l(nodes) {
+			header = claim_element(nodes, "HEADER", { class: true });
+			var header_nodes = children(header);
+			section = claim_element(header_nodes, "SECTION", { style: true, class: true });
+			var section_nodes = children(section);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].l(section_nodes);
+			}
+
+			t0 = claim_space(section_nodes);
+			h1 = claim_element(section_nodes, "H1", { class: true });
+			var h1_nodes = children(h1);
+			hand_wave0 = claim_element(h1_nodes, "HAND-WAVE", { class: true });
+			var hand_wave0_nodes = children(hand_wave0);
+			t1 = claim_text(hand_wave0_nodes, "👋");
+			hand_wave0_nodes.forEach(detach);
+			t2 = claim_text(h1_nodes, "\r\n      hi i am micheal \r\n      ");
+			hand_wave1 = claim_element(h1_nodes, "HAND-WAVE", { class: true });
+			var hand_wave1_nodes = children(hand_wave1);
+			t3 = claim_text(hand_wave1_nodes, "👋");
+			hand_wave1_nodes.forEach(detach);
+			h1_nodes.forEach(detach);
+			section_nodes.forEach(detach);
+			header_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			set_custom_element_data(hand_wave0, "class", "svelte-m0nk23");
+			set_custom_element_data(hand_wave1, "class", "svelte-m0nk23");
+			attr(h1, "class", "font-effect-anaglyph svelte-m0nk23");
+			set_style(section, "height", /*height*/ ctx[2] + size + "px");
+			attr(section, "class", "svelte-m0nk23");
+			attr(header, "class", "svelte-m0nk23");
+		},
+		m(target, anchor) {
+			insert(target, header, anchor);
+			append(header, section);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(section, null);
+			}
+
+			append(section, t0);
+			append(section, h1);
+			append(h1, hand_wave0);
+			append(hand_wave0, t1);
+			append(h1, t2);
+			append(h1, hand_wave1);
+			append(hand_wave1, t3);
+		},
+		p(ctx, [dirty]) {
+			if (dirty & /*size, colors, hexToRGBA, opacity, duration*/ 3) {
+				const each_value = /*colors*/ ctx[1];
+				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, section, destroy_block, create_each_block, t0, get_each_context);
+			}
+		},
+		i: noop,
+		o: noop,
+		d(detaching) {
+			if (detaching) detach(header);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].d();
+			}
+		}
+	};
+}
+
+const duration = 40000;
+const size = 150;
+const depth = 100;
+
+function instance($$self, $$props, $$invalidate) {
+	const width = 800 - size;
+	const height = 200 - size;
+	let opacity = 0;
+	let colors = [];
+
+	for (const hex of Object.values(colorMap)) {
+		colors.push({ hex, x: 0, y: 0, z: 0 });
+	}
+
+	const setRands = (w = window.innerWidth - size) => {
+		for (const color of colors) {
+			color.x = Math.random() * Math.min(width, w);
+			color.y = Math.random() * height;
+			color.z = Math.random() * depth;
+		}
+
+		$$invalidate(1, colors);
+	};
+
+	setRands(width);
+
+	onMount(() => {
+		setTimeout(
+			() => {
+				$$invalidate(0, opacity = 0.5);
+			},
+			10
+		);
+	});
+
+	return [opacity, colors, height];
+}
+
+class Header extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, instance, create_fragment$1, safe_not_equal, {});
+	}
+}
+
+/* src\Project.svelte generated by Svelte v3.19.1 */
+
+function get_each_context$1(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[5] = list[i];
+	child_ctx[7] = i;
+	return child_ctx;
+}
+
+// (67:6) {#each Array(10) as _, i (i)}
+function create_each_block$1(key_1, ctx) {
+	let svg;
+	let use;
+
+	return {
+		key: key_1,
+		first: null,
+		c() {
+			svg = svg_element("svg");
+			use = svg_element("use");
+			this.h();
+		},
+		l(nodes) {
+			svg = claim_element(nodes, "svg", { class: true, style: true }, 1);
+			var svg_nodes = children(svg);
+			use = claim_element(svg_nodes, "use", { "xlink:href": true }, 1);
+			children(use).forEach(detach);
+			svg_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			xlink_attr(use, "xlink:href", "#icon-arrow_forward");
+			attr(svg, "class", "icon icon-arrow_forward svelte-11yb7b7");
+			set_style(svg, "fill", /*colors*/ ctx[4][/*i*/ ctx[7]]);
+			set_style(svg, "animation-delay", /*i*/ ctx[7] * 42 + "ms");
+			this.first = svg;
+		},
+		m(target, anchor) {
+			insert(target, svg, anchor);
+			append(svg, use);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(svg);
+		}
+	};
+}
+
+function create_fragment$2(ctx) {
+	let a;
+	let article;
+	let h3;
+	let t0;
+	let t1;
+	let p;
+	let t2;
+	let t3;
+	let icon_container;
+	let each_blocks = [];
+	let each_1_lookup = new Map();
+	let a_target_value;
+	let each_value = Array(10);
+	const get_key = ctx => /*i*/ ctx[7];
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		let child_ctx = get_each_context$1(ctx, each_value, i);
+		let key = get_key(child_ctx);
+		each_1_lookup.set(key, each_blocks[i] = create_each_block$1(key, child_ctx));
+	}
+
+	return {
+		c() {
+			a = element("a");
+			article = element("article");
+			h3 = element("h3");
+			t0 = text(/*title*/ ctx[2]);
+			t1 = space();
+			p = element("p");
+			t2 = text(/*summary*/ ctx[3]);
+			t3 = space();
+			icon_container = element("icon-container");
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			this.h();
+		},
+		l(nodes) {
+			a = claim_element(nodes, "A", { target: true, href: true, class: true });
+			var a_nodes = children(a);
+			article = claim_element(a_nodes, "ARTICLE", { class: true });
+			var article_nodes = children(article);
+			h3 = claim_element(article_nodes, "H3", { class: true });
+			var h3_nodes = children(h3);
+			t0 = claim_text(h3_nodes, /*title*/ ctx[2]);
+			h3_nodes.forEach(detach);
+			t1 = claim_space(article_nodes);
+			p = claim_element(article_nodes, "P", {});
+			var p_nodes = children(p);
+			t2 = claim_text(p_nodes, /*summary*/ ctx[3]);
+			p_nodes.forEach(detach);
+			t3 = claim_space(article_nodes);
+			icon_container = claim_element(article_nodes, "ICON-CONTAINER", { class: true });
+			var icon_container_nodes = children(icon_container);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].l(icon_container_nodes);
+			}
+
+			icon_container_nodes.forEach(detach);
+			article_nodes.forEach(detach);
+			a_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(h3, "class", "svelte-11yb7b7");
+			set_custom_element_data(icon_container, "class", "svelte-11yb7b7");
+			attr(article, "class", "svelte-11yb7b7");
+			attr(a, "target", a_target_value = /*newTab*/ ctx[0] ? "_tab" : "_self");
+			attr(a, "href", /*href*/ ctx[1]);
+			attr(a, "class", "svelte-11yb7b7");
+		},
+		m(target, anchor) {
+			insert(target, a, anchor);
+			append(a, article);
+			append(article, h3);
+			append(h3, t0);
+			append(article, t1);
+			append(article, p);
+			append(p, t2);
+			append(article, t3);
+			append(article, icon_container);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(icon_container, null);
+			}
+		},
+		p(ctx, [dirty]) {
+			if (dirty & /*title*/ 4) set_data(t0, /*title*/ ctx[2]);
+			if (dirty & /*summary*/ 8) set_data(t2, /*summary*/ ctx[3]);
+
+			if (dirty & /*colors, Array*/ 16) {
+				const each_value = Array(10);
+				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, icon_container, destroy_block, create_each_block$1, null, get_each_context$1);
+			}
+
+			if (dirty & /*newTab*/ 1 && a_target_value !== (a_target_value = /*newTab*/ ctx[0] ? "_tab" : "_self")) {
+				attr(a, "target", a_target_value);
+			}
+
+			if (dirty & /*href*/ 2) {
+				attr(a, "href", /*href*/ ctx[1]);
+			}
+		},
+		i: noop,
+		o: noop,
+		d(detaching) {
+			if (detaching) detach(a);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].d();
+			}
+		}
+	};
+}
+
+function instance$1($$self, $$props, $$invalidate) {
+	const colors = Object.values(colorMap);
+	let { newTab = false } = $$props;
+	let { href = "" } = $$props;
+	let { title = "" } = $$props;
+	let { summary = "" } = $$props;
+
+	$$self.$set = $$props => {
+		if ("newTab" in $$props) $$invalidate(0, newTab = $$props.newTab);
+		if ("href" in $$props) $$invalidate(1, href = $$props.href);
+		if ("title" in $$props) $$invalidate(2, title = $$props.title);
+		if ("summary" in $$props) $$invalidate(3, summary = $$props.summary);
+	};
+
+	return [newTab, href, title, summary, colors];
+}
+
+class Project extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, instance$1, create_fragment$2, safe_not_equal, { newTab: 0, href: 1, title: 2, summary: 3 });
+	}
+}
+
+/* src\Projects.svelte generated by Svelte v3.19.1 */
+
+function get_each_context$2(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[1] = list[i];
+	child_ctx[3] = i;
+	return child_ctx;
+}
+
+// (46:4) {#each projects as project, i (i)}
+function create_each_block$2(key_1, ctx) {
+	let first;
+	let current;
+	const project_spread_levels = [/*project*/ ctx[1]];
+	let project_props = {};
+
+	for (let i = 0; i < project_spread_levels.length; i += 1) {
+		project_props = assign(project_props, project_spread_levels[i]);
+	}
+
+	const project = new Project({ props: project_props });
+
+	return {
+		key: key_1,
+		first: null,
+		c() {
+			first = empty();
+			create_component(project.$$.fragment);
+			this.h();
+		},
+		l(nodes) {
+			first = empty();
+			claim_component(project.$$.fragment, nodes);
+			this.h();
+		},
+		h() {
+			this.first = first;
+		},
+		m(target, anchor) {
+			insert(target, first, anchor);
+			mount_component(project, target, anchor);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const project_changes = (dirty & /*projects*/ 1)
+			? get_spread_update(project_spread_levels, [get_spread_object(/*project*/ ctx[1])])
+			: {};
+
+			project.$set(project_changes);
+		},
+		i(local) {
+			if (current) return;
+			transition_in(project.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(project.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(first);
+			destroy_component(project, detaching);
+		}
+	};
+}
+
+function create_fragment$3(ctx) {
+	let section;
+	let h2;
+	let t0;
+	let t1;
+	let current_projects;
+	let each_blocks = [];
+	let each_1_lookup = new Map();
+	let current;
+	let each_value = /*projects*/ ctx[0];
+	const get_key = ctx => /*i*/ ctx[3];
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		let child_ctx = get_each_context$2(ctx, each_value, i);
+		let key = get_key(child_ctx);
+		each_1_lookup.set(key, each_blocks[i] = create_each_block$2(key, child_ctx));
+	}
+
+	return {
+		c() {
+			section = element("section");
+			h2 = element("h2");
+			t0 = text("cabinet of curiosities");
+			t1 = space();
+			current_projects = element("current-projects");
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			this.h();
+		},
+		l(nodes) {
+			section = claim_element(nodes, "SECTION", { class: true });
+			var section_nodes = children(section);
+			h2 = claim_element(section_nodes, "H2", { class: true });
+			var h2_nodes = children(h2);
+			t0 = claim_text(h2_nodes, "cabinet of curiosities");
+			h2_nodes.forEach(detach);
+			t1 = claim_space(section_nodes);
+			current_projects = claim_element(section_nodes, "CURRENT-PROJECTS", { class: true });
+			var current_projects_nodes = children(current_projects);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].l(current_projects_nodes);
+			}
+
+			current_projects_nodes.forEach(detach);
+			section_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(h2, "class", "svelte-60oau2");
+			set_custom_element_data(current_projects, "class", "svelte-60oau2");
+			attr(section, "class", "svelte-60oau2");
+		},
+		m(target, anchor) {
+			insert(target, section, anchor);
+			append(section, h2);
+			append(h2, t0);
+			append(section, t1);
+			append(section, current_projects);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(current_projects, null);
+			}
+
+			current = true;
+		},
+		p(ctx, [dirty]) {
+			if (dirty & /*projects*/ 1) {
+				const each_value = /*projects*/ ctx[0];
+				group_outros();
+				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, current_projects, outro_and_destroy_block, create_each_block$2, null, get_each_context$2);
+				check_outros();
+			}
+		},
+		i(local) {
+			if (current) return;
+
+			for (let i = 0; i < each_value.length; i += 1) {
+				transition_in(each_blocks[i]);
+			}
+
+			current = true;
+		},
+		o(local) {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				transition_out(each_blocks[i]);
+			}
+
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(section);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].d();
+			}
+		}
+	};
+}
+
+function instance$2($$self) {
+	const projects = [
+		{
+			title: "Galeri",
+			summary: "Galeri is a chrome extension and desktop app focused on artwork discovery.",
+			href: "https://galeri.io",
+			newTab: true
+		}
+	]; // {
+	//   title: 'Koschei Society Webchat Service',
+	//   summary: ''
+
+	return [projects];
+}
+
+class Projects extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, instance$2, create_fragment$3, safe_not_equal, {});
+	}
+}
+
+/* src\SunsetDrive.svelte generated by Svelte v3.19.1 */
+
+function create_if_block(ctx) {
+	let a_scene;
+	let a_entity0;
+	let t0;
+	let a_entity1;
+	let t1;
+	let a_entity2;
+	let t2;
+	let a_entity3;
+	let t3;
+	let a_entity4;
+	let t4;
+	let a_plane;
+	let t5;
+	let a_entity5;
+	let t6;
+	let a_sphere;
+	let t7;
+	let a_sky;
+
+	return {
+		c() {
+			a_scene = element("a-scene");
+			a_entity0 = element("a-entity");
+			t0 = space();
+			a_entity1 = element("a-entity");
+			t1 = space();
+			a_entity2 = element("a-entity");
+			t2 = space();
+			a_entity3 = element("a-entity");
+			t3 = space();
+			a_entity4 = element("a-entity");
+			t4 = space();
+			a_plane = element("a-plane");
+			t5 = space();
+			a_entity5 = element("a-entity");
+			t6 = space();
+			a_sphere = element("a-sphere");
+			t7 = space();
+			a_sky = element("a-sky");
+			this.h();
+		},
+		l(nodes) {
+			a_scene = claim_element(nodes, "A-SCENE", {
+				light: true,
+				"vr-mode-ui": true,
+				"device-orientation-permission-ui": true,
+				renderer: true
+			});
+
+			var a_scene_nodes = children(a_scene);
+			a_entity0 = claim_element(a_scene_nodes, "A-ENTITY", { audio: true });
+			children(a_entity0).forEach(detach);
+			t0 = claim_space(a_scene_nodes);
+
+			a_entity1 = claim_element(a_scene_nodes, "A-ENTITY", {
+				camera: true,
+				id: true,
+				position: true,
+				rotation: true,
+				"rotation-reader": true
+			});
+
+			children(a_entity1).forEach(detach);
+			t1 = claim_space(a_scene_nodes);
+			a_entity2 = claim_element(a_scene_nodes, "A-ENTITY", { light: true, position: true });
+			children(a_entity2).forEach(detach);
+			t2 = claim_space(a_scene_nodes);
+			a_entity3 = claim_element(a_scene_nodes, "A-ENTITY", { light: true, position: true });
+			children(a_entity3).forEach(detach);
+			t3 = claim_space(a_scene_nodes);
+			a_entity4 = claim_element(a_scene_nodes, "A-ENTITY", { id: true, grid: true });
+			children(a_entity4).forEach(detach);
+			t4 = claim_space(a_scene_nodes);
+
+			a_plane = claim_element(a_scene_nodes, "A-PLANE", {
+				position: true,
+				rotation: true,
+				width: true,
+				height: true,
+				color: true
+			});
+
+			children(a_plane).forEach(detach);
+			t5 = claim_space(a_scene_nodes);
+
+			a_entity5 = claim_element(a_scene_nodes, "A-ENTITY", {
+				id: true,
+				"gltf-model": true,
+				rotation: true
+			});
+
+			children(a_entity5).forEach(detach);
+			t6 = claim_space(a_scene_nodes);
+
+			a_sphere = claim_element(a_scene_nodes, "A-SPHERE", {
+				id: true,
+				toon: true,
+				radius: true,
+				position: true
+			});
+
+			children(a_sphere).forEach(detach);
+			t7 = claim_space(a_scene_nodes);
+			a_sky = claim_element(a_scene_nodes, "A-SKY", { id: true, "gradient-material": true });
+			children(a_sky).forEach(detach);
+			a_scene_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			set_custom_element_data(a_entity0, "audio", "");
+			set_custom_element_data(a_entity1, "camera", "");
+			set_custom_element_data(a_entity1, "id", "camera");
+			set_custom_element_data(a_entity1, "position", "-5 3 0");
+			set_custom_element_data(a_entity1, "rotation", "0 -15 0");
+			set_custom_element_data(a_entity1, "rotation-reader", "");
+			set_custom_element_data(a_entity2, "light", "type: hemisphere; color: #fff");
+			set_custom_element_data(a_entity2, "position", "0.6 1 0.6");
+			set_custom_element_data(a_entity3, "light", "type: directional; color: #FFF; intensity: 0.6");
+			set_custom_element_data(a_entity3, "position", "-30 50 50");
+			set_custom_element_data(a_entity4, "id", "ground");
+			set_custom_element_data(a_entity4, "grid", "color: #AB47BC;");
+			set_custom_element_data(a_plane, "position", "0 -0.25 0");
+			set_custom_element_data(a_plane, "rotation", "-90 0 0");
+			set_custom_element_data(a_plane, "width", "5e3");
+			set_custom_element_data(a_plane, "height", "5e3");
+			set_custom_element_data(a_plane, "color", "#222");
+			set_custom_element_data(a_entity5, "id", "car");
+			set_custom_element_data(a_entity5, "gltf-model", "BasicCar.glb");
+			set_custom_element_data(a_entity5, "rotation", "0 180 0");
+			set_custom_element_data(a_sphere, "id", "sun");
+			set_custom_element_data(a_sphere, "toon", "color: #FF5722;");
+			set_custom_element_data(a_sphere, "radius", "50");
+			set_custom_element_data(a_sphere, "position", "0 5 -400");
+			set_custom_element_data(a_sky, "id", "sky");
+			set_custom_element_data(a_sky, "gradient-material", "");
+			set_custom_element_data(a_scene, "light", "defaultLightsEnabled: false");
+			set_custom_element_data(a_scene, "vr-mode-ui", "enabled: false");
+			set_custom_element_data(a_scene, "device-orientation-permission-ui", "enabled: false");
+			set_custom_element_data(a_scene, "renderer", "\r\n      antialias: true;\r\n      foveationLevel: 2;\r\n      maxCanvasWidth: 3840;\r\n      maxCanvasHeight: 2160;\r\n    ");
+		},
+		m(target, anchor) {
+			insert(target, a_scene, anchor);
+			append(a_scene, a_entity0);
+			append(a_scene, t0);
+			append(a_scene, a_entity1);
+			append(a_scene, t1);
+			append(a_scene, a_entity2);
+			append(a_scene, t2);
+			append(a_scene, a_entity3);
+			append(a_scene, t3);
+			append(a_scene, a_entity4);
+			append(a_scene, t4);
+			append(a_scene, a_plane);
+			append(a_scene, t5);
+			append(a_scene, a_entity5);
+			append(a_scene, t6);
+			append(a_scene, a_sphere);
+			append(a_scene, t7);
+			append(a_scene, a_sky);
+		},
+		d(detaching) {
+			if (detaching) detach(a_scene);
+		}
+	};
+}
+
+function create_fragment$4(ctx) {
+	let t0;
+	let button;
+	let t1;
+	let dispose;
+	let if_block = /*state*/ ctx[0] !== "before" && create_if_block();
+
+	return {
+		c() {
+			if (if_block) if_block.c();
+			t0 = space();
+			button = element("button");
+			t1 = text("Enough with the yammering! Let me ride off into the sunset already!");
+			this.h();
+		},
+		l(nodes) {
+			if (if_block) if_block.l(nodes);
+			t0 = claim_space(nodes);
+			button = claim_element(nodes, "BUTTON", { class: true });
+			var button_nodes = children(button);
+			t1 = claim_text(button_nodes, "Enough with the yammering! Let me ride off into the sunset already!");
+			button_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(button, "class", "svelte-r98mcn");
+		},
+		m(target, anchor) {
+			if (if_block) if_block.m(target, anchor);
+			insert(target, t0, anchor);
+			insert(target, button, anchor);
+			append(button, t1);
+			dispose = listen(button, "click", /*init*/ ctx[1]);
+		},
+		p(ctx, [dirty]) {
+			if (/*state*/ ctx[0] !== "before") {
+				if (!if_block) {
+					if_block = create_if_block();
+					if_block.c();
+					if_block.m(t0.parentNode, t0);
+				}
+			} else if (if_block) {
+				if_block.d(1);
+				if_block = null;
+			}
+		},
+		i: noop,
+		o: noop,
+		d(detaching) {
+			if (if_block) if_block.d(detaching);
+			if (detaching) detach(t0);
+			if (detaching) detach(button);
+			dispose();
+		}
+	};
+}
+
+function instance$3($$self, $$props, $$invalidate) {
+	let state = "before";
+
+	onMount(() => {
+		
+	});
+
+	const register = () => {
+		if (window.AFRAME === undefined) return setTimeout(register, 100);
+
+		window.AFRAME.registerComponent("audio", {
+			init() {
+				const listener = new THREE.AudioListener();
+				document.querySelector("#camera").object3D.add(listener);
+
+				// create a global audio source
+				const sound = new THREE.Audio(listener);
+
+				// load a sound and set it as the Audio object's buffer
+				const audioLoader = new THREE.AudioLoader();
+
+				audioLoader.load("infinity_keyboard.wav", function (buffer) {
+					sound.setBuffer(buffer);
+					sound.setLoop(true);
+					sound.play();
+				});
+			}
+		});
+
+		window.AFRAME.registerComponent("grid", {
+			schema: {
+				color: { default: "#fff" },
+				size: { default: 5000 }
+			},
+			init() {
+				const { data, el } = this;
+				const { size, color } = data;
+				this.grid = new THREE.GridHelper(size, size, color, color);
+				el.setObject3D("mesh", this.grid);
+			}
+		});
+
+		window.AFRAME.registerComponent("edges", {
+			schema: {
+				width: { default: 1, min: 0 },
+				height: { default: 1, min: 0 },
+				depth: { default: 1, min: 0 },
+				type: { default: "box" }
+			},
+			init() {
+				const { data, el } = this;
+				let geo;
+
+				switch (data.type) {
+					case "box":
+						geo = new THREE.BoxBufferGeometry(data.width, data.height, data.depth);
+						break;
+					case "plane":
+						geo = new THREE.PlaneBufferGeometry(data.width, data.height);
+						break;
+				}
+
+				this.geometry = new THREE.EdgesGeometry(geo);
+				this.material = new THREE.LineBasicMaterial({ color: 16777215 });
+				this.mesh = new THREE.LineSegments(this.geometry, this.material, { color: 16777215 });
+				el.setObject3D("mesh", this.mesh);
+			}
+		});
+
+		AFRAME.registerComponent("rotation-reader", {
+			init() {
+				this.car = document.querySelector("#car").object3D;
+				this.sun = document.querySelector("#sun").object3D;
+				this.sky = document.querySelector("#sky").object3D;
+			},
+			tick() {
+				const { object3D } = this.el;
+				object3D.position.z -= 0.1;
+				this.car.position.z = object3D.position.z - 7;
+				this.sun.position.z = object3D.position.z - 400;
+				this.sky.position.z = object3D.position.z;
+			}
+		});
+
+		AFRAME.registerComponent("toon", {
+			schema: { color: { default: "" } },
+			init() {
+				console.log(this.data.color);
+				this.material = new THREE.MeshToonMaterial({ color: this.data.color });
+				this.el.object3D.children[0].material = this.material;
+			}
+		});
+
+		AFRAME.registerComponent("gradient-material", {
+			init() {
+				this.material = this.el.object3D.children[0].material = new THREE.ShaderMaterial({
+						uniforms: {
+							topColor: { value: new THREE.Color(0) },
+							bottomColor: { value: new THREE.Color(6056896) },
+							offset: { value: 33 },
+							exponent: { value: 0.6 }
+						},
+						vertexShader: this.vertexShader,
+						fragmentShader: this.fragmentShader,
+						side: THREE.BackSide
+					});
+			},
+			update() {
+				
+			}, // Update `this.material`.
+			// Update `this.material`.
+			vertexShader: `
+      varying vec3 vWorldPosition;
+
+			void main() {
+
+				vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+				vWorldPosition = worldPosition.xyz;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+    `,
+			fragmentShader: `
+      uniform vec3 topColor;
+			uniform vec3 bottomColor;
+			uniform float offset;
+			uniform float exponent;
+
+			varying vec3 vWorldPosition;
+
+			void main() {
+
+				float h = normalize( vWorldPosition + offset ).y;
+				gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h , 0.0), exponent ), 0.0 ) ), 1.0 );
+
+			}
+    `
+		});
+	};
+
+	const init = () => {
+		$$invalidate(0, state = "during");
+		register();
+	};
+
+	return [state, init];
+}
+
+class SunsetDrive extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, instance$3, create_fragment$4, safe_not_equal, {});
+	}
+}
+
+/* src\Footer.svelte generated by Svelte v3.19.1 */
+
+function get_each_context$3(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[0] = list[i];
+	child_ctx[2] = i;
+	return child_ctx;
+}
+
+// (68:6) {#each 'about this human:' as char, i (char)}
+function create_each_block$3(key_1, ctx) {
+	let span;
+	let t;
+	let span_style_value;
+
+	return {
+		key: key_1,
+		first: null,
+		c() {
+			span = element("span");
+			t = text(/*char*/ ctx[0]);
+			this.h();
+		},
+		l(nodes) {
+			span = claim_element(nodes, "SPAN", { style: true, class: true });
+			var span_nodes = children(span);
+			t = claim_text(span_nodes, /*char*/ ctx[0]);
+			span_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(span, "style", span_style_value = "animation-delay: " + /*i*/ ctx[2] * 52 + "ms; " + (/*char*/ ctx[0] === " " ? "margin-left: 10px;" : ""));
+			attr(span, "class", "svelte-x48bow");
+			this.first = span;
+		},
+		m(target, anchor) {
+			insert(target, span, anchor);
+			append(span, t);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(span);
+		}
+	};
+}
+
+function create_fragment$5(ctx) {
+	let footer;
+	let img;
+	let img_src_value;
+	let t0;
+	let section;
+	let h2;
+	let each_blocks = [];
+	let each_1_lookup = new Map();
+	let t1;
+	let p0;
+	let strong;
+	let t2;
+	let t3;
+	let a0;
+	let t4;
+	let t5;
+	let t6;
+	let p1;
+	let span0;
+	let t7;
+	let t8;
+	let a1;
+	let svg0;
+	let use0;
+	let t9;
+	let a2;
+	let svg1;
+	let use1;
+	let t10;
+	let a3;
+	let svg2;
+	let use2;
+	let t11;
+	let span1;
+	let t12;
+	let t13;
+	let a4;
+	let svg3;
+	let use3;
+	let t14;
+	let current;
+	let each_value = "about this human:";
+	const get_key = ctx => /*char*/ ctx[0];
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		let child_ctx = get_each_context$3(ctx, each_value, i);
+		let key = get_key(child_ctx);
+		each_1_lookup.set(key, each_blocks[i] = create_each_block$3(key, child_ctx));
+	}
+
+	const sunsetdrive = new SunsetDrive({});
+
+	return {
+		c() {
+			footer = element("footer");
+			img = element("img");
+			t0 = space();
+			section = element("section");
+			h2 = element("h2");
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			t1 = space();
+			p0 = element("p");
+			strong = element("strong");
+			t2 = text("Micheal Parks");
+			t3 = text(" is a software engineer or whatever who lives in a ");
+			a0 = element("a");
+			t4 = text("Large Apple");
+			t5 = text(".");
+			t6 = space();
+			p1 = element("p");
+			span0 = element("span");
+			t7 = text("He has links for you but of course");
+			t8 = space();
+			a1 = element("a");
+			svg0 = svg_element("svg");
+			use0 = svg_element("use");
+			t9 = space();
+			a2 = element("a");
+			svg1 = svg_element("svg");
+			use1 = svg_element("use");
+			t10 = space();
+			a3 = element("a");
+			svg2 = svg_element("svg");
+			use2 = svg_element("use");
+			t11 = space();
+			span1 = element("span");
+			t12 = text("and the best link!!!!1!!1");
+			t13 = space();
+			a4 = element("a");
+			svg3 = svg_element("svg");
+			use3 = svg_element("use");
+			t14 = space();
+			create_component(sunsetdrive.$$.fragment);
+			this.h();
+		},
+		l(nodes) {
+			footer = claim_element(nodes, "FOOTER", { class: true });
+			var footer_nodes = children(footer);
+
+			img = claim_element(footer_nodes, "IMG", {
+				loading: true,
+				alt: true,
+				src: true,
+				class: true
+			});
+
+			t0 = claim_space(footer_nodes);
+			section = claim_element(footer_nodes, "SECTION", {});
+			var section_nodes = children(section);
+			h2 = claim_element(section_nodes, "H2", { class: true });
+			var h2_nodes = children(h2);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].l(h2_nodes);
+			}
+
+			h2_nodes.forEach(detach);
+			t1 = claim_space(section_nodes);
+			p0 = claim_element(section_nodes, "P", {});
+			var p0_nodes = children(p0);
+			strong = claim_element(p0_nodes, "STRONG", {});
+			var strong_nodes = children(strong);
+			t2 = claim_text(strong_nodes, "Micheal Parks");
+			strong_nodes.forEach(detach);
+			t3 = claim_text(p0_nodes, " is a software engineer or whatever who lives in a ");
+			a0 = claim_element(p0_nodes, "A", { target: true, href: true });
+			var a0_nodes = children(a0);
+			t4 = claim_text(a0_nodes, "Large Apple");
+			a0_nodes.forEach(detach);
+			t5 = claim_text(p0_nodes, ".");
+			p0_nodes.forEach(detach);
+			t6 = claim_space(section_nodes);
+			p1 = claim_element(section_nodes, "P", { class: true });
+			var p1_nodes = children(p1);
+			span0 = claim_element(p1_nodes, "SPAN", { class: true });
+			var span0_nodes = children(span0);
+			t7 = claim_text(span0_nodes, "He has links for you but of course");
+			span0_nodes.forEach(detach);
+			t8 = claim_space(p1_nodes);
+			a1 = claim_element(p1_nodes, "A", { target: true, href: true, class: true });
+			var a1_nodes = children(a1);
+			svg0 = claim_element(a1_nodes, "svg", { class: true }, 1);
+			var svg0_nodes = children(svg0);
+			use0 = claim_element(svg0_nodes, "use", { "xlink:href": true }, 1);
+			children(use0).forEach(detach);
+			svg0_nodes.forEach(detach);
+			a1_nodes.forEach(detach);
+			t9 = claim_space(p1_nodes);
+			a2 = claim_element(p1_nodes, "A", { target: true, href: true, class: true });
+			var a2_nodes = children(a2);
+			svg1 = claim_element(a2_nodes, "svg", { class: true }, 1);
+			var svg1_nodes = children(svg1);
+			use1 = claim_element(svg1_nodes, "use", { "xlink:href": true }, 1);
+			children(use1).forEach(detach);
+			svg1_nodes.forEach(detach);
+			a2_nodes.forEach(detach);
+			t10 = claim_space(p1_nodes);
+			a3 = claim_element(p1_nodes, "A", { target: true, href: true, class: true });
+			var a3_nodes = children(a3);
+			svg2 = claim_element(a3_nodes, "svg", { class: true }, 1);
+			var svg2_nodes = children(svg2);
+			use2 = claim_element(svg2_nodes, "use", { "xlink:href": true }, 1);
+			children(use2).forEach(detach);
+			svg2_nodes.forEach(detach);
+			a3_nodes.forEach(detach);
+			t11 = claim_space(p1_nodes);
+			span1 = claim_element(p1_nodes, "SPAN", { style: true, class: true });
+			var span1_nodes = children(span1);
+			t12 = claim_text(span1_nodes, "and the best link!!!!1!!1");
+			span1_nodes.forEach(detach);
+			t13 = claim_space(p1_nodes);
+			a4 = claim_element(p1_nodes, "A", { target: true, href: true, class: true });
+			var a4_nodes = children(a4);
+			svg3 = claim_element(a4_nodes, "svg", { class: true }, 1);
+			var svg3_nodes = children(svg3);
+			use3 = claim_element(svg3_nodes, "use", { "xlink:href": true }, 1);
+			children(use3).forEach(detach);
+			svg3_nodes.forEach(detach);
+			a4_nodes.forEach(detach);
+			p1_nodes.forEach(detach);
+			t14 = claim_space(section_nodes);
+			claim_component(sunsetdrive.$$.fragment, section_nodes);
+			section_nodes.forEach(detach);
+			footer_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(img, "loading", "lazy");
+			attr(img, "alt", "Micheal's detatched head.");
+			if (img.src !== (img_src_value = "profile-compressed.jpg")) attr(img, "src", img_src_value);
+			attr(img, "class", "svelte-x48bow");
+			attr(h2, "class", "svelte-x48bow");
+			attr(a0, "target", "_tab");
+			attr(a0, "href", "https://duckduckgo.com/?q=new+york+city&ia=news&iaxm=about");
+			attr(span0, "class", "svelte-x48bow");
+			xlink_attr(use0, "xlink:href", "#icon-spotify");
+			attr(svg0, "class", "icon icon-spotify svelte-x48bow");
+			attr(a1, "target", "_tab");
+			attr(a1, "href", "https://open.spotify.com/user/micheal_parks");
+			attr(a1, "class", "svelte-x48bow");
+			xlink_attr(use1, "xlink:href", "#icon-github");
+			attr(svg1, "class", "icon icon-github svelte-x48bow");
+			attr(a2, "target", "_tab");
+			attr(a2, "href", "https://github.com/michealparks");
+			attr(a2, "class", "svelte-x48bow");
+			xlink_attr(use2, "xlink:href", "#icon-soundcloud");
+			attr(svg2, "class", "icon icon-soundcloud svelte-x48bow");
+			attr(a3, "target", "_tab");
+			attr(a3, "href", "https://soundcloud.com/dead_culture");
+			attr(a3, "class", "svelte-x48bow");
+			set_style(span1, "margin-left", "7px");
+			attr(span1, "class", "svelte-x48bow");
+			xlink_attr(use3, "xlink:href", "#icon-linkedin");
+			attr(svg3, "class", "icon icon-linkedin svelte-x48bow");
+			attr(a4, "target", "_tab");
+			attr(a4, "href", "https://www.linkedin.com/in/michealparks/");
+			attr(a4, "class", "svelte-x48bow");
+			attr(p1, "class", "social-media svelte-x48bow");
+			attr(footer, "class", "svelte-x48bow");
+		},
+		m(target, anchor) {
+			insert(target, footer, anchor);
+			append(footer, img);
+			append(footer, t0);
+			append(footer, section);
+			append(section, h2);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(h2, null);
+			}
+
+			append(section, t1);
+			append(section, p0);
+			append(p0, strong);
+			append(strong, t2);
+			append(p0, t3);
+			append(p0, a0);
+			append(a0, t4);
+			append(p0, t5);
+			append(section, t6);
+			append(section, p1);
+			append(p1, span0);
+			append(span0, t7);
+			append(p1, t8);
+			append(p1, a1);
+			append(a1, svg0);
+			append(svg0, use0);
+			append(p1, t9);
+			append(p1, a2);
+			append(a2, svg1);
+			append(svg1, use1);
+			append(p1, t10);
+			append(p1, a3);
+			append(a3, svg2);
+			append(svg2, use2);
+			append(p1, t11);
+			append(p1, span1);
+			append(span1, t12);
+			append(p1, t13);
+			append(p1, a4);
+			append(a4, svg3);
+			append(svg3, use3);
+			append(section, t14);
+			mount_component(sunsetdrive, section, null);
+			current = true;
+		},
+		p: noop,
+		i(local) {
+			if (current) return;
+			transition_in(sunsetdrive.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(sunsetdrive.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(footer);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].d();
+			}
+
+			destroy_component(sunsetdrive);
+		}
+	};
+}
+
+class Footer extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, null, create_fragment$5, safe_not_equal, {});
+	}
+}
+
+/* src\Jamz.svelte generated by Svelte v3.19.1 */
+
+function create_else_block(ctx) {
+	let button;
+	let t;
+	let dispose;
+
+	return {
+		c() {
+			button = element("button");
+			t = text("more! moar JAMZ!");
+			this.h();
+		},
+		l(nodes) {
+			button = claim_element(nodes, "BUTTON", { class: true });
+			var button_nodes = children(button);
+			t = claim_text(button_nodes, "more! moar JAMZ!");
+			button_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(button, "class", "svelte-1y6pnro");
+		},
+		m(target, anchor) {
+			insert(target, button, anchor);
+			append(button, t);
+			dispose = listen(button, "click", /*startJamz*/ ctx[2]);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(button);
+			dispose();
+		}
+	};
+}
+
+// (80:32) 
+function create_if_block_2(ctx) {
+	let button;
+	let t;
+	let dispose;
+
+	return {
+		c() {
+			button = element("button");
+			t = text("stop!! 'nuff jam TIME!!");
+			this.h();
+		},
+		l(nodes) {
+			button = claim_element(nodes, "BUTTON", { class: true });
+			var button_nodes = children(button);
+			t = claim_text(button_nodes, "stop!! 'nuff jam TIME!!");
+			button_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(button, "class", "svelte-1y6pnro");
+		},
+		m(target, anchor) {
+			insert(target, button, anchor);
+			append(button, t);
+			dispose = listen(button, "click", /*endJamz*/ ctx[3]);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(button);
+			dispose();
+		}
+	};
+}
+
+// (78:2) {#if state === 'unjammed'}
+function create_if_block_1(ctx) {
+	let button;
+	let t;
+	let dispose;
+
+	return {
+		c() {
+			button = element("button");
+			t = text("pump up my jamz");
+			this.h();
+		},
+		l(nodes) {
+			button = claim_element(nodes, "BUTTON", { class: true });
+			var button_nodes = children(button);
+			t = claim_text(button_nodes, "pump up my jamz");
+			button_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(button, "class", "svelte-1y6pnro");
+		},
+		m(target, anchor) {
+			insert(target, button, anchor);
+			append(button, t);
+			dispose = listen(button, "click", /*initJamz*/ ctx[1]);
+		},
+		p: noop,
+		d(detaching) {
+			if (detaching) detach(button);
+			dispose();
+		}
+	};
+}
+
+// (87:0) {#if state !== 'unjammed'}
+function create_if_block$1(ctx) {
+	let iframe;
+	let iframe_src_value;
+
+	return {
+		c() {
+			iframe = element("iframe");
+			this.h();
+		},
+		l(nodes) {
+			iframe = claim_element(nodes, "IFRAME", {
+				id: true,
+				title: true,
+				width: true,
+				height: true,
+				src: true,
+				frameborder: true,
+				allow: true,
+				class: true
+			});
+
+			children(iframe).forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(iframe, "id", "jamz");
+			attr(iframe, "title", "Jamz");
+			attr(iframe, "width", "560");
+			attr(iframe, "height", "315");
+			if (iframe.src !== (iframe_src_value = "https://www.youtube.com/embed/4T1t5OFOYDU?enablejsapi=1")) attr(iframe, "src", iframe_src_value);
+			attr(iframe, "frameborder", "0");
+			attr(iframe, "allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
+			attr(iframe, "class", "svelte-1y6pnro");
+		},
+		m(target, anchor) {
+			insert(target, iframe, anchor);
+		},
+		d(detaching) {
+			if (detaching) detach(iframe);
+		}
+	};
+}
+
+function create_fragment$6(ctx) {
+	let button_container;
+	let t;
+	let if_block1_anchor;
+
+	function select_block_type(ctx, dirty) {
+		if (/*state*/ ctx[0] === "unjammed") return create_if_block_1;
+		if (/*state*/ ctx[0] === "jamming") return create_if_block_2;
+		return create_else_block;
+	}
+
+	let current_block_type = select_block_type(ctx);
+	let if_block0 = current_block_type(ctx);
+	let if_block1 = /*state*/ ctx[0] !== "unjammed" && create_if_block$1();
+
+	return {
+		c() {
+			button_container = element("button-container");
+			if_block0.c();
+			t = space();
+			if (if_block1) if_block1.c();
+			if_block1_anchor = empty();
+			this.h();
+		},
+		l(nodes) {
+			button_container = claim_element(nodes, "BUTTON-CONTAINER", { class: true });
+			var button_container_nodes = children(button_container);
+			if_block0.l(button_container_nodes);
+			button_container_nodes.forEach(detach);
+			t = claim_space(nodes);
+			if (if_block1) if_block1.l(nodes);
+			if_block1_anchor = empty();
+			this.h();
+		},
+		h() {
+			set_custom_element_data(button_container, "class", "svelte-1y6pnro");
+		},
+		m(target, anchor) {
+			insert(target, button_container, anchor);
+			if_block0.m(button_container, null);
+			insert(target, t, anchor);
+			if (if_block1) if_block1.m(target, anchor);
+			insert(target, if_block1_anchor, anchor);
+		},
+		p(ctx, [dirty]) {
+			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block0) {
+				if_block0.p(ctx, dirty);
+			} else {
+				if_block0.d(1);
+				if_block0 = current_block_type(ctx);
+
+				if (if_block0) {
+					if_block0.c();
+					if_block0.m(button_container, null);
+				}
+			}
+
+			if (/*state*/ ctx[0] !== "unjammed") {
+				if (!if_block1) {
+					if_block1 = create_if_block$1();
+					if_block1.c();
+					if_block1.m(if_block1_anchor.parentNode, if_block1_anchor);
+				}
+			} else if (if_block1) {
+				if_block1.d(1);
+				if_block1 = null;
+			}
+		},
+		i: noop,
+		o: noop,
+		d(detaching) {
+			if (detaching) detach(button_container);
+			if_block0.d();
+			if (detaching) detach(t);
+			if (if_block1) if_block1.d(detaching);
+			if (detaching) detach(if_block1_anchor);
+		}
+	};
+}
+
+function instance$4($$self, $$props, $$invalidate) {
+	let state = "unjammed";
+	let target;
+
+	const initJamz = () => {
+		$$invalidate(0, state = "jamming");
+		const tag = document.createElement("script");
+		tag.async = true;
+		tag.src = "https://www.youtube.com/iframe_api";
+		document.head.appendChild(tag);
+
+		window.onYouTubeIframeAPIReady = () => new YT.Player("jamz",
+		{
+				events: {
+					onReady: onPlayerReady,
+					onStateChange: onPlayerStateChange
+				}
+			});
+	};
+
+	const startJamz = () => {
+		target.playVideo();
+		$$invalidate(0, state = "jamming");
+	};
+
+	const endJamz = () => {
+		target.stopVideo();
+		document.querySelector("main").style.backgroundColor = "";
+		$$invalidate(0, state = "jammed");
+	};
+
+	const onPlayerReady = e => {
+		target = e.target;
+		startJamz();
+	};
+
+	const onPlayerStateChange = e => {
+		switch (e.data) {
+			case YT.PlayerState.ENDED:
+				endJamz();
+				return;
+			case YT.PlayerState.PLAYING:
+				document.querySelector("main").style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+				return;
+		}
+	};
+
+	return [state, initJamz, startJamz, endJamz];
+}
+
+class Jamz extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, instance$4, create_fragment$6, safe_not_equal, {});
+	}
+}
+
+/* src\Icons.svelte generated by Svelte v3.19.1 */
+
+function create_fragment$7(ctx) {
+	let div;
+	let svg0;
+	let path0;
+	let t0;
+	let svg1;
+	let path1;
+	let t1;
+	let svg2;
+	let path2;
+	let t2;
+	let svg3;
+	let path3;
+	let t3;
+	let svg4;
+	let path4;
+
+	return {
+		c() {
+			div = element("div");
+			svg0 = svg_element("svg");
+			path0 = svg_element("path");
+			t0 = space();
+			svg1 = svg_element("svg");
+			path1 = svg_element("path");
+			t1 = space();
+			svg2 = svg_element("svg");
+			path2 = svg_element("path");
+			t2 = space();
+			svg3 = svg_element("svg");
+			path3 = svg_element("path");
+			t3 = space();
+			svg4 = svg_element("svg");
+			path4 = svg_element("path");
+			this.h();
+		},
+		l(nodes) {
+			div = claim_element(nodes, "DIV", { style: true });
+			var div_nodes = children(div);
+			svg0 = claim_element(div_nodes, "svg", { id: true, viewBox: true }, 1);
+			var svg0_nodes = children(svg0);
+			path0 = claim_element(svg0_nodes, "path", { fill: true, style: true, d: true }, 1);
+			children(path0).forEach(detach);
+			svg0_nodes.forEach(detach);
+			t0 = claim_space(div_nodes);
+			svg1 = claim_element(div_nodes, "svg", { id: true, viewBox: true }, 1);
+			var svg1_nodes = children(svg1);
+			path1 = claim_element(svg1_nodes, "path", { fill: true, style: true, d: true }, 1);
+			children(path1).forEach(detach);
+			svg1_nodes.forEach(detach);
+			t1 = claim_space(div_nodes);
+			svg2 = claim_element(div_nodes, "svg", { id: true, viewBox: true }, 1);
+			var svg2_nodes = children(svg2);
+			path2 = claim_element(svg2_nodes, "path", { fill: true, d: true }, 1);
+			children(path2).forEach(detach);
+			svg2_nodes.forEach(detach);
+			t2 = claim_space(div_nodes);
+			svg3 = claim_element(div_nodes, "svg", { id: true, viewBox: true }, 1);
+			var svg3_nodes = children(svg3);
+			path3 = claim_element(svg3_nodes, "path", { fill: true, style: true, d: true }, 1);
+			children(path3).forEach(detach);
+			svg3_nodes.forEach(detach);
+			t3 = claim_space(div_nodes);
+			svg4 = claim_element(div_nodes, "svg", { id: true, viewBox: true }, 1);
+			var svg4_nodes = children(svg4);
+			path4 = claim_element(svg4_nodes, "path", { d: true }, 1);
+			children(path4).forEach(detach);
+			svg4_nodes.forEach(detach);
+			div_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(path0, "fill", "#1ed760");
+			set_style(path0, "fill", "#1ed760");
+			attr(path0, "d", "M16 0c-8.8 0-16 7.2-16 16s7.2 16 16 16 16-7.2 16-16-7.12-16-16-16zM23.361 23.12c-0.32 0.479-0.88 0.64-1.361 0.32-3.76-2.32-8.48-2.801-14.081-1.521-0.557 0.163-1.039-0.239-1.199-0.719-0.16-0.561 0.24-1.040 0.72-1.2 6.080-1.361 11.36-0.8 15.52 1.76 0.56 0.24 0.639 0.879 0.401 1.36zM25.281 18.72c-0.401 0.56-1.121 0.8-1.683 0.4-4.319-2.64-10.879-3.44-15.919-1.84-0.639 0.16-1.36-0.16-1.52-0.8s0.16-1.361 0.8-1.521c5.84-1.759 13.040-0.877 18 2.161 0.481 0.241 0.72 1.040 0.321 1.6zM25.441 14.24c-5.121-3.040-13.681-3.36-18.561-1.839-0.8 0.239-1.6-0.241-1.84-0.961-0.24-0.801 0.24-1.6 0.96-1.841 5.68-1.68 15.040-1.36 20.961 2.161 0.719 0.4 0.959 1.36 0.559 2.080-0.399 0.561-1.36 0.799-2.079 0.4z");
+			attr(svg0, "id", "icon-spotify");
+			attr(svg0, "viewBox", "0 0 32 32");
+			attr(path1, "fill", "#f30");
+			set_style(path1, "fill", "#f30");
+			attr(path1, "d", "M1.567 16.3c-0.068 0-0.125 0.061-0.135 0.133l-0.311 2.872 0.311 2.807c0.009 0.077 0.067 0.131 0.135 0.131 0.067 0 0.12-0.053 0.132-0.131l0.34-2.807-0.36-2.872c0-0.076-0.060-0.133-0.12-0.133zM0.36 17.404c-0.080 0-0.121 0.049-0.139 0.125l-0.221 1.776 0.22 1.744c0 0.073 0.060 0.125 0.12 0.125s0.119-0.060 0.139-0.139l0.28-1.759-0.28-1.779c0-0.081-0.059-0.12-0.12-0.12zM2.799 15.74c-0.081 0-0.16 0.060-0.16 0.139l-0.28 3.417 0.3 3.277c0 0.080 0.060 0.16 0.159 0.16 0.081 0 0.14-0.081 0.161-0.16l0.339-3.299-0.339-3.397c-0.021-0.080-0.081-0.16-0.161-0.16zM4.077 15.599c-0.1 0-0.18 0.080-0.2 0.18l-0.257 3.52 0.28 3.392c0.021 0.103 0.1 0.184 0.199 0.184 0.1 0 0.18-0.081 0.2-0.2l0.32-3.376-0.32-3.497c0-0.1-0.080-0.18-0.18-0.18zM5.617 16.079c-0.007-0.12-0.1-0.199-0.212-0.199-0.12 0-0.211 0.080-0.219 0.199l-0.289 3.24 0.267 3.417c0 0.12 0.1 0.209 0.212 0.209 0.099 0 0.197-0.091 0.197-0.211l0.303-3.417-0.303-3.259zM6.696 13.8c-0.135 0-0.24 0.12-0.24 0.241l-0.28 5.276 0.249 3.417c0 0.12 0.107 0.219 0.24 0.219 0.125 0 0.232-0.12 0.24-0.24l0.279-3.417-0.279-5.296c-0.011-0.139-0.117-0.24-0.24-0.24zM7.944 12.541c-0.14 0-0.26 0.12-0.271 0.259l-0.24 6.496 0.22 3.397c0 0.16 0.12 0.279 0.26 0.279 0.139 0 0.259-0.119 0.28-0.279l0.257-3.397-0.256-6.475c-0.021-0.16-0.14-0.28-0.28-0.28zM9.233 11.943c-0.161 0-0.281 0.119-0.3 0.279l-0.22 7.033 0.22 3.36c0.019 0.159 0.139 0.3 0.3 0.3 0.159 0 0.3-0.14 0.3-0.3l0.26-3.36-0.261-7.033c0-0.16-0.14-0.3-0.3-0.3zM10.892 11.981c0-0.18-0.14-0.32-0.32-0.32-0.159 0-0.32 0.14-0.32 0.32l-0.199 7.255 0.199 3.337c0.021 0.18 0.161 0.32 0.341 0.32s0.32-0.14 0.32-0.32l0.219-3.337-0.219-7.275zM11.891 11.803c-0.18 0-0.34 0.159-0.34 0.339l-0.2 7.096 0.2 3.297c0 0.2 0.16 0.34 0.34 0.34s0.34-0.16 0.34-0.36l0.2-3.299-0.22-7.076c0-0.197-0.16-0.36-0.361-0.36zM13.189 12.001c-0.219 0-0.379 0.18-0.379 0.38l-0.137 6.857 0.18 3.299c0 0.199 0.159 0.369 0.379 0.369 0.199 0 0.361-0.16 0.379-0.38l0.161-3.257-0.18-6.816c-0.016-0.219-0.18-0.38-0.38-0.38zM14.791 10.813c-0.060-0.039-0.14-0.059-0.22-0.059s-0.159 0.020-0.22 0.059c-0.12 0.072-0.199 0.2-0.199 0.34v0.081l-0.139 8.064 0.153 3.265v0.011c0.011 0.080 0.040 0.18 0.099 0.24 0.077 0.081 0.189 0.139 0.312 0.139 0.107 0 0.211-0.059 0.279-0.12 0.077-0.080 0.121-0.18 0.121-0.3l0.020-0.32 0.156-2.937-0.18-8.115c0-0.139-0.081-0.257-0.18-0.319zM16.132 10.084c-0.060-0.060-0.12-0.081-0.2-0.081-0.099 0-0.199 0.021-0.279 0.081-0.1 0.081-0.159 0.2-0.159 0.32v0.039l-0.183 8.812 0.101 1.62 0.081 1.58c0 0.219 0.197 0.419 0.437 0.419 0.241 0 0.44-0.2 0.44-0.439l0.2-3.219-0.2-8.849c0-0.16-0.099-0.295-0.22-0.369zM28.064 15.033c-0.54 0-1.060 0.115-1.519 0.309-0.32-3.539-3.28-6.315-6.917-6.315-0.879 0-1.74 0.18-2.519 0.479-0.3 0.12-0.36 0.24-0.38 0.479v12.491c0.021 0.24 0.2 0.44 0.44 0.46h10.913c2.159 0.021 3.917-1.717 3.917-3.896s-1.759-3.936-3.917-3.936z");
+			attr(svg1, "id", "icon-soundcloud");
+			attr(svg1, "viewBox", "0 0 32 32");
+			attr(path2, "fill", "#fff");
+			attr(path2, "d", "M16 0.396c-8.84 0-16 7.164-16 16 0 7.071 4.584 13.067 10.94 15.18 0.8 0.151 1.093-0.344 1.093-0.769 0-0.38-0.013-1.387-0.020-2.72-4.451 0.965-5.389-2.147-5.389-2.147-0.728-1.847-1.78-2.34-1.78-2.34-1.449-0.992 0.112-0.972 0.112-0.972 1.607 0.112 2.451 1.648 2.451 1.648 1.427 2.447 3.745 1.74 4.66 1.331 0.144-1.035 0.556-1.74 1.013-2.14-3.553-0.4-7.288-1.776-7.288-7.907 0-1.747 0.62-3.173 1.647-4.293-0.18-0.404-0.72-2.031 0.14-4.235 0 0 1.34-0.429 4.4 1.64 1.28-0.356 2.64-0.532 4-0.54 1.36 0.008 2.72 0.184 4 0.54 3.040-2.069 4.38-1.64 4.38-1.64 0.86 2.204 0.32 3.831 0.16 4.235 1.020 1.12 1.64 2.547 1.64 4.293 0 6.147-3.74 7.5-7.3 7.893 0.56 0.48 1.080 1.461 1.080 2.96 0 2.141-0.020 3.861-0.020 4.381 0 0.42 0.28 0.92 1.1 0.76 6.401-2.099 10.981-8.099 10.981-15.159 0-8.836-7.164-16-16-16z");
+			attr(svg2, "id", "icon-github");
+			attr(svg2, "viewBox", "0 0 32 32");
+			attr(path3, "fill", "#0077b5");
+			set_style(path3, "fill", "var(--color1, #0077b5)");
+			attr(path3, "d", "M27.263 27.269h-4.739v-7.425c0-1.771-0.036-4.049-2.469-4.049-2.471 0-2.848 1.927-2.848 3.919v7.556h-4.739v-15.269h4.552v2.081h0.061c0.636-1.2 2.183-2.467 4.493-2.467 4.801 0 5.689 3.16 5.689 7.273zM7.116 9.911c-1.525 0-2.751-1.235-2.751-2.753 0-1.517 1.227-2.751 2.751-2.751 1.52 0 2.752 1.233 2.752 2.751 0 1.519-1.233 2.753-2.752 2.753zM9.492 27.269h-4.752v-15.269h4.752zM29.633 0h-27.272c-1.305 0-2.361 1.032-2.361 2.305v27.389c0 1.275 1.056 2.305 2.361 2.305h27.268c1.304 0 2.371-1.031 2.371-2.305v-27.389c0-1.273-1.067-2.305-2.371-2.305z");
+			attr(svg3, "id", "icon-linkedin");
+			attr(svg3, "viewBox", "0 0 32 32");
+			attr(path4, "d", "M12 3.984l8.016 8.016-8.016 8.016-1.406-1.406 5.578-5.625h-12.188v-1.969h12.188l-5.578-5.625z");
+			attr(svg4, "id", "icon-arrow_forward");
+			attr(svg4, "viewBox", "0 0 24 24");
+			set_style(div, "display", "none");
+		},
+		m(target, anchor) {
+			insert(target, div, anchor);
+			append(div, svg0);
+			append(svg0, path0);
+			append(div, t0);
+			append(div, svg1);
+			append(svg1, path1);
+			append(div, t1);
+			append(div, svg2);
+			append(svg2, path2);
+			append(div, t2);
+			append(div, svg3);
+			append(svg3, path3);
+			append(div, t3);
+			append(div, svg4);
+			append(svg4, path4);
+		},
+		p: noop,
+		i: noop,
+		o: noop,
+		d(detaching) {
+			if (detaching) detach(div);
+		}
+	};
+}
+
+class Icons extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, null, create_fragment$7, safe_not_equal, {});
+	}
+}
+
+/* src\App.svelte generated by Svelte v3.19.1 */
+
+function create_fragment$8(ctx) {
+	let t0;
+	let t1;
+	let main;
+	let t2;
+	let t3;
+	let t4;
+	let t5;
+	let current;
+	const head = new Head({});
+	const stylesheet = new Stylesheet({});
+	const header = new Header({});
+	const projects = new Projects({});
+	const footer = new Footer({});
+	const jamz = new Jamz({});
+	const icons = new Icons({});
+
+	return {
+		c() {
+			create_component(head.$$.fragment);
+			t0 = space();
+			create_component(stylesheet.$$.fragment);
+			t1 = space();
+			main = element("main");
+			create_component(header.$$.fragment);
+			t2 = space();
+			create_component(projects.$$.fragment);
+			t3 = space();
+			create_component(footer.$$.fragment);
+			t4 = space();
+			create_component(jamz.$$.fragment);
+			t5 = space();
+			create_component(icons.$$.fragment);
+			this.h();
+		},
+		l(nodes) {
+			claim_component(head.$$.fragment, nodes);
+			t0 = claim_space(nodes);
+			claim_component(stylesheet.$$.fragment, nodes);
+			t1 = claim_space(nodes);
+			main = claim_element(nodes, "MAIN", { class: true });
+			var main_nodes = children(main);
+			claim_component(header.$$.fragment, main_nodes);
+			t2 = claim_space(main_nodes);
+			claim_component(projects.$$.fragment, main_nodes);
+			t3 = claim_space(main_nodes);
+			claim_component(footer.$$.fragment, main_nodes);
+			t4 = claim_space(main_nodes);
+			claim_component(jamz.$$.fragment, main_nodes);
+			t5 = claim_space(main_nodes);
+			claim_component(icons.$$.fragment, main_nodes);
+			main_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(main, "class", "svelte-9dp4ed");
+		},
+		m(target, anchor) {
+			mount_component(head, target, anchor);
+			insert(target, t0, anchor);
+			mount_component(stylesheet, target, anchor);
+			insert(target, t1, anchor);
+			insert(target, main, anchor);
+			mount_component(header, main, null);
+			append(main, t2);
+			mount_component(projects, main, null);
+			append(main, t3);
+			mount_component(footer, main, null);
+			append(main, t4);
+			mount_component(jamz, main, null);
+			append(main, t5);
+			mount_component(icons, main, null);
+			current = true;
+		},
+		p: noop,
+		i(local) {
+			if (current) return;
+			transition_in(head.$$.fragment, local);
+			transition_in(stylesheet.$$.fragment, local);
+			transition_in(header.$$.fragment, local);
+			transition_in(projects.$$.fragment, local);
+			transition_in(footer.$$.fragment, local);
+			transition_in(jamz.$$.fragment, local);
+			transition_in(icons.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(head.$$.fragment, local);
+			transition_out(stylesheet.$$.fragment, local);
+			transition_out(header.$$.fragment, local);
+			transition_out(projects.$$.fragment, local);
+			transition_out(footer.$$.fragment, local);
+			transition_out(jamz.$$.fragment, local);
+			transition_out(icons.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			destroy_component(head, detaching);
+			if (detaching) detach(t0);
+			destroy_component(stylesheet, detaching);
+			if (detaching) detach(t1);
+			if (detaching) detach(main);
+			destroy_component(header);
+			destroy_component(projects);
+			destroy_component(footer);
+			destroy_component(jamz);
+			destroy_component(icons);
+		}
+	};
+}
+
+class App extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, null, create_fragment$8, safe_not_equal, {});
+	}
+}
+
+export default App;

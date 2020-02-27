@@ -1,5 +1,11 @@
 <script>
+import { onMount } from 'svelte'
+
 let state = 'before'
+
+onMount(() => {
+ 
+})
 
 const register = () => {
   if (window.AFRAME === undefined) return setTimeout(register, 100)
@@ -23,14 +29,22 @@ const register = () => {
   })
 
   window.AFRAME.registerComponent('grid', {
+    schema: {
+      color: { default: '#fff' },
+      size: { default: 5e3 }
+    },
+  
     init () {
       const { data, el } = this
+      const { size, color } = data
+
+      this.grid = new THREE.GridHelper( size, size, color, color )
   
-      el.setObject3D('mesh', new THREE.GridHelper( 5e3, 5e3, 0xffffff, 0xffffff ))
+      el.setObject3D('mesh', this.grid)
     }
   })
 
-  window.AFRAME.registerComponent('edge-box', {
+  window.AFRAME.registerComponent('edges', {
     schema: {
       width: { default: 1, min: 0 },
       height: { default: 1, min: 0 },
@@ -61,26 +75,81 @@ const register = () => {
   })
 
   AFRAME.registerComponent('rotation-reader', {
-  /**
-   * We use IIFE (immediately-invoked function expression) to only allocate one
-   * vector or euler and not re-create on every tick to save memory.
-   */
-  tick: (function () {
-    var position = new THREE.Vector3();
-    var quaternion = new THREE.Quaternion();
+    init () {
+      this.car = document.querySelector('#car').object3D
+      this.sun = document.querySelector('#sun').object3D
+      this.sky = document.querySelector('#sky').object3D
+    },
 
-    return function () {
+    tick () {
       const { object3D } = this.el
-      object3D.getWorldPosition(position)
-      object3D.getWorldQuaternion(quaternion)
-      console.log(object3D.position, object3D.rotation)
-      // position and rotation now contain vector and quaternion in world space.
 
-      object3D.position.z -= 0.05
+      object3D.position.z -= 0.1
+      this.car.position.z = object3D.position.z - 7
+      this.sun.position.z = object3D.position.z - 400
+      this.sky.position.z = object3D.position.z
+    }
+  })
 
-    };
-  })()
-});
+  AFRAME.registerComponent('toon', {
+    schema: {
+      color: { default: '' }
+    },
+
+    init () {
+      console.log(this.data.color)
+      this.material = new THREE.MeshToonMaterial({ color: this.data.color })
+      this.el.object3D.children[0].material = this.material
+    },
+  })
+
+  AFRAME.registerComponent('gradient-material', {
+    init () {
+      this.material = this.el.object3D.children[0].material = new THREE.ShaderMaterial({
+        uniforms: {
+          topColor: { value: new THREE.Color(0x000) },
+          bottomColor: { value: new THREE.Color(0x5C6BC0) },
+          offset: { value: 33 },
+          exponent: { value: 0.6 }
+        },
+        vertexShader: this.vertexShader,
+        fragmentShader: this.fragmentShader,
+        side: THREE.BackSide
+      });
+    },
+
+    update () {
+      // Update `this.material`.
+    },
+
+    vertexShader: `
+      varying vec3 vWorldPosition;
+
+			void main() {
+
+				vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+				vWorldPosition = worldPosition.xyz;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+    `,
+    fragmentShader: `
+      uniform vec3 topColor;
+			uniform vec3 bottomColor;
+			uniform float offset;
+			uniform float exponent;
+
+			varying vec3 vWorldPosition;
+
+			void main() {
+
+				float h = normalize( vWorldPosition + offset ).y;
+				gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h , 0.0), exponent ), 0.0 ) ), 1.0 );
+
+			}
+    `,
+  });
 }
 
 const init = () => {
@@ -91,7 +160,7 @@ const init = () => {
 
 {#if state !== "before"}
   <a-scene
-    fog="type: linear; color: #222; far: 100"
+    light="defaultLightsEnabled: false"
     vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false"
     renderer="
@@ -102,21 +171,29 @@ const init = () => {
     "
   >
     <a-entity audio />
-    <a-entity edge-box />
-    <a-entity grid />
-    <a-entity
-      edge-box="type: plane; width: 4; height: 4;"
-      position="0 0 -4"
-      rotation="-90 0 0"
-    />
     <a-entity
       camera
       id="camera"
-      position="0 1.6 0"
-      rotation="0 0 0"
+      position="-5 3 0"
+      rotation="0 -15 0"
       rotation-reader
     />
-    <a-sky color="#222"></a-sky>
+
+    <a-entity light="type: hemisphere; color: #fff" position="0.6 1 0.6"></a-entity>
+    <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-30 50 50"></a-entity>
+
+    <a-entity id="ground" grid="color: #AB47BC;" />
+    <a-plane position="0 -0.25 0" rotation="-90 0 0" width="5e3" height="5e3" color="#222"></a-plane>
+
+    <a-entity
+      id="car"
+      gltf-model="BasicCar.glb"
+      rotation="0 180 0"
+    />
+
+    <a-sphere id="sun" toon="color: #FF5722;" radius="50" position="0 5 -400"></a-sphere>
+
+    <a-sky id="sky" gradient-material></a-sky>
   </a-scene>
 {/if}
 
