@@ -62,7 +62,7 @@ import SunsetDrive from './SunsetDrive.svelte'
 </script>
 
 <footer>
-  <img alt="Micheal's detatched head." src="profile.jpg" />
+  <img loading="lazy" alt="Micheal's detatched head." src="profile-compressed.jpg" />
   <section>
     <h2>
       {#each 'about this human:' as char, i (char)}
