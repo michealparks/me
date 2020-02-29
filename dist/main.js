@@ -1153,8 +1153,12 @@ function create_if_block(ctx) {
 	let t5;
 	let a_entity5;
 	let t6;
-	let a_sphere;
+	let a_entity6;
 	let t7;
+	let a_entity7;
+	let t8;
+	let a_sphere;
+	let t9;
 	let a_sky;
 
 	return {
@@ -1174,8 +1178,12 @@ function create_if_block(ctx) {
 			t5 = space();
 			a_entity5 = element("a-entity");
 			t6 = space();
-			a_sphere = element("a-sphere");
+			a_entity6 = element("a-entity");
 			t7 = space();
+			a_entity7 = element("a-entity");
+			t8 = space();
+			a_sphere = element("a-sphere");
+			t9 = space();
 			a_sky = element("a-sky");
 			this.h();
 		},
@@ -1232,6 +1240,26 @@ function create_if_block(ctx) {
 			children(a_entity5).forEach(detach);
 			t6 = claim_space(a_scene_nodes);
 
+			a_entity6 = claim_element(a_scene_nodes, "A-ENTITY", {
+				id: true,
+				"gltf-model": true,
+				scale: true,
+				position: true
+			});
+
+			children(a_entity6).forEach(detach);
+			t7 = claim_space(a_scene_nodes);
+
+			a_entity7 = claim_element(a_scene_nodes, "A-ENTITY", {
+				id: true,
+				"gltf-model": true,
+				scale: true,
+				position: true
+			});
+
+			children(a_entity7).forEach(detach);
+			t8 = claim_space(a_scene_nodes);
+
 			a_sphere = claim_element(a_scene_nodes, "A-SPHERE", {
 				id: true,
 				toon: true,
@@ -1240,8 +1268,15 @@ function create_if_block(ctx) {
 			});
 
 			children(a_sphere).forEach(detach);
-			t7 = claim_space(a_scene_nodes);
-			a_sky = claim_element(a_scene_nodes, "A-SKY", { id: true, "gradient-material": true });
+			t9 = claim_space(a_scene_nodes);
+
+			a_sky = claim_element(a_scene_nodes, "A-SKY", {
+				id: true,
+				"gradient-material": true,
+				"segments-height": true,
+				"segments-width": true
+			});
+
 			children(a_sky).forEach(detach);
 			a_scene_nodes.forEach(detach);
 			this.h();
@@ -1259,7 +1294,7 @@ function create_if_block(ctx) {
 			set_custom_element_data(a_entity3, "position", "-30 50 50");
 			set_custom_element_data(a_entity4, "id", "ground");
 			set_custom_element_data(a_entity4, "grid", "color: #AB47BC;");
-			set_custom_element_data(a_plane, "position", "0 -0.25 0");
+			set_custom_element_data(a_plane, "position", "0 -1 0");
 			set_custom_element_data(a_plane, "rotation", "-90 0 0");
 			set_custom_element_data(a_plane, "width", "5e3");
 			set_custom_element_data(a_plane, "height", "5e3");
@@ -1267,12 +1302,22 @@ function create_if_block(ctx) {
 			set_custom_element_data(a_entity5, "id", "car");
 			set_custom_element_data(a_entity5, "gltf-model", "BasicCar.glb");
 			set_custom_element_data(a_entity5, "rotation", "0 180 0");
+			set_custom_element_data(a_entity6, "id", "mountain-left");
+			set_custom_element_data(a_entity6, "gltf-model", "LowPolyTerrain1.glb");
+			set_custom_element_data(a_entity6, "scale", "3 5 3");
+			set_custom_element_data(a_entity6, "position", "-90 -1 -350");
+			set_custom_element_data(a_entity7, "id", "mountain-right");
+			set_custom_element_data(a_entity7, "gltf-model", "LowPolyTerrain1.glb");
+			set_custom_element_data(a_entity7, "scale", "3 5 3");
+			set_custom_element_data(a_entity7, "position", "90 -1 -350");
 			set_custom_element_data(a_sphere, "id", "sun");
 			set_custom_element_data(a_sphere, "toon", "color: #FF5722;");
 			set_custom_element_data(a_sphere, "radius", "50");
 			set_custom_element_data(a_sphere, "position", "0 5 -400");
 			set_custom_element_data(a_sky, "id", "sky");
 			set_custom_element_data(a_sky, "gradient-material", "");
+			set_custom_element_data(a_sky, "segments-height", "10");
+			set_custom_element_data(a_sky, "segments-width", "10");
 			set_custom_element_data(a_scene, "light", "defaultLightsEnabled: false");
 			set_custom_element_data(a_scene, "vr-mode-ui", "enabled: false");
 			set_custom_element_data(a_scene, "device-orientation-permission-ui", "enabled: false");
@@ -1294,8 +1339,12 @@ function create_if_block(ctx) {
 			append(a_scene, t5);
 			append(a_scene, a_entity5);
 			append(a_scene, t6);
-			append(a_scene, a_sphere);
+			append(a_scene, a_entity6);
 			append(a_scene, t7);
+			append(a_scene, a_entity7);
+			append(a_scene, t8);
+			append(a_scene, a_sphere);
+			append(a_scene, t9);
 			append(a_scene, a_sky);
 		},
 		d(detaching) {
@@ -1435,12 +1484,17 @@ function instance$3($$self, $$props, $$invalidate) {
 				this.car = document.querySelector("#car").object3D;
 				this.sun = document.querySelector("#sun").object3D;
 				this.sky = document.querySelector("#sky").object3D;
+				this.mountainLeft = document.querySelector("#mountain-left").object3D;
+				this.mountainRight = document.querySelector("#mountain-right").object3D;
+				console.log(this.mountainLeft);
 			},
 			tick() {
 				const { object3D } = this.el;
 				object3D.position.z -= 0.1;
 				this.car.position.z = object3D.position.z - 7;
 				this.sun.position.z = object3D.position.z - 400;
+				this.mountainLeft.position.z = object3D.position.z - 350;
+				this.mountainRight.position.z = object3D.position.z - 350;
 				this.sky.position.z = object3D.position.z;
 			}
 		});

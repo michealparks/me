@@ -79,6 +79,10 @@ const register = () => {
       this.car = document.querySelector('#car').object3D
       this.sun = document.querySelector('#sun').object3D
       this.sky = document.querySelector('#sky').object3D
+      this.mountainLeft = document.querySelector('#mountain-left').object3D
+      this.mountainRight = document.querySelector('#mountain-right').object3D
+
+      console.log(this.mountainLeft)
     },
 
     tick () {
@@ -87,6 +91,8 @@ const register = () => {
       object3D.position.z -= 0.1
       this.car.position.z = object3D.position.z - 7
       this.sun.position.z = object3D.position.z - 400
+      this.mountainLeft.position.z = object3D.position.z - 350
+      this.mountainRight.position.z = object3D.position.z - 350
       this.sky.position.z = object3D.position.z
     }
   })
@@ -183,7 +189,7 @@ const init = () => {
     <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-30 50 50"></a-entity>
 
     <a-entity id="ground" grid="color: #AB47BC;" />
-    <a-plane position="0 -0.25 0" rotation="-90 0 0" width="5e3" height="5e3" color="#222"></a-plane>
+    <a-plane position="0 -1 0" rotation="-90 0 0" width="5e3" height="5e3" color="#222"></a-plane>
 
     <a-entity
       id="car"
@@ -191,9 +197,23 @@ const init = () => {
       rotation="0 180 0"
     />
 
+    <a-entity
+      id="mountain-left"
+      gltf-model="LowPolyTerrain1.glb"
+      scale="3 5 3"
+      position="-90 -1 -350"
+    />
+
+    <a-entity
+      id="mountain-right"
+      gltf-model="LowPolyTerrain1.glb"
+      scale="3 5 3"
+      position="90 -1 -350"
+    />
+
     <a-sphere id="sun" toon="color: #FF5722;" radius="50" position="0 5 -400"></a-sphere>
 
-    <a-sky id="sky" gradient-material></a-sky>
+    <a-sky id="sky" gradient-material segments-height="10" segments-width="10"></a-sky>
   </a-scene>
 {/if}
 
