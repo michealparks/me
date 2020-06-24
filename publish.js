@@ -1,6 +1,6 @@
 const { execSync } = require('child_process')
 const ghpages = require('gh-pages')
-const dir = 'dist'
+const dir = '__sapper__/export'
 
 execSync('npm run build', { stdio: 'inherit' })
 
