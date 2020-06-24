@@ -2340,7 +2340,7 @@ class Icons extends SvelteComponent {
 function create_fragment$8(ctx) {
 	let t0;
 	let t1;
-	let main;
+	let main_1;
 	let t2;
 	let t3;
 	let t4;
@@ -2360,7 +2360,7 @@ function create_fragment$8(ctx) {
 			t0 = space();
 			create_component(stylesheet.$$.fragment);
 			t1 = space();
-			main = element("main");
+			main_1 = element("main");
 			create_component(header.$$.fragment);
 			t2 = space();
 			create_component(projects.$$.fragment);
@@ -2377,38 +2377,38 @@ function create_fragment$8(ctx) {
 			t0 = claim_space(nodes);
 			claim_component(stylesheet.$$.fragment, nodes);
 			t1 = claim_space(nodes);
-			main = claim_element(nodes, "MAIN", { class: true });
-			var main_nodes = children(main);
-			claim_component(header.$$.fragment, main_nodes);
-			t2 = claim_space(main_nodes);
-			claim_component(projects.$$.fragment, main_nodes);
-			t3 = claim_space(main_nodes);
-			claim_component(footer.$$.fragment, main_nodes);
-			t4 = claim_space(main_nodes);
-			claim_component(jamz.$$.fragment, main_nodes);
-			t5 = claim_space(main_nodes);
-			claim_component(icons.$$.fragment, main_nodes);
-			main_nodes.forEach(detach);
+			main_1 = claim_element(nodes, "MAIN", { class: true });
+			var main_1_nodes = children(main_1);
+			claim_component(header.$$.fragment, main_1_nodes);
+			t2 = claim_space(main_1_nodes);
+			claim_component(projects.$$.fragment, main_1_nodes);
+			t3 = claim_space(main_1_nodes);
+			claim_component(footer.$$.fragment, main_1_nodes);
+			t4 = claim_space(main_1_nodes);
+			claim_component(jamz.$$.fragment, main_1_nodes);
+			t5 = claim_space(main_1_nodes);
+			claim_component(icons.$$.fragment, main_1_nodes);
+			main_1_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(main, "class", "svelte-9dp4ed");
+			attr(main_1, "class", "svelte-9dp4ed");
 		},
 		m(target, anchor) {
 			mount_component(head, target, anchor);
 			insert(target, t0, anchor);
 			mount_component(stylesheet, target, anchor);
 			insert(target, t1, anchor);
-			insert(target, main, anchor);
-			mount_component(header, main, null);
-			append(main, t2);
-			mount_component(projects, main, null);
-			append(main, t3);
-			mount_component(footer, main, null);
-			append(main, t4);
-			mount_component(jamz, main, null);
-			append(main, t5);
-			mount_component(icons, main, null);
+			insert(target, main_1, anchor);
+			mount_component(header, main_1, null);
+			append(main_1, t2);
+			mount_component(projects, main_1, null);
+			append(main_1, t3);
+			mount_component(footer, main_1, null);
+			append(main_1, t4);
+			mount_component(jamz, main_1, null);
+			append(main_1, t5);
+			mount_component(icons, main_1, null);
 			current = true;
 		},
 		p: noop,
@@ -2438,7 +2438,7 @@ function create_fragment$8(ctx) {
 			if (detaching) detach(t0);
 			destroy_component(stylesheet, detaching);
 			if (detaching) detach(t1);
-			if (detaching) detach(main);
+			if (detaching) detach(main_1);
 			destroy_component(header);
 			destroy_component(projects);
 			destroy_component(footer);
@@ -2448,10 +2448,22 @@ function create_fragment$8(ctx) {
 	};
 }
 
+function instance$5($$self) {
+	const main = async () => {
+		const response = await fetch("https://mongodb.com/api/event/all/1?sort=-created_at&populate=tag_ids,node_ids");
+		const json = await response.json();
+		c;
+		document.write(JSON.stringify(json));
+	};
+
+	main();
+	return [];
+}
+
 class App extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, null, create_fragment$8, safe_not_equal, {});
+		init(this, options, instance$5, create_fragment$8, safe_not_equal, {});
 	}
 }
 

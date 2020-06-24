@@ -370,10 +370,18 @@ const Icons = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
 
 const css$7 = {
 	code: "main.svelte-9dp4ed{width:100%;min-height:100vh;background-color:#222;color:#eee\r\n}",
-	map: "{\"version\":3,\"file\":\"App.svelte\",\"sources\":[\"App.svelte\"],\"sourcesContent\":[\"<script>\\r\\n  import Head from './Head.svelte'\\r\\n  import Stylesheet from './Stylesheet.svelte'\\r\\n  import Header from './Header.svelte'\\r\\n  import Projects from './Projects.svelte'\\r\\n  import Footer from './Footer.svelte'\\r\\n  import Jamz from './Jamz.svelte'\\r\\n  import Icons from './Icons.svelte'\\r\\n</script>\\r\\n\\r\\n<style>\\r\\nmain {\\r\\n  width: 100%;\\r\\n  min-height: 100vh;\\r\\n  background-color: #222;\\r\\n  color: #eee\\r\\n}\\r\\n</style>\\r\\n\\r\\n<Head />\\r\\n<Stylesheet />\\r\\n\\r\\n<main>\\r\\n  <Header />\\r\\n  <Projects />\\r\\n  <Footer />\\r\\n  <Jamz />\\r\\n  <Icons />\\r\\n</main>\\r\\n\"],\"names\":[],\"mappings\":\"AAWA,IAAI,cAAC,CAAC,AACJ,KAAK,CAAE,IAAI,CACX,UAAU,CAAE,KAAK,CACjB,gBAAgB,CAAE,IAAI,CACtB,KAAK,CAAE,IAAI;AACb,CAAC\"}"
+	map: "{\"version\":3,\"file\":\"App.svelte\",\"sources\":[\"App.svelte\"],\"sourcesContent\":[\"<script>\\r\\n  import Head from './Head.svelte'\\r\\n  import Stylesheet from './Stylesheet.svelte'\\r\\n  import Header from './Header.svelte'\\r\\n  import Projects from './Projects.svelte'\\r\\n  import Footer from './Footer.svelte'\\r\\n  import Jamz from './Jamz.svelte'\\r\\n  import Icons from './Icons.svelte'\\r\\n\\r\\n    const main = async () => {\\r\\n    const response = await fetch('https://mongodb.com/api/event/all/1?sort=-created_at&populate=tag_ids,node_ids')\\r\\n    const json = await response.json()\\r\\n\\r\\n    c\\r\\n    document.write(JSON.stringify(json))\\r\\n  }\\r\\n\\r\\n  main()\\r\\n</script>\\r\\n\\r\\n<style>\\r\\nmain {\\r\\n  width: 100%;\\r\\n  min-height: 100vh;\\r\\n  background-color: #222;\\r\\n  color: #eee\\r\\n}\\r\\n</style>\\r\\n\\r\\n<Head />\\r\\n<Stylesheet />\\r\\n\\r\\n<main>\\r\\n  <Header />\\r\\n  <Projects />\\r\\n  <Footer />\\r\\n  <Jamz />\\r\\n  <Icons />\\r\\n</main>\\r\\n\"],\"names\":[],\"mappings\":\"AAqBA,IAAI,cAAC,CAAC,AACJ,KAAK,CAAE,IAAI,CACX,UAAU,CAAE,KAAK,CACjB,gBAAgB,CAAE,IAAI,CACtB,KAAK,CAAE,IAAI;AACb,CAAC\"}"
 };
 
 const App = create_ssr_component(($$result, $$props, $$bindings, $$slots) => {
+	const main = async () => {
+		const response = await fetch("https://mongodb.com/api/event/all/1?sort=-created_at&populate=tag_ids,node_ids");
+		const json = await response.json();
+		c;
+		document.write(JSON.stringify(json));
+	};
+
+	main();
 	$$result.css.add(css$7);
 
 	return `${validate_component(Head, "Head").$$render($$result, {}, {}, {})}
