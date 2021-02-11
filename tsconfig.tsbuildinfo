@@ -1422,7 +1422,7 @@
         "affectsGlobalScope": false
       },
       "./src/gl.ts": {
-        "version": "afd22416afbb12299bbd37f12d30f271d9bdb39314c8208f5ecd550b667a0c9f",
+        "version": "1e375117d01002adb089e085f814bd5b9fc3aca565f0563366cab0880facdb95",
         "signature": "5cf2f40c83ce361953285b495a73f71fde061dc1eb8d5b3aa95dd1e9fffed5ee",
         "affectsGlobalScope": false
       },

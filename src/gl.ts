@@ -9,8 +9,6 @@ import {
   HalfFloatType,
   AmbientLight,
   AudioListener,
-  Camera,
-  OrthographicCamera,
   Fog,
   Clock
 } from 'three'
@@ -23,12 +21,7 @@ import {
   SMAAImageLoader,
   SMAAPreset,
   BloomEffect,
-  BlendFunction,
   KernelSize,
-  SSAOEffect,
-  NormalPass,
-  DepthEffect,
-  DepthOfFieldEffect
   // @ts-ignore
 } from 'postprocessing'
 
@@ -66,6 +59,7 @@ document.body.append(renderer.domElement)
 let fn: Tick
 let dt = 0, elapsed = 0
 
+const clock = new Clock()
 const stats = new Stats({ maxFPS: Infinity, maxMem: Infinity })
 const canvas = renderer.domElement
 const composer = new EffectComposer(renderer, {
@@ -104,24 +98,15 @@ const init = async () => {
 
   const smaaEffect = new SMAAEffect(search, area, SMAAPreset.ULTRA)
 
-  const dofEffect = new DepthOfFieldEffect(camera, {
-    focusDistance: 0.4
-  })
-
   const effectPass = new EffectPass(
     camera,
     smaaEffect,
-    bloomEffect,
-    // dofEffect
+    bloomEffect
   )
-
-  effectPass.renderToScreen = true
 
   composer.addPass(new RenderPass(scene, camera))
   composer.addPass(effectPass)
 }
-
-const clock = new Clock()
 
 const render = () => {
   if (import.meta.env.MODE === 'development') {
