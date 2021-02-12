@@ -3,7 +3,7 @@ import {physics} from "./physics.js";
 import {BODYTYPE_DYNAMIC, BODYSHAPE_BOX} from "./constants.js";
 import {utils} from "./utils.js";
 const setRandomTransform = (mesh, transform) => {
-  const px = Math.random() * 4 - 3, py = 3, pz = 0;
+  const px = Math.random() * 4 - 3, py = 5, pz = 0;
   const qx = Math.random(), qy = Math.random(), qz = Math.random();
   mesh.position.set(px, py, pz);
   mesh.rotation.set(qx, qy, qz);

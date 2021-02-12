@@ -333,7 +333,6 @@ const applyCentralForce = (id, force) => {
 const teleport = (id, transform, clearForces, shift2 = 0) => {
   body = bodyMap.get(id);
   body.activate();
-  console.log(transform);
   if (clearForces === true) {
     ammoVec.setValue(0, 0, 0);
     body.setLinearVelocity(ammoVec);
