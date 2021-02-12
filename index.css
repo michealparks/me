@@ -6,3 +6,18 @@ canvas, body {
   width: 100vw;
   margin: 0;
 }
+
+.links {
+  position: absolute;
+  z-index: 1;
+  top: 75%;
+  width: 400px;
+  left: calc(50% - 200px);
+  display: flex;
+  justify-content: center;
+}
+
+.links img {
+  width: 50px;
+  padding: 5px;
+}
