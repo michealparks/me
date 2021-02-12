@@ -3,7 +3,7 @@ import {physics} from "./physics.js";
 import {BODYTYPE_DYNAMIC, BODYSHAPE_BOX} from "./constants.js";
 import {utils} from "./utils.js";
 const setRandomTransform = (mesh, transform) => {
-  const px = Math.random() * 4 - 3, py = 5, pz = 0;
+  const px = Math.random() * 4 - 3, py = 3, pz = 0;
   const qx = Math.random(), qy = Math.random(), qz = Math.random();
   mesh.position.set(px, py, pz);
   mesh.rotation.set(qx, qy, qz);
@@ -19,17 +19,16 @@ const setRandomTransform = (mesh, transform) => {
 };
 const rainCubes = async (numCubes = 50, i = 0) => {
   const template = utils.createCube(0.5);
-  template.visible = false;
   template.castShadow = true;
   template.receiveShadow = true;
   const cubes = [];
-  const transform = new Float32Array(10);
-  transform[7] = transform[8] = transform[9] = 0.25;
   const rigidbodies = [];
   for (i = 0; i < numCubes; i++) {
     const cube = template.clone();
+    const transform = new Float32Array(10);
     setRandomTransform(cube, transform);
-    gl.scene.add(cube);
+    transform[7] = transform[8] = transform[9] = 0.25;
+    cube.updateMatrix();
     rigidbodies.push({
       id: cube.id,
       name: cube.name,
@@ -43,13 +42,14 @@ const rainCubes = async (numCubes = 50, i = 0) => {
       restitution: 0.9,
       enabled: false
     });
+    gl.scene.add(cube);
     cubes.push(cube);
   }
   physics.addRigidbodies(cubes, rigidbodies);
   i = 0;
   setInterval(() => {
     const cube = cubes[i];
-    cube.visible = true;
+    const transform = new Float32Array(7);
     setRandomTransform(cube, transform);
     physics.teleport(cube.id, transform, true);
     i += 1;

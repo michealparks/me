@@ -6,6 +6,7 @@ import {
   PASSIVE,
   MAX_BODIES
 } from "./constants.js";
+import {app} from "./app.js";
 const worker = new Worker(new URL("./worker.js", import.meta.url));
 const bodyMap = new Map();
 const dynamicBodies = new Set();
@@ -39,6 +40,9 @@ const handleMessage = (e) => {
 };
 const updateBodies = (e) => {
   const {data} = e;
+  for (const [id, others] of e.data.collisionStart) {
+    app.fire("collisionstart", {id, others});
+  }
   transforms = data.transforms;
   i = 0;
   for (const object of dynamicBodies) {

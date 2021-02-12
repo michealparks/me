@@ -9,6 +9,7 @@ import {utils} from "./utils.js";
 import {physics} from "./physics.js";
 import {rainCubes} from "./rainCubes.js";
 import {BODYSHAPE_MESH, BODYTYPE_STATIC} from "./constants.js";
+import {audio} from "./audio.js";
 export const main = async () => {
   const vec = new Vector3();
   assets.queue("helvetiker.typeface.json");
@@ -17,7 +18,7 @@ export const main = async () => {
     gl.init(),
     assets.load()
   ]);
-  rainCubes(100);
+  rainCubes(10);
   const light = utils.createPointLight();
   light.position.set(2, 2, 2);
   gl.scene.add(light);
@@ -68,5 +69,13 @@ export const main = async () => {
     physics.update();
   };
   gl.setAnimationLoop(frame);
+  await assets.queue("1.mp3", "2.mp3", "3.mp3", "4.mp3", "5.mp3", "6.mp3", "background.mp3").load();
+  audio.create("1.mp3", false, 0.1);
+  audio.create("2.mp3", false, 0.1);
+  audio.create("3.mp3", false, 0.1);
+  audio.create("4.mp3", false, 0.1);
+  audio.create("5.mp3", false, 0.1);
+  audio.create("6.mp3", false, 0.1);
+  audio.create("background.mp3", true, 0.2);
 };
 main();

@@ -73,11 +73,13 @@ const get = (file) => {
 };
 const queue = (...args) => {
   queueMany(args);
+  return assets;
 };
 const queueMany = (iterable) => {
   for (const file of iterable) {
     queued.add(file);
   }
+  return assets;
 };
 const on = (event, fn) => {
   switch (event) {
