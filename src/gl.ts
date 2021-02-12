@@ -9,7 +9,6 @@ import {
   HalfFloatType,
   AmbientLight,
   AudioListener,
-  Fog,
   Clock
 } from 'three'
 
@@ -30,11 +29,8 @@ import TWEEN from '@tweenjs/tween.js'
 
 import {
   COLOR_AMBIENT_LIGHT,
-  COLOR_FOG,
   EXPOSURE,
   FAR,
-  FOG_FAR,
-  FOG_NEAR,
   FOV,
   NEAR,
   SHADOWMAP
@@ -53,7 +49,6 @@ renderer.outputEncoding = sRGBEncoding
 renderer.physicallyCorrectLights = true
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = SHADOWMAP
-renderer.setClearColor(COLOR_FOG)
 document.body.append(renderer.domElement)
 
 let fn: Tick
@@ -67,8 +62,6 @@ const composer = new EffectComposer(renderer, {
 })
 
 const scene = new Scene()
-const fog = new Fog(COLOR_FOG, FOG_NEAR, FOG_FAR)
-scene.fog = fog
 
 let camera: PerspectiveCamera = new PerspectiveCamera(FOV, window.innerWidth / window.innerHeight, NEAR, FAR)
 const listener = new AudioListener()

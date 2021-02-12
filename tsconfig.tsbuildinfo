@@ -236,6 +236,11 @@
         "signature": "d96fa8a56871904776165ceb8e00bd56127e1a017bb2664cae76223b5f815141",
         "affectsGlobalScope": false
       },
+      "./src/types.ts": {
+        "version": "d8a1b05bc927fb4bbf23ef7ff55fa670e4291e12161b5196778b1ae043d574f8",
+        "signature": "1ed6416858a87b593cc836f81db2109564927256b1e1080385397595dfbee4c1",
+        "affectsGlobalScope": false
+      },
       "./node_modules/three/src/polyfills.d.ts": {
         "version": "bae8640f98f4800ab31583b8a680e283d8f7e51d1d601f23a2461ebf2a35b7b6",
         "signature": "bae8640f98f4800ab31583b8a680e283d8f7e51d1d601f23a2461ebf2a35b7b6",
@@ -1401,14 +1406,34 @@
         "signature": "b5d3a35384c7df717b6acfa3aaf71797a01350c8324d327646fdc5691fa51c5c",
         "affectsGlobalScope": false
       },
-      "./src/constants.ts": {
-        "version": "46f0f0a6dfa306fa3909bfb704b92f85a9ecd4bfc3af51f21cf7c57e54197aa0",
-        "signature": "caed4549a55dee15cebcf33f01631e87a27da0642faf0d0a0d921fa2059e6132",
+      "./node_modules/three/examples/jsm/loaders/dracoloader.d.ts": {
+        "version": "2b3a3b4981000b83ea9966f6ec50c82dc7823f6f84a660b5ef37fce3a8ca5ad8",
+        "signature": "2b3a3b4981000b83ea9966f6ec50c82dc7823f6f84a660b5ef37fce3a8ca5ad8",
         "affectsGlobalScope": false
       },
-      "./src/types.ts": {
-        "version": "c7104ffa36e0660a6e95fd6be6ef54ca1eeabc51431f61c4ac848d33eec04266",
-        "signature": "7627226b89a188c5faa5907b0baea871884130ea323189d22d301da42453ab34",
+      "./node_modules/three/examples/jsm/loaders/ddsloader.d.ts": {
+        "version": "c0368133592f12f9a1089326d5b939267682e474e6ebb98674272991e941b0ea",
+        "signature": "c0368133592f12f9a1089326d5b939267682e474e6ebb98674272991e941b0ea",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/three/examples/jsm/loaders/ktx2loader.d.ts": {
+        "version": "713ff6d1de1a2667073acf0084426d7b029dd5c6bc045ad86e39ae9cde1e93f4",
+        "signature": "713ff6d1de1a2667073acf0084426d7b029dd5c6bc045ad86e39ae9cde1e93f4",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/three/examples/jsm/loaders/gltfloader.d.ts": {
+        "version": "448a9b21b286fd565685ce314646f507f548d7f1147dfa97cad8c255f296636f",
+        "signature": "448a9b21b286fd565685ce314646f507f548d7f1147dfa97cad8c255f296636f",
+        "affectsGlobalScope": false
+      },
+      "./src/assets.ts": {
+        "version": "ac6913bc0ea402bcff06a6c7112b7df07ecf299e4fd6157a791e131f627f8db2",
+        "signature": "4dc62a7599d2af3c95610f3fae6be64197d85f6b0d9e28118537bacd3c7d49de",
+        "affectsGlobalScope": false
+      },
+      "./src/constants.ts": {
+        "version": "b68721b4743f18a98dc2835693a50db9428f286c825a54c63542ed9c44b47ab8",
+        "signature": "fe86d9a86fe712e5f9d7eec6dfb70963e02ae70b2bc58a283e696132aac5ace1",
         "affectsGlobalScope": false
       },
       "./node_modules/@drecom/stats.js/src/index.d.ts": {
@@ -1422,13 +1447,33 @@
         "affectsGlobalScope": false
       },
       "./src/gl.ts": {
-        "version": "1e375117d01002adb089e085f814bd5b9fc3aca565f0563366cab0880facdb95",
+        "version": "1fcdf0697a26ea67f53a38963735e38b83426b2b2bbec641f98aadb4fa6a829b",
         "signature": "5cf2f40c83ce361953285b495a73f71fde061dc1eb8d5b3aa95dd1e9fffed5ee",
         "affectsGlobalScope": false
       },
+      "./src/utils.ts": {
+        "version": "08e62590cd539b4e9218cdf9a23f678110477e7d355712c152b863353b8230e3",
+        "signature": "95c81f035a35b255446043923a57a40f66bc876a9fd6e499c12d1d539bca392a",
+        "affectsGlobalScope": false
+      },
+      "./src/physics.ts": {
+        "version": "cffb947f7ae18b8c1d5ff4a9f3759cf6990c7986fd46a4555c2e15c6d0ddb7fe",
+        "signature": "0d2a065b769d6f60abcba9101d16e549b24d4c42a6325067170af765a07b9985",
+        "affectsGlobalScope": false
+      },
+      "./src/raincubes.ts": {
+        "version": "f7c1eaaecd7ae1ef1b102ded09e3f7940609ff25d3f32c7aa826c93fb7dcad80",
+        "signature": "3db44927c09612c111d383512084a6c7b11a4793c8708929bd374f9538f4c7f9",
+        "affectsGlobalScope": false
+      },
       "./src/index.ts": {
-        "version": "41ab871cff9cba4414170cc6de5d918e32f228ffc8974ce7dd66cde25ca2f434",
+        "version": "f9968cf33a5e7348c18ea85c40f3890be9e1753d52cc566557b89abb772e803d",
         "signature": "fc096df87e10947a9c2142c386e9f7010f09d421d9aa4115922977bab4866706",
+        "affectsGlobalScope": false
+      },
+      "./src/worker.ts": {
+        "version": "08099da67b63c8ef0af6a897f4647d8306c3c84f7d4dab15ad1079374edf6292",
+        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/estree/index.d.ts": {
@@ -1897,6 +1942,21 @@
       "./node_modules/@types/node/zlib.d.ts": [
         "./node_modules/@types/node/stream.d.ts"
       ],
+      "./node_modules/three/examples/jsm/loaders/ddsloader.d.ts": [
+        "./node_modules/three/src/three.d.ts"
+      ],
+      "./node_modules/three/examples/jsm/loaders/dracoloader.d.ts": [
+        "./node_modules/three/src/three.d.ts"
+      ],
+      "./node_modules/three/examples/jsm/loaders/gltfloader.d.ts": [
+        "./node_modules/three/examples/jsm/loaders/ddsloader.d.ts",
+        "./node_modules/three/examples/jsm/loaders/dracoloader.d.ts",
+        "./node_modules/three/examples/jsm/loaders/ktx2loader.d.ts",
+        "./node_modules/three/src/three.d.ts"
+      ],
+      "./node_modules/three/examples/jsm/loaders/ktx2loader.d.ts": [
+        "./node_modules/three/src/three.d.ts"
+      ],
       "./node_modules/three/src/animation/animationaction.d.ts": [
         "./node_modules/three/src/animation/animationclip.d.ts",
         "./node_modules/three/src/animation/animationmixer.d.ts",
@@ -3148,6 +3208,11 @@
         "./node_modules/three/src/textures/videotexture.d.ts",
         "./node_modules/three/src/three.legacy.d.ts"
       ],
+      "./src/assets.ts": [
+        "./node_modules/three/examples/jsm/loaders/gltfloader.d.ts",
+        "./node_modules/three/src/three.d.ts",
+        "./src/types.ts"
+      ],
       "./src/constants.ts": [
         "./node_modules/three/src/three.d.ts"
       ],
@@ -3160,7 +3225,34 @@
       ],
       "./src/index.ts": [
         "./node_modules/three/src/three.d.ts",
-        "./src/gl.ts"
+        "./src/assets.ts",
+        "./src/constants.ts",
+        "./src/gl.ts",
+        "./src/physics.ts",
+        "./src/raincubes.ts",
+        "./src/utils.ts"
+      ],
+      "./src/physics.ts": [
+        "./node_modules/three/src/three.d.ts",
+        "./src/constants.ts",
+        "./src/types.ts"
+      ],
+      "./src/raincubes.ts": [
+        "./node_modules/three/src/three.d.ts",
+        "./src/constants.ts",
+        "./src/gl.ts",
+        "./src/physics.ts",
+        "./src/types.ts",
+        "./src/utils.ts"
+      ],
+      "./src/utils.ts": [
+        "./node_modules/three/src/three.d.ts",
+        "./src/assets.ts",
+        "./src/constants.ts"
+      ],
+      "./src/worker.ts": [
+        "./node_modules/three/src/three.d.ts",
+        "./src/types.ts"
       ]
     },
     "exportedModulesMap": {
@@ -3343,6 +3435,21 @@
       "./node_modules/@types/node/zlib.d.ts": [
         "./node_modules/@types/node/stream.d.ts"
       ],
+      "./node_modules/three/examples/jsm/loaders/ddsloader.d.ts": [
+        "./node_modules/three/src/three.d.ts"
+      ],
+      "./node_modules/three/examples/jsm/loaders/dracoloader.d.ts": [
+        "./node_modules/three/src/three.d.ts"
+      ],
+      "./node_modules/three/examples/jsm/loaders/gltfloader.d.ts": [
+        "./node_modules/three/examples/jsm/loaders/ddsloader.d.ts",
+        "./node_modules/three/examples/jsm/loaders/dracoloader.d.ts",
+        "./node_modules/three/examples/jsm/loaders/ktx2loader.d.ts",
+        "./node_modules/three/src/three.d.ts"
+      ],
+      "./node_modules/three/examples/jsm/loaders/ktx2loader.d.ts": [
+        "./node_modules/three/src/three.d.ts"
+      ],
       "./node_modules/three/src/animation/animationaction.d.ts": [
         "./node_modules/three/src/animation/animationclip.d.ts",
         "./node_modules/three/src/animation/animationmixer.d.ts",
@@ -4594,6 +4701,11 @@
         "./node_modules/three/src/textures/videotexture.d.ts",
         "./node_modules/three/src/three.legacy.d.ts"
       ],
+      "./src/assets.ts": [
+        "./node_modules/three/examples/jsm/loaders/gltfloader.d.ts",
+        "./node_modules/three/src/three.d.ts",
+        "./src/types.ts"
+      ],
       "./src/constants.ts": [
         "./node_modules/three/src/three.d.ts"
       ],
@@ -4601,6 +4713,13 @@
         "./node_modules/@drecom/stats.js/src/index.d.ts",
         "./node_modules/three/src/three.d.ts",
         "./src/types.ts"
+      ],
+      "./src/physics.ts": [
+        "./node_modules/three/src/three.d.ts",
+        "./src/types.ts"
+      ],
+      "./src/utils.ts": [
+        "./node_modules/three/src/three.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -4658,6 +4777,10 @@
       "./node_modules/@types/node/worker_threads.d.ts",
       "./node_modules/@types/node/zlib.d.ts",
       "./node_modules/@types/snowpack-env/index.d.ts",
+      "./node_modules/three/examples/jsm/loaders/ddsloader.d.ts",
+      "./node_modules/three/examples/jsm/loaders/dracoloader.d.ts",
+      "./node_modules/three/examples/jsm/loaders/gltfloader.d.ts",
+      "./node_modules/three/examples/jsm/loaders/ktx2loader.d.ts",
       "./node_modules/three/src/animation/animationaction.d.ts",
       "./node_modules/three/src/animation/animationclip.d.ts",
       "./node_modules/three/src/animation/animationmixer.d.ts",
@@ -4938,10 +5061,15 @@
       "./node_modules/typescript/lib/lib.esnext.weakref.d.ts",
       "./node_modules/typescript/lib/lib.scripthost.d.ts",
       "./node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
+      "./src/assets.ts",
       "./src/constants.ts",
       "./src/gl.ts",
       "./src/index.ts",
-      "./src/types.ts"
+      "./src/physics.ts",
+      "./src/raincubes.ts",
+      "./src/types.ts",
+      "./src/utils.ts",
+      "./src/worker.ts"
     ],
     "affectedFilesPendingEmit": [
       [
@@ -5158,6 +5286,22 @@
       ],
       [
         "./node_modules/@types/snowpack-env/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/three/examples/jsm/loaders/ddsloader.d.ts",
+        1
+      ],
+      [
+        "./node_modules/three/examples/jsm/loaders/dracoloader.d.ts",
+        1
+      ],
+      [
+        "./node_modules/three/examples/jsm/loaders/gltfloader.d.ts",
+        1
+      ],
+      [
+        "./node_modules/three/examples/jsm/loaders/ktx2loader.d.ts",
         1
       ],
       [
@@ -6125,6 +6269,14 @@
         1
       ],
       [
+        "./src/asset.ts",
+        1
+      ],
+      [
+        "./src/assets.ts",
+        1
+      ],
+      [
         "./src/constants.ts",
         1
       ],
@@ -6137,7 +6289,23 @@
         1
       ],
       [
+        "./src/physics.ts",
+        1
+      ],
+      [
+        "./src/raincubes.ts",
+        1
+      ],
+      [
         "./src/types.ts",
+        1
+      ],
+      [
+        "./src/utils.ts",
+        1
+      ],
+      [
+        "./src/worker.ts",
         1
       ]
     ]

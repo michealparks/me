@@ -11,13 +11,13 @@ export type Rigidbody = {
   name: string
   type: number
   shape: number
-  flat: boolean
   transform: Float32Array
   mass: number
   linearDamping: number
   angularDamping: number
   friction: number
   restitution: number
+  enabled: boolean
   triangles?: Float32Array
   linkedRigidbodyId?: number
 }
