@@ -30,11 +30,6 @@ const loadJSON = async (file: string) => {
   cache.set(file, await response.json())
 }
 
-const loadObj = async (file: string) => {
-  const response = await fetch(`assets/obj/${file}`)
-  cache.set(file, await response.text())
-}
-
 const loadTexture = async (file: string) => {
   cache.set(file, await textureLoader.loadAsync(file))
 }
@@ -51,19 +46,6 @@ const loadFont = async (file: string) => {
   cache.set(file, await fontLoader.loadAsync(file))
 }
 
-const loadSprite = async (file: string) => {
-  const [data, tex] = await Promise.all([
-    fetch(`assets/textures/${file.replace('sprite', 'json')}`).then((res) => res.json()),
-    textureLoader.loadAsync(file.replace('sprite', 'png'))
-  ])
-
-  cache.set(file, {
-    frames: data.frames,
-    meta: data.meta,
-    texture: tex
-  })
-}
-
 const loadOne = (file: string) => {
   if (file.includes('.typeface.json')) {
     return loadFont(file)
@@ -74,8 +56,6 @@ const loadOne = (file: string) => {
     case 'png': return loadTexture(file)
     case 'mp3': return loadAudio(file)
     case 'json': return loadJSON(file)
-    case 'sprite': return loadSprite(file)
-    case 'obj': return loadObj(file)
   }
 }
 
@@ -85,12 +65,14 @@ const get = (file: string) => {
 
 const queue = (...args: string[]) => {
   queueMany(args)
+  return assets
 }
 
 const queueMany = (iterable: string[] | Set<string>) => {
   for (const file of iterable) {
     queued.add(file)
   }
+  return assets
 }
 
 const on = (event: string, fn: Listener) => {

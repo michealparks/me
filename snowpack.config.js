@@ -15,6 +15,7 @@ module.exports = {
       'snowpack-plugin-copy',
       {
         patterns: [
+          { source: ['public/CNAME'], destination: 'build' },
           { source: ['public/.nojekyll'], destination: 'build' }
         ],
       },

@@ -1,4 +1,4 @@
-require('gh-pages').publish('build', {
+require('gh-pages').publish('dist', {
   dotfiles: true
 }, (err) => {
   if (err) {

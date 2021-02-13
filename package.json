@@ -18,6 +18,7 @@
     "@types/snowpack-env": "^2.3.3",
     "ammo.js": "github:kripken/ammo.js",
     "gh-pages": "^3.1.0",
+    "npm-run-all": "^4.1.5",
     "postprocessing": "^6.20.3",
     "rollup": "^2.38.5",
     "rollup-plugin-copy": "^3.3.0",

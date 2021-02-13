@@ -1,9 +1,5 @@
 import type { Vector3 } from 'three'
-
-import type {
-  Rigidbody,
-  TriggerVolume
-} from './types'
+import type { Rigidbody } from './types'
 
 importScripts('ammo.js')
 
@@ -74,7 +70,7 @@ let now = 0, then = 0, dt = 0
 let i = 0, shift = 0
 let position: any, quaternion: any
 
-const init = async () => {
+void async function () {
   // @ts-ignore
   ammo = await self.Ammo()
   ammoTransform = new ammo.btTransform()
@@ -93,7 +89,7 @@ const init = async () => {
 
   // @ts-ignore
   postMessage({ op: 'init' })
-}
+}()
 
 const update = (transforms: Float32Array) => {
   now = performance.now()
@@ -145,7 +141,7 @@ const update = (transforms: Float32Array) => {
   [transforms.buffer])
 }
 
-const storeCollision = (body: Rigidbody | TriggerVolume, other: Rigidbody) => {
+const storeCollision = (body: Rigidbody, other: Rigidbody) => {
   const { id } = body
   let isNewCollision = false
 
@@ -384,57 +380,6 @@ const createRigidbodies = (objects: Rigidbody[]) => {
   }
 }
 
-const createTriggerVolume = (object: TriggerVolume) => {
-  const { transform } = object
-
-  const shape = createShape(object.name, object.shape, object.transform, undefined)
-  shape.setMargin(0.0)
-
-  ammoVec.setValue(transform[0], transform[1], transform[2])
-  ammoQuat.setValue(transform[3], transform[4], transform[5], transform[6])
-  ammoTransform.setOrigin(ammoVec)
-  ammoTransform.setRotation(ammoQuat)
-
-  const mass = 1
-  const motionState = new ammo.btDefaultMotionState(ammoTransform)
-  const bodyInfo = new ammo.btRigidBodyConstructionInfo(mass, motionState, shape)
-  const body = new ammo.btRigidBody(bodyInfo)
-
-  body.type = BODYTYPE_STATIC
-  body.trigger = true
-  body.id = object.id
-  body.name = object.name
-  body.enter = object.enter
-  body.leave = object.leave
-  body.entity = object.entity
-  body.linkedRigidbodyId = object.linkedRigidbodyId
-
-  body.setRestitution(0)
-  body.setFriction(0)
-  body.setDamping(0, 0)
-
-  ammoVec.setValue(0, 0, 0)
-  body.setLinearFactor(ammoVec)
-  body.setAngularFactor(ammoVec)
-  body.setCollisionFlags(body.getCollisionFlags() | BODYFLAG_NORESPONSE_OBJECT)
-
-  ammo.destroy(bodyInfo)
-  
-  bodyMap.set(body.id, body)
-
-  return body
-}
-
-const createTriggerVolumes = (objects: TriggerVolume[]) => {
-  const group = BODYGROUP_STATIC
-  const mask = BODYMASK_NOT_STATIC
-
-  for (const object of objects) {
-    const body = createTriggerVolume(object)
-    world.addRigidBody(body, group, mask)
-  }
-}
-
 const applyCentralImpulse = (id: number, impulse: Vector3) => {
   body = bodyMap.get(id)
   ammoVec.setValue(impulse.x, impulse.y, impulse.z)
@@ -482,66 +427,10 @@ const teleportMany = (ids: Uint16Array, transforms: Float32Array, clearForces: b
   }
 }
 
-const setGravity = (id: number, acceleration: Vector3) => {
-  body = bodyMap.get(id)
-  ammoVec.setValue(acceleration.x, acceleration.y, acceleration.z)
-  body.setGravity(ammoVec)
-  body.activate()
-}
-
-const setFriction = (id: number, friction: number) => {
-  body = bodyMap.get(id)
-  body.setFriction(friction)
-  body.activate()
-}
-
-const removeRigidbody = (id: number) => {
-  const body = bodyMap.get(id)
-  const linkedId = body.linkedRigidbodyId
-
-  // Linked rigidbodies borrow their motionState, so we only need to destroy the body.
-  if (linkedId !== undefined) {
-    const linkedBody = bodyMap.get(linkedId)
-    bodyMap.delete(linkedId)
-    dynamicBodies.delete(linkedBody)
-    world.removeRigidBody(linkedBody)
-    ammo.destroy(linkedBody)
-  }
-
-  bodyMap.delete(id)
-  dynamicBodies.delete(body)
-  world.removeRigidBody(body)
-
-  const motionState = body.getMotionState()
-  if (motionState !== undefined) {
-    ammo.destroy(motionState)
-  }
-
-  ammo.destroy(body)
-}
-
-const removeRigidbodies = (ids: Uint16Array) => {
-  for (const id of ids) {
-    removeRigidbody(id)
-  }
-
-  for (body of dynamicBodies) {
-    body.activate()
-  }
-
-  // @ts-ignore
-  postMessage({ op: 'unpause' })
-}
-
-const removeTriggerVolumes = (ids: Uint16Array) => {
-
-}
-
 onmessage = ({ data }) => {
   switch (data.op) {
     case 'update':
       return update(data.transforms)
-
     case 'applyCentralImpulse':
       return applyCentralImpulse(data.id, data.impulse)
     case 'applyCentralForce':
@@ -550,23 +439,9 @@ onmessage = ({ data }) => {
       return teleport(data.id, data.transform, data.clearForces)
     case 'teleportMany':
       return teleportMany(data.ids, data.transforms, data.clearForces)
-
-    case 'setGravity':
-      return setGravity(data.id, data.acceleration)
-    case 'setFriction':
-      return setFriction(data.id, data.friction)
-
     case 'createRigidbodies':
       return createRigidbodies(data.objects)
-    case 'createTriggerVolumes':
-      return createTriggerVolumes(data.objects)
-    case 'removeRigidbodies':
-      return removeRigidbodies(data.ids)
-    case 'removeTriggerVolumes':
-      return removeTriggerVolumes(data.ids)
   }
 }
-
-init()
 
 export {}

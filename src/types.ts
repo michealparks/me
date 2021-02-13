@@ -21,36 +21,3 @@ export type Rigidbody = {
   triangles?: Float32Array
   linkedRigidbodyId?: number
 }
-
-export type TriggerVolume = {
-  id: number
-  name: string
-  shape: number
-  enter: string
-  leave: string
-  entity: string
-  linkedRigidbodyId?: number
-  transform: Float32Array
-}
-
-export type TriggerListener = {
-  (body0: TriggerVolume, body1: TriggerVolume): void
-}
-
-export type SpriteMeta = {
-  frameTags: [
-    {
-      name: string,
-      from: number,
-      to: number
-    }
-  ]
-}
-
-export type SpriteFrame = {
-  duration: number
-}
-
-export type GLTFParams = {
-  shadows: boolean
-}

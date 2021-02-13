@@ -236,9 +236,14 @@
         "signature": "d96fa8a56871904776165ceb8e00bd56127e1a017bb2664cae76223b5f815141",
         "affectsGlobalScope": false
       },
+      "./src/app.ts": {
+        "version": "d19352629b7796b994ae590ce1ecde2627a11b2660e6aa600a189988506d14d0",
+        "signature": "23f5296915feb5fc5722039cb7d06ef11e1c6e6f7c3b17d1b572d4ac23b0d849",
+        "affectsGlobalScope": false
+      },
       "./src/types.ts": {
-        "version": "d8a1b05bc927fb4bbf23ef7ff55fa670e4291e12161b5196778b1ae043d574f8",
-        "signature": "1ed6416858a87b593cc836f81db2109564927256b1e1080385397595dfbee4c1",
+        "version": "c9e16419ecec9cb8441b208bb26195430f70ec80645901ee34bae8794b6bb7c9",
+        "signature": "6ce737b9dc0fe4e2acab0d364ffc57fe120f826cece9fe3294c165ad66a4eb98",
         "affectsGlobalScope": false
       },
       "./node_modules/three/src/polyfills.d.ts": {
@@ -1427,13 +1432,8 @@
         "affectsGlobalScope": false
       },
       "./src/assets.ts": {
-        "version": "ac6913bc0ea402bcff06a6c7112b7df07ecf299e4fd6157a791e131f627f8db2",
-        "signature": "4dc62a7599d2af3c95610f3fae6be64197d85f6b0d9e28118537bacd3c7d49de",
-        "affectsGlobalScope": false
-      },
-      "./src/constants.ts": {
-        "version": "b68721b4743f18a98dc2835693a50db9428f286c825a54c63542ed9c44b47ab8",
-        "signature": "fe86d9a86fe712e5f9d7eec6dfb70963e02ae70b2bc58a283e696132aac5ace1",
+        "version": "b3adc2ca98bae90b5994ddfdd9462c28bdb2c3cd8eb23f00fca455dc7b77032c",
+        "signature": "2d080595cd98843612fe5e33fcdd5c23ebe335d586a3d5a4dd8d91d7d0662f64",
         "affectsGlobalScope": false
       },
       "./node_modules/@drecom/stats.js/src/index.d.ts": {
@@ -1446,9 +1446,19 @@
         "signature": "b0c893d41f392712d8da2302e30c3e7062138afaab628bfdd599e1b1c6118b75",
         "affectsGlobalScope": false
       },
+      "./src/constants.ts": {
+        "version": "4913c5af0b9d95910193ffd4096742f2a04a50fb3e79cf3c5feae6536d2c90fc",
+        "signature": "26b427212cebf00f4db1dc26c5e6017b3f21d990b1fdbd69c14f26ea3f03edeb",
+        "affectsGlobalScope": false
+      },
       "./src/gl.ts": {
         "version": "1fcdf0697a26ea67f53a38963735e38b83426b2b2bbec641f98aadb4fa6a829b",
         "signature": "5cf2f40c83ce361953285b495a73f71fde061dc1eb8d5b3aa95dd1e9fffed5ee",
+        "affectsGlobalScope": false
+      },
+      "./src/audio.ts": {
+        "version": "ff711ccfbf121136ad1f5c61e12885500a47a0764bc4f064b36f0c90d96d0c6b",
+        "signature": "463d20414259fc1b85b995b89de728250519c401097d47e27e10934063e72883",
         "affectsGlobalScope": false
       },
       "./src/utils.ts": {
@@ -1457,22 +1467,22 @@
         "affectsGlobalScope": false
       },
       "./src/physics.ts": {
-        "version": "cffb947f7ae18b8c1d5ff4a9f3759cf6990c7986fd46a4555c2e15c6d0ddb7fe",
-        "signature": "0d2a065b769d6f60abcba9101d16e549b24d4c42a6325067170af765a07b9985",
+        "version": "d03a27c5e6a690b80b24eb02049d226fa0c5a96e579ef81a23b45f4dc1a01d54",
+        "signature": "1072b225478bdc1275f87e5ff4ccb688b500fb3a5108a1ea3c65e702f182f2ba",
         "affectsGlobalScope": false
       },
       "./src/raincubes.ts": {
-        "version": "f7c1eaaecd7ae1ef1b102ded09e3f7940609ff25d3f32c7aa826c93fb7dcad80",
+        "version": "0d6b00a5b3ecae9eda4dbaaa158ebfde21d69f733a6565d4749d474bd7b6525a",
         "signature": "3db44927c09612c111d383512084a6c7b11a4793c8708929bd374f9538f4c7f9",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "f9968cf33a5e7348c18ea85c40f3890be9e1753d52cc566557b89abb772e803d",
+        "version": "4d6ed296caa2f7a659df2b5b8a1097392b9f5a7ab078313fc83723b1b27aed04",
         "signature": "fc096df87e10947a9c2142c386e9f7010f09d421d9aa4115922977bab4866706",
         "affectsGlobalScope": false
       },
       "./src/worker.ts": {
-        "version": "08099da67b63c8ef0af6a897f4647d8306c3c84f7d4dab15ad1079374edf6292",
+        "version": "7691d964d5fdb1123c6d2550ad1dbd2fd8137c462b8ceb26c089229e1d9fb298",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
@@ -3213,6 +3223,11 @@
         "./node_modules/three/src/three.d.ts",
         "./src/types.ts"
       ],
+      "./src/audio.ts": [
+        "./node_modules/three/src/three.d.ts",
+        "./src/assets.ts",
+        "./src/gl.ts"
+      ],
       "./src/constants.ts": [
         "./node_modules/three/src/three.d.ts"
       ],
@@ -3225,7 +3240,9 @@
       ],
       "./src/index.ts": [
         "./node_modules/three/src/three.d.ts",
+        "./src/app.ts",
         "./src/assets.ts",
+        "./src/audio.ts",
         "./src/constants.ts",
         "./src/gl.ts",
         "./src/physics.ts",
@@ -3234,6 +3251,7 @@
       ],
       "./src/physics.ts": [
         "./node_modules/three/src/three.d.ts",
+        "./src/app.ts",
         "./src/constants.ts",
         "./src/types.ts"
       ],
@@ -4706,6 +4724,9 @@
         "./node_modules/three/src/three.d.ts",
         "./src/types.ts"
       ],
+      "./src/audio.ts": [
+        "./node_modules/three/src/three.d.ts"
+      ],
       "./src/constants.ts": [
         "./node_modules/three/src/three.d.ts"
       ],
@@ -5061,7 +5082,9 @@
       "./node_modules/typescript/lib/lib.esnext.weakref.d.ts",
       "./node_modules/typescript/lib/lib.scripthost.d.ts",
       "./node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
+      "./src/app.ts",
       "./src/assets.ts",
+      "./src/audio.ts",
       "./src/constants.ts",
       "./src/gl.ts",
       "./src/index.ts",
@@ -6269,11 +6292,19 @@
         1
       ],
       [
+        "./src/app.ts",
+        1
+      ],
+      [
         "./src/asset.ts",
         1
       ],
       [
         "./src/assets.ts",
+        1
+      ],
+      [
+        "./src/audio.ts",
         1
       ],
       [

@@ -4,8 +4,7 @@ import type {
 } from 'three'
 
 import type {
-  Rigidbody,
-  TriggerVolume
+  Rigidbody
 } from './types'
 
 import {
@@ -13,8 +12,16 @@ import {
   PASSIVE,
   MAX_BODIES
 } from './constants'
+import { app } from './app'
 
 const worker = new Worker(new URL('./worker.js', import.meta.url))
+
+worker.addEventListener('message', () => {
+  worker.addEventListener('message', handleMessage, PASSIVE)
+  if (resolver) resolver()
+  ready = true
+}, { once: true })
+
 const bodyMap = new Map<number, Object3D>()
 const dynamicBodies = new Set<Object3D>()
 
@@ -22,13 +29,13 @@ let transforms = new Float32Array(MAX_BODIES * 7)
 let pendingUpdate = false
 let i = 0
 let shift = 0
+let ready = false
+let resolver: any
 
-const init = (): Promise<void> => {
+const init = () => {
+  if (ready) return Promise.resolve()
   return new Promise((resolve) => {
-    worker.addEventListener('message', () => {
-      worker.addEventListener('message', handleMessage, PASSIVE)
-      resolve()
-    }, { once: true })
+    resolver = resolve
   })
 }
 
@@ -53,6 +60,10 @@ const handleMessage = (e: MessageEvent) => {
 
 const updateBodies = (e: MessageEvent) => {
   const { data } = e
+
+  for (const [id, others] of e.data.collisionStart) {
+    app.fire('collisionstart', { id, others })
+  }
 
   transforms = data.transforms
   i = 0
@@ -105,17 +116,6 @@ const addRigidbodies = (objects: Object3D[], configs: Rigidbody[]) => {
   })
 }
 
-const addTriggerVolumes = (objects: Object3D[], configs: TriggerVolume[]) => {
-  for (const object of objects) {
-    bodyMap.set(object.id, object)
-  }
-
-  worker.postMessage({
-    op: 'createTriggerVolumes',
-    objects: configs
-  })
-}
-
 const applyCentralImpulse = (id: number, impulse: Vector3) => {
   worker.postMessage({
     op: 'applyCentralImpulse',
@@ -149,70 +149,15 @@ const teleportMany = (ids: Uint16Array, transforms: Float32Array) => {
   })
 }
 
-const setGravity = (id: number, acceleration: Vector3) => {
-  worker.postMessage({
-    op: 'setGravity',
-    id,
-    acceleration: { x: acceleration.x, y: acceleration.y, z: acceleration.z }
-  })
-}
-
-const setFriction = (id: number, friction: number) => {
-  worker.postMessage({
-    op: 'setFriction',
-    id,
-    friction
-  })
-}
-
-const removeRigidbody = (object: Object3D) => {
-  bodyMap.delete(object.id)
-  dynamicBodies.delete(object)
-
-  const ids = new Uint16Array(1)
-  ids[0] = object.id
-
-  worker.postMessage({
-    op: 'removeRigidbodies',
-    ids
-  })
-}
-
-const removeRigidbodies = (objects: Object3D[]) => {
-  const ids = new Uint16Array(objects.length)
-  let i = 0
-
-  for (const object of objects) {
-    ids[i] = object.id
-    bodyMap.delete(object.id)
-    dynamicBodies.delete(object)
-    i++
-  }
-
-  worker.postMessage({
-    op: 'removeRigidbodies',
-    ids
-  })
-}
-
 export const physics = {
   worker,
   bodyMap,
   dynamicBodies,
-
   init,
   update,
   addRigidbodies,
-  addTriggerVolumes,
-
   applyCentralImpulse,
   applyCentralForce,
   teleport,
   teleportMany,
-
-  setGravity,
-  setFriction,
-
-  removeRigidbody,
-  removeRigidbodies
 }

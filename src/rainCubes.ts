@@ -29,21 +29,20 @@ const setRandomTransform = (mesh: Mesh, transform: Float32Array) => {
 
 const rainCubes = async (numCubes = 50, i = 0) => {
   const template = utils.createCube(0.5)
-  template.visible = false
   template.castShadow = true
   template.receiveShadow = true
 
   const cubes: Mesh[] = []
-  const transform = new Float32Array(10)
-  transform[7] = transform[8] = transform[9] = 0.25
+  
 
   const rigidbodies: Rigidbody[] = []
   for (i = 0; i < numCubes; i++) {
     const cube = template.clone() as Mesh
-
+    const transform = new Float32Array(10)
     setRandomTransform(cube, transform)
+    transform[7] = transform[8] = transform[9] = 0.25
 
-    gl.scene.add(cube)
+    cube.updateMatrix()
 
     rigidbodies.push({
       id: cube.id,
@@ -59,6 +58,7 @@ const rainCubes = async (numCubes = 50, i = 0) => {
       enabled: false
     })
 
+    gl.scene.add(cube)
     cubes.push(cube)
   }
 
@@ -68,8 +68,8 @@ const rainCubes = async (numCubes = 50, i = 0) => {
 
   setInterval(() => {
     const cube = cubes[i]
-    cube.visible = true
-  
+
+    const transform = new Float32Array(7)
     setRandomTransform(cube, transform)
 
     physics.teleport(cube.id, transform, true)

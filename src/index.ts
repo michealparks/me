@@ -9,7 +9,9 @@ import { assets } from './assets'
 import { utils } from './utils'
 import { physics } from './physics'
 import { rainCubes } from './rainCubes'
-import { BODYSHAPE_MESH, BODYTYPE_STATIC } from './constants'
+import { BODYSHAPE_MESH, BODYTYPE_STATIC, PASSIVE } from './constants'
+import { audio } from './audio'
+import { app } from './app'
 
 export const main = async () => {
   const vec = new Vector3()
@@ -24,7 +26,7 @@ export const main = async () => {
     assets.load()
   ])
 
-  rainCubes(100)
+  rainCubes(10)
 
   const light = utils.createPointLight()
   light.position.set(2, 2, 2)
@@ -77,7 +79,7 @@ export const main = async () => {
   window.addEventListener('mousemove', (e: MouseEvent) => {
     mouse.x = (e.clientX / window.innerWidth) * 2 - 1
     mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
-  })
+  }, PASSIVE)
 
   const frame = (dt: number, elapsed: number) => {
     pivot.rotation.y = 2 * -mouse.x / Math.PI / 1.5
@@ -86,6 +88,25 @@ export const main = async () => {
   }
 
   gl.setAnimationLoop(frame)
+
+  await assets.queue(
+    '1.mp3', '2.mp3', '3.mp3', '4.mp3', '5.mp3', '6.mp3',
+    'background.mp3'
+  ).load()
+
+  audio.create('1.mp3', false, 0.1)
+  audio.create('2.mp3', false, 0.1)
+  audio.create('3.mp3', false, 0.1)
+  audio.create('4.mp3', false, 0.1)
+  audio.create('5.mp3', false, 0.1)
+  audio.create('6.mp3', false, 0.1)
+  audio.create('background.mp3', true, 0.2)
+
+  // app.on('collisionstart', (data: any) => {
+  //   if (data.id === name.id) {
+  //     audio.play(`${(Math.random() * 6 | 0) + 1}.mp3`, true)
+  //   }
+  // })
 }
 
 main()
