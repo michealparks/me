@@ -53,7 +53,7 @@ const loadOne = (file: string) => {
 
   switch (file.split('.').pop()) {
     case 'glb': return loadGLTF(file)
-    case 'png': return loadTexture(file)
+    case 'png': case 'jpg': return loadTexture(file)
     case 'mp3': return loadAudio(file)
     case 'json': return loadJSON(file)
   }

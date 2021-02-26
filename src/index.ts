@@ -1,7 +1,8 @@
 import {
+  Color,
   Object3D,
   Vector2,
-  Vector3
+  MeshStandardMaterial
 } from 'three'
 
 import { gl } from './gl'
@@ -9,15 +10,14 @@ import { assets } from './assets'
 import { utils } from './utils'
 import { physics } from './physics'
 import { rainCubes } from './rainCubes'
-import { BODYSHAPE_MESH, BODYTYPE_STATIC, PASSIVE } from './constants'
-import { audio } from './audio'
-import { app } from './app'
+import { rainObjects } from './rainObjects'
+import { BODYSHAPE_MESH, BODYTYPE_STATIC, PASSIVE, COLORS } from './constants'
 
 export const main = async () => {
-  const vec = new Vector3()
-
   assets.queue(
-    'helvetiker.typeface.json'
+    'helvetiker.typeface.json',
+    'portrait.glb',
+    'switch.glb'
   )
 
   await Promise.all([
@@ -26,27 +26,41 @@ export const main = async () => {
     assets.load()
   ])
 
+  rainObjects([
+    assets.get('portrait.glb').scene.getObjectByName('Portrait'),
+    assets.get('switch.glb').scene
+  ])
+
   rainCubes(10)
 
-  const light = utils.createPointLight()
-  light.position.set(2, 2, 2)
-  gl.scene.add(light)
-
   const name = utils.createText('micheal parks')
+  const mat = name.material as MeshStandardMaterial
+  mat.flatShading = true
+  name.receiveShadow = true
+  name.castShadow = true
   gl.scene.add(name)
-  name.geometry.boundingBox?.getSize(vec)
 
-  const transform = new Float32Array(10)
-  transform[0] = name.position.x
-  transform[1] = name.position.y
-  transform[2] = name.position.z
-  transform[3] = name.quaternion.x
-  transform[4] = name.quaternion.y
-  transform[5] = name.quaternion.z
-  transform[6] = name.quaternion.w
-  transform[7] = vec.x
-  transform[8] = vec.y
-  transform[9] = vec.z
+  const light1 = utils.createSpotLight()
+  light1.intensity = 10
+  light1.position.set(-1, 0.5, 2).multiplyScalar(4)
+  light1.color = new Color(COLORS.warmLight)
+  light1.lookAt(name.position)
+  gl.scene.add(light1)
+
+  const light2 = utils.createSpotLight()
+  light2.position.set(1, 2, 2).multiplyScalar(4)
+  light2.color = new Color(COLORS.warmestLight)
+  gl.scene.add(light2)
+  light2.lookAt(name.position)
+
+  const transform2 = new Float32Array(7)
+  transform2[0] = name.position.x
+  transform2[1] = name.position.y
+  transform2[2] = name.position.z
+  transform2[3] = name.quaternion.x
+  transform2[4] = name.quaternion.y
+  transform2[5] = name.quaternion.z
+  transform2[6] = name.quaternion.w
 
   physics.addRigidbodies([name], [{
     id: name.id,
@@ -54,16 +68,12 @@ export const main = async () => {
     triangles: new Float32Array(name.geometry.getAttribute('position').array),
     type: BODYTYPE_STATIC,
     shape: BODYSHAPE_MESH,
-    transform,
-    mass: 0,
-    linearDamping: 0,
-    angularDamping: 0,
+    transform: transform2,
     friction: 0.3,
-    restitution: 0.5,
-    enabled: true
+    restitution: 0.5
   }])
 
-  const title = utils.createText('software engineer', 0.3)
+  const title = utils.createText('creative engineer', 0.3)
   title.position.setY(-0.6)
   gl.scene.add(title)
 
@@ -89,18 +99,18 @@ export const main = async () => {
 
   gl.setAnimationLoop(frame)
 
-  await assets.queue(
-    '1.mp3', '2.mp3', '3.mp3', '4.mp3', '5.mp3', '6.mp3',
-    'background.mp3'
-  ).load()
+  // await assets.queue(
+  //   '1.mp3', '2.mp3', '3.mp3', '4.mp3', '5.mp3', '6.mp3',
+  //   'background.mp3'
+  // ).load()
 
-  audio.create('1.mp3', false, 0.1)
-  audio.create('2.mp3', false, 0.1)
-  audio.create('3.mp3', false, 0.1)
-  audio.create('4.mp3', false, 0.1)
-  audio.create('5.mp3', false, 0.1)
-  audio.create('6.mp3', false, 0.1)
-  audio.create('background.mp3', true, 0.2)
+  // audio.create('1.mp3', false, 0.1)
+  // audio.create('2.mp3', false, 0.1)
+  // audio.create('3.mp3', false, 0.1)
+  // audio.create('4.mp3', false, 0.1)
+  // audio.create('5.mp3', false, 0.1)
+  // audio.create('6.mp3', false, 0.1)
+  // audio.create('background.mp3', true, 0.2)
 
   // app.on('collisionstart', (data: any) => {
   //   if (data.id === name.id) {

@@ -2,19 +2,47 @@ import {
   PointLight,
   SpotLight,
   TextGeometry,
-  MeshNormalMaterial,
   MeshStandardMaterial,
   BoxGeometry,
-  Mesh
+  Mesh,
+  PlaneGeometry,
+  Object3D
 } from 'three'
 
 import { assets } from './assets'
 import { COLORS, SHADOW_MAP } from './constants'
 
+const setRandomTransform = (object: Object3D, transform: Float32Array) => {
+  const px = Math.random() * 4 - 3, py = 6, pz = 0
+  const qx = Math.random(), qy = Math.random(), qz = Math.random()
+
+  object.position.set(px, py, pz)
+  object.rotation.set(qx, qy, qz)
+  object.updateMatrix()
+
+  transform[0] = px
+  transform[1] = py
+  transform[2] = pz
+  transform[3] = object.quaternion.x
+  transform[4] = object.quaternion.y
+  transform[5] = object.quaternion.z
+  transform[6] = object.quaternion.w
+  transform[7] = transform[8] = transform[9] = 0.25
+
+  return transform
+}
+
+const createPlane = (size = 1, color = 0xffffff) => {
+  return new Mesh(
+    new PlaneGeometry(size, size, 1, 1),
+    new MeshStandardMaterial({ color })
+  )
+}
+
 const createCube = (size = 1, color = 0x44aa88) => {
   return new Mesh(
     new BoxGeometry(size, size, size),
-    new MeshNormalMaterial())
+    new MeshStandardMaterial({ color }))
 }
 
 const createPointLight = () => {
@@ -52,15 +80,17 @@ const createText = (text: string, size = 0.5, color = 0xffffff, font = 'helvetik
     bevelThickness: 0.03,
     bevelSize: 0.02,
     bevelOffset: 0,
-    bevelSegments: 5
+    bevelSegments: 1
   }).center()
-  const textMaterial = new MeshNormalMaterial()
+  const textMaterial = new MeshStandardMaterial({ color })
   return new Mesh(textGeometry, textMaterial)
 }
 
 export const utils = {
+  createPlane,
   createCube,
   createPointLight,
   createSpotLight,
-  createText
+  createText,
+  setRandomTransform
 }

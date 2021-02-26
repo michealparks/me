@@ -311,7 +311,7 @@ const createRigidBody = (object: Rigidbody, inertia: boolean, flag: number | und
 
   if (inertia === true) {
     localInertia = new ammo.btVector3(0, 0, 0)
-    shape.calculateLocalInertia(object.mass, localInertia)
+    shape.calculateLocalInertia(object.mass ?? 0, localInertia)
   }
 
   ammoVec.setValue(transform[0], transform[1], transform[2])
@@ -320,7 +320,7 @@ const createRigidBody = (object: Rigidbody, inertia: boolean, flag: number | und
   ammoTransform.setRotation(ammoQuat)
 
   const motionState = new ammo.btDefaultMotionState(ammoTransform)
-  const bodyInfo = new ammo.btRigidBodyConstructionInfo(object.mass, motionState, shape, localInertia)
+  const bodyInfo = new ammo.btRigidBodyConstructionInfo(object.mass ?? 0, motionState, shape, localInertia)
   const body = new ammo.btRigidBody(bodyInfo)
 
   body.type = object.type
@@ -362,7 +362,7 @@ const createRigidbodies = (objects: Rigidbody[]) => {
         break
 
       case BODYTYPE_DYNAMIC:
-        inertia = object.mass !== 0
+        inertia = (object.mass || 0) !== 0
         flag = undefined
         body = createRigidBody(object, inertia, flag)
         dynamicBodies.add(body)
