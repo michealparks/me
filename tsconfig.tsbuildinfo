@@ -1462,8 +1462,8 @@
         "affectsGlobalScope": false
       },
       "./src/gl.ts": {
-        "version": "1fcdf0697a26ea67f53a38963735e38b83426b2b2bbec641f98aadb4fa6a829b",
-        "signature": "5cf2f40c83ce361953285b495a73f71fde061dc1eb8d5b3aa95dd1e9fffed5ee",
+        "version": "e309f5877363e75ff440ae53786d5deaa5db71d750786b95ff12385e7b8e3d75",
+        "signature": "8757847b85f2425b271b6cbd9a3dc131292830a22eaafbcbcaa1762c66792e9e",
         "affectsGlobalScope": false
       },
       "./src/audio.ts": {

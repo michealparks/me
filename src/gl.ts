@@ -33,7 +33,8 @@ import {
   FAR,
   FOV,
   NEAR,
-  SHADOWMAP
+  SHADOWMAP,
+  PASSIVE
 } from './constants'
 
 const renderer = new WebGLRenderer({
@@ -52,7 +53,6 @@ renderer.shadowMap.type = SHADOWMAP
 document.body.append(renderer.domElement)
 
 let fn: Tick
-let dt = 0, elapsed = 0
 
 const clock = new Clock()
 const stats = new Stats({ maxFPS: Infinity, maxMem: Infinity })
@@ -61,9 +61,15 @@ const composer = new EffectComposer(renderer, {
   frameBufferType: HalfFloatType
 })
 
+const effects = new Map()
 const scene = new Scene()
 
-let camera: PerspectiveCamera = new PerspectiveCamera(FOV, window.innerWidth / window.innerHeight, NEAR, FAR)
+const camera = new PerspectiveCamera(
+  FOV,
+  window.innerWidth / window.innerHeight,
+  NEAR,
+  FAR)
+
 const listener = new AudioListener()
 scene.add(camera)
 camera.add(listener)
@@ -82,6 +88,7 @@ const init = async () => {
     intensity: 1.5,
     kernelSize: KernelSize.VERY_LARGE
   })
+  effects.set('bloom', bloomEffect)
 
   const smaaImageLoader = new SMAAImageLoader()
 
@@ -90,15 +97,28 @@ const init = async () => {
   )
 
   const smaaEffect = new SMAAEffect(search, area, SMAAPreset.ULTRA)
+  effects.set('smaa', smaaEffect)
 
-  const effectPass = new EffectPass(
+  composer.addPass(new RenderPass(scene, camera))
+  composer.addPass(new EffectPass(
     camera,
     smaaEffect,
     bloomEffect
-  )
+  ))
 
-  composer.addPass(new RenderPass(scene, camera))
-  composer.addPass(effectPass)
+  window.addEventListener('blur', () => toggleRender(false), PASSIVE)
+  window.addEventListener('focus', () => toggleRender(true), PASSIVE)
+  document.addEventListener('visibilitychange', () => 
+    toggleRender(document.visibilityState === 'visible'),
+  PASSIVE)
+}
+
+const toggleRender = (active: boolean) => {
+  if (active) {
+    renderer.setAnimationLoop(render)
+  } else {
+    renderer.setAnimationLoop(null)
+  }
 }
 
 const render = () => {
@@ -106,8 +126,8 @@ const render = () => {
     stats.begin()
   }
 
-  dt = clock.getDelta()
-  elapsed = clock.getElapsedTime()
+  const dt = clock.getDelta()
+  const elapsed = clock.getElapsedTime()
 
   TWEEN.update()
 
@@ -137,6 +157,7 @@ const setAnimationLoop = (frame: Tick) => {
 }
 
 export const gl = {
+  effects,
   stats,
   renderer,
   canvas,
