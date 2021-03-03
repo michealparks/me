@@ -1477,8 +1477,8 @@
         "affectsGlobalScope": false
       },
       "./src/physics.ts": {
-        "version": "d03a27c5e6a690b80b24eb02049d226fa0c5a96e579ef81a23b45f4dc1a01d54",
-        "signature": "1072b225478bdc1275f87e5ff4ccb688b500fb3a5108a1ea3c65e702f182f2ba",
+        "version": "7987684482f75601b7bcd1a1039ecefc32206f52fe3600cf12d29d670b976c4c",
+        "signature": "01d978422a8cb619487c92dcd2c67587f65088ef0e4a6f86a28cae31cf90c3a5",
         "affectsGlobalScope": false
       },
       "./src/raincubes.ts": {
@@ -1492,12 +1492,12 @@
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "d0214e8798d49df02bb909bbe86f20e6aa87b5063d3a8521c225e61ed3660ff9",
+        "version": "590243a9c05af68c27c88783a312a106aa8fab8745d819ad2736861afb15ffbc",
         "signature": "fc096df87e10947a9c2142c386e9f7010f09d421d9aa4115922977bab4866706",
         "affectsGlobalScope": false
       },
       "./src/worker.ts": {
-        "version": "2013be3bb88fed8367247f851e54712cc9b3b0e8261068bdf023349a174eb69f",
+        "version": "05b8b84cd02bca6b68cdaece689afe28af85544e43ca88ba368ebeed81927c43",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },

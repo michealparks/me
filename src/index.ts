@@ -2,7 +2,8 @@ import {
   Color,
   Object3D,
   Vector2,
-  MeshStandardMaterial
+  MeshStandardMaterial,
+  Vector3
 } from 'three'
 
 import { gl } from './gl'
@@ -98,6 +99,20 @@ export const main = async () => {
   }
 
   gl.setAnimationLoop(frame)
+
+  let gravityOn = true
+  const vec3 = new Vector3()
+
+  document.querySelector('#btn-gravity')?.addEventListener('click', () => {
+    if (gravityOn) {
+      vec3.set(0, 0, 0)
+    } else {
+      vec3.set(0, -9.8, 0)
+    }
+
+    physics.setGravity(vec3)
+    gravityOn = !gravityOn
+  })
 
   // await assets.queue(
   //   '1.mp3', '2.mp3', '3.mp3', '4.mp3', '5.mp3', '6.mp3',

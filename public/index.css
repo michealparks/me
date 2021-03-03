@@ -12,3 +12,8 @@
   width: 50px;
   padding: 5px;
 }
+
+button {
+  z-index: 10;
+  position: relative;
+}

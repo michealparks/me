@@ -149,6 +149,13 @@ const teleportMany = (ids: Uint16Array, transforms: Float32Array) => {
   })
 }
 
+const setGravity = (acceleration: Vector3) => {
+  worker.postMessage({
+    op: 'setGravity',
+    acceleration: { x: acceleration.x, y: acceleration.y, z: acceleration.z }
+  })
+}
+
 export const physics = {
   worker,
   bodyMap,
@@ -160,4 +167,5 @@ export const physics = {
   applyCentralForce,
   teleport,
   teleportMany,
+  setGravity,
 }

@@ -427,6 +427,11 @@ const teleportMany = (ids: Uint16Array, transforms: Float32Array, clearForces: b
   }
 }
 
+const setGravity = (acceleration: Vector3) => {
+  ammoVec.setValue(acceleration.x, acceleration.y, acceleration.z)
+  world.setGravity(ammoVec)
+}
+
 onmessage = ({ data }) => {
   switch (data.op) {
     case 'update':
@@ -441,6 +446,8 @@ onmessage = ({ data }) => {
       return teleportMany(data.ids, data.transforms, data.clearForces)
     case 'createRigidbodies':
       return createRigidbodies(data.objects)
+    case 'setGravity':
+      return setGravity(data.acceleration)
   }
 }
 
