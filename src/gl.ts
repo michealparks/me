@@ -9,7 +9,8 @@ import {
   HalfFloatType,
   AmbientLight,
   AudioListener,
-  Clock
+  Clock,
+  Fog
 } from 'three'
 
 import {
@@ -64,7 +65,9 @@ const composer = new EffectComposer(renderer, {
 const effects = new Map()
 const scene = new Scene()
 
-const camera = new PerspectiveCamera(
+scene.fog = new Fog('black', 10, 20)
+
+let camera = new PerspectiveCamera(
   FOV,
   window.innerWidth / window.innerHeight,
   NEAR,
@@ -85,7 +88,7 @@ scene.add(ambientLight)
 const init = async () => {
   const bloomEffect = new BloomEffect({
     height: 480,
-    intensity: 1.5,
+    intensity: 1,
     kernelSize: KernelSize.VERY_LARGE
   })
   effects.set('bloom', bloomEffect)

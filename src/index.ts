@@ -1,24 +1,24 @@
 import {
-  Color,
+  Euler,
   Object3D,
+  Quaternion,
   Vector2,
-  MeshStandardMaterial,
   Vector3
 } from 'three'
 
 import { gl } from './gl'
 import { assets } from './assets'
-import { utils } from './utils'
 import { physics } from './physics'
-import { rainCubes } from './rainCubes'
 import { rainObjects } from './rainObjects'
 import { BODYSHAPE_MESH, BODYTYPE_STATIC, PASSIVE, COLORS } from './constants'
 
 export const main = async () => {
   assets.queue(
-    'helvetiker.typeface.json',
     'portrait.glb',
-    'switch.glb'
+    'switch.glb',
+    'name.glb',
+    'synth.glb',
+    'lego.glb'
   )
 
   await Promise.all([
@@ -27,46 +27,62 @@ export const main = async () => {
     assets.load()
   ])
 
+  const legoScene = assets.get('lego.glb').scene
+
   rainObjects([
     assets.get('portrait.glb').scene.getObjectByName('Portrait'),
-    assets.get('switch.glb').scene
+    assets.get('switch.glb').scene,
+    assets.get('synth.glb').scene,
+    legoScene.getObjectByName('Lego1'),
+    legoScene.getObjectByName('Lego2'),
+    legoScene.getObjectByName('Lego3'),
+    legoScene.getObjectByName('Lego4'),
+    legoScene.getObjectByName('Lego5'),
   ])
 
-  rainCubes(10)
+  const mainScene = assets.get('name.glb').scene
+  gl.scene.add(mainScene)
 
-  const name = utils.createText('micheal parks')
-  const mat = name.material as MeshStandardMaterial
-  mat.flatShading = true
+  const [light] = mainScene.getObjectByName('Light').children
+  light.castShadow = true
+  light.shadow.bias = -0.001
+
+  const name = mainScene.getObjectByName('Micheal')
+  const title = mainScene.getObjectByName('Title')
   name.receiveShadow = true
-  name.castShadow = true
-  gl.scene.add(name)
+  title.receiveShadow = true
 
-  const light1 = utils.createSpotLight()
-  light1.intensity = 10
-  light1.position.set(-1, 0.5, 2).multiplyScalar(4)
-  light1.color = new Color(COLORS.warmLight)
-  light1.lookAt(name.position)
-  gl.scene.add(light1)
-
-  const light2 = utils.createSpotLight()
-  light2.position.set(1, 2, 2).multiplyScalar(4)
-  light2.color = new Color(COLORS.warmestLight)
-  gl.scene.add(light2)
-  light2.lookAt(name.position)
+  const transform = new Float32Array(7)
+  transform[0] = name.position.x
+  transform[1] = name.position.y
+  transform[2] = name.position.z
+  transform[3] = name.quaternion.x
+  transform[4] = name.quaternion.y
+  transform[5] = name.quaternion.z
+  transform[6] = name.quaternion.w
 
   const transform2 = new Float32Array(7)
-  transform2[0] = name.position.x
-  transform2[1] = name.position.y
-  transform2[2] = name.position.z
-  transform2[3] = name.quaternion.x
-  transform2[4] = name.quaternion.y
-  transform2[5] = name.quaternion.z
-  transform2[6] = name.quaternion.w
+  transform2[0] = title.position.x
+  transform2[1] = title.position.y
+  transform2[2] = title.position.z
+  transform2[3] = title.quaternion.x
+  transform2[4] = title.quaternion.y
+  transform2[5] = title.quaternion.z
+  transform2[6] = title.quaternion.w
 
-  physics.addRigidbodies([name], [{
+  physics.addRigidbodies([name, title], [{
     id: name.id,
     name: name.name,
     triangles: new Float32Array(name.geometry.getAttribute('position').array),
+    type: BODYTYPE_STATIC,
+    shape: BODYSHAPE_MESH,
+    transform,
+    friction: 0.3,
+    restitution: 0.5
+  }, {
+    id: title.id,
+    name: title.name,
+    triangles: new Float32Array(title.geometry.getAttribute('position').array),
     type: BODYTYPE_STATIC,
     shape: BODYSHAPE_MESH,
     transform: transform2,
@@ -74,12 +90,9 @@ export const main = async () => {
     restitution: 0.5
   }])
 
-  const title = utils.createText('creative engineer', 0.3)
-  title.position.setY(-0.6)
-  gl.scene.add(title)
-
-  gl.camera.position.set(0, 0, 15)
-  gl.camera.lookAt(0, 0, 0)
+  const camera = mainScene.getObjectByName('Camera') as Object3D
+  gl.camera.position.copy(camera.position)
+  gl.camera.quaternion.copy(camera.quaternion.multiply(camera.children[0].quaternion))
 
   const pivot = new Object3D()
   gl.scene.add(pivot)
@@ -88,20 +101,26 @@ export const main = async () => {
   const mouse = new Vector2()
 
   window.addEventListener('mousemove', (e: MouseEvent) => {
-    mouse.x = (e.clientX / window.innerWidth) * 2 - 1
+    mouse.x = +(e.clientX / window.innerWidth) * 2 - 1
     mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
   }, PASSIVE)
 
+  const dest = new Quaternion()
+
   const frame = (dt: number, elapsed: number) => {
-    pivot.rotation.y = 2 * -mouse.x / Math.PI / 1.5
-    pivot.rotation.x = 2 * mouse.y / Math.PI / 1.5
+    dest.z = 2 * mouse.x / Math.PI / 5
+    dest.x = 2 * mouse.y / Math.PI / 5
+
+    pivot.rotation.set(dest.x, 0, dest.z)
     physics.update()
   }
 
   gl.setAnimationLoop(frame)
 
   let gravityOn = true
-  const vec3 = new Vector3()
+  const vec3 = new Vector3(0, -2, 0)
+
+  physics.setGravity(vec3)
 
   document.querySelector('#btn-gravity')?.addEventListener('click', () => {
     if (gravityOn) {

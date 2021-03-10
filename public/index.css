@@ -1,7 +1,7 @@
 .links {
   position: absolute;
   z-index: 1;
-  top: 75%;
+  bottom: 5%;
   width: 400px;
   left: calc(50% - 200px);
   display: flex;
@@ -9,7 +9,6 @@
 }
 
 .links img {
-  width: 50px;
   padding: 5px;
 }
 

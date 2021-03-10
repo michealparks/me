@@ -13,7 +13,7 @@ import { assets } from './assets'
 import { COLORS, SHADOW_MAP } from './constants'
 
 const setRandomTransform = (object: Object3D, transform: Float32Array) => {
-  const px = Math.random() * 4 - 3, py = 6, pz = 0
+  const px = Math.random() * 4 - 3, py = 7, pz = 0
   const qx = Math.random(), qy = Math.random(), qz = Math.random()
 
   object.position.set(px, py, pz)
@@ -30,6 +30,23 @@ const setRandomTransform = (object: Object3D, transform: Float32Array) => {
   transform[7] = transform[8] = transform[9] = 0.25
 
   return transform
+}
+
+const shuffleArray = (arr: Array<any>) => {
+  let i = arr.length - 1
+  let j = 0
+  let temp
+
+  while (i > 0) {
+    j = Math.random() * (i + 1) | 0
+    temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+
+    i -= 1
+  }
+
+  return arr
 }
 
 const createPlane = (size = 1, color = 0xffffff) => {
@@ -70,27 +87,11 @@ const createSpotLight = () => {
   return light
 }
 
-const createText = (text: string, size = 0.5, color = 0xffffff, font = 'helvetiker.typeface.json') => {
-  const textGeometry = new TextGeometry(text, {
-    font: assets.get(font),
-    size,
-    height: 0.2,
-    curveSegments: 12,
-    bevelEnabled: true,
-    bevelThickness: 0.03,
-    bevelSize: 0.02,
-    bevelOffset: 0,
-    bevelSegments: 1
-  }).center()
-  const textMaterial = new MeshStandardMaterial({ color })
-  return new Mesh(textGeometry, textMaterial)
-}
-
 export const utils = {
   createPlane,
   createCube,
   createPointLight,
   createSpotLight,
-  createText,
-  setRandomTransform
+  setRandomTransform,
+  shuffleArray
 }

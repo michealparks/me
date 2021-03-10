@@ -10,19 +10,33 @@ import type { Rigidbody } from './types'
 import { gl } from './gl'
 import { physics } from './physics'
 import { BODYTYPE_DYNAMIC, BODYSHAPE_BOX } from './constants'
-
 import { utils } from './utils'
 
 const vec3 = new Vector3()
 const box = new Box3()
 
 export const rainObjects = async (objects: Mesh[]) => {
+  utils.shuffleArray(objects)
+
   const meshes: Object3D[] = []
   const rigidbodies: Rigidbody[] = []
 
   let l = 0
 
   for (const object of objects) {
+    object.visible = false
+    if (object instanceof Mesh) {
+      object.castShadow = true
+      object.receiveShadow = true
+    }
+
+    object.traverse((obj) => {
+      if (obj instanceof Mesh) {
+        obj.castShadow = true
+        obj.receiveShadow = true
+      }
+    })
+  
     const transform = new Float32Array(10)
     utils.setRandomTransform(object, transform)
 
@@ -55,9 +69,9 @@ export const rainObjects = async (objects: Mesh[]) => {
 
   let i = 0
 
-  setInterval(() => {
-    console.log(i)
+  const startFall = () => {
     const object = meshes[i]
+    object.visible = true
 
     const transform = new Float32Array(7)
     utils.setRandomTransform(object, transform)
@@ -67,5 +81,8 @@ export const rainObjects = async (objects: Mesh[]) => {
     i += 1
     
     if (i === l) i = 0
-  }, 3000)
+  }
+
+  setInterval(startFall, 1000)
+  startFall()
 }
