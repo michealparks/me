@@ -1477,7 +1477,7 @@
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "6529a1438e1247d639b53179f9377eb26e48669a251ea63aa6aba53a1ab04b02",
+        "version": "fd03c33bbe3630a365973b3f470e5a7f5c54a842e73c89b50b7014a8d30b7684",
         "signature": "fc096df87e10947a9c2142c386e9f7010f09d421d9aa4115922977bab4866706",
         "affectsGlobalScope": false
       },

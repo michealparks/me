@@ -145,6 +145,10 @@ export const main = async () => {
     pointer.y = -(e.clientY / window.innerHeight) * 2 + 1
   }
 
+  const handleTouchStart = (e: TouchEvent) => {
+    e.preventDefault()
+  }
+
   const handleTouchMove = (e: TouchEvent) => {
     e.preventDefault()
 
@@ -167,6 +171,7 @@ export const main = async () => {
   handleResize()
   window.addEventListener('resize', utils.debounce(handleResize, 400, true), PASSIVE)
   window.addEventListener('mousemove', handleMouseMove, PASSIVE)
+  window.addEventListener('touchstart', handleTouchStart)
   window.addEventListener('touchmove', handleTouchMove)
 
   // await assets.queue(
