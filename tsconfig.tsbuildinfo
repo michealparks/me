@@ -1467,8 +1467,8 @@
         "affectsGlobalScope": false
       },
       "./src/utils.ts": {
-        "version": "51eae4a13ae8e2f116b2c6dca7dd4442dd71ed432c06216ba8e2f520b62f7249",
-        "signature": "f698b039e64f2e91da344cb6c76f8c2ded22b4e76adef3eacd66f5ce084e14e3",
+        "version": "cef7d97813f5609d7b4dd639798fa31c8dbf0154e7c5560fd802271fc405ed96",
+        "signature": "5cf45c145d297f5d3e55280cb5adb4b1806f754d51440e0f6e89e265f8ae63cc",
         "affectsGlobalScope": false
       },
       "./src/rainobjects.ts": {
@@ -1477,7 +1477,7 @@
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "2b6c7801e1f2584296fa056ecddf57b07739b60952668af0d46ca9f49a81d2a2",
+        "version": "6529a1438e1247d639b53179f9377eb26e48669a251ea63aa6aba53a1ab04b02",
         "signature": "fc096df87e10947a9c2142c386e9f7010f09d421d9aa4115922977bab4866706",
         "affectsGlobalScope": false
       },
@@ -3241,7 +3241,8 @@
         "./src/constants.ts",
         "./src/gl.ts",
         "./src/physics.ts",
-        "./src/rainobjects.ts"
+        "./src/rainobjects.ts",
+        "./src/utils.ts"
       ],
       "./src/physics.ts": [
         "./node_modules/@types/three/index.d.ts",
@@ -3258,9 +3259,7 @@
         "./src/utils.ts"
       ],
       "./src/utils.ts": [
-        "./node_modules/@types/three/index.d.ts",
-        "./src/assets.ts",
-        "./src/constants.ts"
+        "./node_modules/@types/three/index.d.ts"
       ],
       "./src/worker.ts": [
         "./node_modules/@types/three/index.d.ts",

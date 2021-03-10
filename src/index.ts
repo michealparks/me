@@ -1,5 +1,5 @@
 import {
-  Euler,
+  Box3,
   Object3D,
   Quaternion,
   Vector2,
@@ -10,7 +10,8 @@ import { gl } from './gl'
 import { assets } from './assets'
 import { physics } from './physics'
 import { rainObjects } from './rainObjects'
-import { BODYSHAPE_MESH, BODYTYPE_STATIC, PASSIVE, COLORS } from './constants'
+import { BODYTYPE_STATIC, PASSIVE, BODYSHAPE_BOX } from './constants'
+import { utils } from './utils'
 
 export const main = async () => {
   assets.queue(
@@ -54,7 +55,9 @@ export const main = async () => {
   name.receiveShadow = true
   title.receiveShadow = true
 
-  const transform = new Float32Array(7)
+  const vec3 = new Vector3()
+  const box = new Box3()
+  const transform = new Float32Array(10)
   transform[0] = name.position.x
   transform[1] = name.position.y
   transform[2] = name.position.z
@@ -63,7 +66,15 @@ export const main = async () => {
   transform[5] = name.quaternion.z
   transform[6] = name.quaternion.w
 
-  const transform2 = new Float32Array(7)
+  const bb1 = mainScene.getObjectByName('BoundingBox1')
+  box.setFromObject(bb1)
+  bb1.visible = false
+  box.getSize(vec3)
+  transform[7] = vec3.x / 2
+  transform[8] = vec3.y / 2
+  transform[9] = vec3.z / 2
+
+  const transform2 = new Float32Array(10)
   transform2[0] = title.position.x
   transform2[1] = title.position.y
   transform2[2] = title.position.z
@@ -72,21 +83,27 @@ export const main = async () => {
   transform2[5] = title.quaternion.z
   transform2[6] = title.quaternion.w
 
+  const bb2 = mainScene.getObjectByName('BoundingBox2')
+  box.setFromObject(bb2)
+  bb2.visible = false
+  box.getSize(vec3)
+  transform2[7] = vec3.x / 2
+  transform2[8] = vec3.y / 2
+  transform2[9] = vec3.z / 2
+
   physics.addRigidbodies([name, title], [{
     id: name.id,
     name: name.name,
-    triangles: new Float32Array(name.geometry.getAttribute('position').array),
     type: BODYTYPE_STATIC,
-    shape: BODYSHAPE_MESH,
+    shape: BODYSHAPE_BOX,
     transform,
     friction: 0.3,
     restitution: 0.5
   }, {
     id: title.id,
     name: title.name,
-    triangles: new Float32Array(title.geometry.getAttribute('position').array),
     type: BODYTYPE_STATIC,
-    shape: BODYSHAPE_MESH,
+    shape: BODYSHAPE_BOX,
     transform: transform2,
     friction: 0.3,
     restitution: 0.5
@@ -96,22 +113,50 @@ export const main = async () => {
   gl.camera.position.copy(camera.position)
   gl.camera.quaternion.copy(camera.quaternion.multiply(camera.children[0].quaternion))
 
+  vec3.set(0, -2, 0)
+  physics.setGravity(vec3)
+
+  const MOBILE_ZOOM = -5
+
+  let isMobile = false
+
+  const handleResize = () => {
+    if (window.innerWidth < 600 && isMobile === false) {
+      gl.camera.getWorldDirection(vec3)
+      vec3.multiplyScalar(MOBILE_ZOOM)
+      gl.camera.position.add(vec3)
+      isMobile = true
+    } else if (window.innerWidth >= 600 && isMobile === true) {
+      gl.camera.getWorldDirection(vec3)
+      vec3.multiplyScalar(-MOBILE_ZOOM)
+      gl.camera.position.add(vec3)
+      isMobile = false
+    }
+  }
+
   const pivot = new Object3D()
   gl.scene.add(pivot)
   pivot.attach(gl.camera)
 
-  const mouse = new Vector2()
+  const pointer = new Vector2()
 
-  window.addEventListener('mousemove', (e: MouseEvent) => {
-    mouse.x = +(e.clientX / window.innerWidth) * 2 - 1
-    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
-  }, PASSIVE)
+  const handleMouseMove = (e: MouseEvent) => {
+    pointer.x = +(e.clientX / window.innerWidth) * 2 - 1
+    pointer.y = -(e.clientY / window.innerHeight) * 2 + 1
+  }
+
+  const handleTouchMove = (e: TouchEvent) => {
+    e.preventDefault()
+
+    pointer.x = +(e.touches[0].clientX / window.innerWidth) * 2 - 1
+    pointer.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1
+  }
 
   const dest = new Quaternion()
 
   const frame = (dt: number, elapsed: number) => {
-    dest.z = 2 * mouse.x / Math.PI / 5
-    dest.x = 2 * mouse.y / Math.PI / 5
+    dest.z = 2 * pointer.x / Math.PI / 5
+    dest.x = 2 * pointer.y / Math.PI / 5
 
     pivot.rotation.set(dest.x, 0, dest.z)
     physics.update()
@@ -119,21 +164,10 @@ export const main = async () => {
 
   gl.setAnimationLoop(frame)
 
-  let gravityOn = true
-  const vec3 = new Vector3(0, -2, 0)
-
-  physics.setGravity(vec3)
-
-  document.querySelector('#btn-gravity')?.addEventListener('click', () => {
-    if (gravityOn) {
-      vec3.set(0, 0, 0)
-    } else {
-      vec3.set(0, -9.8, 0)
-    }
-
-    physics.setGravity(vec3)
-    gravityOn = !gravityOn
-  })
+  handleResize()
+  window.addEventListener('resize', utils.debounce(handleResize, 400, true), PASSIVE)
+  window.addEventListener('mousemove', handleMouseMove, PASSIVE)
+  window.addEventListener('touchmove', handleTouchMove)
 
   // await assets.queue(
   //   '1.mp3', '2.mp3', '3.mp3', '4.mp3', '5.mp3', '6.mp3',

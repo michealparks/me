@@ -1,16 +1,6 @@
-import {
-  PointLight,
-  SpotLight,
-  TextGeometry,
-  MeshStandardMaterial,
-  BoxGeometry,
-  Mesh,
-  PlaneGeometry,
+import type {
   Object3D
 } from 'three'
-
-import { assets } from './assets'
-import { COLORS, SHADOW_MAP } from './constants'
 
 const setRandomTransform = (object: Object3D, transform: Float32Array) => {
   const px = Math.random() * 4 - 3, py = 7, pz = 0
@@ -49,49 +39,32 @@ const shuffleArray = (arr: Array<any>) => {
   return arr
 }
 
-const createPlane = (size = 1, color = 0xffffff) => {
-  return new Mesh(
-    new PlaneGeometry(size, size, 1, 1),
-    new MeshStandardMaterial({ color })
-  )
-}
+const debounce = (fn: any, wait: number, immediate: boolean) => {
+	let timeout: NodeJS.Timeout | null
 
-const createCube = (size = 1, color = 0x44aa88) => {
-  return new Mesh(
-    new BoxGeometry(size, size, size),
-    new MeshStandardMaterial({ color }))
-}
+	return (...args: any) => {
+		const later = () => {
+			timeout = null
+			if (immediate === false) fn(...args)
+		}
 
-const createPointLight = () => {
-  const intensity = 3.0
-  const color = COLORS.warmLight
-  const light = new PointLight(color, intensity)
-  light.castShadow = true
-  light.shadow.mapSize.width = SHADOW_MAP.width
-  light.shadow.mapSize.height = SHADOW_MAP.height
-  light.shadow.radius = 8
-  light.shadow.bias = -0.0001
-  return light
-}
+		if (timeout !== null) {
+      clearTimeout(timeout)
+      timeout = null
+    }
 
-const createSpotLight = () => {
-  const intensity = 5.0
-  const light = new SpotLight(COLORS.warmLight, intensity)
-  light.castShadow = true
-  light.angle = 50
-  light.penumbra = 1
-  light.shadow.mapSize.width = SHADOW_MAP.width
-  light.shadow.mapSize.height = SHADOW_MAP.height
-  light.shadow.radius = 8
-  light.shadow.bias = -0.0001
-  return light
+    const callNow = immediate && timeout === null
+
+		timeout = setTimeout(later, wait)
+
+		if (callNow) {
+      fn(...args)
+    }
+	}
 }
 
 export const utils = {
-  createPlane,
-  createCube,
-  createPointLight,
-  createSpotLight,
   setRandomTransform,
-  shuffleArray
+  shuffleArray,
+  debounce,
 }
