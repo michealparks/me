@@ -22,6 +22,9 @@ import {
   SMAAPreset,
   BloomEffect,
   KernelSize,
+  NoiseEffect,
+  BlendFunction,
+  ChromaticAberrationEffect
   // @ts-ignore
 } from 'postprocessing'
 
@@ -102,11 +105,21 @@ const init = async () => {
   const smaaEffect = new SMAAEffect(search, area, SMAAPreset.ULTRA)
   effects.set('smaa', smaaEffect)
 
+  // const noiseEffect = new NoiseEffect({
+  //   blendFunction: BlendFunction.COLOR_BURN,
+  // })
+  // effects.set('noise', noiseEffect)
+
+  const chromaticAberrationEffect = new ChromaticAberrationEffect()
+  effects.set('chromaticAberrationEffect', chromaticAberrationEffect)
+
   composer.addPass(new RenderPass(scene, camera))
   composer.addPass(new EffectPass(
     camera,
+    // noiseEffect,
     smaaEffect,
-    bloomEffect
+    bloomEffect,
+    chromaticAberrationEffect
   ))
 
   window.addEventListener('blur', () => toggleRender(false), PASSIVE)

@@ -18,7 +18,8 @@ export const main = async () => {
     'switch.glb',
     'name.glb',
     'synth.glb',
-    'lego.glb'
+    'lego.glb',
+    'plant.glb'
   )
 
   await Promise.all([
@@ -33,6 +34,7 @@ export const main = async () => {
     assets.get('portrait.glb').scene.getObjectByName('Portrait'),
     assets.get('switch.glb').scene,
     assets.get('synth.glb').scene,
+    assets.get('plant.glb').scene,
     legoScene.getObjectByName('Lego1'),
     legoScene.getObjectByName('Lego2'),
     legoScene.getObjectByName('Lego3'),

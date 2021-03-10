@@ -40,7 +40,14 @@ export const rainObjects = async (objects: Mesh[]) => {
     const transform = new Float32Array(10)
     utils.setRandomTransform(object, transform)
 
-    box.setFromObject(object)
+    const bb = object.getObjectByName('BoundingBox')
+    if (bb) {
+      box.setFromObject(bb)
+      bb.visible = false
+    } else {
+      box.setFromObject(object)
+    }
+    
     box.getSize(vec3)
     transform[7] = vec3.x / 2
     transform[8] = vec3.y / 2
