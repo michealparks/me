@@ -1,7 +1,7 @@
 import type { Vector3 } from 'three'
 import type { Rigidbody } from './types'
 
-importScripts('ammo.js')
+import Ammo from './ammo.js'
 
 const MAX_SUBSTEPS = 40
 const FIXED_TIMESTEP = 1 / 60
@@ -72,7 +72,7 @@ let position: any, quaternion: any
 
 void async function () {
   // @ts-ignore
-  ammo = await self.Ammo()
+  ammo = await Ammo()
   ammoTransform = new ammo.btTransform()
   ammoVec = new ammo.btVector3()
   ammoVec2 = new ammo.btVector3()
@@ -452,3 +452,4 @@ onmessage = ({ data }) => {
 }
 
 export {}
+export default {}

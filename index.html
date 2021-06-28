@@ -21,15 +21,13 @@
       h1, h2 { opacity: 0; }
     </style>
 
-    <link rel="modulepreload" href="index.js">
-    <link rel="preload" href="worker.js" as="script">
-    <link rel="preload" href="ammo.js" as="script">
-    <link rel="preload" href="index.css" as="style">
+    <link rel="modulepreload" href="/src/index.ts">
+    <link rel="preload" href="/src/index.scss" as="style">
+
+    <script defer type="module" src="/src/index.ts"></script>
   </head>
 
   <body>
-    <script async type="module" src="index.js"></script>
-
     <h1>micheal parks</h1>
     <h2>software engineer</h2>
 
@@ -45,8 +43,6 @@
       </a>
     </div>
 
-    <button style="display:none" id='btn-gravity'>doop</button>
-
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/src/index.scss">
   </body>
 </html>

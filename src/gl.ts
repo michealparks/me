@@ -110,8 +110,8 @@ const init = async () => {
   // })
   // effects.set('noise', noiseEffect)
 
-  const chromaticAberrationEffect = new ChromaticAberrationEffect()
-  effects.set('chromaticAberrationEffect', chromaticAberrationEffect)
+  // const chromaticAberrationEffect = new ChromaticAberrationEffect()
+  // effects.set('chromaticAberrationEffect', chromaticAberrationEffect)
 
   composer.addPass(new RenderPass(scene, camera))
   composer.addPass(new EffectPass(
@@ -119,7 +119,7 @@ const init = async () => {
     // noiseEffect,
     smaaEffect,
     bloomEffect,
-    chromaticAberrationEffect
+    //chromaticAberrationEffect
   ))
 
   window.addEventListener('blur', () => toggleRender(false), PASSIVE)

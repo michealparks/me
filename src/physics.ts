@@ -14,7 +14,9 @@ import {
 } from './constants'
 import { app } from './app'
 
-const worker = new Worker(new URL('./worker.js', import.meta.url))
+import PhysicsWorker from './worker.ts?worker'
+
+const worker = new PhysicsWorker()
 
 worker.addEventListener('message', () => {
   worker.addEventListener('message', handleMessage, PASSIVE)
