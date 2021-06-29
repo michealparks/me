@@ -15,10 +15,10 @@ const audioLoader = new AudioLoader()
 const gltfLoader = new GLTFLoader()
 const fontLoader = new FontLoader()
 
-textureLoader.setPath('assets/textures/')
-audioLoader.setPath('assets/mp3/')
-gltfLoader.setPath('assets/glb/')
-fontLoader.setPath('assets/fonts/')
+textureLoader.setPath('/assets/textures/')
+audioLoader.setPath('/assets/mp3/')
+gltfLoader.setPath('/assets/glb/')
+fontLoader.setPath('/assets/fonts/')
 
 const queued = new Set<string>()
 const listeners = new Set<Listener>()
@@ -81,7 +81,9 @@ const on = (event: string, fn: Listener) => {
   }
 }
 
-const load = () => {
+const load = (...queue: string[]) => {
+  if (queue) queueMany(queue)
+
   for (const file of queued) {
     promises.add(loadOne(file))
   }
@@ -93,6 +95,8 @@ const load = () => {
 
     queued.clear()
     promises.clear()
+
+    return cache.get(queue[0])
   })
 }
 

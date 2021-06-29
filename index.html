@@ -22,12 +22,16 @@
     </style>
 
     <link rel="modulepreload" href="/src/index.ts">
+    <link rel="preload" href="/ammo.js" as="script">
     <link rel="preload" href="/src/index.scss" as="style">
 
+    <script defer src="/ammo.js"></script>
     <script defer type="module" src="/src/index.ts"></script>
   </head>
 
   <body>
+    <canvas id="canvas"></canvas>
+
     <h1>micheal parks</h1>
     <h2>software engineer</h2>
 

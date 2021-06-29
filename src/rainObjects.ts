@@ -2,12 +2,12 @@ import {
   Object3D,
   Vector3,
   Mesh,
-  Box3
+  Box3,
+  Scene
 } from 'three'
 
-import type { Rigidbody } from './types'
+import { assets } from './assets'
 
-import { gl } from './gl'
 import { physics } from './physics'
 import { BODYTYPE_DYNAMIC, BODYSHAPE_BOX } from './constants'
 import { utils } from './utils'
@@ -15,45 +15,62 @@ import { utils } from './utils'
 const vec3 = new Vector3()
 const box = new Box3()
 
-export const rainObjects = async (objects: Mesh[]) => {
-  utils.shuffleArray(objects)
+const delay = (ms: number) => new Promise(resolve => {
+  setTimeout(resolve, ms)
+})
 
-  const meshes: Object3D[] = []
-  const rigidbodies: Rigidbody[] = []
+const addShadows = (node: Object3D) => {
+  if (node instanceof Mesh) {
+    node.castShadow = true
+    node.receiveShadow = true
+  }
+}
 
-  let l = 0
+const getSize = (object: Object3D) => {
+  const bb = object.getObjectByName('BoundingBox')
+  if (bb) {
+    box.setFromObject(bb)
+    bb.visible = false
+  } else {
+    box.setFromObject(object)
+  }
+  box.getSize(vec3)
+}
 
-  for (const object of objects) {
-    object.visible = false
-    if (object instanceof Mesh) {
-      object.castShadow = true
-      object.receiveShadow = true
-    }
+const prep = (object: Object3D) => {
+  // addShadows(object)
+  object.traverse(addShadows)
+}
 
-    object.traverse((obj) => {
-      if (obj instanceof Mesh) {
-        obj.castShadow = true
-        obj.receiveShadow = true
-      }
-    })
-  
+const startFall = (object: Object3D) => {
+  const transform = new Float32Array(7)
+  utils.setRandomTransform(object, transform)
+  physics.teleport(object.id, transform, true)
+  setTimeout(startFall, 12000, object)
+}
+
+type Configs = { file: string, sel?: string }[]
+
+export const rainObjects = async (configs: Configs, mainScene: Scene) => {
+  utils.shuffleArray(configs)
+
+  while (configs.length > 0) {
+    const { file, sel } = configs.pop()!
+    await assets.load(file)
+
+    const scene = assets.get(file).scene as Object3D
+    const object = sel ? scene.getObjectByName(sel)! : scene
+    prep(object)
+
     const transform = new Float32Array(10)
     utils.setRandomTransform(object, transform)
 
-    const bb = object.getObjectByName('BoundingBox')
-    if (bb) {
-      box.setFromObject(bb)
-      bb.visible = false
-    } else {
-      box.setFromObject(object)
-    }
-    
-    box.getSize(vec3)
+    getSize(object)
     transform[7] = vec3.x / 2
     transform[8] = vec3.y / 2
     transform[9] = vec3.z / 2
 
-    rigidbodies.push({
+    physics.addRigidbodies([object], [{
       id: object.id,
       name: object.name,
       type: BODYTYPE_DYNAMIC,
@@ -64,32 +81,12 @@ export const rainObjects = async (objects: Mesh[]) => {
       angularDamping: 0,
       friction: 0.3,
       restitution: 0.9
-    })
+    }])
 
-    gl.scene.add(object)
-    meshes.push(object)
+    mainScene.add(object)
+  
+    startFall(object)
 
-    l += 1
+    await delay(2000)
   }
-
-  physics.addRigidbodies(meshes, rigidbodies)
-
-  let i = 0
-
-  const startFall = () => {
-    const object = meshes[i]
-    object.visible = true
-
-    const transform = new Float32Array(7)
-    utils.setRandomTransform(object, transform)
-
-    physics.teleport(object.id, transform, true)
-
-    i += 1
-    
-    if (i === l) i = 0
-  }
-
-  setInterval(startFall, 1000)
-  startFall()
 }

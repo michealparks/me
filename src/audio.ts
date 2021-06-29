@@ -4,7 +4,6 @@ import {
   PositionalAudio
 } from 'three'
 
-import { gl } from './gl'
 import { assets } from './assets'
 
 const audios = new Map<string, Audio>()

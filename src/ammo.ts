@@ -1,52 +1,30 @@
 import type { Vector3 } from 'three'
 import type { Rigidbody } from './types'
 
-import Ammo from './ammo.js'
-
-const MAX_SUBSTEPS = 40
-const FIXED_TIMESTEP = 1 / 60
-const GRAVITY = -9.8
-
-// Rigid body has infinite mass and cannot move.
-const BODYTYPE_STATIC = 0
-
-// Rigid body is simulated according to applied forces.
-const BODYTYPE_DYNAMIC = 1
-
-// Rigid body has infinite mass and does not respond to forces but can still be moved by setting their velocity or position.
-const BODYTYPE_KINEMATIC = 2
-
-// Collision shapes
-const BODYSHAPE_BOX = 0
-const BODYSHAPE_SPHERE = 1
-const BODYSHAPE_MESH = 2
-
-// Collision flags
-const BODYFLAG_STATIC_OBJECT = 1
-const BODYFLAG_KINEMATIC_OBJECT = 2
-const BODYFLAG_NORESPONSE_OBJECT = 4
-
-// Activation states
-const BODYSTATE_ACTIVE_TAG = 1
-const BODYSTATE_ISLAND_SLEEPING = 2
-const BODYSTATE_WANTS_DEACTIVATION = 3
-const BODYSTATE_DISABLE_DEACTIVATION = 4
-const BODYSTATE_DISABLE_SIMULATION = 5
-
-// Groups
-const BODYGROUP_NONE = 0
-const BODYGROUP_DEFAULT = 1
-const BODYGROUP_DYNAMIC = 1
-const BODYGROUP_STATIC = 2
-const BODYGROUP_KINEMATIC = 4
-const BODYGROUP_TRIGGER = 16
-
-// Masks
-const BODYMASK_NONE = 0
-const BODYMASK_ALL = 65535
-const BODYMASK_STATIC = 2
-const BODYMASK_NOT_STATIC = 65535 ^ 2
-const BODYMASK_NOT_STATIC_KINEMATIC = 65535 ^ (2 | 4)
+import {
+  MAX_SUBSTEPS,
+  FIXED_TIMESTEP,
+  GRAVITY,
+  BODYTYPE_STATIC,
+  BODYTYPE_DYNAMIC,
+  BODYTYPE_KINEMATIC,
+  // Collision shapes
+  BODYSHAPE_BOX,
+  BODYSHAPE_SPHERE,
+  BODYSHAPE_MESH,
+  // Collision flags
+  BODYFLAG_STATIC_OBJECT,
+  BODYFLAG_KINEMATIC_OBJECT,
+  BODYFLAG_NORESPONSE_OBJECT,
+  // Activation states
+  BODYSTATE_DISABLE_DEACTIVATION,
+  // Groups
+  BODYGROUP_DYNAMIC,
+  BODYGROUP_STATIC,
+  // Masks
+  BODYMASK_ALL,
+  BODYMASK_NOT_STATIC,
+} from './constants'
 
 const dynamicBodies = new Set<any>()
 const bodyMap = new Map<number, any>()
@@ -57,22 +35,16 @@ const collisionEnd = new Map()
 const triggerEnter = new Map()
 const triggerLeave = new Map()
 
-let ammo: any
-let ammoTransform: any
-let ammoVec: any
-let ammoVec2: any
-let ammoVec3: any
-let ammoQuat: any
 let world: any
 let motionState: any
 let body: any
 let now = 0, then = 0, dt = 0
 let i = 0, shift = 0
 let position: any, quaternion: any
+let ammo: any, ammoTransform: any, ammoVec: any, ammoVec2: any, ammoVec3: any, ammoQuat: any
 
-void async function () {
-  // @ts-ignore
-  ammo = await Ammo()
+const init = async () => {
+  ammo = await (globalThis as any).Ammo()
   ammoTransform = new ammo.btTransform()
   ammoVec = new ammo.btVector3()
   ammoVec2 = new ammo.btVector3()
@@ -80,16 +52,13 @@ void async function () {
   ammoQuat = new ammo.btQuaternion()
 
   const collisionConfiguration = new ammo.btDefaultCollisionConfiguration()
-	const dispatcher = new ammo.btCollisionDispatcher(collisionConfiguration)
-	const broadphase = new ammo.btDbvtBroadphase()
-	const solver = new ammo.btSequentialImpulseConstraintSolver()
+  const dispatcher = new ammo.btCollisionDispatcher(collisionConfiguration)
+  const broadphase = new ammo.btDbvtBroadphase()
+  const solver = new ammo.btSequentialImpulseConstraintSolver()
 
   world = new ammo.btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration)
   world.setGravity(new ammo.btVector3(0, GRAVITY, 0))
-
-  // @ts-ignore
-  postMessage({ op: 'init' })
-}()
+}
 
 const update = (transforms: Float32Array) => {
   now = performance.now()
@@ -100,23 +69,25 @@ const update = (transforms: Float32Array) => {
 
   i = 0
   for (body of dynamicBodies) {
-    if (body.isActive() === true) {
-      motionState = body.getMotionState()
-      motionState.getWorldTransform(ammoTransform)
-      position = ammoTransform.getOrigin()
-      quaternion = ammoTransform.getRotation()
-      shift = 7 * i
-      transforms[shift + 0] = position.x()
-      transforms[shift + 1] = position.y()
-      transforms[shift + 2] = position.z()
-      transforms[shift + 3] = quaternion.x()
-      transforms[shift + 4] = quaternion.y()
-      transforms[shift + 5] = quaternion.z()
-      transforms[shift + 6] = quaternion.w()
+    if (body.isActive() === false) {
+      continue
+    }
 
-      if (body.linkedRigidbodyId !== undefined) {
-        bodyMap.get(body.linkedRigidbodyId)?.setMotionState(motionState)
-      }
+    motionState = body.getMotionState()
+    motionState.getWorldTransform(ammoTransform)
+    position = ammoTransform.getOrigin()
+    quaternion = ammoTransform.getRotation()
+    shift = 7 * i
+    transforms[shift + 0] = position.x()
+    transforms[shift + 1] = position.y()
+    transforms[shift + 2] = position.z()
+    transforms[shift + 3] = quaternion.x()
+    transforms[shift + 4] = quaternion.y()
+    transforms[shift + 5] = quaternion.z()
+    transforms[shift + 6] = quaternion.w()
+
+    if (body.linkedRigidbodyId !== undefined) {
+      bodyMap.get(body.linkedRigidbodyId)?.setMotionState(motionState)
     }
 
     i += 1
@@ -127,8 +98,7 @@ const update = (transforms: Float32Array) => {
   checkForCollisions(globalEvents)
   cleanOldCollisions(globalEvents)
 
-  postMessage({
-    op: 'update',
+  return {
     transforms,
     globalEvents,
     // TODO: turn these into shared buffers that get mapped back to values
@@ -136,9 +106,7 @@ const update = (transforms: Float32Array) => {
     collisionStart: [...collisionStart],
     triggerLeave: [...triggerLeave],
     collisionEnd: [...collisionEnd]
-  },
-  // @ts-ignore
-  [transforms.buffer])
+  }
 }
 
 const storeCollision = (body: Rigidbody, other: Rigidbody) => {
@@ -394,7 +362,7 @@ const applyCentralForce = (id: number, force: Vector3) => {
   body.activate()
 }
 
-const teleport = (id: number, transform: Float32Array, clearForces: boolean, shift = 0) => {
+const teleport = (id: number, transform: Float32Array, clearForces = false, shift = 0) => {
   body = bodyMap.get(id)
 
   body.activate()
@@ -418,7 +386,7 @@ const teleport = (id: number, transform: Float32Array, clearForces: boolean, shi
   }
 }
 
-const teleportMany = (ids: Uint16Array, transforms: Float32Array, clearForces: boolean) => {
+const teleportMany = (ids: Uint16Array, transforms: Float32Array, clearForces = false) => {
   i = 0
 
   for (const id of ids) {
@@ -432,24 +400,13 @@ const setGravity = (acceleration: Vector3) => {
   world.setGravity(ammoVec)
 }
 
-onmessage = ({ data }) => {
-  switch (data.op) {
-    case 'update':
-      return update(data.transforms)
-    case 'applyCentralImpulse':
-      return applyCentralImpulse(data.id, data.impulse)
-    case 'applyCentralForce':
-      return applyCentralForce(data.id, data.force)
-    case 'teleport':
-      return teleport(data.id, data.transform, data.clearForces)
-    case 'teleportMany':
-      return teleportMany(data.ids, data.transforms, data.clearForces)
-    case 'createRigidbodies':
-      return createRigidbodies(data.objects)
-    case 'setGravity':
-      return setGravity(data.acceleration)
-  }
+export const ammoLib = {
+  init,
+  update,
+  applyCentralImpulse,
+  applyCentralForce,
+  teleport,
+  teleportMany,
+  createRigidbodies,
+  setGravity
 }
-
-export {}
-export default {}

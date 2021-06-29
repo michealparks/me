@@ -39,32 +39,28 @@ const shuffleArray = (arr: Array<any>) => {
   return arr
 }
 
-const debounce = (fn: any, wait: number, immediate: boolean) => {
-	let timeout: NodeJS.Timeout | null
-
-	return (...args: any) => {
-		const later = () => {
-			timeout = null
-			if (immediate === false) fn(...args)
-		}
-
-		if (timeout !== null) {
-      clearTimeout(timeout)
-      timeout = null
-    }
-
-    const callNow = immediate && timeout === null
-
-		timeout = setTimeout(later, wait)
-
-		if (callNow) {
-      fn(...args)
-    }
+const debounce = (fn: Function, ms = 300) => {
+	let timeoutId: ReturnType<typeof setTimeout>
+	return function (this: any, ...args: any[]) {
+		clearTimeout(timeoutId)
+		timeoutId = setTimeout(() => fn.apply(this, args), ms)
 	}
+}
+
+const memoize = <T = any>(fn: Function) => {
+	const cache = new Map()
+	const cached = function (this: any, val: T) {
+		return cache.has(val)
+			? cache.get(val)
+			: cache.set(val, fn.call(this, val)) && cache.get(val)
+	}
+	cached.cache = cache
+	return cached
 }
 
 export const utils = {
   setRandomTransform,
   shuffleArray,
   debounce,
+  memoize
 }

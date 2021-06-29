@@ -38,6 +38,10 @@ export const PASSIVE = { passive: true }
 /**
  * Physics
  */
+
+export const MAX_SUBSTEPS = 40
+export const FIXED_TIMESTEP = 1 / 60
+export const GRAVITY = -9.8
 export const MAX_BODIES = 100
 
 // Rigid body has infinite mass and cannot move.
