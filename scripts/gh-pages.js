@@ -1,4 +1,6 @@
-require('gh-pages').publish('dist', {
+import Pages from 'gh-pages'
+
+Pages.publish('dist', {
   dotfiles: true
 }, (err) => {
   if (err) {
