@@ -21,14 +21,18 @@
       h1, h2 { opacity: 0; }
     </style>
 
-    <link rel="modulepreload" href="index.js">
-    <link rel="preload" href="worker.js" as="script">
-    <link rel="preload" href="ammo.js" as="script">
-    <link rel="preload" href="index.css" as="style">
-  </head>
+    <link rel="preload" href="/ammo.js" as="script">
+    
+
+    <script defer src="/ammo.js"></script>
+    
+  <script type="module" crossorigin src="/assets/index.e7841898.js"></script>
+  <link rel="modulepreload" href="/assets/vendor.85e5a7c0.js">
+  <link rel="stylesheet" href="/assets/index.7b3a47b4.css">
+</head>
 
   <body>
-    <script async type="module" src="index.js"></script>
+    <canvas id="canvas"></canvas>
 
     <h1>micheal parks</h1>
     <h2>software engineer</h2>
@@ -45,8 +49,6 @@
       </a>
     </div>
 
-    <button style="display:none" id='btn-gravity'>doop</button>
-
-    <link rel="stylesheet" href="index.css">
+    
   </body>
 </html>
