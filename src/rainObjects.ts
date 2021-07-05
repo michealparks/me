@@ -15,6 +15,10 @@ import { utils } from './utils'
 const vec3 = new Vector3()
 const box = new Box3()
 
+const idle = () => new Promise(resolve => {
+  'requestIdleCallback' in window ? window.requestIdleCallback(resolve) : resolve(undefined)
+})
+
 const delay = (ms: number) => new Promise(resolve => {
   setTimeout(resolve, ms)
 })
@@ -42,7 +46,8 @@ const prep = (object: Object3D) => {
   object.traverse(addShadows)
 }
 
-const startFall = (object: Object3D) => {
+const startFall = async (object: Object3D) => {
+  await idle()
   const transform = new Float32Array(7)
   utils.setRandomTransform(object, transform)
   physics.teleport(object.id, transform, true)
@@ -56,6 +61,7 @@ export const rainObjects = async (configs: Configs, mainScene: Scene) => {
 
   while (configs.length > 0) {
     const { file, sel } = configs.pop()!
+    await idle()
     await assets.load(file)
 
     const scene = assets.get(file).scene as Object3D
@@ -70,6 +76,7 @@ export const rainObjects = async (configs: Configs, mainScene: Scene) => {
     transform[8] = vec3.y / 2
     transform[9] = vec3.z / 2
 
+    await idle()
     physics.addRigidbodies([object], [{
       id: object.id,
       name: object.name,
@@ -83,8 +90,8 @@ export const rainObjects = async (configs: Configs, mainScene: Scene) => {
       restitution: 0.9
     }])
 
+    await idle()
     mainScene.add(object)
-  
     startFall(object)
 
     await delay(2000)
