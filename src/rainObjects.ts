@@ -3,7 +3,8 @@ import {
   Vector3,
   Mesh,
   Box3,
-  Scene
+  Scene,
+  MeshBasicMaterial
 } from 'three'
 
 import { assets } from './assets'
@@ -57,8 +58,19 @@ export const rainObjects = async (configs: Configs, mainScene: Scene) => {
   while (configs.length > 0) {
     const { file, sel } = configs.pop()!
     await assets.load(file)
+    
 
     const scene = assets.get(file).scene as Object3D
+
+    if (file === 'synth.glb') {
+      await assets.load(file.replace('.glb', '.jpg'))
+      const bakedTexture = assets.get(file.replace('.glb', '.jpg'))
+      const bakedMaterial = new MeshBasicMaterial({ map: bakedTexture })
+      scene.traverse((node) => {
+        node.material = bakedMaterial
+      })
+    }
+
     const object = sel ? scene.getObjectByName(sel)! : scene
     prep(object)
 
