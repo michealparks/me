@@ -12,7 +12,6 @@ import {
   MAX_BODIES
 } from './constants'
 
-import { app } from './app'
 import { ammoLib as ammo } from './ammo'
 
 const bodyMap = new Map<number, Object3D>()
@@ -25,13 +24,8 @@ let shift = 0
 const init = () => ammo.init()
 
 const update = () => {
-  const data = ammo.update(transforms)
+  ammo.update(transforms)
 
-  for (const [id, others] of data.collisionStart) {
-    app.fire('collisionstart', { id, others })
-  }
-
-  transforms = data.transforms
   i = 0
 
   for (const object of dynamicBodies) {
@@ -54,6 +48,13 @@ const update = () => {
 
     i += 1
   }
+}
+
+const add = (obj: Object3D, config: Rigidbody) => {
+  bodyMap.set(obj.id, obj)
+  obj.matrixAutoUpdate = false
+  dynamicBodies.add(obj)
+  ammo.createRigidbodies([config])
 }
 
 const addRigidbodies = (objects: Object3D[], configs: Rigidbody[]) => {
@@ -82,6 +83,7 @@ export const physics = {
   dynamicBodies,
   init,
   update,
+  add,
   addRigidbodies,
   applyCentralImpulse: ammo.applyCentralImpulse,
   applyCentralForce: ammo.applyCentralForce,

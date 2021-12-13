@@ -41,7 +41,12 @@ let body: any
 let now = 0, then = 0, dt = 0
 let i = 0, shift = 0
 let position: any, quaternion: any
-let ammo: any, ammoTransform: any, ammoVec: any, ammoVec2: any, ammoVec3: any, ammoQuat: any
+let ammo: any
+let ammoTransform: any
+let ammoVec: any
+let ammoVec2: any
+let ammoVec3: any
+let ammoQuat: any
 
 const init = async () => {
   ammo = await (globalThis as any).Ammo()
@@ -97,16 +102,6 @@ const update = (transforms: Float32Array) => {
   
   checkForCollisions(globalEvents)
   cleanOldCollisions(globalEvents)
-
-  return {
-    transforms,
-    globalEvents,
-    // TODO: turn these into shared buffers that get mapped back to values
-    triggerEnter: [...triggerEnter],
-    collisionStart: [...collisionStart],
-    triggerLeave: [...triggerLeave],
-    collisionEnd: [...collisionEnd]
-  }
 }
 
 const storeCollision = (body: Rigidbody, other: Rigidbody) => {
@@ -401,6 +396,9 @@ const setGravity = (acceleration: Vector3) => {
 }
 
 export const ammoLib = {
+  collisionStart,
+  collisionEnd,
+
   init,
   update,
   applyCentralImpulse,

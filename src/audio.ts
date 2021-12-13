@@ -9,9 +9,9 @@ import { assets } from './assets'
 const audios = new Map<string, Audio>()
 const positionals = new Map<string, PositionalAudio>()
 
-const create = (file: string, loop = true, volume = 1) => {
+const create = (listener: THREE.AudioListener, file: string, loop = true, volume = 1) => {
   const buffer = assets.get(file)
-  const sound = new Audio(gl.listener)
+  const sound = new Audio(listener)
   sound.setBuffer(buffer)
   sound.setLoop(loop)
   sound.setVolume(volume)
@@ -19,9 +19,9 @@ const create = (file: string, loop = true, volume = 1) => {
   return audio
 }
 
-const createPositional = async (file: string, parent: Object3D, refDistance = 1, loop = true, volume = 1) => {
+const createPositional = async (listener: THREE.AudioListener, file: string, parent: Object3D, refDistance = 1, loop = true, volume = 1) => {
   const buffer = assets.get(file)
-  const sound = new PositionalAudio(gl.listener)
+  const sound = new PositionalAudio(listener)
   sound.setBuffer(buffer)
   sound.setRefDistance(refDistance)
   sound.setLoop(loop)

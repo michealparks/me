@@ -3,10 +3,10 @@ import type { Listener } from './types'
 import {
   LoadingManager,
   TextureLoader,
-  AudioLoader,
-  FontLoader
+  AudioLoader
 } from 'three'
 
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 const manager = new LoadingManager()
@@ -15,7 +15,7 @@ const audioLoader = new AudioLoader()
 const gltfLoader = new GLTFLoader()
 const fontLoader = new FontLoader()
 
-textureLoader.setPath('/assets/textures/')
+textureLoader.setPath('/assets/tex/')
 audioLoader.setPath('/assets/mp3/')
 gltfLoader.setPath('/assets/glb/')
 fontLoader.setPath('/assets/fonts/')
@@ -53,7 +53,8 @@ const loadOne = (file: string) => {
 
   switch (file.split('.').pop()) {
     case 'glb': return loadGLTF(file)
-    case 'png': case 'jpg': return loadTexture(file)
+    case 'png':
+    case 'jpg': return loadTexture(file)
     case 'mp3': return loadAudio(file)
     case 'json': return loadJSON(file)
   }

@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .select-none {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .backdrop-filter {
+    backdrop-filter: var(--tw-backdrop-filter);
+    -webkit-backdrop-filter: var(--tw-backdrop-filter);
+  }
+}
+
+body {
+  @apply overflow-hidden;
+}
+
+.links {
+  position: absolute;
+  z-index: 1;
+  bottom: 5%;
+  width: 400px;
+  left: calc(50% - 200px);
+  display: flex;
+  justify-content: center;
+}
+
+.links img {
+  padding: 5px;
+}
+
+button {
+  z-index: 10;
+  position: relative;
+}

@@ -1,6 +1,18 @@
-import type {
-  Object3D
+import {
+  Object3D,
+  Vector3,
+  Box3,
 } from 'three'
+
+const vec3 = new Vector3()
+const box = new Box3()
+
+const getSize = (object: Object3D, transform: Float32Array) => {
+  box.setFromObject(object).getSize(vec3)
+  transform[7] = vec3.x / 2
+  transform[8] = vec3.y / 2
+  transform[9] = vec3.z / 2
+}
 
 const setRandomTransform = (object: Object3D, transform: Float32Array) => {
   const px = Math.random() * 4 - 3, py = 7, pz = 0
@@ -17,7 +29,6 @@ const setRandomTransform = (object: Object3D, transform: Float32Array) => {
   transform[4] = object.quaternion.y
   transform[5] = object.quaternion.z
   transform[6] = object.quaternion.w
-  transform[7] = transform[8] = transform[9] = 0.25
 
   return transform
 }
@@ -59,6 +70,7 @@ const memoize = <T = any>(fn: Function) => {
 }
 
 export const utils = {
+  getSize,
   setRandomTransform,
   shuffleArray,
   debounce,

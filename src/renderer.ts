@@ -89,7 +89,7 @@ export class Renderer {
 
     const bloomEffect = new BloomEffect({
       height: 480,
-      intensity: 1,
+      intensity: 0.5,
       kernelSize: KernelSize.VERY_LARGE
     })
 

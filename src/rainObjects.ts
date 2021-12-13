@@ -4,11 +4,11 @@ import {
   Mesh,
   Box3,
   Scene,
-  MeshBasicMaterial
+  MeshBasicMaterial,
+  sRGBEncoding
 } from 'three'
 
 import { assets } from './assets'
-
 import { physics } from './physics'
 import { BODYTYPE_DYNAMIC, BODYSHAPE_BOX } from './constants'
 import { utils } from './utils'
@@ -16,9 +16,7 @@ import { utils } from './utils'
 const vec3 = new Vector3()
 const box = new Box3()
 
-const delay = (ms: number) => new Promise(resolve => {
-  setTimeout(resolve, ms)
-})
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
 const addShadows = (node: Object3D) => {
   if (node instanceof Mesh) {
@@ -29,12 +27,14 @@ const addShadows = (node: Object3D) => {
 
 const getSize = (object: Object3D) => {
   const bb = object.getObjectByName('BoundingBox')
+
   if (bb) {
     box.setFromObject(bb)
     bb.visible = false
   } else {
     box.setFromObject(object)
   }
+
   box.getSize(vec3)
 }
 
@@ -58,18 +58,8 @@ export const rainObjects = async (configs: Configs, mainScene: Scene) => {
   while (configs.length > 0) {
     const { file, sel } = configs.pop()!
     await assets.load(file)
-    
 
     const scene = assets.get(file).scene as Object3D
-
-    if (file === 'synth.glb') {
-      await assets.load(file.replace('.glb', '.jpg'))
-      const bakedTexture = assets.get(file.replace('.glb', '.jpg'))
-      const bakedMaterial = new MeshBasicMaterial({ map: bakedTexture })
-      scene.traverse((node) => {
-        node.material = bakedMaterial
-      })
-    }
 
     const object = sel ? scene.getObjectByName(sel)! : scene
     prep(object)

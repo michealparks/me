@@ -7,46 +7,13 @@
     <title>Micheal Parks</title>
     <meta name="Description" content="Software Engineer.">
 
-    <style>
-      canvas, body {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 100vw;
-        margin: 0;
-        overflow: hidden;
-      }
-      body { background-color: #000; }
-      h1, h2 { opacity: 0; }
-    </style>
-
-    <link rel="modulepreload" href="/src/index.ts">
+    <link rel="modulepreload" href="/src/main.tsx">
     <link rel="preload" href="/ammo.js" as="script">
-    <link rel="preload" href="/src/index.scss" as="style">
-
     <script defer src="/ammo.js"></script>
-    <script defer type="module" src="/src/index.ts"></script>
   </head>
 
   <body>
-    <canvas id="canvas"></canvas>
-
-    <h1>micheal parks</h1>
-    <h2>software engineer</h2>
-
-    <div class="links">
-      <a title="Github" target="_tab" href="https://github.com/michealparks">
-        <img width="40" height="40" alt="Github" src="assets/img/github.png" />
-      </a>
-      <a title="Spotify" target="_tab" href="https://open.spotify.com/user/micheal_parks">
-        <img width="40" height="40" alt="Spotify" src="assets/img/spotify.png" />
-      </a>
-      <a title="Twitter" target="_tab" href="https://twitter.com/godisacomputer">
-        <img width="40" height="40" alt="Twitter" src="assets/img/twitter.png" />
-      </a>
-    </div>
-
-    <link rel="stylesheet" href="/src/index.scss">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
