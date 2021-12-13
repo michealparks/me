@@ -13,6 +13,7 @@ import { physics } from './physics'
 import { rainObjects } from './rainObjects'
 import { BODYTYPE_STATIC, PASSIVE, BODYSHAPE_BOX } from './constants'
 import { utils } from './utils'
+import { ThreeWorker } from './threeWorker'
 
 export const main = async () => {
   const canvas = document.querySelector<HTMLCanvasElement>('#canvas')!

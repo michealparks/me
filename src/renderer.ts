@@ -35,7 +35,7 @@ import {
 } from './constants'
 
 export class Renderer {
-  canvas: HTMLCanvasElement
+  canvas: HTMLCanvasElement | OffscreenCanvas
   composer: EffectComposer
   camera: PerspectiveCamera
   ambientLight: AmbientLight
@@ -48,10 +48,10 @@ export class Renderer {
   height = 0
   dpi = 0
 
-  constructor (canvas: HTMLCanvasElement, width: number, height: number, dpi: number) {
+  constructor (canvas: HTMLCanvasElement | OffscreenCanvas, width: number, height: number, dpi: number) {
     this.gl = new WebGLRenderer({
       canvas,
-      antialias: false,
+      antialias: true,
       depth: false,
       stencil: false,
       powerPreference: 'high-performance',
@@ -80,10 +80,13 @@ export class Renderer {
     this.scene.add(this.ambientLight)
   }
 
-  init = async () => {
+  init = async (offscreen = false) => {
     const smaaImageLoader = new SMAAImageLoader()
 
-    const [search, area] = await new Promise((resolve) =>
+    const [search, area] = offscreen ? [
+      new OffscreenCanvas(64, 64),
+      new OffscreenCanvas(64, 64)
+    ] : await new Promise((resolve) =>
       smaaImageLoader.load(resolve)
     )
 

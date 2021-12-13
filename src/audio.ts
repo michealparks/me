@@ -1,7 +1,8 @@
 import {
   Object3D,
   Audio,
-  PositionalAudio
+  PositionalAudio,
+  AudioListener
 } from 'three'
 
 import { assets } from './assets'
