@@ -1,22 +1,17 @@
-import {
-  Object3D,
-  Vector3,
-  Box3,
-} from 'three'
-
+import * as THREE from 'three'
 import { physics } from './physics'
 
-const vec3 = new Vector3()
-const box = new Box3()
+const vec3 = new THREE.Vector3()
+const box = new THREE.Box3()
 
-const getSize = (object: Object3D, transform: Float32Array) => {
+const getSize = (object: THREE.Object3D, transform: Float32Array) => {
   box.setFromObject(object).getSize(vec3)
   transform[7] = vec3.x / 2
   transform[8] = vec3.y / 2
   transform[9] = vec3.z / 2
 }
 
-const setRandomTransform = (object: Object3D, transform: Float32Array) => {
+const setRandomTransform = (object: THREE.Object3D, transform: Float32Array) => {
   const px = (Math.random() - 0.5) * 6
   const py = Math.random() // 7
   const pz = (Math.random() - 0.5) * 6
