@@ -4,6 +4,8 @@ import {
   Box3,
 } from 'three'
 
+import { physics } from './physics'
+
 const vec3 = new Vector3()
 const box = new Box3()
 
@@ -15,8 +17,12 @@ const getSize = (object: Object3D, transform: Float32Array) => {
 }
 
 const setRandomTransform = (object: Object3D, transform: Float32Array) => {
-  const px = Math.random() * 4 - 3, py = 7, pz = 0
-  const qx = Math.random(), qy = Math.random(), qz = Math.random()
+  const px = (Math.random() - 0.5) * 6
+  const py = Math.random() // 7
+  const pz = (Math.random() - 0.5) * 6
+  const qx = Math.random()
+  const qy = Math.random()
+  const qz = Math.random()
 
   object.position.set(px, py, pz)
   object.rotation.set(qx, qy, qz)
@@ -31,6 +37,15 @@ const setRandomTransform = (object: Object3D, transform: Float32Array) => {
   transform[6] = object.quaternion.w
 
   return transform
+}
+
+const setRandomTorque = (id: number, damp = 0.1) => {
+  vec3.set(
+    (Math.random() - 0.5) * damp,
+    (Math.random() - 0.5) * damp,
+    (Math.random() - 0.5) * damp,
+  )
+  physics.applyTorqueImpulse(id, vec3)
 }
 
 const shuffleArray = (arr: Array<any>) => {
@@ -58,7 +73,7 @@ const debounce = (fn: Function, ms = 300) => {
 	}
 }
 
-const memoize = <T = any>(fn: Function) => {
+const memoize = <T>(fn: Function) => {
 	const cache = new Map()
 	const cached = function (this: any, val: T) {
 		return cache.has(val)
@@ -72,6 +87,7 @@ const memoize = <T = any>(fn: Function) => {
 export const utils = {
   getSize,
   setRandomTransform,
+  setRandomTorque,
   shuffleArray,
   debounce,
   memoize

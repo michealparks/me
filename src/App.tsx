@@ -5,11 +5,13 @@ import Legos from './Models/Legos'
 import Switch from './Models/Switch'
 import Synth from './Models/Synth'
 import Plant from './Models/Plant'
+import Portrait from './Models/Portrait'
 import Name from './Models/Name'
 import Lights from './Lights'
 import Effects from './Effects'
 import { physics } from './physics'
 import { useEffect, useState } from 'react'
+import Interface from './Interface'
 
 const bg = new THREE.Color('#020207')
 
@@ -21,7 +23,7 @@ const App = () => {
       await Promise.all([
         physics.init()
       ])
-      physics.setGravity(new THREE.Vector3(0, -0.5, 0))
+      physics.setGravity(new THREE.Vector3(0, 0, 0))
       setReady(true)
     }
 
@@ -51,16 +53,22 @@ const App = () => {
           <Effects />
           <Lights />
           <PresentationControls
+            snap
             global
-            zoom={1}>
+            speed={0.8}
+            zoom={1}
+            rotation={[Math.PI / 3, -Math.PI / 20, 0]}
+            config={{ mass: 1, tension: 100, friction: 26 }}
+          >
             <Name />
             <Legos />
             <Switch />
             <Synth />
             <Plant />
+            <Portrait />
           </PresentationControls>
-          
         </Canvas>
+        <Interface />
       </div>
     </>
   )

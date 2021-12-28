@@ -85,6 +85,7 @@ export const physics = {
   update,
   add,
   addRigidbodies,
+  applyTorqueImpulse: ammo.applyTorqueImpulse,
   applyCentralImpulse: ammo.applyCentralImpulse,
   applyCentralForce: ammo.applyCentralForce,
   teleport: ammo.teleport,

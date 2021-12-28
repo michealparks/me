@@ -295,6 +295,9 @@ const createRigidBody = (object: Rigidbody, inertia: boolean, flag: number | und
   body.setRestitution(object.restitution ?? 0)
   body.setFriction(object.friction ?? 0)
   body.setDamping(object.linearDamping ?? 0, object.angularDamping ?? 0)
+  
+  // This is only because we have zero gravity set
+  body.setActivationState(BODYSTATE_DISABLE_DEACTIVATION)
 
   if (flag !== undefined) {
     body.setCollisionFlags(body.getCollisionFlags() | flag)
@@ -357,6 +360,13 @@ const applyCentralForce = (id: number, force: Vector3) => {
   body.activate()
 }
 
+const applyTorqueImpulse = (id: number, torque: Vector3) => {
+  body = bodyMap.get(id)
+  ammoVec.setValue(torque.x, torque.y, torque.z)
+  body.applyTorqueImpulse(ammoVec)
+  body.activate()
+}
+
 const teleport = (id: number, transform: Float32Array, clearForces = false, shift = 0) => {
   body = bodyMap.get(id)
 
@@ -402,6 +412,7 @@ export const ammoLib = {
   init,
   update,
   applyCentralImpulse,
+  applyTorqueImpulse,
   applyCentralForce,
   teleport,
   teleportMany,

@@ -10,14 +10,14 @@ softShadows({
 })
 
 const Lights = () => {
-  const mapsize = 1
+  const mapsize = 6
 
   return (
     <>
       <ambientLight intensity={0.1} />
       <directionalLight
         castShadow
-        position={[1, 1, 1]}
+        position={[3, 2, 3]}
         intensity={2}
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
@@ -40,7 +40,8 @@ const Lights = () => {
         color="red"
         intensity={0.3}
         position={[1.5, -1, 3]}
-        width={10} height={10}
+        width={10}
+        height={10}
         onUpdate={(self) => self.lookAt(0, 0, 0)}
       />
     </>

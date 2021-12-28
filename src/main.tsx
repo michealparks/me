@@ -1,9 +1,9 @@
 import './index.css'
 import { StrictMode, Suspense } from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import App from './App'
 
-ReactDOM.render(
+render(
   <StrictMode>
     <Suspense fallback={null}>
       <App />
