@@ -43,15 +43,12 @@ const App = () => {
           performance={{ min: 0.75 }}
           dpr={Math.min(1.5, window.devicePixelRatio)}
           gl={{ alpha: false, antialias: false }}
-          onCreated={({ gl }) => {
-            gl.setClearColor(bg)
-          }}
+          onCreated={({ gl }) => gl.setClearColor(bg)}
         >
           <fog attach="fog" args={[bg, 4, 15]} />
           <AdaptiveDpr pixelated />
           <AdaptiveEvents />
           <Effects />
-          <Lights />
           <PresentationControls
             snap
             global
@@ -60,6 +57,7 @@ const App = () => {
             rotation={[Math.PI / 3, -Math.PI / 20, 0]}
             config={{ mass: 1, tension: 100, friction: 26 }}
           >
+            <Lights />
             <Name />
             <Legos />
             <Switch />
