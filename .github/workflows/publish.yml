@@ -18,7 +18,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           npm ci --production --audit=false
-          npm run build -- --base=/me/
+          npm run build
 
       - name: Publish 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.6
