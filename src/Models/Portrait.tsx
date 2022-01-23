@@ -17,12 +17,12 @@ type GLTFResult = GLTF & {
 
 const url = new URL('../assets/glb/portrait.glb', import.meta.url).href
 
-export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
-  const group = useRef<THREE.Group>()
+export default function Model() {
+  const ref = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF(url) as GLTFResult
 
   useEffect(() => {
-    const portrait = group.current
+    const portrait = ref.current
     const transform = new Float32Array(10)
     utils.setRandomTransform(portrait, transform)
     utils.getSize(portrait, transform)
@@ -39,22 +39,19 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
       friction: 0.3,
       restitution: 0.9
     })
-
+  
     utils.setRandomTorque(portrait.id, 0.05)
   }, [])
 
   return (
-    <group ref={group} {...props} dispose={null}>
-      <group name="Scene" userData={{ glTF2ExportSettings: { export_extras: 1, use_selection: 1 } }}>
-        <mesh
-          name="Portrait"
-          castShadow
-          receiveShadow
-          geometry={nodes.Portrait.geometry}
-          material={materials.Bake}
-        />
-      </group>
-    </group>
+    <mesh
+      name="Portrait"
+      ref={ref} 
+      castShadow
+      receiveShadow
+      geometry={nodes.Portrait.geometry}
+      material={materials.Bake}
+    />
   )
 }
 

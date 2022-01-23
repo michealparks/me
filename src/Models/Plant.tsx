@@ -23,11 +23,12 @@ type GLTFResult = GLTF & {
 const url = new URL('../assets/glb/plant.glb', import.meta.url).href
 
 const Model = () => {
-  const group = useRef<THREE.Group>()
+  const init = useRef<boolean>()
+  const ref = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF(url) as GLTFResult
   
   useEffect(() => {
-    const plant = group.current
+    const plant = ref.current
     const transform = new Float32Array(10)
     utils.setRandomTransform(plant, transform)
     utils.getSize(new THREE.Mesh(nodes.BoundingBox.geometry), transform)
@@ -49,7 +50,7 @@ const Model = () => {
   }, [])
 
   return (
-    <group ref={group}>
+    <group name='Plant' ref={ref}>
       <Merged castShadow receiveShadow meshes={[
         nodes.Circle,
         nodes.Circle_1,

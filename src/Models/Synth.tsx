@@ -38,10 +38,10 @@ const url = new URL('../assets/glb/synth.glb', import.meta.url).href
 
 export default function Model() {
   const { nodes, materials } = useGLTF(url) as GLTFResult
-  const synthRef = useRef<THREE.Group>()
+  const ref = useRef<THREE.Group>()
 
   useEffect(() => {
-    const synth = synthRef.current
+    const synth = ref.current
     const transform = new Float32Array(10)
     utils.setRandomTransform(synth, transform)
     utils.getSize(new THREE.Mesh(nodes.BoundingBox.geometry), transform)
@@ -63,7 +63,7 @@ export default function Model() {
   }, [])
 
   return (
-    <group ref={synthRef}>
+    <group name='Synth' ref={ref}>
       <Merged castShadow receiveShadow meshes={[
         nodes.Cube,
         nodes.Cube001,

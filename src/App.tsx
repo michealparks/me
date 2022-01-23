@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { Canvas, addAfterEffect } from '@react-three/fiber'
-import { PresentationControls, ContactShadows, AdaptiveEvents, AdaptiveDpr } from '@react-three/drei'
+import { PresentationControls, AdaptiveEvents, AdaptiveDpr } from '@react-three/drei'
 import Legos from './Models/Legos'
 import Switch from './Models/Switch'
 import Synth from './Models/Synth'
@@ -20,9 +20,6 @@ const App = () => {
 
   useEffect(() => {
     const init = async () => {
-      await Promise.all([
-        physics.init()
-      ])
       physics.setGravity(new THREE.Vector3(0, 0, 0))
       setReady(true)
     }

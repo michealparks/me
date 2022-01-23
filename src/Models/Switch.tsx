@@ -39,10 +39,10 @@ const url = new URL('../assets/glb/switch.glb', import.meta.url).href
 
 export default function Model() {
   const { nodes, materials } = useGLTF(url) as GLTFResult
-  const switchRef = useRef<THREE.Group>()
+  const ref = useRef<THREE.Group>()
 
   useEffect(() => {
-    const sw = switchRef.current
+    const sw = ref.current
     const transform = new Float32Array(10)
     utils.setRandomTransform(sw, transform)
     utils.getSize(new THREE.Mesh(nodes.BoundingBox.geometry), transform)
@@ -64,7 +64,7 @@ export default function Model() {
   }, [])
 
   return (
-    <group ref={switchRef}>
+    <group name='Switch' ref={ref}>
       <Merged castShadow receiveShadow meshes={[
         nodes.Cube001,
         nodes.Cube001_1,

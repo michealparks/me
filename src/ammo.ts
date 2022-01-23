@@ -35,35 +35,25 @@ const collisionEnd = new Map()
 const triggerEnter = new Map()
 const triggerLeave = new Map()
 
-let world: any
-let motionState: any
+const ammo = await (globalThis as any).Ammo() 
+const collisionConfiguration = new ammo.btDefaultCollisionConfiguration()
+const dispatcher = new ammo.btCollisionDispatcher(collisionConfiguration)
+const broadphase = new ammo.btDbvtBroadphase()
+const solver = new ammo.btSequentialImpulseConstraintSolver()
+const world = new ammo.btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration)
+world.setGravity(new ammo.btVector3(0, GRAVITY, 0))
+
+const ammoTransform = new ammo.btTransform()
+const ammoVec = new ammo.btVector3()
+const ammoVec2 = new ammo.btVector3()
+const ammoVec3 = new ammo.btVector3()
+const ammoQuat = new ammo.btQuaternion()
+
 let body: any
+let motionState: any
 let now = 0, then = 0, dt = 0
 let i = 0, shift = 0
 let position: any, quaternion: any
-let ammo: any
-let ammoTransform: any
-let ammoVec: any
-let ammoVec2: any
-let ammoVec3: any
-let ammoQuat: any
-
-const init = async () => {
-  ammo = await (globalThis as any).Ammo()
-  ammoTransform = new ammo.btTransform()
-  ammoVec = new ammo.btVector3()
-  ammoVec2 = new ammo.btVector3()
-  ammoVec3 = new ammo.btVector3()
-  ammoQuat = new ammo.btQuaternion()
-
-  const collisionConfiguration = new ammo.btDefaultCollisionConfiguration()
-  const dispatcher = new ammo.btCollisionDispatcher(collisionConfiguration)
-  const broadphase = new ammo.btDbvtBroadphase()
-  const solver = new ammo.btSequentialImpulseConstraintSolver()
-
-  world = new ammo.btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration)
-  world.setGravity(new ammo.btVector3(0, GRAVITY, 0))
-}
 
 const update = (transforms: Float32Array) => {
   now = performance.now()
@@ -409,7 +399,6 @@ export const ammoLib = {
   collisionStart,
   collisionEnd,
 
-  init,
   update,
   applyCentralImpulse,
   applyTorqueImpulse,

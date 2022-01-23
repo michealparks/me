@@ -31,10 +31,10 @@ const url = new URL('../assets/glb/lego.glb', import.meta.url).href
 
 const Legos = () => {
   const { nodes, materials } = useGLTF(url) as GLTFResult
-  const legoRefs = [useRef<THREE.Mesh>(), useRef(), useRef(), useRef(), useRef()]
+  const refs = [useRef<THREE.Mesh>(), useRef(), useRef(), useRef(), useRef()]
 
   useEffect(() => {
-    for (const lego of legoRefs.map(ref => ref.current)) {
+    for (const lego of refs.map(ref => ref.current)) {
       const transform = new Float32Array(10)
       utils.setRandomTransform(lego, transform)
       utils.getSize(lego, transform)
@@ -60,7 +60,7 @@ const Legos = () => {
     <>
       <mesh
         name="Lego1"
-        ref={legoRefs[0]}
+        ref={refs[0]}
         castShadow
         receiveShadow
         geometry={nodes.Lego1.geometry}
@@ -68,7 +68,7 @@ const Legos = () => {
       />
       <mesh
         name="Lego2"
-        ref={legoRefs[1]}
+        ref={refs[1]}
         castShadow
         receiveShadow
         geometry={nodes.Lego2.geometry}
@@ -76,7 +76,7 @@ const Legos = () => {
       />
       <mesh
         name="Lego3"
-        ref={legoRefs[2]}
+        ref={refs[2]}
         castShadow
         receiveShadow
         geometry={nodes.Lego3.geometry}
@@ -84,7 +84,7 @@ const Legos = () => {
       />
       <mesh
         name="Lego4"
-        ref={legoRefs[3]}
+        ref={refs[3]}
         castShadow
         receiveShadow
         geometry={nodes.Lego4.geometry}
@@ -92,7 +92,7 @@ const Legos = () => {
       />
       <mesh
         name="Lego5"
-        ref={legoRefs[4]}
+        ref={refs[4]}
         castShadow
         receiveShadow
         geometry={nodes.Lego5.geometry}

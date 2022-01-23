@@ -26,22 +26,20 @@ const url = new URL('../assets/glb/name.glb', import.meta.url).href
 
 export default function Model(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF(url) as GLTFResult
-  const nameRef = useRef<THREE.Mesh>()
-  const titleRef = useRef<THREE.Mesh>()
   const bb1Ref = useRef<THREE.Mesh>()
   const bb2Ref = useRef<THREE.Mesh>()
 
   useEffect(() => {
     const bb1 = bb1Ref.current
-    const transform = new Float32Array(10)
-    transform[0] = bb1.position.x 
-    transform[1] = bb1.position.y
-    transform[2] = bb1.position.z
-    transform[3] = bb1.quaternion.x
-    transform[4] = bb1.quaternion.y
-    transform[5] = bb1.quaternion.z
-    transform[6] = bb1.quaternion.w
-    utils.getSize(bb1, transform)
+    const transform1 = new Float32Array(10)
+    transform1[0] = bb1.position.x 
+    transform1[1] = bb1.position.y
+    transform1[2] = bb1.position.z
+    transform1[3] = bb1.quaternion.x
+    transform1[4] = bb1.quaternion.y
+    transform1[5] = bb1.quaternion.z
+    transform1[6] = bb1.quaternion.w
+    utils.getSize(bb1, transform1)
   
     const bb2 = bb2Ref.current
     const transform2 = new Float32Array(10)
@@ -52,50 +50,52 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
     transform2[4] = bb2.quaternion.y
     transform2[5] = bb2.quaternion.z
     transform2[6] = bb2.quaternion.w
-    utils.getSize(bb2, transform)
+    utils.getSize(bb2, transform2)
 
-    physics.addRigidbodies([bb1, bb2], [{
+    physics.add(bb1, {
       id: bb1.id,
       name: bb1.name,
       type: BODYTYPE_STATIC,
       shape: BODYSHAPE_BOX,
-      transform,
+      transform: transform1,
       friction: 0.3,
-      restitution: 0.5
-    }, {
+      restitution: 0.9
+    })
+
+    physics.add(bb2, {
       id: bb2.id,
       name: bb2.name,
       type: BODYTYPE_STATIC,
       shape: BODYSHAPE_BOX,
       transform: transform2,
       friction: 0.3,
-      restitution: 0.5
-    }])
+      restitution: 0.9
+    })
   }, [])
 
   return (
     <>
       <mesh
         name="Micheal"
-        ref={nameRef}
         castShadow receiveShadow
         geometry={nodes.Micheal.geometry}
         material={nodes.Micheal.material}
       />
       <mesh
         name="Title"
-        ref={titleRef}
         castShadow receiveShadow
         geometry={nodes.Title.geometry}
         material={nodes.Title.material}
       />
       <mesh
+        name='MichealBB'
         visible={false}
         ref={bb1Ref}
         geometry={nodes.BoundingBox1.geometry}
         position={[-0.019, 0.035, -0.248]}
       />
       <mesh
+        name='TitleBB'
         visible={false}
         ref={bb2Ref}
         geometry={nodes.BoundingBox2.geometry}
