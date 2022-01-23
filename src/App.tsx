@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { Suspense } from 'react'
 import { Canvas, addAfterEffect } from '@react-three/fiber'
 import { PresentationControls, AdaptiveEvents, AdaptiveDpr } from '@react-three/drei'
 import Legos from './Models/Legos'
@@ -10,25 +11,13 @@ import Name from './Models/Name'
 import Lights from './Lights'
 import Effects from './Effects'
 import { physics } from './physics'
-import { useEffect, useState } from 'react'
 import Interface from './Interface'
 
 const bg = new THREE.Color('#020207')
 
 const App = () => {
-  const [ready, setReady] = useState(false)
-
-  useEffect(() => {
-    const init = async () => {
-      physics.setGravity(new THREE.Vector3(0, 0, 0))
-      setReady(true)
-    }
-
-    init()
-  }, [setReady])
-
   addAfterEffect(() => {
-    if (ready) physics.update()
+    physics.update()
   })
 
   return (
@@ -55,12 +44,13 @@ const App = () => {
             config={{ mass: 1, tension: 100, friction: 26 }}
           >
             <Lights />
-            <Name />
-            <Legos />
-            <Switch />
-            <Synth />
-            <Plant />
-            <Portrait />
+
+            <Suspense fallback={null}><Name /></Suspense>
+            <Suspense fallback={null}><Portrait /></Suspense>
+            <Suspense fallback={null}><Legos /></Suspense>
+            <Suspense fallback={null}><Synth /></Suspense>
+            <Suspense fallback={null}><Switch /></Suspense>
+            <Suspense fallback={null}><Plant /></Suspense>
           </PresentationControls>
         </Canvas>
         <Interface />
