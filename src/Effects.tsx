@@ -1,3 +1,4 @@
+import React from 'react'
 import { EffectComposer, Bloom, Noise, Vignette } from '@react-three/postprocessing'
 import { CameraShake } from '@react-three/drei'
 
@@ -24,7 +25,6 @@ const Effects = () => {
         decayRate: 0.65, // if decay = true this is the rate at which intensity will reduce at
         additive: false, // this should be used when your scene has orbit controls
       }} />
-
     </EffectComposer>
   )
 }

@@ -1,6 +1,6 @@
-import * as THREE from 'three'
+import React, { useEffect, useRef } from 'react'
+import { Mesh } from 'three'
 import type { GLTF } from 'three-stdlib'
-import { useEffect, useRef } from 'react'
 import { useGLTF, Merged } from '@react-three/drei'
 import { utils } from '../utils'
 import { physics } from '../physics'
@@ -36,19 +36,19 @@ type GLTFResult = GLTF & {
 
 const url = new URL('../assets/glb/synth.glb', import.meta.url).href
 
-export default function Model() {
+const Model = () => {
   const { nodes, materials } = useGLTF(url) as GLTFResult
   const ref = useRef<THREE.Group>()
 
   useEffect(() => {
-    const synth = ref.current
+    const current = ref.current!
     const transform = new Float32Array(10)
-    utils.setRandomTransform(synth, transform)
-    utils.getSize(new THREE.Mesh(nodes.BoundingBox.geometry), transform)
+    utils.setRandomTransform(current, transform)
+    utils.getSize(new Mesh(nodes.BoundingBox.geometry), transform)
 
-    physics.add(synth, {
-      id: synth.id,
-      name: synth.name,
+    physics.add(current, {
+      id: current.id,
+      name: current.name,
       type: BODYTYPE_DYNAMIC,
       shape: BODYSHAPE_BOX,
       transform,
@@ -56,10 +56,10 @@ export default function Model() {
       linearDamping: 0,
       angularDamping: 0,
       friction: 0.3,
-      restitution: 0.9
+      restitution: 0.9,
     })
 
-    utils.setRandomTorque(synth.id, 0.05)
+    utils.setRandomTorque(current.id, 0.05)
   }, [])
 
   return (
@@ -106,3 +106,5 @@ export default function Model() {
 }
 
 useGLTF.preload(url)
+
+export default Model

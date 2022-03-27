@@ -1,8 +1,8 @@
-import * as THREE from 'three'
+import { Vector3, Box3 } from 'three'
 import { physics } from './physics'
 
-const vec3 = new THREE.Vector3()
-const box = new THREE.Box3()
+const vec3 = new Vector3()
+const box = new Box3()
 
 const getSize = (object: THREE.Object3D, transform: Float32Array) => {
   box.setFromObject(object).getSize(vec3)
@@ -38,21 +38,21 @@ const setRandomTorque = (id: number, damp = 0.1) => {
   vec3.set(
     (Math.random() - 0.5) * damp,
     (Math.random() - 0.5) * damp,
-    (Math.random() - 0.5) * damp,
+    (Math.random() - 0.5) * damp
   )
   physics.applyTorqueImpulse(id, vec3)
 }
 
-const shuffleArray = (arr: Array<any>) => {
+const shuffleArray = <Type>(arr: Type[]): Type[] => {
   let i = arr.length - 1
   let j = 0
   let temp
 
   while (i > 0) {
-    j = Math.random() * (i + 1) | 0
+    j = Math.trunc(Math.random() * (i + 1))
     temp = arr[i]
-    arr[i] = arr[j]
-    arr[j] = temp
+    arr[i] = arr[j]!
+    arr[j] = temp!
 
     i -= 1
   }
@@ -60,17 +60,17 @@ const shuffleArray = (arr: Array<any>) => {
   return arr
 }
 
-const debounce = (fn: Function, ms = 300) => {
+const debounce = (fn: (...args: unknown[]) => void, ms = 300) => {
 	let timeoutId: ReturnType<typeof setTimeout>
-	return function (this: any, ...args: any[]) {
+	return function (this: unknown, ...args: unknown[]) {
 		clearTimeout(timeoutId)
 		timeoutId = setTimeout(() => fn.apply(this, args), ms)
 	}
 }
 
-const memoize = <T>(fn: Function) => {
+const memoize = <Type>(fn: (val: unknown) => void) => {
 	const cache = new Map()
-	const cached = function (this: any, val: T) {
+	const cached = function (this: unknown, val: Type) {
 		return cache.has(val)
 			? cache.get(val)
 			: cache.set(val, fn.call(this, val)) && cache.get(val)
@@ -85,5 +85,5 @@ export const utils = {
   setRandomTorque,
   shuffleArray,
   debounce,
-  memoize
+  memoize,
 }

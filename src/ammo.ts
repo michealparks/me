@@ -38,9 +38,9 @@ const triggerLeave = new Map()
 let world: any
 let motionState: any
 let body: any
-let now = 0, then = 0, dt = 0
-let i = 0, shift = 0
-let position: any, quaternion: any
+let now = 0; let then = 0; let dt = 0
+let i = 0; let shift = 0
+let position: any; let quaternion: any
 let ammo: any
 let ammoTransform: any
 let ammoVec: any
@@ -270,7 +270,7 @@ const createRigidBody = (object: Rigidbody, inertia: boolean, flag: number | und
   let localInertia: any
   
   const shape = createShape(object.name, object.shape, transform, object.triangles)
-  shape.setMargin(0.0)
+  shape.setMargin(0)
 
   if (inertia === true) {
     localInertia = new ammo.btVector3(0, 0, 0)
@@ -315,7 +315,7 @@ const createRigidBody = (object: Rigidbody, inertia: boolean, flag: number | und
 }
 
 const createRigidbodies = (objects: Rigidbody[]) => {
-  let flag, body, inertia
+  let flag; let body; let inertia
 
   for (const object of objects) {
     switch (object.type) {
@@ -400,8 +400,8 @@ const teleportMany = (ids: Uint16Array, transforms: Float32Array, clearForces = 
   }
 }
 
-const setGravity = (acceleration: Vector3) => {
-  ammoVec.setValue(acceleration.x, acceleration.y, acceleration.z)
+const setGravity = (x: number, y: number, z: number) => {
+  ammoVec.setValue(x, y, z)
   world.setGravity(ammoVec)
 }
 
@@ -417,5 +417,5 @@ export const ammoLib = {
   teleport,
   teleportMany,
   createRigidbodies,
-  setGravity
+  setGravity,
 }

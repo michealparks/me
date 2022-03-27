@@ -1,6 +1,6 @@
-import * as THREE from 'three'
+import React, { useEffect, useRef } from 'react'
+import { Mesh } from 'three'
 import type { GLTF } from 'three-stdlib'
-import { useEffect, useRef } from 'react'
 import { useGLTF, Merged } from '@react-three/drei'
 import { utils } from '../utils'
 import { physics } from '../physics'
@@ -23,15 +23,14 @@ type GLTFResult = GLTF & {
 const url = new URL('../assets/glb/plant.glb', import.meta.url).href
 
 const Model = () => {
-  const init = useRef<boolean>()
   const ref = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF(url) as GLTFResult
   
   useEffect(() => {
-    const plant = ref.current
+    const plant = ref.current!
     const transform = new Float32Array(10)
     utils.setRandomTransform(plant, transform)
-    utils.getSize(new THREE.Mesh(nodes.BoundingBox.geometry), transform)
+    utils.getSize(new Mesh(nodes.BoundingBox.geometry), transform)
 
     physics.add(plant, {
       id: plant.id,
@@ -43,7 +42,7 @@ const Model = () => {
       linearDamping: 0,
       angularDamping: 0,
       friction: 0.3,
-      restitution: 0.9
+      restitution: 0.9,
     })
 
     utils.setRandomTorque(plant.id, 0.05)

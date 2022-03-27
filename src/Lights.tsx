@@ -1,4 +1,4 @@
-
+import React from 'react'
 import { softShadows } from '@react-three/drei'
 
 softShadows({

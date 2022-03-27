@@ -1,7 +1,8 @@
+import React from 'react'
 
-const github = new URL('./assets/img/github.png', import.meta.url).href
-const spotify = new URL('./assets/img/spotify.png', import.meta.url).href
-const twitter = new URL('./assets/img/twitter.png', import.meta.url).href
+const github = new URL('assets/img/github.png', import.meta.url).href
+const spotify = new URL('assets/img/spotify.png', import.meta.url).href
+const twitter = new URL('assets/img/twitter.png', import.meta.url).href
 
 const Interface = () => {
   return (

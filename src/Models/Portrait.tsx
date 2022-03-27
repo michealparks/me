@@ -1,5 +1,4 @@
-import * as THREE from 'three'
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import type { GLTF } from 'three-stdlib'
 import { utils } from '../utils'
@@ -17,12 +16,12 @@ type GLTFResult = GLTF & {
 
 const url = new URL('../assets/glb/portrait.glb', import.meta.url).href
 
-export default function Model() {
+const Model = () => {
   const ref = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF(url) as GLTFResult
 
   useEffect(() => {
-    const portrait = ref.current
+    const portrait = ref.current!
     const transform = new Float32Array(10)
     utils.setRandomTransform(portrait, transform)
     utils.getSize(portrait, transform)
@@ -37,7 +36,7 @@ export default function Model() {
       linearDamping: 0,
       angularDamping: 0,
       friction: 0.3,
-      restitution: 0.9
+      restitution: 0.9,
     })
   
     utils.setRandomTorque(portrait.id, 0.05)
@@ -45,7 +44,7 @@ export default function Model() {
 
   return (
     <mesh
-      name="Portrait"
+      name='Portrait'
       ref={ref} 
       castShadow
       receiveShadow
@@ -54,5 +53,7 @@ export default function Model() {
     />
   )
 }
+
+export default Model
 
 useGLTF.preload(url)

@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import { Suspense } from 'react'
+import React, { Suspense } from 'react'
+import { Color } from 'three'
 import { Canvas, addAfterEffect } from '@react-three/fiber'
 import { PresentationControls, AdaptiveEvents, AdaptiveDpr } from '@react-three/drei'
 import Legos from './Models/Legos'
@@ -13,7 +13,7 @@ import Effects from './Effects'
 import { physics } from './physics'
 import Interface from './Interface'
 
-const bg = new THREE.Color('#020207')
+const bg = new Color('#020207')
 
 const App = () => {
   addAfterEffect(() => {
@@ -31,7 +31,7 @@ const App = () => {
           gl={{ alpha: false, antialias: false }}
           onCreated={({ gl }) => gl.setClearColor(bg)}
         >
-          <fog attach="fog" args={[bg, 4, 15]} />
+          <fog attach='fog' args={[bg, 4, 15]} />
           <AdaptiveDpr pixelated />
           <AdaptiveEvents />
           <Effects />
