@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    assetsInlineLimit: 2048
-  }
+    assetsInlineLimit: 2048,
+  },
 })
