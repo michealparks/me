@@ -25,7 +25,6 @@ const App = () => {
       <div className='w-screen h-screen'>
         <Canvas
           shadows
-          mode='concurrent'
           performance={{ min: 0.75 }}
           dpr={Math.min(1.5, window.devicePixelRatio)}
           gl={{ alpha: false, antialias: false }}
