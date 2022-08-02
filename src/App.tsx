@@ -21,40 +21,38 @@ const App = () => {
   })
 
   return (
-    <>
-      <div className='w-screen h-screen'>
-        <Canvas
-          shadows
-          performance={{ min: 0.75 }}
-          dpr={1.25}
-          gl={{ alpha: false, antialias: false }}
-          onCreated={({ gl }) => gl.setClearColor(bg)}
+    <div className='w-screen h-screen'>
+      <Canvas
+        shadows
+        performance={{ min: 0.75 }}
+        dpr={1.25}
+        gl={{ alpha: false, stencil: false, antialias: false }}
+        onCreated={({ gl }) => gl.setClearColor(bg)}
+      >
+        <fog attach='fog' args={[bg, 4, 15]} />
+        <AdaptiveDpr pixelated />
+        <AdaptiveEvents />
+        <Effects />
+        <PresentationControls
+          snap
+          global
+          speed={0.8}
+          zoom={1}
+          rotation={[Math.PI / 3, -Math.PI / 20, 0]}
+          config={{ mass: 1, tension: 100, friction: 26 }}
         >
-          <fog attach='fog' args={[bg, 4, 15]} />
-          <AdaptiveDpr pixelated />
-          <AdaptiveEvents />
-          <Effects />
-          <PresentationControls
-            snap
-            global
-            speed={0.8}
-            zoom={1}
-            rotation={[Math.PI / 3, -Math.PI / 20, 0]}
-            config={{ mass: 1, tension: 100, friction: 26 }}
-          >
-            <Lights />
+          <Lights />
 
-            <Suspense fallback={null}><Name /></Suspense>
-            <Suspense fallback={null}><Portrait /></Suspense>
-            <Suspense fallback={null}><Legos /></Suspense>
-            <Suspense fallback={null}><Synth /></Suspense>
-            <Suspense fallback={null}><Switch /></Suspense>
-            <Suspense fallback={null}><Plant /></Suspense>
-          </PresentationControls>
-        </Canvas>
-        <Interface />
-      </div>
-    </>
+          <Suspense fallback={null}><Name /></Suspense>
+          <Suspense fallback={null}><Portrait /></Suspense>
+          <Suspense fallback={null}><Legos /></Suspense>
+          <Suspense fallback={null}><Synth /></Suspense>
+          <Suspense fallback={null}><Switch /></Suspense>
+          <Suspense fallback={null}><Plant /></Suspense>
+        </PresentationControls>
+      </Canvas>
+      <Interface />
+    </div>
   )
 }
 

@@ -5,12 +5,13 @@ softShadows({
   frustum: 1.75,
   size: 0.005,
   near: 2.5,
-  samples: 30,
+  samples: 20,
   rings: 11, // Rings (default: 11) must be a int
 })
 
 const Lights = () => {
-  const mapsize = 6
+  const mapsize = 10
+  const mapResolution = 2048
 
   return (
     <>
@@ -19,8 +20,9 @@ const Lights = () => {
         castShadow
         position={[3, 2, 3]}
         intensity={2}
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        shadow-mapSize-width={mapResolution}
+        shadow-mapSize-height={mapResolution}
+        shadow-mapSize={[mapResolution, mapResolution]}
         shadow-camera-far={25}
         shadow-camera-left={-mapsize}
         shadow-camera-right={mapsize}
@@ -33,7 +35,9 @@ const Lights = () => {
         position={[-5, 10, 2]}
         angle={0.2}
         penumbra={1}
-        shadow-mapSize={[2048, 2048]}
+        shadow-mapSize-height={mapResolution}
+        shadow-mapSize-width={mapResolution}
+        shadow-mapSize={[mapResolution, mapResolution]}
         onUpdate={(self) => self.lookAt(0, 0, 0)}
       />
       <rectAreaLight
