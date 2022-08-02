@@ -26,7 +26,7 @@ const App = () => {
         <Canvas
           shadows
           performance={{ min: 0.75 }}
-          dpr={Math.min(1.5, window.devicePixelRatio)}
+          dpr={1.25}
           gl={{ alpha: false, antialias: false }}
           onCreated={({ gl }) => gl.setClearColor(bg)}
         >
