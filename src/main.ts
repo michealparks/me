@@ -1,26 +1,15 @@
+if (import.meta.env.DEV) {
+  import('sword/debug')
+}
+
 import './main.css'
-import 'sword/debug'
-import * as THREE from 'three'
 import * as sword from 'sword'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { camera, cameraShake, renderer, run, update } from 'three-kit'
+import { run } from 'three-kit'
+import './camera'
 import './lights'
-
-const controls = new OrbitControls(camera, renderer.domElement)
-controls.enableDamping = true
-controls.enableZoom = true
-controls.enablePan = false
-controls.maxPolarAngle = Math.PI / 2 - 0.3
-
-renderer.setClearColor(new THREE.Color('#020207'))
-camera.position.set(2, 4, 3)
-camera.lookAt(0, 0, 0)
-
+import './controls'
 
 await sword.init(0, 0, 0)
-const name = await import('./objects/name')
-sword.run()
-run()
 
 const [lego, picture, nintendo, synth, houseplant] = await Promise.all([
   import('./objects/lego'),
@@ -28,6 +17,7 @@ const [lego, picture, nintendo, synth, houseplant] = await Promise.all([
   import('./objects/switch'),
   import('./objects/synth'),
   import('./objects/houseplant'),
+  import('./objects/name')
 ])
 
 const ids = [...lego.ids, picture.id, nintendo.id, synth.id, houseplant.id] as number[]
@@ -42,23 +32,18 @@ for (let i = 0, l = ids.length * 3; i < l; i += 3) {
 
 sword.applyTorqueImpulses(new Uint16Array(ids), impulses)
 
-window.addEventListener('mousedown', () => {
-  // const forces = new Float32Array(ids.length * 6)
-  // for (let i = 0, l = ids.length * 3; i < l; i += 6) {
-  //   forces[i + 0] = 
-  // }
+// window.addEventListener('mousedown', () => {
+//   const forces = new Float32Array(ids.length * 6)
+//   for (let i = 0, l = ids.length * 3; i < l; i += 6) {
+//     forces[i + 0] = 
+//   }
 
-  // sword.setForces(new Uint16Array(ids), forces)
-})
+//   sword.setForces(new Uint16Array(ids), forces)
+// })
 
-update(() => {
-  controls.update()
-})
-
-cameraShake.enable(controls)
-cameraShake.maxPitch = 0.05
+sword.run()
+run()
 
 requestIdleCallback(() => {
-  document.querySelector('.loading')!.setAttribute('style', 'display:none;')
+  document.querySelector('.loading')!.remove()
 })
-

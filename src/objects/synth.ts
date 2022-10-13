@@ -22,8 +22,8 @@ gltf.scene.traverse((child) => {
 const group = new THREE.Group()
 group.name = 'Synth'
 
-for (const name of elements) {
-  const element = gltf.scene.getObjectByName(name) as THREE.Mesh
+for (let i = 0, l = elements.length; i < l; i += 1) {
+  const element = gltf.scene.getObjectByName(elements[i]!) as THREE.Mesh
   group.add(element)
 }
 

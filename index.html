@@ -11,23 +11,41 @@
     
     <style>
       body {
+        overflow: hidden;
         margin: 0;
         background-color: #020207;
       }
+
+      canvas {
+        width: 100vw !important;
+        height: 100vh !important;
+      }
+
       .loading {
-        position: absolute;
-        box-sizing: border-box;
-        font-family: system-ui;
+        font-family: monospace;
         color: white;
         width: 100vw;
         height: 100vh;
         place-content: center;
         display: grid;
+        z-index: 10;
       }
     </style>
   </head>
 
   <body>
     <div class="loading">Loading...</div>
+
+    <div class='absolute bottom-5 right-5 flex gap-2'>
+      <a title='Github' target='_tab' href='https://github.com/michealparks'>
+        <img class="w-8 h-8" alt='Github' src='/img/github.png' />
+      </a>
+      <a title='Spotify' target='_tab' href='https://open.spotify.com/user/micheal_parks'>
+        <img class="w-8 h-8" alt='Spotify' src='/img/spotify.png' />
+      </a>
+      <a title='Twitter' target='_tab' href='https://twitter.com/godisacomputer'>
+        <img class="w-8 h-8" alt='Twitter' src='/img/twitter.png' />
+      </a>
+    </div>
   </body>
 </html>

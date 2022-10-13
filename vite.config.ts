@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import path from 'node:path'
+import define from './env'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,4 +16,5 @@ export default defineConfig({
       'sword' : path.resolve(__dirname, './src/sword/main'),
     },
   },
+  define,
 })
