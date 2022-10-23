@@ -6,7 +6,7 @@ import define from './env'
 export default defineConfig({
   publicDir: 'assets',
   build: {
-    assetsInlineLimit: 2048,
+    assetsInlineLimit: 0,
     target: 'esnext',
   },
   envPrefix: ['THREE', 'SWORD'],

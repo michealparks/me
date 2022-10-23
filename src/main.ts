@@ -1,13 +1,15 @@
-if (import.meta.env.DEV) {
-  import('sword/debug')
-}
-
 import './main.css'
+import * as THREE from 'three'
 import * as sword from 'sword'
-import { run } from 'three-kit'
+import Debug from 'three-debug'
+import { physicsDebugPlugin } from 'sword/debug'
+import { scene, camera, renderer, composer, run } from 'three-kit'
 import './camera'
 import './lights'
 import './controls'
+
+const debug = new Debug(THREE, scene, camera, renderer, composer)
+// debug.registerPlugin(physicsDebugPlugin)
 
 await sword.init(0, 0, 0)
 
@@ -17,7 +19,7 @@ const [lego, picture, nintendo, synth, houseplant] = await Promise.all([
   import('./objects/switch'),
   import('./objects/synth'),
   import('./objects/houseplant'),
-  import('./objects/name')
+  import('./objects/name'),
 ])
 
 const ids = [...lego.ids, picture.id, nintendo.id, synth.id, houseplant.id] as number[]

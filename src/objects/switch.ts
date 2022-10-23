@@ -34,7 +34,7 @@ const id = await sword.createRigidBody(group, {
   canSleep: false,
   type: sword.RigidBodyType.Dynamic,
   collider: sword.ColliderType.ConvexHull,
-  vertices: new Float32Array(collider.geometry.attributes.position!.array),
+  vertices: new Float32Array(collider!.geometry.attributes.position!.array),
   indices: new Uint16Array(collider.geometry.attributes.index!),
 })
 
