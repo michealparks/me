@@ -12,6 +12,7 @@
     "sword": "github:michealparks/sword",
     "tailwindcss": "^3.2.2",
     "three": "^0.146.0",
+    "three-debug": "^0.0.28",
     "three-kit": "github:michealparks/three-kit",
     "vite": "3.2.2",
     "vite-plugin-wasm": "^3.1.0"
@@ -25,7 +26,6 @@
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-sonarjs": "^0.16.0",
     "eslint-plugin-unicorn": "^44.0.2",
-    "three-debug": "^0.0.28",
     "typescript": "^4.8.4"
   }
 }

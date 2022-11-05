@@ -8,8 +8,10 @@ import './camera'
 import './lights'
 import './controls'
 
-const debug = new Debug(THREE, scene, camera, renderer, composer)
-debug.registerPlugin(physicsDebugPlugin)
+if (import.meta.env.DEV) {
+  const debug = new Debug(THREE, scene, camera, renderer, composer)
+  debug.registerPlugin(physicsDebugPlugin)
+}
 
 await sword.ready()
 
