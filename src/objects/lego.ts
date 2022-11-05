@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import * as sword from 'sword'
 import { createRandomTransform } from '../util'
 
-const gltf = await assets.load<{ scene: THREE.Scene }>('lego.glb')
+const gltf = await assets.loadGLTF('lego.glb')
 const color = new THREE.Color()
 
 const count = 30

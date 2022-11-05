@@ -13,7 +13,7 @@ const elements = [
   'Screen',
 ]
 
-const gltf = await assets.load<{ scene: THREE.Scene }>('synth.glb')
+const gltf = await assets.loadGLTF('synth.glb')
 gltf.scene.traverse((child) => {
   child.castShadow = true
   child.receiveShadow = true

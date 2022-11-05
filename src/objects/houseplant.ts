@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import * as sword from 'sword'
 import { createRandomTransform } from '../util'
 
-const gltf = await assets.load<{ scene: THREE.Scene }>('houseplant.glb')
+const gltf = await assets.loadGLTF('houseplant.glb')
 
 const mesh = gltf.scene.getObjectByName('Plant') as THREE.Group
 mesh.traverse((child) => {

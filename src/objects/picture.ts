@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import * as sword from 'sword'
 import { createRandomTransform } from '../util'
 
-const gltf = await assets.load<{ scene: THREE.Scene }>('picture.glb')
+const gltf = await assets.loadGLTF('picture.glb')
 
 const mesh = gltf.scene.getObjectByName('Portrait') as THREE.Mesh
 mesh.castShadow = true

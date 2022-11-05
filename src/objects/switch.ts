@@ -12,7 +12,7 @@ const elements = [
   ...Array.from({ length: 6 }).map((_, i) => `Button${i + 1}`),
 ]
 
-const gltf = await assets.load<{ scene: THREE.Scene }>('switch.glb')
+const gltf = await assets.loadGLTF('switch.glb')
 gltf.scene.traverse((child) => {
   child.castShadow = true
   child.receiveShadow = true

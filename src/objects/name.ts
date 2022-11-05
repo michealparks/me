@@ -1,7 +1,7 @@
 import { assets, scene } from 'three-kit'
 import * as sword from 'sword'
 
-const gltf = await assets.load<{ scene: THREE.Scene }>('name.glb')
+const gltf = await assets.loadGLTF('name.glb')
 
 const title = gltf.scene.getObjectByName('Title') as THREE.Mesh
 title.castShadow = true

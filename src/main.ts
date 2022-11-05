@@ -9,9 +9,11 @@ import './lights'
 import './controls'
 
 const debug = new Debug(THREE, scene, camera, renderer, composer)
-// debug.registerPlugin(physicsDebugPlugin)
+debug.registerPlugin(physicsDebugPlugin)
 
-await sword.init(0, 0, 0)
+await sword.ready()
+
+sword.setGravity(0, 0, 0)
 
 const [lego, picture, nintendo, synth, houseplant] = await Promise.all([
   import('./objects/lego'),

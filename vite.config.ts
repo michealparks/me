@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import path from 'node:path'
+import wasm from 'vite-plugin-wasm'
 import define from './env'
 
 // https://vitejs.dev/config/
@@ -9,6 +10,9 @@ export default defineConfig({
     assetsInlineLimit: 0,
     target: 'esnext',
   },
+  plugins: [
+    wasm(),
+  ],
   envPrefix: ['THREE', 'SWORD'],
   resolve:{
     alias:{
@@ -17,4 +21,7 @@ export default defineConfig({
     },
   },
   define,
+  worker: {
+    format: 'es',
+  },
 })
