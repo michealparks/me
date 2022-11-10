@@ -8,7 +8,7 @@ controls.enablePan = false
 controls.maxPolarAngle = Math.PI / 2 - 0.3
 
 cameraShake.enable(controls)
-cameraShake.maxPitch = 0.05
+cameraShake.maxPitch = 0.1
 
 update(() => {
   controls.update()

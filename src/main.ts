@@ -1,7 +1,7 @@
 import './main.css'
 import * as THREE from 'three'
 import * as sword from 'sword'
-import Debug from 'three-debug'
+import Inspector from 'three-inspect'
 import { physicsDebugPlugin } from 'sword/debug'
 import { scene, camera, renderer, composer, run } from 'three-kit'
 import './camera'
@@ -9,8 +9,8 @@ import './lights'
 import './controls'
 
 if (import.meta.env.DEV) {
-  const debug = new Debug(THREE, scene, camera, renderer, composer)
-  debug.registerPlugin(physicsDebugPlugin)
+  const inspector = new Inspector(THREE, scene, camera, renderer, composer)
+  inspector.registerPlugin(physicsDebugPlugin)
 }
 
 await sword.ready()
