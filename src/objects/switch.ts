@@ -13,6 +13,7 @@ const elements = [
 ]
 
 const gltf = await assets.loadGLTF('switch.glb')
+
 gltf.scene.traverse((child) => {
   child.castShadow = true
   child.receiveShadow = true
@@ -30,7 +31,6 @@ createRandomTransform(group.position, group.quaternion)
 
 const collider = gltf.scene.getObjectByName('Collider')
 
-console.log(11)
 const id = await sword.createRigidBody(group, {
   canSleep: false,
   type: sword.RigidBodyType.Dynamic,
@@ -38,8 +38,6 @@ const id = await sword.createRigidBody(group, {
   vertices: new Float32Array(collider!.geometry.attributes.position!.array),
   indices: new Uint16Array(collider.geometry.attributes.index!),
 })
-
-console.log(22)
 
 scene.add(group)
 

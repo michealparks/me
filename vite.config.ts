@@ -5,17 +5,19 @@ import define from './env'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  optimizeDeps: {
-    exclude: ['@dimforge/rapier3d'],
-  },
   publicDir: 'assets',
   build: {
-    assetsInlineLimit: 0,
     target: 'esnext',
   },
   plugins: [
     wasm(),
   ],
+  worker: {
+    format: "es",
+    plugins: [
+      wasm(),
+    ]
+  },
   envPrefix: ['THREE', 'SWORD'],
   resolve:{
     alias:{
