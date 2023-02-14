@@ -1,0 +1,1 @@
+var u=(n=>(n[n.Cuboid=0]="Cuboid",n[n.Ball=1]="Ball",n[n.Capsule=2]="Capsule",n[n.Cone=3]="Cone",n[n.ConvexHull=4]="ConvexHull",n[n.Cylinder=5]="Cylinder",n[n.Trimesh=6]="Trimesh",n[n.Heightfield=7]="Heightfield",n))(u||{});export{u as C};
