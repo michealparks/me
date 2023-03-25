@@ -1,1 +1,0 @@
-import{M as r,E as e,V as s,Q as m}from"./index-705c7266.js";const o=new r,a=new e,M=new s,i=new m,c=(t=M,n=i)=>(a.x=Math.random()*Math.PI,a.y=Math.random()*Math.PI,a.z=Math.random()*Math.PI,n.setFromEuler(a,!0),o.makeRotationFromQuaternion(n),t.x=(Math.random()-.5)*6,t.y=Math.random(),t.z=(Math.random()-.5)*6,o.setPosition(t),o);export{c};
