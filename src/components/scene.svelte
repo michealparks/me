@@ -38,4 +38,6 @@ $: if (renderer) {
 
 <Colliders />
 
-<Debug />
+{#if import.meta.env.DEV}
+  <Debug />
+{/if}

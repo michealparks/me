@@ -12,7 +12,6 @@ module.exports = {
     'jsx-a11y',
     'sonarjs',
     'prefer-arrow',
-    'react-hooks',
   ],
   extends: [
     'eslint:recommended',
@@ -23,7 +22,6 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'plugin:unicorn/recommended',
     'plugin:sonarjs/recommended',
-    'plugin:react-hooks/recommended',
   ],
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -135,28 +133,4 @@ module.exports = {
     // Sonar
     'sonarjs/no-duplicate-string': 'off',
   },
-  overrides: [
-    {
-      files: [
-        '**/__tests__/*.ts?(x)',
-        '**/tests/unit/**/*.spec.ts?(x)',
-      ],
-      plugins: [
-        'testing-library',
-        'jest-dom',
-      ],
-      extends: [
-        'plugin:testing-library/react',
-        'plugin:jest-dom/recommended',
-      ],
-      rules: {
-        'testing-library/await-async-query': 'off',
-        'testing-library/prefer-screen-queries': 'off',
-        'unicorn/numeric-separators-style': 'off',
-      },
-      env: {
-        jest: true,
-      },
-    },
-  ],
 }
