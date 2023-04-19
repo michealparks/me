@@ -1,59 +1,6 @@
-import './main.css'
-import * as THREE from 'three'
-import Inspector from 'three-inspect'
-import * as sword from 'sword'
-import { physicsDebugPlugin } from 'sword/debug'
+import './app.css'
+import App from './app.svelte'
 
-if (import.meta.env.DEV) {
-  const inspector = new Inspector(THREE, scene, camera, renderer, composer)
-  inspector.registerPlugin(physicsDebugPlugin)
-}
-
-import { scene, camera, renderer, composer, run } from 'three-kit'
-import './camera'
-import './lights'
-import './controls'
-
-const main = async () => {
-  await sword.ready()
-  sword.setGravity(0, 0, 0)
-
-  const [lego, picture, nintendo, synth, houseplant] = await Promise.all([
-    import('./objects/lego'),
-    import('./objects/picture'),
-    import('./objects/switch'),
-    import('./objects/synth'),
-    import('./objects/houseplant'),
-    import('./objects/name'),
-  ])
-
-  const ids = [...lego.ids, picture.id, nintendo.id, synth.id, houseplant.id] as number[]
-  const impulses = new Float32Array(ids.length * 3)
-  const damp = 0.001
-    
-  for (let i = 0, l = ids.length * 3; i < l; i += 3) {
-    impulses[i + 0] = (Math.random() - 0.5) * damp
-    impulses[i + 1] = (Math.random() - 0.5) * damp
-    impulses[i + 2] = (Math.random() - 0.5) * damp
-  }
-  
-  sword.applyTorqueImpulses(new Uint16Array(ids), impulses)
-  
-  sword.run()
-  run()
-
-  requestAnimationFrame(() => {
-    document.querySelector('.loading')!.remove()
-  })
-}
-
-main()
-
-// window.addEventListener('mousedown', () => {
-//   const forces = new Float32Array(ids.length * 6)
-//   for (let i = 0, l = ids.length * 3; i < l; i += 6) {
-//     forces[i + 0] = 
-//   }
-
-//   sword.setForces(new Uint16Array(ids), forces)
-// })
+export default new App({
+  target: document.getElementById('app')!,
+})
