@@ -15,7 +15,13 @@ interface GLTF {
     Dials: THREE.Mesh
     Screen: THREE.Mesh
   }
-  materials: {}
+  materials: {
+    ['Black Key']: THREE.MeshStandardMaterial
+    ['White Key']: THREE.MeshStandardMaterial
+    Wood: THREE.MeshStandardMaterial
+    Button: THREE.MeshStandardMaterial
+    Material: THREE.MeshStandardMaterial
+  }
 }
 
 const gltf = useGltf<GLTF>('/glb/synth.glb')
@@ -32,7 +38,7 @@ const gltf = useGltf<GLTF>('/glb/synth.glb')
       canSleep={false}
       {...randomVelocities()}
     >
-      <AutoColliders mass={2}>
+      <AutoColliders mass={2} restitution={0.8}>
         <T is={$gltf.nodes.Edges} castShadow receiveShadow  />
       </AutoColliders>
       <T is={$gltf.nodes.Body} castShadow receiveShadow />

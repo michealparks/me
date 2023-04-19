@@ -4,7 +4,8 @@
     "start": "vite --host --open",
     "lint": "eslint ./src",
     "build": "vite build",
-    "preview": "vite preview --host"
+    "preview": "vite preview --host",
+    "models": "node ./scripts/models.js"
   },
   "dependencies": {
     "@dimforge/rapier3d-compat": "^0.11.2",

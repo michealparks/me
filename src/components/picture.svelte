@@ -27,7 +27,7 @@ const gltf = useGltf<GLTF>('/glb/picture.glb')
       canSleep={false}
       {...randomVelocities()}
     >
-      <AutoColliders shape='cuboid' mass={2}>
+      <AutoColliders shape='cuboid' mass={2} restitution={0.8}>
         <T is={$gltf.nodes.Portrait} castShadow receiveShadow />
       </AutoColliders>
     </RigidBody>

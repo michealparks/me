@@ -47,7 +47,7 @@ const gltf = useGltf<GLTF>('/glb/lego.glb')
         canSleep={false}
         {...randomVelocities()}
       >
-        <AutoColliders shape='cuboid' mass={1}>
+        <AutoColliders shape='cuboid' mass={1} restitution={0.8}>
           <T.Mesh
             castShadow
             receiveShadow

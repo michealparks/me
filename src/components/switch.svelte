@@ -37,7 +37,7 @@ const gltf = useGltf<GLTF>('/glb/switch.glb')
       canSleep={false}
       {...randomVelocities()}
     >
-      <AutoColliders mass={1.1}>
+      <AutoColliders mass={1.1} restitution={0.8}>
         <T is={$gltf.nodes.Body} castShadow receiveShadow  />
         <T is={$gltf.nodes.LeftStick} castShadow receiveShadow  />
         <T is={$gltf.nodes.RightStick} castShadow receiveShadow  />

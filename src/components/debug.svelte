@@ -10,7 +10,7 @@ import Inspector from 'three-inspect'
 const stats = new Stats()
 const { start, stop } = useFrame(() => stats.update(), { autostart: false })
 
-const debug = false
+const debug = true
 const physicsDebug = false
 
 const { scene, camera, renderer } = useThrelte()
@@ -39,7 +39,6 @@ onDestroy(() => {
 
 </script>
 
-  {#if physicsDebug}
-    <Debug depthTest={depth} depthWrite={depth} />
-  {/if}
-  
+{#if physicsDebug}
+  <Debug depthTest={depth} depthWrite={depth} />
+{/if}
