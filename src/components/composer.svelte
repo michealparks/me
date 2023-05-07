@@ -2,15 +2,12 @@
 
 import { useThrelte, useRender } from '@threlte/core'
 import * as POST from 'postprocessing'
-import { addRendererResizer } from 'trzy'
 
 const { scene, renderer, camera } = useThrelte()
 
 // To use the EffectComposer we need to pass arguments to the
 // default WebGLRenderer: https://github.com/pmndrs/postprocessing#usage
 const composer = new POST.EffectComposer(renderer)
-
-let disposeResizer = addRendererResizer($camera, renderer!, composer, window.devicePixelRatio / 2)
 
 const setupEffectComposer = (camera: THREE.Camera) => {
   composer.removeAllPasses()
@@ -40,11 +37,6 @@ const setupEffectComposer = (camera: THREE.Camera) => {
 }
 // We need to set up the passes according to the camera in use
 $: setupEffectComposer($camera)
-
-$: {
-  disposeResizer()
-  disposeResizer = addRendererResizer($camera, renderer!, composer, window.devicePixelRatio / 2)
-}
 
 useRender((_, delta) => composer.render(delta))
 
