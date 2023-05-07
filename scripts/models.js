@@ -13,7 +13,7 @@ for (const model of models) {
   // console.log(pack)
   // await exec(pack)
 
-  let cmd = `npx @threlte/gltf@1.0.0-next.2 assets/glb/${model}.glb`
+  let cmd = `npx @threlte/gltf@1.0.0-next.12 assets/glb/${model}.glb`
   cmd += ` --output src/models/${model}.svelte`
   cmd += ' --types'
   cmd += ' --keepnames'

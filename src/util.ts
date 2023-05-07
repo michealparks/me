@@ -18,7 +18,7 @@ export const randomTransform = (event: { ref: THREE.Group }) => {
 export const randomVelocities = (): {
   linearVelocity: [x: number, y: number, z: number]
   angularVelocity: [x: number, y: number, z: number]
-}  => {
+} => {
   return {
     linearVelocity: [r(0.1), r(0.1), r(0.1)],
     angularVelocity: [r(), r(), r()],

@@ -27,7 +27,6 @@ onMount(() => {
       scene,
       camera: camera.current as THREE.PerspectiveCamera,
       renderer: renderer!,
-      options: { location: 'overlay' }
     })
   }
 })

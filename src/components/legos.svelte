@@ -37,7 +37,7 @@ const gltf = useGltf<GLTF>('/glb/lego.glb')
 </script>
 
 {#if $gltf}
-  {#each Array.from({ length }) as _, index (index)}
+  {#each Array(length) as _, index (index)}
     <T.Group
       name='Lego-{index}'
       on:create={randomTransform}

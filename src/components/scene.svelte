@@ -1,8 +1,7 @@
 <script lang='ts'>
 
 import { useThrelte } from '@threlte/core'
-import { interactivity } from '@threlte/extras'
-import Renderer from './renderer.svelte'
+import Composer from './composer.svelte'
 import Lights from './lights.svelte'
 import Camera from './camera.svelte'
 import Name from './name.svelte'
@@ -14,8 +13,6 @@ import Legos from './legos.svelte'
 import Debug from './debug.svelte'
 import Colliders from './colliders.svelte'
 
-interactivity()
-
 const { renderer } = useThrelte()
 
 $: if (renderer) {
@@ -25,7 +22,7 @@ $: if (renderer) {
 
 </script>
 
-<Renderer />
+<Composer />
 
 <Lights />
 <Camera />
