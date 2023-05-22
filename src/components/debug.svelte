@@ -10,12 +10,11 @@ import Inspector from 'three-inspect'
 const stats = new Stats()
 const { start, stop } = useFrame(() => stats.update(), { autostart: false })
 
-const debug = true
+const debug = false
 const physicsDebug = false
+const depth = true
 
 const { scene, camera, renderer } = useThrelte()
-
-let depth = true
 
 onMount(() => {
   document.body.append(stats.dom)

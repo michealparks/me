@@ -38,16 +38,4 @@ let clicked = false
     range={40}
     strength={0.1}
   />
-
-  <Attractor
-    range={40}
-    strength={0.1}
-    position={[-5, 0, 0]}
-  />
-
-  <Attractor
-    range={40}
-    strength={0.1}
-    position={[5, 0, 0]}
-  />
 {/if}
