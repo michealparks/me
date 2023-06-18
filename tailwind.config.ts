@@ -1,4 +1,6 @@
-module.exports = {
+import { Config } from 'tailwindcss'
+
+export default {
   content: ['./src/**/*.{ts,svelte}'],
   theme: {
     extend: {},
@@ -7,4 +9,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+} satisfies Config
