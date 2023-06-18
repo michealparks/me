@@ -6,7 +6,13 @@ import Scene from './components/scene.svelte'
 
 </script>
 
-<Canvas useLegacyLights={false}>
+<Canvas
+  dpr={1.7}
+  useLegacyLights={false}
+  rendererParameters={{
+    alpha: false,
+  }}
+>
   <World gravity={[0, 0, 0]}>
     <Scene />
   </World>

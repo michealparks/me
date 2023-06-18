@@ -4,6 +4,7 @@ import { T } from '@threlte/core'
 import { useGltf } from '@threlte/extras'
 import { RigidBody, AutoColliders } from '@threlte/rapier'
 import { randomTransform, randomVelocities } from '../util'
+    import { shadows } from 'trzy';
 
 interface GLTF {
   nodes: {
