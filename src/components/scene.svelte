@@ -1,5 +1,6 @@
 <script lang='ts'>
 
+import * as THREE from 'three'
 import { useThrelte } from '@threlte/core'
 import Composer from './composer.svelte'
 import Lights from './lights.svelte'
@@ -18,7 +19,9 @@ const { renderer } = useThrelte()
 $: if (renderer) {
   renderer.debug.checkShaderErrors = import.meta.env.DEV
   renderer.setClearColor(0x020207)
+  renderer.outputColorSpace = THREE.SRGBColorSpace
 }
+
 
 </script>
 
