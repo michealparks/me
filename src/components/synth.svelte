@@ -1,5 +1,6 @@
 <script lang='ts'>
 
+import * as THREE from 'three'
 import { T } from '@threlte/core'
 import { useGltf } from '@threlte/extras'
 import { RigidBody, AutoColliders } from '@threlte/rapier'
@@ -25,6 +26,7 @@ interface GLTF {
 }
 
 const gltf = useGltf<GLTF>('/glb/synth.glb')
+  
 
 </script>
 
@@ -39,14 +41,14 @@ const gltf = useGltf<GLTF>('/glb/synth.glb')
       {...randomVelocities()}
     >
       <AutoColliders mass={2} restitution={0.8}>
-        <T is={$gltf.nodes.Edges} castShadow receiveShadow  />
+        <T is={$gltf.nodes.Edges} castShadow receiveShadow />
       </AutoColliders>
       <T is={$gltf.nodes.Body} castShadow receiveShadow />
       <T is={$gltf.nodes.WhiteKeys} castShadow receiveShadow />
-      <T is={$gltf.nodes.BlackKeys} castShadow receiveShadow  />
-      <T is={$gltf.nodes.Knobs} castShadow receiveShadow  />
-      <T is={$gltf.nodes.Dials} castShadow receiveShadow  />
-      <T is={$gltf.nodes.Screen} castShadow receiveShadow  />
+      <T is={$gltf.nodes.BlackKeys} castShadow receiveShadow />
+      <T is={$gltf.nodes.Knobs} castShadow receiveShadow />
+      <T is={$gltf.nodes.Dials} castShadow receiveShadow />
+      <T is={$gltf.nodes.Screen} castShadow receiveShadow />
     </RigidBody>
   </T.Group>
 {/if}

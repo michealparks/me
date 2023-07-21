@@ -22,10 +22,10 @@ const setupEffectComposer = (camera: THREE.Camera) => {
         width: 256,
         luminanceSmoothing: 0.08,
         mipmapBlur: true,
-        kernelSize: POST.KernelSize.MEDIUM
+        kernelSize: POST.KernelSize.MEDIUM,
       }),
       new POST.SMAAEffect({
-        preset: POST.SMAAPreset.LOW
+        preset: POST.SMAAPreset.LOW,
       })
     )
   )

@@ -11,7 +11,7 @@ interface GLTF {
     Pot: THREE.Mesh
     Soil: THREE.Mesh
   }
-  materials: {}
+  materials: object
 }
 
 const gltf = useGltf<GLTF>('/glb/houseplant.glb')
@@ -29,10 +29,10 @@ const gltf = useGltf<GLTF>('/glb/houseplant.glb')
       {...randomVelocities()}
     >
       <AutoColliders mass={2} restitution={0.8}>
-        <T is={$gltf.nodes.Leaves} castShadow receiveShadow  />
-        <T is={$gltf.nodes.Pot} castShadow receiveShadow  />
+        <T is={$gltf.nodes.Leaves} castShadow receiveShadow />
+        <T is={$gltf.nodes.Pot} castShadow receiveShadow />
       </AutoColliders>
-      <T is={$gltf.nodes.Soil} castShadow receiveShadow  />
+      <T is={$gltf.nodes.Soil} castShadow receiveShadow />
     </RigidBody>
   </T.Group>
 {/if}

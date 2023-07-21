@@ -19,7 +19,7 @@ interface GLTF {
     Button5: THREE.Mesh
     Button6: THREE.Mesh
   }
-  materials: {}
+  materials: object
 }
 
 const gltf = useGltf<GLTF>('/glb/switch.glb')
@@ -29,7 +29,6 @@ const gltf = useGltf<GLTF>('/glb/switch.glb')
 {#if $gltf}
   <T.Group
     name='Switch'
-    scale={0.5}
     on:create={randomTransform}
   >
     <RigidBody
@@ -38,18 +37,18 @@ const gltf = useGltf<GLTF>('/glb/switch.glb')
       {...randomVelocities()}
     >
       <AutoColliders mass={1.1} restitution={0.8}>
-        <T is={$gltf.nodes.Body} castShadow receiveShadow  />
-        <T is={$gltf.nodes.LeftStick} castShadow receiveShadow  />
-        <T is={$gltf.nodes.RightStick} castShadow receiveShadow  />
+        <T is={$gltf.nodes.Body} castShadow receiveShadow />
+        <T is={$gltf.nodes.LeftStick} castShadow receiveShadow />
+        <T is={$gltf.nodes.RightStick} castShadow receiveShadow />
       </AutoColliders>
       <T is={$gltf.nodes.Pad} castShadow receiveShadow />
-      <T is={$gltf.nodes.Screen} castShadow receiveShadow  />
-      <T is={$gltf.nodes.Button1} castShadow receiveShadow  />
-      <T is={$gltf.nodes.Button2} castShadow receiveShadow  />
-      <T is={$gltf.nodes.Button3} castShadow receiveShadow  />
-      <T is={$gltf.nodes.Button4} castShadow receiveShadow  />
-      <T is={$gltf.nodes.Button5} castShadow receiveShadow  />
-      <T is={$gltf.nodes.Button6} castShadow receiveShadow  />
+      <T is={$gltf.nodes.Screen} castShadow receiveShadow />
+      <T is={$gltf.nodes.Button1} castShadow receiveShadow />
+      <T is={$gltf.nodes.Button2} castShadow receiveShadow />
+      <T is={$gltf.nodes.Button3} castShadow receiveShadow />
+      <T is={$gltf.nodes.Button4} castShadow receiveShadow />
+      <T is={$gltf.nodes.Button5} castShadow receiveShadow />
+      <T is={$gltf.nodes.Button6} castShadow receiveShadow />
     </RigidBody>
   </T.Group>
 {/if}

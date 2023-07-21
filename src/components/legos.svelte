@@ -9,21 +9,21 @@ interface GLTF {
   nodes: {
     Lego: THREE.Mesh
   }
-  materials: {}
+  materials: object
 }
 
 const length = 40
 
 // https://materialui.co/flatuicolors
 const colors = [
-  0x1ABC9C,
-  0x3498DB,
-  0x9B59B6,
-  0xF1C40F,
-  0xF39C12,
-  0xE74C3C,
-  0x2C3E50,
-  0xECF0F1,
+  0x1A_BC_9C,
+  0x34_98_DB,
+  0x9B_59_B6,
+  0xF1_C4_0F,
+  0xF3_9C_12,
+  0xE7_4C_3C,
+  0x2C_3E_50,
+  0xEC_F0_F1,
 ]
 
 const material = (index: number) => {
@@ -37,7 +37,7 @@ const gltf = useGltf<GLTF>('/glb/lego.glb')
 </script>
 
 {#if $gltf}
-  {#each Array(length) as _, index (index)}
+  {#each Array.from({length}) as _, index (index)}
     <T.Group
       name='Lego-{index}'
       on:create={randomTransform}

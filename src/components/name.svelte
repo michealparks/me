@@ -9,7 +9,7 @@ interface GLTF {
   nodes: {
     Title: THREE.Mesh
   }
-  materials: {}
+  materials: object
 }
 
 const gltf = useGltf<GLTF>('/glb/name.glb')

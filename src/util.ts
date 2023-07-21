@@ -13,6 +13,8 @@ export const randomTransform = (event: { ref: THREE.Group }) => {
   position.x = rp() * 3
   position.y = rp() * 3
   position.z = rp() * 3
+  event.ref.updateMatrix()
+  event.ref.updateMatrixWorld()
 }
 
 export const randomVelocities = (): {

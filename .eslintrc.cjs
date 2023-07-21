@@ -1,32 +1,38 @@
 module.exports = {
   root: true,
-  env: {
-    browser: true,
-    es2021: true,
-    node: true,
-  },
+  ignorePatterns: ['.eslintrc.cjs'],
   plugins: [
     '@typescript-eslint',
     'unicorn',
-    'import', 
     'jsx-a11y',
     'sonarjs',
     'prefer-arrow',
   ],
   extends: [
     'eslint:recommended',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-type-checked',
+    'plugin:@typescript-eslint/stylistic-type-checked',
     'plugin:jsx-a11y/recommended',
     'plugin:unicorn/recommended',
     'plugin:sonarjs/recommended',
+    'plugin:svelte/recommended',
   ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
+    project: true,
     parser: '@typescript-eslint/parser',
-    ecmaVersion: 2020,
+    extraFileExtensions: [".svelte"],
   },
+  overrides: [
+    {
+      files: ['*.svelte'],
+      parser: 'svelte-eslint-parser',
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+      },
+    },
+  ],
   rules: {
     'no-restricted-imports': [
       'error',
@@ -92,20 +98,6 @@ module.exports = {
       },
     ],
 
-    // Import
-    'import/no-unresolved': 'error',
-    'import/named': 'error',
-    'import/default': 'error',
-    'import/namespace': 'error',
-    'import/no-absolute-path': 'error',
-    'import/no-webpack-loader-syntax': 'error',
-    'import/no-self-import': 'error',
-    'import/no-cycle': 'error',
-    'import/no-useless-path-segments': 'error',
-    'import/export': 'error',
-    'import/extensions': ['error', 'never'],
-    'import/first': 'error',
-
     // Unicorn
     'unicorn/no-unsafe-regex': 'error',
     'unicorn/no-unused-properties': 'error',
@@ -122,6 +114,7 @@ module.exports = {
     'unicorn/filename-case': 'off',
     'unicorn/no-null': 'off',
     'unicorn/consistent-destructuring': 'off',
+    'unicorn/no-array-for-each': 'off',
 
     // Typescript
     'no-unused-vars': 'off',

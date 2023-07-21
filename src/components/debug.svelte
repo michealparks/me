@@ -11,7 +11,7 @@ const stats = new Stats()
 const { start, stop } = useFrame(() => stats.update(), { autostart: false })
 
 const debug = false
-const physicsDebug = false
+const physicsDebug = localStorage.getItem('debug_physics')
 const depth = true
 
 const { scene, camera, renderer } = useThrelte()
@@ -22,7 +22,6 @@ onMount(() => {
 
   if (debug) {
     new Inspector({
-      THREE,
       scene,
       camera: camera.current as THREE.PerspectiveCamera,
       renderer: renderer!,

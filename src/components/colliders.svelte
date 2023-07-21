@@ -3,7 +3,7 @@
 import { T } from '@threlte/core'
 import { Collider } from '@threlte/rapier'
 
-const size = 4
+const size = 10
 const depth = 0.1
 
 const colliders: {
