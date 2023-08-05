@@ -20,10 +20,8 @@ shadowsPlugin()
 
 const { renderer } = useThrelte()
 
-$: if (renderer) {
-  renderer.debug.checkShaderErrors = import.meta.env.DEV
-  renderer.setClearColor(0x02_02_07)
-}
+renderer.debug.checkShaderErrors = import.meta.env.DEV
+renderer.setClearColor(0x02_02_07)
 
 </script>
 
