@@ -16,13 +16,13 @@ const setupEffectComposer = (camera: THREE.Camera) => {
     new POST.EffectPass(
       camera,
       new POST.BloomEffect({
-        intensity: 0.4,
+        intensity: 0.025,
         luminanceThreshold: 0.15,
-        height: 256,
-        width: 256,
+        height: 512,
+        width: 512,
         luminanceSmoothing: 0.08,
         mipmapBlur: true,
-        kernelSize: POST.KernelSize.MEDIUM,
+        kernelSize: POST.KernelSize.SMALL,
       }),
       new POST.SMAAEffect({
         preset: POST.SMAAPreset.LOW,
